@@ -1,6 +1,3 @@
-# smallsh
-Simple implementation of a Linux shell written in C.
-
 ### Build
 
 #### Option 1: Use build script
