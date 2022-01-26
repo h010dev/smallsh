@@ -4,6 +4,7 @@
  * @date 25 Jan 2022
  * @brief Unit test module for string-iterator.c.
  */
+#define _GNU_SOURCE
 #include <stdarg.h>
 #include <stddef.h>
 #include <setjmp.h>
@@ -30,13 +31,13 @@ static void StringIterator_next_test_advancesCurrent(void **state)
         char *string = "hello world";
         size_t len = strlen(string);
         StringIterator itr;
-        char cur;
+        const char *cur;
 
         StringIterator_ctor(&itr, string);
 
         for (size_t i = 0; i < len; i++) {
                 cur = itr.vptr->next(&itr);
-                assert_int_equal(string[i], cur);
+                assert_int_equal(string[i], cur[0]);
         }
 }
 
@@ -108,6 +109,80 @@ static void StringIterator_dtor_test_deletesData(void **state)
         assert_null(itr._private);
 }
 
+static void StringIterator_slice_test_handlesOutOfBounds(void **state)
+{
+        (void) state;
+        char *string = "hello world";
+        StringIterator itr;
+        const char *from;
+        char *slice;
+
+        StringIterator_ctor(&itr, string);
+
+        // slice when cursor at start of string should fail
+        from = itr._private->current;
+        slice = itr.vptr->slice(&itr, from);
+        assert_null(slice);
+
+        // slice when from is before string start should fail
+        from = itr._private->current;
+        slice = itr.vptr->slice(&itr, --from);
+        assert_null(slice);
+
+        // slice when from is at cursor should fail
+        from = itr.vptr->next(&itr);
+        slice = itr.vptr->slice(&itr, ++from);
+        assert_null(slice);
+
+        // slice when from is past cursor should fail
+        (void) itr.vptr->next(&itr);
+        from = itr._private->current;
+        slice = itr.vptr->slice(&itr, ++from);
+        assert_null(slice);
+}
+
+static void StringIterator_slice_test_returnsSlice(void **state)
+{
+        (void) state;
+        char *string = "hello world";
+        StringIterator itr;
+        const char *from, *start;
+        char *slice;
+
+        StringIterator_ctor(&itr, string);
+
+        // slice of first char in string should work
+        start = itr.vptr->next(&itr);
+        slice = itr.vptr->slice(&itr, start);
+        assert_non_null(slice);
+        assert_string_equal("h", slice);
+        free(slice);
+
+        // slice of single char in middle of string should work
+        for (int i = 0; i < 4; i++) {
+                from = itr.vptr->next(&itr);
+        }
+        slice = itr.vptr->slice(&itr, from);
+        assert_non_null(slice);
+        assert_string_equal("o", slice);
+        free(slice);
+
+        // slice of single char at end - 1 should work
+        for (int i = 0; i < 6; i++) {
+                from = itr.vptr->next(&itr);
+        }
+        slice = itr.vptr->slice(&itr, from);
+        assert_non_null(slice);
+        assert_string_equal("d", slice);
+        free(slice);
+
+        // slice of multi-char string should work
+        slice = itr.vptr->slice(&itr, start);
+        assert_non_null(slice);
+        assert_string_equal("hello world", slice);
+        free(slice);
+}
+
 int main(void)
 {
         const struct CMUnitTest tests[] = {
@@ -123,6 +198,10 @@ int main(void)
                         StringIterator_hasNext_test_detectsNewline, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
                         StringIterator_dtor_test_deletesData, NULL, NULL),
+                cmocka_unit_test_setup_teardown(
+                        StringIterator_slice_test_handlesOutOfBounds, NULL, NULL),
+                cmocka_unit_test_setup_teardown(
+                        StringIterator_slice_test_returnsSlice, NULL, NULL),
         };
 
         return cmocka_run_group_tests(tests, NULL, NULL);

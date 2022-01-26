@@ -9,8 +9,13 @@
  * character, until either a newline is reached or null terminator.
  */
 #define _GNU_SOURCE
+#include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
+
+#ifdef DEBUG
+#include <stdio.h>
+#endif
 
 #include "string-iterator.h"
 
@@ -48,8 +53,8 @@
  * @brief Hides @c StringIterator members from client code.
  */
 struct StringIteratorPrivate {
-        char *string; /**< the string we are iterating over */
-        char *current; /**< cursor position of string */
+        const char *string; /**< the string we are iterating over */
+        const char *current; /**< cursor position of string */
 };
 
 /**
@@ -69,11 +74,37 @@ static inline bool StringIterator_hasNext_(StringIterator const * const self)
  * @param self pointer to iterator object
  * @return the character pointed to by the iterator
  */
-static inline char StringIterator_next_(StringIterator const * const self)
+static inline const char *StringIterator_next_(StringIterator const * const self)
 {
-        char next = *self->_private->current;
+        const char *next = self->_private->current;
         self->_private->current++;
         return next;
+}
+
+static char *StringIterator_slice_(StringIterator const * const self,
+                                   const char *from)
+{
+        const char *l_bound = self->_private->string;
+        const char *r_bound = self->_private->current;
+
+#ifdef DEBUG
+        printf("&from=%p, &l_bound=%p, &r_bound=%p\n",
+               (void *) from, (void *) l_bound, (void *) r_bound);
+#endif
+
+        if (from < l_bound || from >= r_bound) {
+                /* error out of bounds */
+                return NULL;
+        }
+
+        ptrdiff_t len = r_bound - from;
+
+#ifdef DEBUG
+        printf("len=%ld\n", len);
+#endif
+
+        char *slice = strndup(from, len);
+        return slice;
 }
 
 /**
@@ -122,6 +153,7 @@ void StringIterator_ctor(StringIterator * const self, char *string)
                 .has_next = &StringIterator_hasNext_,
                 .next = &StringIterator_next_,
                 .peek = &StringIterator_peek_,
+                .slice = &StringIterator_slice_,
         };
         self->vptr = &vtbl;
         self->_private = malloc(sizeof(struct StringIteratorPrivate));
@@ -134,7 +166,7 @@ void StringIterator_dtor(StringIterator *self)
 {
         self->vptr = NULL;
 
-        free(self->_private->string);
+        free((char *) self->_private->string);
         self->_private->string = NULL;
         self->_private->current = NULL;
 

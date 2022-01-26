@@ -88,9 +88,25 @@ struct StringIteratorVtbl {
          * @pre It is assumed that the iterator is always within bounds of the
          * string it is iterating. Behavior is undefined if this is not the case.
          * @param self pointer to iterator object
-         * @return the character pointed to by the iterator
+         * @return pointer to the character pointed to by the iterator
          */
-        char (*next) (StringIterator const * const self);
+        const char *(*next) (StringIterator const * const self);
+
+        /**
+         * @brief Returns a slice copied from the pointer starting at @p from
+         * and ending at the iterators current position - 1.
+         *
+         * @pre @p from must point to a valid address within the iterators
+         * internal string. This value should be retrieved by a prior call to
+         * @c StringIterator::next(). This function will perform bounds checking
+         * to verify the above is true, and will return @c NULL if it is not.
+         * @param self pointer to iterator object
+         * @param from pointer to a position within iterator string
+         * @return a slice of the iterator string on success, @c NULL on failure
+         * @note The caller is responsible for freeing the slice after they're
+         * done using it.
+         */
+        char *(*slice) (StringIterator const * const self, const char *from);
 
         /**
          * @brief Returns character that iterator is pointing at, without
