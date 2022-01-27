@@ -64,6 +64,17 @@ struct TokenPrivate {
  *
  ******************************************************************************/
 /**
+ * @brief Virtual method definition for pretty printing a @c Token object.
+ *
+ * @param self pointer to @c Token object
+ */
+static void Token_print_(Token const * const self)
+{
+        (void) self;
+        assert(0);
+}
+
+/**
  * @brief Virtual method definition for 'taking', or storing a string as
  * part of the token's value.
  *
@@ -117,6 +128,7 @@ void Token_ctor(Token * const self, TokenType type)
         static struct TokenVtbl const vtbl = {
                 .getType = &Token_getType_,
                 .getValue = &Token_getValue_,
+                .print = &Token_print_,
                 .setValue = &Token_setValue_,
                 .take = &Token_take_,
         };
@@ -172,6 +184,5 @@ void Token_setValue_(Token const * const self, const char * const value)
                 self->_private->value = NULL;
         }
 
-        self->_private->type = TOKEN_0;
         self->_private->value = strdup(value);
 }

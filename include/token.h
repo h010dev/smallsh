@@ -24,17 +24,10 @@ typedef struct {
 } Token;
 
 /**
- * @brief Defines the types of tokens our scanner will produce.
+ * @brief Defines the base token type (class).
  */
 typedef enum {
         TOKEN_0 = 0, /**< placeholder token type */
-        ARGUMENT_TOKEN = 1, /**< an argument is any word after the command */
-        BACKGROUND_COMMAND_TOKEN = 2, /**< a background is identified by '&' at the end of the stream */
-        COMMAND_TOKEN = 3, /**< a command is any word at the start of the stream */
-        COMMENT_TOKEN = 4, /**< a comment is identified by '#' at the start of the stream */
-        INPUT_REDIRECTION_TOKEN = 5, /**< an input redirection is a '<' to redirect file io */
-        OUTPUT_REDIRECTION_TOKEN = 6, /**< an output redirection is a '>' to redirect file io */
-        NUM_TOKENS = 7, /**< count of tokens to allow iterating over them */
 } TokenType;
 
 /**
@@ -61,6 +54,12 @@ struct TokenVtbl {
          * they're done using it.
          */
         char *(*getValue) (Token const * const self);
+
+        /**
+         * @brief Prints a pretty-formatted version of @p self.
+         * @param self pointer to @c Token object
+         */
+        void (*print) (Token const * const self);
 
         /**
          * @brief Copies @p value into @p self's value field.
