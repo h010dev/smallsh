@@ -13,7 +13,7 @@
 
 #include "string-iterator.c"
 
-static void StringIterator_ctor_initializes_values(void **state)
+static void StringIterator_ctor_initializesValues(void **state)
 {
         (void) state;
         char *string = "hello world";
@@ -23,6 +23,19 @@ static void StringIterator_ctor_initializes_values(void **state)
 
         assert_string_equal(string, itr._private->string);
         assert_int_equal(string[0], *itr._private->current);
+}
+
+static void StringIterator_dtor_test_deletesData(void **state)
+{
+        (void) state;
+        char *string = "hello world";
+        StringIterator itr;
+
+        StringIterator_ctor(&itr, string);
+        StringIterator_dtor(&itr);
+
+        assert_null(itr.vptr);
+        assert_null(itr._private);
 }
 
 static void StringIterator_next_test_advancesCurrent(void **state)
@@ -94,19 +107,6 @@ static void StringIterator_hasNext_test_detectsNewline(void **state)
         }
         has_next = itr.vptr->has_next(&itr);
         assert_false(has_next);
-}
-
-static void StringIterator_dtor_test_deletesData(void **state)
-{
-        (void) state;
-        char *string = "hello world";
-        StringIterator itr;
-
-        StringIterator_ctor(&itr, string);
-        StringIterator_dtor(&itr);
-
-        assert_null(itr.vptr);
-        assert_null(itr._private);
 }
 
 static void StringIterator_slice_test_handlesOutOfBounds(void **state)
@@ -183,11 +183,169 @@ static void StringIterator_slice_test_returnsSlice(void **state)
         free(slice);
 }
 
+static void StringIterator_munchChar_beforeEOL(void **state)
+{
+        (void) state;
+        StringIterator iter;
+        char *string = "#";
+        char sym = '#';
+        char *slice;
+
+        // iterate to character
+        StringIterator_ctor(&iter, string);
+        while (iter.vptr->peek(&iter) != sym) {
+                iter.vptr->next(&iter);
+        }
+
+        // eat character
+        slice = iter.vptr->munchChar(&iter);
+        assert_string_equal("#", slice);
+
+        // iter should point at end of character
+        assert_int_equal('\0', *iter.vptr->next(&iter));
+}
+
+static void StringIterator_munchChar_beforeNewline(void **state)
+{
+        (void) state;
+        StringIterator iter;
+        char *string = "#\n";
+        char sym = '#';
+        char *slice;
+
+        // iterate to character
+        StringIterator_ctor(&iter, string);
+        while (iter.vptr->peek(&iter) != sym) {
+                iter.vptr->next(&iter);
+        }
+
+        // eat character
+        slice = iter.vptr->munchChar(&iter);
+        assert_string_equal("#", slice);
+
+        // iter should point at end of character
+        assert_int_equal('\n', *iter.vptr->next(&iter));
+}
+
+static void StringIterator_munchChar_loneChar(void **state)
+{
+        (void) state;
+        StringIterator iter;
+        char *string = "# hello world";
+        char sym = '#';
+        char *slice;
+
+        // iterate to character
+        StringIterator_ctor(&iter, string);
+        while (iter.vptr->peek(&iter) != sym) {
+                iter.vptr->next(&iter);
+        }
+
+        // eat character
+        slice = iter.vptr->munchChar(&iter);
+        assert_string_equal("#", slice);
+
+        // iter should point at end of character
+        assert_int_equal(' ', *iter.vptr->next(&iter));
+}
+
+static void StringIterator_munchChar_followingChars(void **state)
+{
+        (void) state;
+        StringIterator iter;
+        char *string = "#hello world";
+        char sym = '#';
+        char *slice;
+
+        // iterate to character
+        StringIterator_ctor(&iter, string);
+        while (iter.vptr->peek(&iter) != sym) {
+                iter.vptr->next(&iter);
+        }
+
+        // eat character
+        slice = iter.vptr->munchChar(&iter);
+        assert_string_equal("#", slice);
+
+        // iter should point at end of character
+        assert_int_equal('h', *iter.vptr->next(&iter));
+}
+
+static void StringIterator_munchWord_beforeEOL(void **state)
+{
+        (void) state;
+        StringIterator iter;
+        char *string = "cmd";
+        char *slice;
+
+        StringIterator_ctor(&iter, string);
+
+        // eat word
+        slice = iter.vptr->munchWord(&iter);
+        assert_string_equal("cmd", slice);
+
+        // iter should point at end of word
+        assert_int_equal('\0', *iter.vptr->next(&iter));
+}
+
+static void StringIterator_munchWord_beforeNewline(void **state)
+{
+        (void) state;
+        StringIterator iter;
+        char *string = "cmd\n";
+        char *slice;
+
+        StringIterator_ctor(&iter, string);
+
+        // eat word
+        slice = iter.vptr->munchWord(&iter);
+        assert_string_equal("cmd", slice);
+
+        // iter should point at end of word
+        assert_int_equal('\n', *iter.vptr->next(&iter));
+}
+
+static void StringIterator_munchWord_followingWords(void **state)
+{
+        (void) state;
+        StringIterator iter;
+        char *string = "cmd > file1.txt &";
+        char *slice;
+
+        StringIterator_ctor(&iter, string);
+
+        // eat word
+        slice = iter.vptr->munchWord(&iter);
+        assert_string_equal("cmd", slice);
+
+        // iter should point at end of word
+        assert_int_equal(' ', *iter.vptr->next(&iter));
+}
+
+static void StringIterator_munchWord_singleChar(void **state)
+{
+        (void) state;
+        StringIterator iter;
+        char *string = "c > file1.txt &";
+        char *slice;
+
+        StringIterator_ctor(&iter, string);
+
+        // eat word
+        slice = iter.vptr->munchWord(&iter);
+        assert_string_equal("c", slice);
+
+        // iter should point at end of word
+        assert_int_equal(' ', *iter.vptr->next(&iter));
+}
+
 int main(void)
 {
         const struct CMUnitTest tests[] = {
                 cmocka_unit_test_setup_teardown(
-                        StringIterator_ctor_initializes_values, NULL, NULL),
+                        StringIterator_ctor_initializesValues, NULL, NULL),
+                cmocka_unit_test_setup_teardown(
+                        StringIterator_dtor_test_deletesData, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
                         StringIterator_next_test_advancesCurrent, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
@@ -197,11 +355,25 @@ int main(void)
                 cmocka_unit_test_setup_teardown(
                         StringIterator_hasNext_test_detectsNewline, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        StringIterator_dtor_test_deletesData, NULL, NULL),
-                cmocka_unit_test_setup_teardown(
                         StringIterator_slice_test_handlesOutOfBounds, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
                         StringIterator_slice_test_returnsSlice, NULL, NULL),
+                cmocka_unit_test_setup_teardown(
+                        StringIterator_munchChar_beforeEOL, NULL, NULL),
+                cmocka_unit_test_setup_teardown(
+                        StringIterator_munchChar_beforeNewline, NULL, NULL),
+                cmocka_unit_test_setup_teardown(
+                        StringIterator_munchChar_loneChar, NULL, NULL),
+                cmocka_unit_test_setup_teardown(
+                        StringIterator_munchChar_followingChars, NULL, NULL),
+                cmocka_unit_test_setup_teardown(
+                        StringIterator_munchWord_beforeEOL, NULL, NULL),
+                cmocka_unit_test_setup_teardown(
+                        StringIterator_munchWord_beforeNewline, NULL, NULL),
+                cmocka_unit_test_setup_teardown(
+                        StringIterator_munchWord_followingWords, NULL, NULL),
+                cmocka_unit_test_setup_teardown(
+                        StringIterator_munchWord_singleChar, NULL, NULL),
         };
 
         return cmocka_run_group_tests(tests, NULL, NULL);

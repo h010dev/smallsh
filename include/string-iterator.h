@@ -83,6 +83,36 @@ struct StringIteratorVtbl {
         bool (*has_next) (StringIterator const * const self);
 
         /**
+         * @brief Iterates over a single character and returns copy to caller.
+         *
+         * Iterator is updated to point to immediate character after end of
+         * copied character.
+         * @param self pointer to iterator object
+         * @return string containing copied character
+         * @note The caller is responsible for freeing the return value after
+         * they are done using it.
+         */
+        char *(*munchChar) (StringIterator const * const self);
+
+        /**
+         * @brief Iterates over a single word and returns copy to caller.
+         *
+         * <br>
+         *
+         * A word is any sequence of characters, excluding a space character.
+         *
+         * <br><br>
+         *
+         * Iterator is updated to point to immediate character after end of
+         * copied word.
+         * @param self pointer to iterator object
+         * @return string containing copied word
+         * @note The caller is responsible for freeing the return value after
+         * they are done using it.
+         */
+        char *(*munchWord) (StringIterator const * const self);
+
+        /**
          * @brief Returns character that the iterator is pointing at, then
          * advances to the next character.
          * @pre It is assumed that the iterator is always within bounds of the
@@ -91,6 +121,20 @@ struct StringIteratorVtbl {
          * @return pointer to the character pointed to by the iterator
          */
         const char *(*next) (StringIterator const * const self);
+
+        /**
+         * @brief Returns character that iterator is pointing at, without
+         * advancing to the next character.
+         *
+         * This function is provided to allow for look-ahead parsing by peeking
+         * at the next character in the iterator.
+         *
+         * @pre It is assumed that the iterator is always within bounds of the
+         * string it is iterating. Behavior is undefined if this is not the case.
+         * @param self pointer to iterator object
+         * @return the character pointed to by the iterator
+         */
+        char (*peek) (StringIterator const * const self);
 
         /**
          * @brief Returns a slice copied from the pointer starting at @p from
@@ -107,20 +151,6 @@ struct StringIteratorVtbl {
          * done using it.
          */
         char *(*slice) (StringIterator const * const self, const char *from);
-
-        /**
-         * @brief Returns character that iterator is pointing at, without
-         * advancing to the next character.
-         *
-         * This function is provided to allow for look-ahead parsing by peeking
-         * at the next character in the iterator.
-         *
-         * @pre It is assumed that the iterator is always within bounds of the
-         * string it is iterating. Behavior is undefined if this is not the case.
-         * @param self pointer to iterator object
-         * @return the character pointed to by the iterator
-         */
-        char (*peek) (StringIterator const * const self);
 };
 
 /**

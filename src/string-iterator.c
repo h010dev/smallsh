@@ -69,6 +69,29 @@ static inline bool StringIterator_hasNext_(StringIterator const * const self)
         return itr != '\n' && itr != '\0';
 }
 
+static char *StringIterator_munchChar_(StringIterator const * const self)
+{
+        // grab character
+        const char *start = self->vptr->next(self);
+
+        // copy and return character
+        char *slice = self->vptr->slice(self, start);
+        return slice;
+}
+
+static char *StringIterator_munchWord_(StringIterator const * const self)
+{
+        // grab word
+        const char *start = self->vptr->next(self);
+        while (self->vptr->has_next(self) && self->vptr->peek(self) != ' ') {
+                self->vptr->next(self);
+        }
+
+        // copy and return word
+        char *slice = self->vptr->slice(self, start);
+        return slice;
+}
+
 /**
  * @brief Implementation of @c StringIterator::next().
  * @param self pointer to iterator object
@@ -151,6 +174,8 @@ void StringIterator_ctor(StringIterator * const self, char *string)
 {
         static struct StringIteratorVtbl const vtbl = {
                 .has_next = &StringIterator_hasNext_,
+                .munchChar = &StringIterator_munchChar_,
+                .munchWord = &StringIterator_munchWord_,
                 .next = &StringIterator_next_,
                 .peek = &StringIterator_peek_,
                 .slice = &StringIterator_slice_,
