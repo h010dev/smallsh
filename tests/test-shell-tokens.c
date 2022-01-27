@@ -41,7 +41,7 @@ static void CommentToken_take_test_functionality(void **state)
 
         // iterate to symbol
         StringIterator_ctor(&iter, string);
-        while (iter.vptr->peek(&iter) != sym) {
+        while (iter.vptr->peek(&iter, 0) != sym) {
                 iter.vptr->next(&iter);
         }
 
@@ -56,47 +56,47 @@ static void CommentToken_take_test_functionality(void **state)
 }
 // endregion
 
-// region InputRedirectionToken
-static void InputRedirectionToken_ctor_test_initializesValues(void **state)
+// region InputRedirToken
+static void InputRedirToken_ctor_test_initializesValues(void **state)
 {
         (void) state;
-        InputRedirectionToken tok;
+        InputRedirToken tok;
 
-        InputRedirectionToken_ctor(&tok);
+        InputRedirToken_ctor(&tok);
 
-        assert_int_equal(INPUT_REDIRECTION_TOKEN, tok.super.vptr->getType((Token *) &tok));
+        assert_int_equal(INPUT_REDIR_TOKEN, tok.super.vptr->getType((Token *) &tok));
         assert_null(tok.super.vptr->getValue((Token *) &tok));
 }
 
-static void InputRedirectionToken_dtor_test_deletesData(void **state)
+static void InputRedirToken_dtor_test_deletesData(void **state)
 {
         (void) state;
-        InputRedirectionToken tok;
+        InputRedirToken tok;
 
-        InputRedirectionToken_ctor(&tok);
-        InputRedirectionToken_dtor(&tok);
+        InputRedirToken_ctor(&tok);
+        InputRedirToken_dtor(&tok);
 
         assert_null(tok.super.vptr);
         assert_null(tok.super._private);
 }
 
-static void InputRedirectionToken_take_test_functionality(void **state)
+static void InputRedirToken_take_test_functionality(void **state)
 {
         (void) state;
         StringIterator iter;
         char *string = "cmd < file1.txt";
         char sym = '<';
         char *slice;
-        InputRedirectionToken tok;
+        InputRedirToken tok;
 
         // iterate to symbol
         StringIterator_ctor(&iter, string);
-        while (iter.vptr->peek(&iter) != sym) {
+        while (iter.vptr->peek(&iter, 0) != sym) {
                 iter.vptr->next(&iter);
         }
 
         // take token
-        InputRedirectionToken_ctor(&tok);
+        InputRedirToken_ctor(&tok);
         tok.super.vptr->take((Token *) &tok, &iter);
         slice = tok.super.vptr->getValue((Token *) &tok);
         assert_string_equal("<", slice);
@@ -106,47 +106,47 @@ static void InputRedirectionToken_take_test_functionality(void **state)
 }
 // endregion
 
-// region OutputRedirectionToken
-static void OutputRedirectionToken_ctor_test_initializesValues(void **state)
+// region OutputRedirToken
+static void OutputRedirToken_ctor_test_initializesValues(void **state)
 {
         (void) state;
-        OutputRedirectionToken tok;
+        OutputRedirToken tok;
 
-        OutputRedirectionToken_ctor(&tok);
+        OutputRedirToken_ctor(&tok);
 
-        assert_int_equal(OUTPUT_REDIRECTION_TOKEN, tok.super.vptr->getType((Token *) &tok));
+        assert_int_equal(OUTPUT_REDIR_TOKEN, tok.super.vptr->getType((Token *) &tok));
         assert_null(tok.super.vptr->getValue((Token *) &tok));
 }
 
-static void OutputRedirectionToken_dtor_test_deletesData(void **state)
+static void OutputRedirToken_dtor_test_deletesData(void **state)
 {
         (void) state;
-        OutputRedirectionToken tok;
+        OutputRedirToken tok;
 
-        OutputRedirectionToken_ctor(&tok);
-        OutputRedirectionToken_dtor(&tok);
+        OutputRedirToken_ctor(&tok);
+        OutputRedirToken_dtor(&tok);
 
         assert_null(tok.super.vptr);
         assert_null(tok.super._private);
 }
 
-static void OutputRedirectionToken_take_test_functionality(void **state)
+static void OutputRedirToken_take_test_functionality(void **state)
 {
         (void) state;
         StringIterator iter;
         char *string = "cmd > file1.txt";
         char sym = '>';
         char *slice;
-        OutputRedirectionToken tok;
+        OutputRedirToken tok;
 
         // iterate to symbol
         StringIterator_ctor(&iter, string);
-        while (iter.vptr->peek(&iter) != sym) {
+        while (iter.vptr->peek(&iter, 0) != sym) {
                 iter.vptr->next(&iter);
         }
 
         // take token
-        OutputRedirectionToken_ctor(&tok);
+        OutputRedirToken_ctor(&tok);
         tok.super.vptr->take((Token *) &tok, &iter);
         slice = tok.super.vptr->getValue((Token *) &tok);
         assert_string_equal(">", slice);
@@ -157,46 +157,46 @@ static void OutputRedirectionToken_take_test_functionality(void **state)
 // endregion
 
 // region BackgroundCommandToken
-static void BackgroundCommandToken_ctor_test_initializesValues(void **state)
+static void BGControlToken_ctor_test_initializesValues(void **state)
 {
         (void) state;
-        BackgroundCommandToken tok;
+        BGControlToken tok;
 
-        BackgroundCommandToken_ctor(&tok);
+        BGControlToken_ctor(&tok);
 
-        assert_int_equal(BACKGROUND_COMMAND_TOKEN, tok.super.vptr->getType((Token *) &tok));
+        assert_int_equal(BG_CONTROL_TOKEN, tok.super.vptr->getType((Token *) &tok));
         assert_null(tok.super.vptr->getValue((Token *) &tok));
 }
 
-static void BackgroundCommandToken_dtor_test_deletesData(void **state)
+static void BGControlToken_dtor_test_deletesData(void **state)
 {
         (void) state;
-        BackgroundCommandToken tok;
+        BGControlToken tok;
 
-        BackgroundCommandToken_ctor(&tok);
-        BackgroundCommandToken_dtor(&tok);
+        BGControlToken_ctor(&tok);
+        BGControlToken_dtor(&tok);
 
         assert_null(tok.super.vptr);
         assert_null(tok.super._private);
 }
 
-static void BackgroundCommandToken_take_test_functionality(void **state)
+static void BGControlToken_take_test_functionality(void **state)
 {
         (void) state;
         StringIterator iter;
         char *string = "cmd > file1.txt &";
         char sym = '&';
         char *slice;
-        BackgroundCommandToken tok;
+        BGControlToken tok;
 
         // iterate to symbol
         StringIterator_ctor(&iter, string);
-        while (iter.vptr->peek(&iter) != sym) {
+        while (iter.vptr->peek(&iter, 0) != sym) {
                 iter.vptr->next(&iter);
         }
 
         // take token
-        BackgroundCommandToken_ctor(&tok);
+        BGControlToken_ctor(&tok);
         tok.super.vptr->take((Token *) &tok, &iter);
         slice = tok.super.vptr->getValue((Token *) &tok);
         assert_string_equal("&", slice);
@@ -206,42 +206,42 @@ static void BackgroundCommandToken_take_test_functionality(void **state)
 }
 // endregion
 
-// region CommandToken
-static void CommandToken_ctor_test_initializesValues(void **state)
+// region WordToken
+static void WordToken_ctor_test_initializesValues(void **state)
 {
         (void) state;
-        CommandToken tok;
+        WordToken tok;
 
-        CommandToken_ctor(&tok);
+        WordToken_ctor(&tok);
 
-        assert_int_equal(COMMAND_TOKEN, tok.super.vptr->getType((Token *) &tok));
+        assert_int_equal(WORD_TOKEN, tok.super.vptr->getType((Token *) &tok));
         assert_null(tok.super.vptr->getValue((Token *) &tok));
 }
 
-static void CommandToken_dtor_test_deletesData(void **state)
+static void WordToken_dtor_test_deletesData(void **state)
 {
         (void) state;
-        CommandToken tok;
+        WordToken tok;
 
-        CommandToken_ctor(&tok);
-        CommandToken_dtor(&tok);
+        WordToken_ctor(&tok);
+        WordToken_dtor(&tok);
 
         assert_null(tok.super.vptr);
         assert_null(tok.super._private);
 }
 
-static void CommandToken_take_test_functionality(void **state)
+static void WordToken_take_test_functionality(void **state)
 {
         (void) state;
         StringIterator iter;
         char *string = "cmd";
         char *slice;
-        CommandToken tok;
+        WordToken tok;
 
         StringIterator_ctor(&iter, string);
 
         // take token
-        CommandToken_ctor(&tok);
+        WordToken_ctor(&tok);
         tok.super.vptr->take((Token *) &tok, &iter);
         slice = tok.super.vptr->getValue((Token *) &tok);
         assert_string_equal("cmd", slice);
@@ -249,59 +249,57 @@ static void CommandToken_take_test_functionality(void **state)
         // iter should point at end of token
         assert_int_equal('\0', *iter.vptr->next(&iter));
 }
-
 // endregion
 
-// region ArgumentToken
-static void ArgumentToken_ctor_test_initializesValues(void **state)
+// region NewlineToken
+static void NewlineToken_ctor_test_initializesValues(void **state)
 {
         (void) state;
-        ArgumentToken tok;
+        NewlineToken tok;
 
-        ArgumentToken_ctor(&tok);
+        NewlineToken_ctor(&tok);
 
-        assert_int_equal(ARGUMENT_TOKEN, tok.super.vptr->getType((Token *) &tok));
+        assert_int_equal(NEWLINE_TOKEN, tok.super.vptr->getType((Token *) &tok));
         assert_null(tok.super.vptr->getValue((Token *) &tok));
 }
 
-static void ArgumentToken_dtor_test_deletesData(void **state)
+static void NewlineToken_dtor_test_deletesData(void **state)
 {
         (void) state;
-        ArgumentToken tok;
+        NewlineToken tok;
 
-        ArgumentToken_ctor(&tok);
-        ArgumentToken_dtor(&tok);
+        NewlineToken_ctor(&tok);
+        NewlineToken_dtor(&tok);
 
         assert_null(tok.super.vptr);
         assert_null(tok.super._private);
 }
 
-static void ArgumentToken_take_test_functionality(void **state)
+static void NewlineToken_take_test_functionality(void **state)
 {
         (void) state;
         StringIterator iter;
-        char *string = "cmd arg1";
+        char *string = "\n";
+        char sym = '\n';
         char *slice;
-        ArgumentToken tok;
+        NewlineToken tok;
 
-        // iterate to arg
+        // iterate to symbol
         StringIterator_ctor(&iter, string);
-        while (iter.vptr->peek(&iter) != 'a') {
+        while (iter.vptr->peek(&iter, 0) != sym) {
                 iter.vptr->next(&iter);
         }
 
         // take token
-        ArgumentToken_ctor(&tok);
+        NewlineToken_ctor(&tok);
         tok.super.vptr->take((Token *) &tok, &iter);
         slice = tok.super.vptr->getValue((Token *) &tok);
-        assert_string_equal("arg1", slice);
+        assert_string_equal("\n", slice);
 
         // iter should point at end of token
         assert_int_equal('\0', *iter.vptr->next(&iter));
 }
-
 // endregion
-
 
 int main(void)
 {
@@ -313,35 +311,35 @@ int main(void)
                 cmocka_unit_test_setup_teardown(
                         CommentToken_take_test_functionality, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        InputRedirectionToken_ctor_test_initializesValues, NULL, NULL),
+                        InputRedirToken_ctor_test_initializesValues, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        InputRedirectionToken_dtor_test_deletesData, NULL, NULL),
+                        InputRedirToken_dtor_test_deletesData, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        InputRedirectionToken_take_test_functionality, NULL, NULL),
+                        InputRedirToken_take_test_functionality, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        OutputRedirectionToken_ctor_test_initializesValues, NULL, NULL),
+                        OutputRedirToken_ctor_test_initializesValues, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        OutputRedirectionToken_dtor_test_deletesData, NULL, NULL),
+                        OutputRedirToken_dtor_test_deletesData, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        OutputRedirectionToken_take_test_functionality, NULL, NULL),
+                        OutputRedirToken_take_test_functionality, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        BackgroundCommandToken_ctor_test_initializesValues, NULL, NULL),
+                        BGControlToken_ctor_test_initializesValues, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        BackgroundCommandToken_dtor_test_deletesData, NULL, NULL),
+                        BGControlToken_dtor_test_deletesData, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        BackgroundCommandToken_take_test_functionality, NULL, NULL),
+                        BGControlToken_take_test_functionality, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        CommandToken_ctor_test_initializesValues, NULL, NULL),
+                        WordToken_ctor_test_initializesValues, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        CommandToken_dtor_test_deletesData, NULL, NULL),
+                        WordToken_dtor_test_deletesData, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        CommandToken_take_test_functionality, NULL, NULL),
+                        WordToken_take_test_functionality, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        ArgumentToken_ctor_test_initializesValues, NULL, NULL),
+                        NewlineToken_ctor_test_initializesValues, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        ArgumentToken_dtor_test_deletesData, NULL, NULL),
+                        NewlineToken_dtor_test_deletesData, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        ArgumentToken_take_test_functionality, NULL, NULL),
+                        NewlineToken_take_test_functionality, NULL, NULL),
         };
 
         return cmocka_run_group_tests(tests, NULL, NULL);

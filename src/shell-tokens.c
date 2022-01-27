@@ -4,6 +4,8 @@
  * @date 26 Jan 2022
  * @brief For parsing and storing the different types of tokens of the shell.
  */
+#include <stdio.h>
+
 #include "shell-tokens.h"
 
 /* *****************************************************************************
@@ -37,38 +39,31 @@
  *
  ******************************************************************************/
 /**
- * @brief Implementation of @c ArgumentToken::Token::take().
+ * @brief Implementation of @c BGControlToken::Token::print().
  *
- * Iterates over a single word and then stores the copy.
- * @pre It is the caller's responsibility to ensure that the data being
- * copied over is indeed an argument token.
- * @param self pointer to @c ArgumentToken object
- * @param iter pointer to @c StringIterator object
+ * Prints a pretty formatted display of the @c Token object.
+ * @param self pointer to @c BGControlToken object
  */
-static void ArgumentToken_take_(Token const * const self,
-                                StringIterator const * const iter)
+static void BGControlToken_print_(Token const * const self)
 {
-        ArgumentToken const * const self_ = (ArgumentToken const *) self;
+        BGControlToken const * const self_ = (BGControlToken const *) self;
 
-        // copy word into token
-        char *slice = iter->vptr->munchWord(iter);
-        self_->super.vptr->setValue(self, slice);
+        printf("BG_CONTROL:%s", self_->super.vptr->getValue(self));
 }
 
 /**
- * @brief Implementation of @c BackgroundCommandToken::Token::take().
+ * @brief Implementation of @c BGControlToken::Token::take().
  *
  * Iterates over a single character and then stores the copy.
  * @pre It is the caller's responsibility to ensure that the data being
  * copied over is indeed a background command token.
- * @param self pointer to @c BackgroundCommandToken object
+ * @param self pointer to @c BGControlToken object
  * @param iter pointer to @c StringIterator object
  */
-static void BackgroundCommandToken_take_(Token const * const self,
-                                         StringIterator const * const iter)
+static void BGControlToken_take_(Token const * const self,
+                                 StringIterator const * const iter)
 {
-        BackgroundCommandToken const * const self_ =
-                (BackgroundCommandToken const *) self;
+        BGControlToken const * const self_ = (BGControlToken const *) self;
 
         // copy background command symbol into token
         char *slice = iter->vptr->munchChar(iter);
@@ -76,22 +71,16 @@ static void BackgroundCommandToken_take_(Token const * const self,
 }
 
 /**
- * @brief Implementation of @c CommandToken::Token::take().
+ * @brief Implementation of @c CommentToken::Token::print().
  *
- * Iterates over a single word and then stores the copy.
- * @pre It is the caller's responsibility to ensure that the data being
- * copied over is indeed a command token.
- * @param self pointer to @c CommandToken object
- * @param iter pointer to @c StringIterator object
+ * Prints a pretty formatted display of the @c Token object.
+ * @param self pointer to @c CommentToken object
  */
-static void CommandToken_take_(Token const * const self,
-                               StringIterator const * const iter)
+static void CommentToken_print_(Token const * const self)
 {
-        CommandToken const * const self_ = (CommandToken const *) self;
+        CommentToken const * const self_ = (CommentToken const *) self;
 
-        // copy word into token
-        char *slice = iter->vptr->munchWord(iter);
-        self_->super.vptr->setValue(self, slice);
+        printf("COMMENT:%s", self_->super.vptr->getValue(self));
 }
 
 /**
@@ -114,19 +103,31 @@ static void CommentToken_take_(Token const * const self,
 }
 
 /**
- * @brief Implementation of @c InputRedirectionToken::Token::take().
+ * @brief Implementation of @c InputRedirToken::Token::print().
+ *
+ * Prints a pretty formatted display of the @c Token object.
+ * @param self pointer to @c InputRedirToken object
+ */
+static void InputRedirToken_print_(Token const * const self)
+{
+        InputRedirToken const * const self_ = (InputRedirToken const *) self;
+
+        printf("INPUT_REDIR:%s", self_->super.vptr->getValue(self));
+}
+
+/**
+ * @brief Implementation of @c InputRedirToken::Token::take().
  *
  * Iterates over a single character and then stores the copy.
  * @pre It is the caller's responsibility to ensure that the data being
  * copied over is indeed an input redirection token.
- * @param self pointer to @c InputRedirectionToken object
+ * @param self pointer to @c InputRedirToken object
  * @param iter pointer to @c StringIterator object
  */
-static void InputRedirectionToken_take_(Token const * const self,
-                                        StringIterator const * const iter)
+static void InputRedirToken_take_(Token const * const self,
+                                  StringIterator const * const iter)
 {
-        InputRedirectionToken const * const self_ =
-                (InputRedirectionToken const *) self;
+        InputRedirToken const * const self_ = (InputRedirToken const *) self;
 
         // copy input redirection symbol into token
         char *slice = iter->vptr->munchChar(iter);
@@ -134,22 +135,97 @@ static void InputRedirectionToken_take_(Token const * const self,
 }
 
 /**
- * @brief Implementation of @c OutputRedirectionToken::Token::take().
+ * @brief Implementation of @c NewlineToken::Token::print().
+ *
+ * Prints a pretty formatted display of the @c Token object.
+ * @param self pointer to @c NewlineToken object
+ */
+static void NewlineToken_print_(Token const * const self)
+{
+        (void) self;
+        printf("NEWLINE:\\n");
+}
+
+/**
+ * @brief Implementation of @c NewlineToken::Token::take().
  *
  * Iterates over a single character and then stores the copy.
  * @pre It is the caller's responsibility to ensure that the data being
  * copied over is indeed an output redirection token.
- * @param self pointer to @c OutputRedirectionToken object
+ * @param self pointer to @c NewlineToken object
  * @param iter pointer to @c StringIterator object
  */
-static void OutputRedirectionToken_take_(Token const * const self,
-                                         StringIterator const * const iter)
+static void NewlineToken_take_(Token const * const self,
+                               StringIterator const * const iter)
 {
-        OutputRedirectionToken const * const self_ =
-                (OutputRedirectionToken const *) self;
+        NewlineToken const * const self_ = (NewlineToken const *) self;
 
         // copy output redirection symbol into token
         char *slice = iter->vptr->munchChar(iter);
+        self_->super.vptr->setValue(self, slice);
+}
+
+/**
+ * @brief Implementation of @c OutputRedirToken::Token::print().
+ *
+ * Prints a pretty formatted display of the @c Token object.
+ * @param self pointer to @c OutputRedirToken object
+ */
+static void OutputRedirToken_print_(Token const * const self)
+{
+        OutputRedirToken const * const self_ = (OutputRedirToken const *) self;
+
+        printf("OUTPUT_REDIR:%s", self_->super.vptr->getValue(self));
+}
+
+/**
+ * @brief Implementation of @c OutputRedirToken::Token::take().
+ *
+ * Iterates over a single character and then stores the copy.
+ * @pre It is the caller's responsibility to ensure that the data being
+ * copied over is indeed an output redirection token.
+ * @param self pointer to @c OutputRedirToken object
+ * @param iter pointer to @c StringIterator object
+ */
+static void OutputRedirToken_take_(Token const * const self,
+                                   StringIterator const * const iter)
+{
+        OutputRedirToken const * const self_ = (OutputRedirToken const *) self;
+
+        // copy output redirection symbol into token
+        char *slice = iter->vptr->munchChar(iter);
+        self_->super.vptr->setValue(self, slice);
+}
+
+/**
+ * @brief Implementation of @c WordToken::Token::print().
+ *
+ * Prints a pretty formatted display of the @c Token object.
+ * @param self pointer to @c WordToken object
+ */
+static void WordToken_print_(Token const * const self)
+{
+        WordToken const * const self_ = (WordToken const *) self;
+
+        printf("WORD:%s", self_->super.vptr->getValue(self));
+}
+
+/**
+ * @brief Implementation of @c WordToken::Token::take().
+ *
+ * Iterates over a single word and then stores the copy.
+ * @pre It is the caller's responsibility to ensure that the data being
+ * copied over is indeed a command token.
+ * @param self pointer to @c WordToken object
+ * @param iter pointer to @c StringIterator object
+ */
+static void WordToken_take_(Token const * const self,
+                            StringIterator const * const iter)
+{
+        WordToken const * const self_ = (WordToken const *) self;
+
+        // copy word into token
+        char *slice = iter->vptr->munchWord(iter);
         self_->super.vptr->setValue(self, slice);
 }
 
@@ -183,53 +259,20 @@ static void OutputRedirectionToken_take_(Token const * const self,
  *
  *
  ******************************************************************************/
-void ArgumentToken_ctor(ArgumentToken * const self)
+void BGControlToken_ctor(BGControlToken * const self)
 {
         static struct TokenVtbl const vtbl = {
                 .getType = &Token_getType_,
                 .getValue = &Token_getValue_,
+                .print = &BGControlToken_print_,
                 .setValue = &Token_setValue_,
-                .take = &ArgumentToken_take_,
+                .take = &BGControlToken_take_,
         };
-        Token_ctor(&self->super, ARGUMENT_TOKEN);
+        Token_ctor(&self->super, (TokenType) BG_CONTROL_TOKEN);
         self->super.vptr = &vtbl;
 }
 
-void ArgumentToken_dtor(ArgumentToken *self)
-{
-        Token_dtor(&self->super);
-}
-
-void BackgroundCommandToken_ctor(BackgroundCommandToken * const self)
-{
-        static struct TokenVtbl const vtbl = {
-                .getType = &Token_getType_,
-                .getValue = &Token_getValue_,
-                .setValue = &Token_setValue_,
-                .take = &BackgroundCommandToken_take_,
-        };
-        Token_ctor(&self->super, BACKGROUND_COMMAND_TOKEN);
-        self->super.vptr = &vtbl;
-}
-
-void BackgroundCommandToken_dtor(BackgroundCommandToken *self)
-{
-        Token_dtor(&self->super);
-}
-
-void CommandToken_ctor(CommandToken * const self)
-{
-        static struct TokenVtbl const vtbl = {
-                .getType = &Token_getType_,
-                .getValue = &Token_getValue_,
-                .setValue = &Token_setValue_,
-                .take = &CommandToken_take_,
-        };
-        Token_ctor(&self->super, COMMAND_TOKEN);
-        self->super.vptr = &vtbl;
-}
-
-void CommandToken_dtor(CommandToken *self)
+void BGControlToken_dtor(BGControlToken *self)
 {
         Token_dtor(&self->super);
 }
@@ -239,10 +282,11 @@ void CommentToken_ctor(CommentToken * const self)
         static struct TokenVtbl const vtbl = {
                 .getType = &Token_getType_,
                 .getValue = &Token_getValue_,
+                .print = &CommentToken_print_,
                 .setValue = &Token_setValue_,
                 .take = &CommentToken_take_,
         };
-        Token_ctor(&self->super, COMMENT_TOKEN);
+        Token_ctor(&self->super, (TokenType) COMMENT_TOKEN);
         self->super.vptr = &vtbl;
 }
 
@@ -251,36 +295,74 @@ void CommentToken_dtor(CommentToken *self)
         Token_dtor(&self->super);
 }
 
-void InputRedirectionToken_ctor(InputRedirectionToken * const self)
+void InputRedirToken_ctor(InputRedirToken * const self)
 {
         static struct TokenVtbl const vtbl = {
                 .getType = &Token_getType_,
                 .getValue = &Token_getValue_,
+                .print = &InputRedirToken_print_,
                 .setValue = &Token_setValue_,
-                .take = &InputRedirectionToken_take_,
+                .take = &InputRedirToken_take_,
         };
-        Token_ctor(&self->super, INPUT_REDIRECTION_TOKEN);
+        Token_ctor(&self->super, (TokenType) INPUT_REDIR_TOKEN);
         self->super.vptr = &vtbl;
 }
 
-void InputRedirectionToken_dtor(InputRedirectionToken *self)
+void InputRedirToken_dtor(InputRedirToken *self)
 {
         Token_dtor(&self->super);
 }
 
-void OutputRedirectionToken_ctor(OutputRedirectionToken * const self)
+void NewlineToken_ctor(NewlineToken *self)
 {
         static struct TokenVtbl const vtbl = {
                 .getType = &Token_getType_,
                 .getValue = &Token_getValue_,
+                .print = &NewlineToken_print_,
                 .setValue = &Token_setValue_,
-                .take = &OutputRedirectionToken_take_,
+                .take = &NewlineToken_take_,
         };
-        Token_ctor(&self->super, OUTPUT_REDIRECTION_TOKEN);
+        Token_ctor(&self->super, (TokenType) NEWLINE_TOKEN);
         self->super.vptr = &vtbl;
 }
 
-void OutputRedirectionToken_dtor(OutputRedirectionToken *self)
+void NewlineToken_dtor(NewlineToken *self)
+{
+        Token_dtor(&self->super);
+}
+
+void OutputRedirToken_ctor(OutputRedirToken *self)
+{
+        static struct TokenVtbl const vtbl = {
+                .getType = &Token_getType_,
+                .getValue = &Token_getValue_,
+                .print = &OutputRedirToken_print_,
+                .setValue = &Token_setValue_,
+                .take = &OutputRedirToken_take_,
+        };
+        Token_ctor(&self->super, (TokenType) OUTPUT_REDIR_TOKEN);
+        self->super.vptr = &vtbl;
+}
+
+void OutputRedirToken_dtor(OutputRedirToken *self)
+{
+        Token_dtor(&self->super);
+}
+
+void WordToken_ctor(WordToken *self)
+{
+        static struct TokenVtbl const vtbl = {
+                .getType = &Token_getType_,
+                .getValue = &Token_getValue_,
+                .print = &WordToken_print_,
+                .setValue = &Token_setValue_,
+                .take = &WordToken_take_,
+        };
+        Token_ctor(&self->super, (TokenType) WORD_TOKEN);
+        self->super.vptr = &vtbl;
+}
+
+void WordToken_dtor(WordToken *self)
 {
         Token_dtor(&self->super);
 }

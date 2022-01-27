@@ -9,49 +9,18 @@
 
 #include "token.h"
 
-/* *****************************************************************************
- * ArgumentToken
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- ******************************************************************************/
 /**
- * @brief Defines a token object that parses and stores an argument literal.
+ * @brief Defines the types of tokens our scanner will produce.
  */
-typedef struct {
-        Token super; /**< inherits from @c Token */
-} ArgumentToken;
-
-/**
- * @brief Constructs a new @c ArgumentToken object.
- *
- * The general implementation of a vtable, usage of const for the main object,
- * and other OOP concepts were derived from this publication.
- *
- * <br><br>
- *
- * Source: https://www.state-machine.com/doc/AN_OOP_in_C.pdf*
- * @param self @c ArgumentToken object to initialize
- */
-void ArgumentToken_ctor(ArgumentToken *self);
-
-/**
- * @brief Destroys an @c ArgumentToken object, freeing its members and
- * re-initializing them to @c NULL in the process.
- * @param self @c ArgumentToken object to destroy
- * @note The caller is responsible for freeing @p self afterwards if it was
- * originally allocated on the heap.
- */
-void ArgumentToken_dtor(ArgumentToken *self);
+typedef enum {
+        BG_CONTROL_TOKEN = 1, /**< a background is identified by '&' at the end of the stream */
+        COMMENT_TOKEN = 2, /**< a comment is identified by '#' at the start of the stream */
+        INPUT_REDIR_TOKEN = 3, /**< an input redirection is a '<' to redirect file io */
+        NEWLINE_TOKEN = 4, /**< a newline is identified by '\\n' */
+        OUTPUT_REDIR_TOKEN = 5, /**< an output redirection is a '>' to redirect file io */
+        WORD_TOKEN = 6, /**< a command is any word at the start of the stream */
+        NUM_TOKENS = 7, /**< count of tokens to allow iterating over them */
+} ShellTokenType;
 
 /* *****************************************************************************
  * BackgroundCommandToken
@@ -74,7 +43,7 @@ void ArgumentToken_dtor(ArgumentToken *self);
  */
 typedef struct {
         Token super; /**< inherits from @c Token */
-} BackgroundCommandToken;
+} BGControlToken;
 
 /**
  * @brief Constructs a new @c BackgroundCommandToken object.
@@ -87,7 +56,7 @@ typedef struct {
  * Source: https://www.state-machine.com/doc/AN_OOP_in_C.pdf*
  * @param self @c BackgroundCommandToken object to initialize
  */
-void BackgroundCommandToken_ctor(BackgroundCommandToken *self);
+void BGControlToken_ctor(BGControlToken *self);
 
 /**
  * @brief Destroys a @c BackgroundCommandToken object, freeing its members and
@@ -96,51 +65,7 @@ void BackgroundCommandToken_ctor(BackgroundCommandToken *self);
  * @note The caller is responsible for freeing @p self afterwards if it was
  * originally allocated on the heap.
  */
-void BackgroundCommandToken_dtor(BackgroundCommandToken *self);
-
-/* *****************************************************************************
- * CommandToken
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- ******************************************************************************/
-/**
- * @brief Defines a token object that parses and stores a command literal.
- */
-typedef struct {
-        Token super; /**< inherits from @c Token */
-} CommandToken;
-
-/**
- * @brief Constructs a new @c CommandToken object.
- *
- * The general implementation of a vtable, usage of const for the main object,
- * and other OOP concepts were derived from this publication.
- *
- * <br><br>
- *
- * Source: https://www.state-machine.com/doc/AN_OOP_in_C.pdf*
- * @param self @c CommandToken object to initialize
- */
-void CommandToken_ctor(CommandToken *self);
-
-/**
- * @brief Destroys a @c CommandToken object, freeing its members and
- * re-initializing them to @c NULL in the process.
- * @param self @c CommandToken object to destroy
- * @note The caller is responsible for freeing @p self afterwards if it was
- * originally allocated on the heap.
- */
-void CommandToken_dtor(CommandToken *self);
+void BGControlToken_dtor(BGControlToken *self);
 
 /* *****************************************************************************
  * CommentToken
@@ -187,7 +112,7 @@ void CommentToken_ctor(CommentToken *self);
 void CommentToken_dtor(CommentToken *self);
 
 /* *****************************************************************************
- * InputRedirectionToken
+ * InputRedirToken
  *
  *
  *
@@ -207,10 +132,10 @@ void CommentToken_dtor(CommentToken *self);
  */
 typedef struct {
         Token super; /**< inherits from @c Token */
-} InputRedirectionToken;
+} InputRedirToken;
 
 /**
- * @brief Constructs a new @c InputRedirectionToken object.
+ * @brief Constructs a new @c InputRedirToken object.
  *
  * The general implementation of a vtable, usage of const for the main object,
  * and other OOP concepts were derived from this publication.
@@ -220,19 +145,63 @@ typedef struct {
  * Source: https://www.state-machine.com/doc/AN_OOP_in_C.pdf*
  * @param self @c InputRedirectionToken object to initialize
  */
-void InputRedirectionToken_ctor(InputRedirectionToken *self);
+void InputRedirToken_ctor(InputRedirToken *self);
 
 /**
- * @brief Destroys an @c InputRedirectionToken object, freeing its members and
+ * @brief Destroys an @c InputRedirToken object, freeing its members and
  * re-initializing them to @c NULL in the process.
- * @param self @c InputRedirectionToken object to destroy
+ * @param self @c InputRedirToken object to destroy
  * @note The caller is responsible for freeing @p self afterwards if it was
  * originally allocated on the heap.
  */
-void InputRedirectionToken_dtor(InputRedirectionToken *self);
+void InputRedirToken_dtor(InputRedirToken *self);
 
 /* *****************************************************************************
- * OutputRedirectionToken
+ * NewlineToken
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
+/**
+ * @brief Defines a token object that parses and stores a newline character.
+ */
+typedef struct {
+        Token super; /**< inherits from @c Token */
+} NewlineToken;
+
+/**
+ * @brief Constructs a new @c NewlineToken object.
+ *
+ * The general implementation of a vtable, usage of const for the main object,
+ * and other OOP concepts were derived from this publication.
+ *
+ * <br><br>
+ *
+ * Source: https://www.state-machine.com/doc/AN_OOP_in_C.pdf*
+ * @param self @c NewlineToken object to initialize
+ */
+void NewlineToken_ctor(NewlineToken *self);
+
+/**
+ * @brief Destroys an @c NewlineToken object, freeing its members and
+ * re-initializing them to @c NULL in the process.
+ * @param self @c NewlineToken object to destroy
+ * @note The caller is responsible for freeing @p self afterwards if it was
+ * originally allocated on the heap.
+ */
+void NewlineToken_dtor(NewlineToken *self);
+
+/* *****************************************************************************
+ * OutputRedirToken
  *
  *
  *
@@ -252,10 +221,10 @@ void InputRedirectionToken_dtor(InputRedirectionToken *self);
  */
 typedef struct {
         Token super; /**< inherits from @c Token */
-} OutputRedirectionToken;
+} OutputRedirToken;
 
 /**
- * @brief Constructs a new @c OutputRedirectionToken object.
+ * @brief Constructs a new @c OutputRedirToken object.
  *
  * The general implementation of a vtable, usage of const for the main object,
  * and other OOP concepts were derived from this publication.
@@ -263,17 +232,61 @@ typedef struct {
  * <br><br>
  *
  * Source: https://www.state-machine.com/doc/AN_OOP_in_C.pdf*
- * @param self @c OutputRedirectionToken object to initialize
+ * @param self @c OutputRedirToken object to initialize
  */
-void OutputRedirectionToken_ctor(OutputRedirectionToken *self);
+void OutputRedirToken_ctor(OutputRedirToken *self);
 
 /**
- * @brief Destroys an @c OutputRedirectionToken object, freeing its members and
+ * @brief Destroys an @c OutputRedirToken object, freeing its members and
  * re-initializing them to @c NULL in the process.
- * @param self @c OutputRedirectionToken object to destroy
+ * @param self @c OutputRedirToken object to destroy
  * @note The caller is responsible for freeing @p self afterwards if it was
  * originally allocated on the heap.
  */
-void OutputRedirectionToken_dtor(OutputRedirectionToken *self);
+void OutputRedirToken_dtor(OutputRedirToken *self);
+
+/* *****************************************************************************
+ * WordToken
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
+/**
+ * @brief Defines a token object that parses and stores a command literal.
+ */
+typedef struct {
+        Token super; /**< inherits from @c Token */
+} WordToken;
+
+/**
+ * @brief Constructs a new @c WordToken object.
+ *
+ * The general implementation of a vtable, usage of const for the main object,
+ * and other OOP concepts were derived from this publication.
+ *
+ * <br><br>
+ *
+ * Source: https://www.state-machine.com/doc/AN_OOP_in_C.pdf*
+ * @param self @c WordToken object to initialize
+ */
+void WordToken_ctor(WordToken *self);
+
+/**
+ * @brief Destroys a @c CommandToken object, freeing its members and
+ * re-initializing them to @c NULL in the process.
+ * @param self @c CommandToken object to destroy
+ * @note The caller is responsible for freeing @p self afterwards if it was
+ * originally allocated on the heap.
+ */
+void WordToken_dtor(WordToken *self);
 
 #endif //SMALLSH_SHELL_TOKENS_H
