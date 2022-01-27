@@ -18,8 +18,52 @@ target_include_directories(
 )
 target_link_libraries(test-string-iterator cmocka)
 
+# TEST-TOKEN
+add_executable(
+        test-token
+        test-token.c
+)
+target_include_directories(
+        test-token
+        PRIVATE
+        "${PROJECT_SOURCE_DIR}/src"
+)
+target_link_libraries(test-token cmocka)
+
+# TEST-SHELL-TOKENS
+add_executable(
+        "test-shell-tokens"
+        test-shell-tokens.c
+        "${PROJECT_SOURCE_DIR}/src/string-iterator.c"
+        "${PROJECT_SOURCE_DIR}/src/shell-tokens.c"
+        "${PROJECT_SOURCE_DIR}/src/token.c"
+)
+target_include_directories(
+        "test-shell-tokens"
+        PRIVATE
+        "${PROJECT_SOURCE_DIR}/src"
+)
+target_link_libraries("test-shell-tokens" cmocka)
+
+# TEST-LEXER
+add_executable(
+        "test-lexer"
+        test-lexer.c
+        "${PROJECT_SOURCE_DIR}/src/lexer.c"
+        "${PROJECT_SOURCE_DIR}/src/string-iterator.c"
+        "${PROJECT_SOURCE_DIR}/src/shell-tokens.c"
+        "${PROJECT_SOURCE_DIR}/src/token.c"
+)
+target_include_directories(
+        "test-lexer"
+        PRIVATE
+        "${PROJECT_SOURCE_DIR}/src"
+)
+target_link_libraries("test-lexer" cmocka)
+
 #################### ADD TESTS ####################
 enable_testing()
+
 add_test(
         NAME test-main
         COMMAND test-main
@@ -29,5 +73,23 @@ add_test(
 add_test(
         NAME test-string-iterator
         COMMAND test-string-iterator
+        WORKING_DIRECTORY /nfs/stak/users/alhussem/cs344/a3
+)
+
+add_test(
+        NAME test-token
+        COMMAND test-token
+        WORKING_DIRECTORY /nfs/stak/users/alhussem/cs344/a3
+)
+
+add_test(
+        NAME "test-shell-tokens"
+        COMMAND "test-shell-tokens"
+        WORKING_DIRECTORY /nfs/stak/users/alhussem/cs344/a3
+)
+
+add_test(
+        NAME "test-lexer"
+        COMMAND "test-lexer"
         WORKING_DIRECTORY /nfs/stak/users/alhussem/cs344/a3
 )
