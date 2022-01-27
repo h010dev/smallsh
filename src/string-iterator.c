@@ -66,7 +66,7 @@ struct StringIteratorPrivate {
 static inline bool StringIterator_hasNext_(StringIterator const * const self)
 {
         char itr = *self->_private->current;
-        return itr != '\n' && itr != '\0';
+        return itr != '\0';
 }
 
 static char *StringIterator_munchChar_(StringIterator const * const self)
@@ -83,7 +83,7 @@ static char *StringIterator_munchWord_(StringIterator const * const self)
 {
         // grab word
         const char *start = self->vptr->next(self);
-        while (self->vptr->has_next(self) && self->vptr->peek(self) != ' ') {
+        while (self->vptr->has_next(self) && self->vptr->peek(self, 0) != ' ') {
                 self->vptr->next(self);
         }
 
@@ -133,11 +133,36 @@ static char *StringIterator_slice_(StringIterator const * const self,
 /**
  * @brief Implementation of @c StringIterator::peek().
  * @param self pointer to iterator object
+ * @param offset how far ahead to peek
  * @return the character pointed to by the iterator
  */
-static inline char StringIterator_peek_(StringIterator const * const self)
+static inline char StringIterator_peek_(StringIterator const * const self,
+                                        unsigned int offset)
 {
-        return *self->_private->current;
+        const char *orig, *cur;
+        char result;
+        unsigned int pos;
+
+        // store pointer to originating character
+        orig = self->_private->current;
+
+        // seek to offset or end of stream, whichever comes first
+        pos = 0;
+        do {
+                cur = self->vptr->next(self);
+                pos++;
+        } while (pos <= offset && self->vptr->has_next(self));
+
+        // check if iterator exhausted before reaching offset
+        if (pos <= offset)
+                result = STRING_ITERATOR_EOL;
+        else
+                result = *cur;
+
+        // reset pointer to originating character
+        self->_private->current = orig;
+
+        return result;
 }
 
 /* *****************************************************************************

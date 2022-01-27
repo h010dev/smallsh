@@ -13,6 +13,8 @@
 
 #include <stdbool.h>
 
+#define STRING_ITERATOR_EOL '\0' /**< signified end of line for iterator */
+
 struct StringIteratorVtbl;
 struct StringIteratorPrivate;
 
@@ -35,12 +37,8 @@ struct StringIteratorVtbl {
          * @brief Let's caller know if there are any more characters left to
          * parse from internal string.
          *
-         * If the current iterator is positioned at a newline ('\\n') or null
-         * ('\\0') character, then it is assumed that the iterator has been
-         * exhausted.
-         *
-         * Note this means that multi-line strings cannot be parsed
-         * by this iterator without failing prematurely.
+         * If the current iterator is positioned at a null terminator ('\\0')
+         * character, then it is assumed that the iterator has been exhausted.
          *
          * @example
          * <br>
@@ -64,15 +62,6 @@ struct StringIteratorVtbl {
          * returns false.
          *
          * <br>
-         *
-         * <pre>string = "hello world\\n goodbye world\\0"</pre>
-         * <pre>cursor:             ^                     </pre>
-         *
-         * <br>
-         *
-         * In this case, the cursor is at 'd'. The next letter is '\\n' so it
-         * returns false, even though the string has technically not been
-         * exhausted.
          *
          * @pre It is assumed that the iterator is always within bounds of the
          * string it is iterating. Behavior is undefined if this is not the case.
@@ -123,18 +112,30 @@ struct StringIteratorVtbl {
         const char *(*next) (StringIterator const * const self);
 
         /**
-         * @brief Returns character that iterator is pointing at, without
-         * advancing to the next character.
+         * @brief Returns the nth character from the iterators cursor, without
+         * advancing to the it.
+         *
+         * <br>
+         *
+         * If @p offset is equal to 0, then the character at the current
+         * cursor is retrieved.
+         *
+         * <br>
+         *
+         * If @p offset is positive, then the iterator peaks ahead of the cursor.
+         *
+         * <br>
          *
          * This function is provided to allow for look-ahead parsing by peeking
          * at the next character in the iterator.
-         *
          * @pre It is assumed that the iterator is always within bounds of the
          * string it is iterating. Behavior is undefined if this is not the case.
          * @param self pointer to iterator object
-         * @return the character pointed to by the iterator
+         * @param offset how far ahead to peak
+         * @return the nth character past the iterators cursor, or EOL if no
+         * more characters to seek past
          */
-        char (*peek) (StringIterator const * const self);
+        char (*peek) (StringIterator const * const self, unsigned int offset);
 
         /**
          * @brief Returns a slice copied from the pointer starting at @p from

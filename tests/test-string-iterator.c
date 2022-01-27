@@ -65,10 +65,57 @@ static void StringIterator_peek_test_returnsCurrent(void **state)
         StringIterator_ctor(&itr, string);
 
         for (size_t i = 0; i < len; i++) {
-                cur = itr.vptr->peek(&itr);
+                cur = itr.vptr->peek(&itr, 0);
                 assert_int_equal(string[i], cur);
                 itr.vptr->next(&itr);
         }
+}
+
+static void StringIterator_peek_test_returnsOffset(void **state)
+{
+        (void) state;
+        char *string = "hello world";
+        size_t len = strlen(string);
+        StringIterator itr;
+        char cur;
+
+        StringIterator_ctor(&itr, string);
+
+        for (size_t i = 0; i < len; i++) {
+                cur = itr.vptr->peek(&itr, i);
+                assert_int_equal(string[i], cur);
+        }
+
+        // cursor should remain at original position
+        assert_int_equal('h', itr.vptr->peek(&itr, 0));
+}
+
+static void StringIterator_peek_test_EOL(void **state)
+{
+        (void) state;
+        char *string = "hello world";
+        size_t len = strlen(string);
+        StringIterator itr;
+        char cur;
+
+        StringIterator_ctor(&itr, string);
+
+        // go to last valid character
+        for (size_t i = 0; i < len - 1; i++) {
+                itr.vptr->next(&itr);
+        }
+
+        // cur should be valid
+        assert_int_equal('d', itr.vptr->peek(&itr, 0));
+
+        // next should not be valid
+        for (size_t i = 1; i < 5; i++) {
+                cur = itr.vptr->peek(&itr, i);
+                assert_int_equal(STRING_ITERATOR_EOL, cur);
+        }
+
+        // cursor should remain at original position
+        assert_int_equal('d', itr.vptr->peek(&itr, 0));
 }
 
 static void StringIterator_hasNext_test_detectsNullTerminator(void **state)
@@ -76,25 +123,6 @@ static void StringIterator_hasNext_test_detectsNullTerminator(void **state)
         (void) state;
         char *string = "hello world";
         size_t len = strlen(string);
-        StringIterator itr;
-        bool has_next;
-
-        StringIterator_ctor(&itr, string);
-
-        for (size_t i = 0; i < len; i++) {
-                has_next = itr.vptr->has_next(&itr);
-                assert_true(has_next);
-                itr.vptr->next(&itr);
-        }
-        has_next = itr.vptr->has_next(&itr);
-        assert_false(has_next);
-}
-
-static void StringIterator_hasNext_test_detectsNewline(void **state)
-{
-        (void) state;
-        char *string = "hello \nworld";
-        size_t len = 6; /* newline pos */
         StringIterator itr;
         bool has_next;
 
@@ -183,7 +211,7 @@ static void StringIterator_slice_test_returnsSlice(void **state)
         free(slice);
 }
 
-static void StringIterator_munchChar_beforeEOL(void **state)
+static void StringIterator_test_munchChar_beforeEOL(void **state)
 {
         (void) state;
         StringIterator iter;
@@ -193,7 +221,7 @@ static void StringIterator_munchChar_beforeEOL(void **state)
 
         // iterate to character
         StringIterator_ctor(&iter, string);
-        while (iter.vptr->peek(&iter) != sym) {
+        while (iter.vptr->peek(&iter, 0) != sym) {
                 iter.vptr->next(&iter);
         }
 
@@ -205,7 +233,7 @@ static void StringIterator_munchChar_beforeEOL(void **state)
         assert_int_equal('\0', *iter.vptr->next(&iter));
 }
 
-static void StringIterator_munchChar_beforeNewline(void **state)
+static void StringIterator_test_munchChar_beforeNewline(void **state)
 {
         (void) state;
         StringIterator iter;
@@ -215,7 +243,7 @@ static void StringIterator_munchChar_beforeNewline(void **state)
 
         // iterate to character
         StringIterator_ctor(&iter, string);
-        while (iter.vptr->peek(&iter) != sym) {
+        while (iter.vptr->peek(&iter, 0) != sym) {
                 iter.vptr->next(&iter);
         }
 
@@ -227,7 +255,7 @@ static void StringIterator_munchChar_beforeNewline(void **state)
         assert_int_equal('\n', *iter.vptr->next(&iter));
 }
 
-static void StringIterator_munchChar_loneChar(void **state)
+static void StringIterator_test_munchChar_loneChar(void **state)
 {
         (void) state;
         StringIterator iter;
@@ -237,7 +265,7 @@ static void StringIterator_munchChar_loneChar(void **state)
 
         // iterate to character
         StringIterator_ctor(&iter, string);
-        while (iter.vptr->peek(&iter) != sym) {
+        while (iter.vptr->peek(&iter, 0) != sym) {
                 iter.vptr->next(&iter);
         }
 
@@ -249,7 +277,7 @@ static void StringIterator_munchChar_loneChar(void **state)
         assert_int_equal(' ', *iter.vptr->next(&iter));
 }
 
-static void StringIterator_munchChar_followingChars(void **state)
+static void StringIterator_test_munchChar_followingChars(void **state)
 {
         (void) state;
         StringIterator iter;
@@ -259,7 +287,7 @@ static void StringIterator_munchChar_followingChars(void **state)
 
         // iterate to character
         StringIterator_ctor(&iter, string);
-        while (iter.vptr->peek(&iter) != sym) {
+        while (iter.vptr->peek(&iter, 0) != sym) {
                 iter.vptr->next(&iter);
         }
 
@@ -271,7 +299,7 @@ static void StringIterator_munchChar_followingChars(void **state)
         assert_int_equal('h', *iter.vptr->next(&iter));
 }
 
-static void StringIterator_munchWord_beforeEOL(void **state)
+static void StringIterator_test_munchWord_beforeEOL(void **state)
 {
         (void) state;
         StringIterator iter;
@@ -288,24 +316,7 @@ static void StringIterator_munchWord_beforeEOL(void **state)
         assert_int_equal('\0', *iter.vptr->next(&iter));
 }
 
-static void StringIterator_munchWord_beforeNewline(void **state)
-{
-        (void) state;
-        StringIterator iter;
-        char *string = "cmd\n";
-        char *slice;
-
-        StringIterator_ctor(&iter, string);
-
-        // eat word
-        slice = iter.vptr->munchWord(&iter);
-        assert_string_equal("cmd", slice);
-
-        // iter should point at end of word
-        assert_int_equal('\n', *iter.vptr->next(&iter));
-}
-
-static void StringIterator_munchWord_followingWords(void **state)
+static void StringIterator_test_munchWord_followingWords(void **state)
 {
         (void) state;
         StringIterator iter;
@@ -322,7 +333,7 @@ static void StringIterator_munchWord_followingWords(void **state)
         assert_int_equal(' ', *iter.vptr->next(&iter));
 }
 
-static void StringIterator_munchWord_singleChar(void **state)
+static void StringIterator_test_munchWord_singleChar(void **state)
 {
         (void) state;
         StringIterator iter;
@@ -351,29 +362,29 @@ int main(void)
                 cmocka_unit_test_setup_teardown(
                         StringIterator_peek_test_returnsCurrent, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        StringIterator_hasNext_test_detectsNullTerminator, NULL, NULL),
+                        StringIterator_peek_test_returnsOffset, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        StringIterator_hasNext_test_detectsNewline, NULL, NULL),
+                        StringIterator_peek_test_EOL, NULL, NULL),
+                cmocka_unit_test_setup_teardown(
+                        StringIterator_hasNext_test_detectsNullTerminator, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
                         StringIterator_slice_test_handlesOutOfBounds, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
                         StringIterator_slice_test_returnsSlice, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        StringIterator_munchChar_beforeEOL, NULL, NULL),
+                        StringIterator_test_munchChar_beforeEOL, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        StringIterator_munchChar_beforeNewline, NULL, NULL),
+                        StringIterator_test_munchChar_beforeNewline, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        StringIterator_munchChar_loneChar, NULL, NULL),
+                        StringIterator_test_munchChar_loneChar, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        StringIterator_munchChar_followingChars, NULL, NULL),
+                        StringIterator_test_munchChar_followingChars, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        StringIterator_munchWord_beforeEOL, NULL, NULL),
+                        StringIterator_test_munchWord_beforeEOL, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        StringIterator_munchWord_beforeNewline, NULL, NULL),
+                        StringIterator_test_munchWord_followingWords, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        StringIterator_munchWord_followingWords, NULL, NULL),
-                cmocka_unit_test_setup_teardown(
-                        StringIterator_munchWord_singleChar, NULL, NULL),
+                        StringIterator_test_munchWord_singleChar, NULL, NULL),
         };
 
         return cmocka_run_group_tests(tests, NULL, NULL);
