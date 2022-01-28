@@ -83,12 +83,25 @@ static char *StringIterator_munchWord_(StringIterator const * const self)
 {
         // grab word
         const char *start = self->vptr->next(self);
-        while (self->vptr->has_next(self) && self->vptr->peek(self, 0) != ' ') {
+        char *slice;
+        char c;
+        while (self->vptr->has_next(self)) {
+                c = self->vptr->peek(self, 0);
+                switch (c) {
+                        // stop at terminal character
+                        case ' ':
+                        case '\t':
+                        case '\n':
+                                goto seek_fin;
+                        default:
+                                break;
+                }
                 self->vptr->next(self);
         }
 
+seek_fin:
         // copy and return word
-        char *slice = self->vptr->slice(self, start);
+        slice = self->vptr->slice(self, start);
         return slice;
 }
 
