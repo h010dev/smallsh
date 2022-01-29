@@ -5,7 +5,7 @@
  * @brief Implementation of stack ADT to be used for storing parsed statement
  * nodes.
  */
-#include "node-stack.h"
+#include "stack.h"
 #include "node.h"
 
 /* *****************************************************************************
@@ -155,7 +155,7 @@ static inline void NodeStack_push_(Stack const * const self, void **item)
  *
  *
  ******************************************************************************/
-void NodeStack_ctor(Stack *self, size_t size)
+void Stack_ctor(Stack *self, size_t size)
 {
         // initialize stack methods
         self->isEmpty = &NodeStack_isEmpty_;
@@ -173,7 +173,7 @@ void NodeStack_ctor(Stack *self, size_t size)
 }
 
 // TODO: see if its necessary to free individual stack items or not
-void NodeStack_dtor(Stack *self)
+void Stack_dtor(Stack *self)
 {
         // un-initialize stack methods
         self->isEmpty = NULL;

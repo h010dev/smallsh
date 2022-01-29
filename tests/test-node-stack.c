@@ -18,7 +18,7 @@ static void NodeStack_ctor_test_initializesValues(void **state)
 
         Stack s;
         size_t size = 10;
-        NodeStack_ctor(&s, size);
+        Stack_ctor(&s, size);
 
         assert_int_equal(size, s._private->size);
         assert_int_equal(0, s._private->top);
@@ -30,8 +30,8 @@ static void NodeStack_dtor_test_destroysData(void **state)
 
         Stack s;
         size_t size = 10;
-        NodeStack_ctor(&s, size);
-        NodeStack_dtor(&s);
+        Stack_ctor(&s, size);
+        Stack_dtor(&s);
 
         assert_null(s.isEmpty);
         assert_null(s.isFull);
@@ -48,7 +48,7 @@ static void NodeStack_push_test_addsItem(void **state)
         // init stack
         Stack s;
         size_t size = 10;
-        NodeStack_ctor(&s, size);
+        Stack_ctor(&s, size);
 
         // fill stack with nodes passed by value
         for (size_t i = 0; i < size; i++) {
@@ -96,7 +96,7 @@ static void NodeStack_pop_test_removesItem(void **state)
         // init stack
         Stack s;
         size_t size = 10;
-        NodeStack_ctor(&s, size);
+        Stack_ctor(&s, size);
 
         // fill stack with nodes
         for (size_t i = 0; i < size; i++) {
@@ -135,7 +135,7 @@ static void NodeStack_peek_test_returnsCopy(void **state)
         // init stack
         Stack s;
         size_t size = 10;
-        NodeStack_ctor(&s, size);
+        Stack_ctor(&s, size);
 
         // fill stack with nodes
         for (size_t i = 0; i < size; i++) {
@@ -168,7 +168,7 @@ static void NodeStack_peek_tests_emptyStack(void **state)
         // init stack
         Stack s;
         size_t size = 10;
-        NodeStack_ctor(&s, size);
+        Stack_ctor(&s, size);
 
         // try to peek
         assert_null(s.peek(&s));
@@ -181,7 +181,7 @@ static void NodeStack_isEmpty_test_valid(void **state)
         // init stack
         Stack s;
         size_t size = 10;
-        NodeStack_ctor(&s, size);
+        Stack_ctor(&s, size);
 
         assert_true(s.isEmpty(&s));
 }
@@ -193,7 +193,7 @@ static void NodeStack_isFull_test_valid(void **state)
         // init stack
         Stack s;
         size_t size = 10;
-        NodeStack_ctor(&s, size);
+        Stack_ctor(&s, size);
 
         // move top to end of stack
         s._private->top = size;

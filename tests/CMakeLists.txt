@@ -96,7 +96,6 @@ add_test(
 add_executable(
         "test-token-iterator"
         test-token-iterator.c
-        "${PROJECT_SOURCE_DIR}/src/node-stack.c"
         "${PROJECT_SOURCE_DIR}/src/node.c"
         "${PROJECT_SOURCE_DIR}/src/lexer.c"
         "${PROJECT_SOURCE_DIR}/src/string-iterator.c"
