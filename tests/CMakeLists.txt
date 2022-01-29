@@ -116,3 +116,21 @@ add_test(
         COMMAND "test-token-iterator"
         WORKING_DIRECTORY /nfs/stak/users/alhussem/cs344/a3
 )
+
+##################### TEST-TOKEN-ITERATOR ####################
+add_executable(
+        test-node
+        test-node.c
+)
+target_include_directories(
+        test-node
+        PRIVATE
+        "${PROJECT_SOURCE_DIR}/src"
+)
+target_link_libraries(test-node cmocka)
+
+add_test(
+        NAME test-node
+        COMMAND test-node
+        WORKING_DIRECTORY /nfs/stak/users/alhussem/cs344/a3
+)
