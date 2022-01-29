@@ -135,3 +135,22 @@ add_test(
         COMMAND test-node
         WORKING_DIRECTORY /nfs/stak/users/alhussem/cs344/a3
 )
+
+##################### TEST-NODE-STACK ####################
+add_executable(
+        test-node-stack
+        test-node-stack.c
+        "${PROJECT_SOURCE_DIR}/src/node.c"
+)
+target_include_directories(
+        test-node-stack
+        PRIVATE
+        "${PROJECT_SOURCE_DIR}/src"
+)
+target_link_libraries(test-node-stack cmocka)
+
+add_test(
+        NAME test-node-stack
+        COMMAND test-node-stack
+        WORKING_DIRECTORY /nfs/stak/users/alhussem/cs344/a3
+)
