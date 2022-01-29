@@ -27,7 +27,7 @@ typedef struct {
  * @brief Defines the base token type (class).
  */
 typedef enum {
-        TOKEN_0 = 0, /**< placeholder token type */
+        TOK_0 = 0, /**< placeholder token type */
 } TokenType;
 
 /**

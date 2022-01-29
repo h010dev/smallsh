@@ -1,3 +1,9 @@
+/**
+ * @file test-shell-tokens.c
+ * @author Mohamed Al-Hussein
+ * @date 26 Jan 2022
+ * @brief Unit test module for shell-tokens.c.
+ */
 #include <stdarg.h>
 #include <stddef.h>
 #include <setjmp.h>
@@ -14,7 +20,7 @@ static void CommentToken_ctor_test_initializesValues(void **state)
 
         CommentToken_ctor(&tok);
 
-        assert_int_equal(COMMENT_TOKEN, tok.super.vptr->getType((Token *) &tok));
+        assert_int_equal(TOK_CMT, tok.super.vptr->getType((Token *) &tok));
         assert_null(tok.super.vptr->getValue((Token *) &tok));
 }
 
@@ -64,7 +70,7 @@ static void InputRedirToken_ctor_test_initializesValues(void **state)
 
         InputRedirToken_ctor(&tok);
 
-        assert_int_equal(INPUT_REDIR_TOKEN, tok.super.vptr->getType((Token *) &tok));
+        assert_int_equal(TOK_REDIR_INPUT, tok.super.vptr->getType((Token *) &tok));
         assert_null(tok.super.vptr->getValue((Token *) &tok));
 }
 
@@ -114,7 +120,7 @@ static void OutputRedirToken_ctor_test_initializesValues(void **state)
 
         OutputRedirToken_ctor(&tok);
 
-        assert_int_equal(OUTPUT_REDIR_TOKEN, tok.super.vptr->getType((Token *) &tok));
+        assert_int_equal(TOK_REDIR_OUTPUT, tok.super.vptr->getType((Token *) &tok));
         assert_null(tok.super.vptr->getValue((Token *) &tok));
 }
 
@@ -164,7 +170,7 @@ static void BGControlToken_ctor_test_initializesValues(void **state)
 
         BGControlToken_ctor(&tok);
 
-        assert_int_equal(BG_CONTROL_TOKEN, tok.super.vptr->getType((Token *) &tok));
+        assert_int_equal(TOK_CTRL_BG, tok.super.vptr->getType((Token *) &tok));
         assert_null(tok.super.vptr->getValue((Token *) &tok));
 }
 
@@ -214,7 +220,7 @@ static void WordToken_ctor_test_initializesValues(void **state)
 
         WordToken_ctor(&tok);
 
-        assert_int_equal(WORD_TOKEN, tok.super.vptr->getType((Token *) &tok));
+        assert_int_equal(TOK_WORD, tok.super.vptr->getType((Token *) &tok));
         assert_null(tok.super.vptr->getValue((Token *) &tok));
 }
 
@@ -259,7 +265,7 @@ static void NewlineToken_ctor_test_initializesValues(void **state)
 
         NewlineToken_ctor(&tok);
 
-        assert_int_equal(NEWLINE_TOKEN, tok.super.vptr->getType((Token *) &tok));
+        assert_int_equal(TOK_CTRL_NEWLINE, tok.super.vptr->getType((Token *) &tok));
         assert_null(tok.super.vptr->getValue((Token *) &tok));
 }
 

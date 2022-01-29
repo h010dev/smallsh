@@ -11,9 +11,9 @@ static void Token_ctor_test_initializesValues(void **state)
         (void) state;
         Token tok;
 
-        Token_ctor(&tok, TOKEN_0);
+        Token_ctor(&tok, TOK_0);
 
-        assert_int_equal(TOKEN_0, tok._private->type);
+        assert_int_equal(TOK_0, tok._private->type);
         assert_null(tok._private->value);
 }
 
@@ -22,7 +22,7 @@ static void Token_dtor_test_deletesData(void **state)
         (void) state;
         Token tok;
 
-        Token_ctor(&tok, TOKEN_0);
+        Token_ctor(&tok, TOK_0);
         Token_dtor(&tok);
 
         assert_null(tok.vptr);
@@ -35,7 +35,7 @@ static void Token_setValue_test_valueCopy(void **state)
         Token tok;
         char *value = "hello world";
 
-        Token_ctor(&tok, TOKEN_0);
+        Token_ctor(&tok, TOK_0);
         tok.vptr->setValue(&tok, value);
 
         assert_ptr_not_equal(&value, &tok._private->value);
@@ -49,7 +49,7 @@ static void Token_setValue_test_overwriteOrig(void **state)
         char *orig = "hello world";
         char *new = "goodbye world";
 
-        Token_ctor(&tok, TOKEN_0);
+        Token_ctor(&tok, TOK_0);
         tok.vptr->setValue(&tok, orig);
 
         tok.vptr->setValue(&tok, new);
@@ -62,8 +62,8 @@ static void Token_getType_test_valid(void **state)
         (void) state;
         Token tok;
 
-        Token_ctor(&tok, TOKEN_0);
-        assert_int_equal(TOKEN_0, tok.vptr->getValue(&tok));
+        Token_ctor(&tok, TOK_0);
+        assert_int_equal(TOK_0, tok.vptr->getValue(&tok));
 }
 
 static void Token_getValue_test_nullValue(void **state)
@@ -72,7 +72,7 @@ static void Token_getValue_test_nullValue(void **state)
         Token tok;
         char *value;
 
-        Token_ctor(&tok, TOKEN_0);
+        Token_ctor(&tok, TOK_0);
         value = tok.vptr->getValue(&tok);
         assert_null(value);
 }
@@ -84,7 +84,7 @@ static void Token_getValue_test_valueCopy(void **state)
         char *value = "hello world";
         char *copy;
 
-        Token_ctor(&tok, TOKEN_0);
+        Token_ctor(&tok, TOK_0);
         tok.vptr->setValue(&tok, value);
 
         copy = tok.vptr->getValue(&tok);

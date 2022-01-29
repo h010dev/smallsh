@@ -143,7 +143,7 @@ void Token_dtor(Token *self)
 {
         self->vptr = NULL;
 
-        self->_private->type = TOKEN_0;
+        self->_private->type = TOK_0;
 
         free(self->_private->value);
         self->_private->value = NULL;

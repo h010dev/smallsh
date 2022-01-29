@@ -268,7 +268,7 @@ void BGControlToken_ctor(BGControlToken * const self)
                 .setValue = &Token_setValue_,
                 .take = &BGControlToken_take_,
         };
-        Token_ctor(&self->super, (TokenType) BG_CONTROL_TOKEN);
+        Token_ctor(&self->super, (TokenType) TOK_CTRL_BG);
         self->super.vptr = &vtbl;
 }
 
@@ -286,7 +286,7 @@ void CommentToken_ctor(CommentToken * const self)
                 .setValue = &Token_setValue_,
                 .take = &CommentToken_take_,
         };
-        Token_ctor(&self->super, (TokenType) COMMENT_TOKEN);
+        Token_ctor(&self->super, (TokenType) TOK_CMT);
         self->super.vptr = &vtbl;
 }
 
@@ -304,7 +304,7 @@ void InputRedirToken_ctor(InputRedirToken * const self)
                 .setValue = &Token_setValue_,
                 .take = &InputRedirToken_take_,
         };
-        Token_ctor(&self->super, (TokenType) INPUT_REDIR_TOKEN);
+        Token_ctor(&self->super, (TokenType) TOK_REDIR_INPUT);
         self->super.vptr = &vtbl;
 }
 
@@ -322,7 +322,7 @@ void NewlineToken_ctor(NewlineToken *self)
                 .setValue = &Token_setValue_,
                 .take = &NewlineToken_take_,
         };
-        Token_ctor(&self->super, (TokenType) NEWLINE_TOKEN);
+        Token_ctor(&self->super, (TokenType) TOK_CTRL_NEWLINE);
         self->super.vptr = &vtbl;
 }
 
@@ -340,7 +340,7 @@ void OutputRedirToken_ctor(OutputRedirToken *self)
                 .setValue = &Token_setValue_,
                 .take = &OutputRedirToken_take_,
         };
-        Token_ctor(&self->super, (TokenType) OUTPUT_REDIR_TOKEN);
+        Token_ctor(&self->super, (TokenType) TOK_REDIR_OUTPUT);
         self->super.vptr = &vtbl;
 }
 
@@ -358,7 +358,7 @@ void WordToken_ctor(WordToken *self)
                 .setValue = &Token_setValue_,
                 .take = &WordToken_take_,
         };
-        Token_ctor(&self->super, (TokenType) WORD_TOKEN);
+        Token_ctor(&self->super, (TokenType) TOK_WORD);
         self->super.vptr = &vtbl;
 }
 

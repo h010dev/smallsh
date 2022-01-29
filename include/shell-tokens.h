@@ -13,13 +13,13 @@
  * @brief Defines the types of tokens our scanner will produce.
  */
 typedef enum {
-        BG_CONTROL_TOKEN = 1, /**< a background is identified by '&' at the end of the stream */
-        COMMENT_TOKEN = 2, /**< a comment is identified by '#' at the start of the stream */
-        INPUT_REDIR_TOKEN = 3, /**< an input redirection is a '<' to redirect file io */
-        NEWLINE_TOKEN = 4, /**< a newline is identified by '\\n' */
-        OUTPUT_REDIR_TOKEN = 5, /**< an output redirection is a '>' to redirect file io */
-        WORD_TOKEN = 6, /**< a command is any word at the start of the stream */
-        NUM_TOKENS = 7, /**< count of tokens to allow iterating over them */
+        TOK_CMT = 1, /**< a comment is identified by '#' at the start of the stream */
+        TOK_CTRL_BG = 2, /**< a background is identified by '&' at the end of the stream */
+        TOK_CTRL_NEWLINE = 3, /**< a newline is identified by '\\n' */
+        TOK_REDIR_INPUT = 4, /**< an input redirection is a '<' to redirect file io */
+        TOK_REDIR_OUTPUT = 5, /**< an output redirection is a '>' to redirect file io */
+        TOK_WORD = 6, /**< a basic token is any word */
+        TOK_COUNT = 7, /**< count of tokens to allow iterating over them */
 } ShellTokenType;
 
 /* *****************************************************************************

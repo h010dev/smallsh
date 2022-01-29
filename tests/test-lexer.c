@@ -45,7 +45,7 @@ static void generate_tokens_test_singleToken(void **state)
 
         assert_int_equal(1, count1);
         assert_int_equal(
-                COMMENT_TOKEN,
+                TOK_CMT,
                 ((CommentToken *) tokens1[0])->super.vptr->getType(tokens1[0]));
 
         // background control token
@@ -55,7 +55,7 @@ static void generate_tokens_test_singleToken(void **state)
 
         assert_int_equal(1, count2);
         assert_int_equal(
-                BG_CONTROL_TOKEN,
+                TOK_CTRL_BG,
                 ((BGControlToken *) tokens2[0])->super.vptr->getType(tokens2[0]));
 
         // input redirection token
@@ -65,7 +65,7 @@ static void generate_tokens_test_singleToken(void **state)
 
         assert_int_equal(1, count3);
         assert_int_equal(
-                INPUT_REDIR_TOKEN,
+                TOK_REDIR_INPUT,
                 ((InputRedirToken *) tokens3[0])->super.vptr->getType(tokens3[0]));
 
         // output redirection token
@@ -75,7 +75,7 @@ static void generate_tokens_test_singleToken(void **state)
 
         assert_int_equal(1, count4);
         assert_int_equal(
-                OUTPUT_REDIR_TOKEN,
+                TOK_REDIR_OUTPUT,
                 ((OutputRedirToken *) tokens4[0])->super.vptr->getType(tokens4[0]));
 
         // newline token
@@ -85,7 +85,7 @@ static void generate_tokens_test_singleToken(void **state)
 
         assert_int_equal(1, count5);
         assert_int_equal(
-                NEWLINE_TOKEN,
+                TOK_CTRL_NEWLINE,
                 ((NewlineToken *) tokens5[0])->super.vptr->getType(tokens5[0]));
 
         // word token (single character)
@@ -95,7 +95,7 @@ static void generate_tokens_test_singleToken(void **state)
 
         assert_int_equal(1, count6);
         assert_int_equal(
-                WORD_TOKEN,
+                TOK_WORD,
                 ((WordToken *) tokens6[0])->super.vptr->getType(tokens6[0]));
 
         // word token (multi-character)
@@ -105,7 +105,7 @@ static void generate_tokens_test_singleToken(void **state)
 
         assert_int_equal(1, count7);
         assert_int_equal(
-                WORD_TOKEN,
+                TOK_WORD,
                 ((WordToken *) tokens7[0])->super.vptr->getType(tokens7[0]));
 }
 
@@ -120,7 +120,7 @@ static void generate_tokens_test_singleTokenBeforeNewline(void **state)
 
         assert_int_equal(2, count1);
         assert_int_equal(
-                COMMENT_TOKEN,
+                TOK_CMT,
                 ((CommentToken *) tokens1[0])->super.vptr->getType(tokens1[0]));
 
         // background control token
@@ -130,7 +130,7 @@ static void generate_tokens_test_singleTokenBeforeNewline(void **state)
 
         assert_int_equal(2, count2);
         assert_int_equal(
-                BG_CONTROL_TOKEN,
+                TOK_CTRL_BG,
                 ((BGControlToken *) tokens2[0])->super.vptr->getType(tokens2[0]));
 
         // input redirection token
@@ -140,7 +140,7 @@ static void generate_tokens_test_singleTokenBeforeNewline(void **state)
 
         assert_int_equal(2, count3);
         assert_int_equal(
-                INPUT_REDIR_TOKEN,
+                TOK_REDIR_INPUT,
                 ((InputRedirToken *) tokens3[0])->super.vptr->getType(tokens3[0]));
 
         // output redirection token
@@ -150,7 +150,7 @@ static void generate_tokens_test_singleTokenBeforeNewline(void **state)
 
         assert_int_equal(2, count4);
         assert_int_equal(
-                OUTPUT_REDIR_TOKEN,
+                TOK_REDIR_OUTPUT,
                 ((OutputRedirToken *) tokens4[0])->super.vptr->getType(tokens4[0]));
 
         // newline token
@@ -160,7 +160,7 @@ static void generate_tokens_test_singleTokenBeforeNewline(void **state)
 
         assert_int_equal(2, count5);
         assert_int_equal(
-                NEWLINE_TOKEN,
+                TOK_CTRL_NEWLINE,
                 ((NewlineToken *) tokens5[0])->super.vptr->getType(tokens5[0]));
 
         // word token (single character)
@@ -170,7 +170,7 @@ static void generate_tokens_test_singleTokenBeforeNewline(void **state)
 
         assert_int_equal(2, count6);
         assert_int_equal(
-                WORD_TOKEN,
+                TOK_WORD,
                 ((WordToken *) tokens6[0])->super.vptr->getType(tokens6[0]));
 
         // word token (multi-character)
@@ -180,7 +180,7 @@ static void generate_tokens_test_singleTokenBeforeNewline(void **state)
 
         assert_int_equal(2, count7);
         assert_int_equal(
-                WORD_TOKEN,
+                TOK_WORD,
                 ((WordToken *) tokens7[0])->super.vptr->getType(tokens7[0]));
 }
 
@@ -195,7 +195,7 @@ static void generate_tokens_test_singleTokenTrailingWhitespace(void **state)
 
         assert_int_equal(1, count1);
         assert_int_equal(
-                COMMENT_TOKEN,
+                TOK_CMT,
                 ((CommentToken *) tokens1[0])->super.vptr->getType(tokens1[0]));
 
         // background control token
@@ -205,7 +205,7 @@ static void generate_tokens_test_singleTokenTrailingWhitespace(void **state)
 
         assert_int_equal(1, count2);
         assert_int_equal(
-                BG_CONTROL_TOKEN,
+                TOK_CTRL_BG,
                 ((BGControlToken *) tokens2[0])->super.vptr->getType(tokens2[0]));
 
         // input redirection token
@@ -215,7 +215,7 @@ static void generate_tokens_test_singleTokenTrailingWhitespace(void **state)
 
         assert_int_equal(1, count3);
         assert_int_equal(
-                INPUT_REDIR_TOKEN,
+                TOK_REDIR_INPUT,
                 ((InputRedirToken *) tokens3[0])->super.vptr->getType(tokens3[0]));
 
         // output redirection token
@@ -225,7 +225,7 @@ static void generate_tokens_test_singleTokenTrailingWhitespace(void **state)
 
         assert_int_equal(1, count4);
         assert_int_equal(
-                OUTPUT_REDIR_TOKEN,
+                TOK_REDIR_OUTPUT,
                 ((OutputRedirToken *) tokens4[0])->super.vptr->getType(tokens4[0]));
 
         // newline token
@@ -235,7 +235,7 @@ static void generate_tokens_test_singleTokenTrailingWhitespace(void **state)
 
         assert_int_equal(1, count5);
         assert_int_equal(
-                NEWLINE_TOKEN,
+                TOK_CTRL_NEWLINE,
                 ((NewlineToken *) tokens5[0])->super.vptr->getType(tokens5[0]));
 
         // word token (single character)
@@ -245,7 +245,7 @@ static void generate_tokens_test_singleTokenTrailingWhitespace(void **state)
 
         assert_int_equal(1, count6);
         assert_int_equal(
-                WORD_TOKEN,
+                TOK_WORD,
                 ((WordToken *) tokens6[0])->super.vptr->getType(tokens6[0]));
 
         // word token (multi-character)
@@ -255,7 +255,7 @@ static void generate_tokens_test_singleTokenTrailingWhitespace(void **state)
 
         assert_int_equal(1, count7);
         assert_int_equal(
-                WORD_TOKEN,
+                TOK_WORD,
                 ((WordToken *) tokens7[0])->super.vptr->getType(tokens7[0]));
 }
 
@@ -270,67 +270,67 @@ static void generate_tokens_test_allTokenTypes(void **state)
         assert_int_equal(11, count);
 
         assert_int_equal(
-                COMMENT_TOKEN,
+                TOK_CMT,
                 ((CommentToken *) tokens[0])->super.vptr->getType(tokens[0]));
         assert_string_equal("#",
                             ((CommentToken *) tokens[0])->super.vptr->getValue(tokens[0]));
 
         assert_int_equal(
-                WORD_TOKEN,
+                TOK_WORD,
                 ((WordToken *) tokens[1])->super.vptr->getType(tokens[1]));
         assert_string_equal("cmd",
                             ((WordToken *) tokens[1])->super.vptr->getValue(tokens[1]));
 
         assert_int_equal(
-                WORD_TOKEN,
+                TOK_WORD,
                 ((WordToken *) tokens[2])->super.vptr->getType(tokens[2]));
         assert_string_equal("arg1",
                             ((WordToken *) tokens[2])->super.vptr->getValue(tokens[2]));
 
         assert_int_equal(
-                WORD_TOKEN,
+                TOK_WORD,
                 ((WordToken *) tokens[3])->super.vptr->getType(tokens[3]));
         assert_string_equal("arg2",
                             ((WordToken *) tokens[3])->super.vptr->getValue(tokens[3]));
 
         assert_int_equal(
-                WORD_TOKEN,
+                TOK_WORD,
                 ((WordToken *) tokens[4])->super.vptr->getType(tokens[4]));
         assert_string_equal("arg3$$",
                             ((WordToken *) tokens[4])->super.vptr->getValue(tokens[4]));
 
         assert_int_equal(
-                INPUT_REDIR_TOKEN,
+                TOK_REDIR_INPUT,
                 ((InputRedirToken *) tokens[5])->super.vptr->getType(tokens[5]));
         assert_string_equal("<",
                             ((InputRedirToken *) tokens[5])->super.vptr->getValue(tokens[5]));
 
         assert_int_equal(
-                WORD_TOKEN,
+                TOK_WORD,
                 ((WordToken *) tokens[6])->super.vptr->getType(tokens[6]));
         assert_string_equal("file1.txt",
                             ((WordToken *) tokens[6])->super.vptr->getValue(tokens[6]));
 
         assert_int_equal(
-                OUTPUT_REDIR_TOKEN,
+                TOK_REDIR_OUTPUT,
                 ((OutputRedirToken *) tokens[7])->super.vptr->getType(tokens[7]));
         assert_string_equal(">",
                             ((OutputRedirToken *) tokens[7])->super.vptr->getValue(tokens[7]));
 
         assert_int_equal(
-                WORD_TOKEN,
+                TOK_WORD,
                 ((WordToken *) tokens[8])->super.vptr->getType(tokens[8]));
         assert_string_equal("file2.txt",
                             ((WordToken *) tokens[8])->super.vptr->getValue(tokens[8]));
 
         assert_int_equal(
-                BG_CONTROL_TOKEN,
+                TOK_CTRL_BG,
                 ((BGControlToken *) tokens[9])->super.vptr->getType(tokens[9]));
         assert_string_equal("&",
                             ((BGControlToken *) tokens[9])->super.vptr->getValue(tokens[9]));
 
         assert_int_equal(
-                NEWLINE_TOKEN,
+                TOK_CTRL_NEWLINE,
                 ((NewlineToken *) tokens[10])->super.vptr->getType(tokens[10]));
         assert_string_equal("\n",
                             ((NewlineToken *) tokens[10])->super.vptr->getValue(tokens[10]));
@@ -347,67 +347,67 @@ static void generate_tokens_test_mangledTokens(void **state)
         assert_int_equal(11, count);
 
         assert_int_equal(
-                WORD_TOKEN,
+                TOK_WORD,
                 ((WordToken *) tokens[0])->super.vptr->getType(tokens[0]));
         assert_string_equal("##",
                             ((WordToken *) tokens[0])->super.vptr->getValue(tokens[0]));
 
         assert_int_equal(
-                WORD_TOKEN,
+                TOK_WORD,
                 ((WordToken *) tokens[1])->super.vptr->getType(tokens[1]));
         assert_string_equal("#cmd#",
                             ((WordToken *) tokens[1])->super.vptr->getValue(tokens[1]));
 
         assert_int_equal(
-                WORD_TOKEN,
+                TOK_WORD,
                 ((WordToken *) tokens[2])->super.vptr->getType(tokens[2]));
         assert_string_equal("<arg1>",
                             ((WordToken *) tokens[2])->super.vptr->getValue(tokens[2]));
 
         assert_int_equal(
-                WORD_TOKEN,
+                TOK_WORD,
                 ((WordToken *) tokens[3])->super.vptr->getType(tokens[3]));
         assert_string_equal(">arg2<",
                             ((WordToken *) tokens[3])->super.vptr->getValue(tokens[3]));
 
         assert_int_equal(
-                WORD_TOKEN,
+                TOK_WORD,
                 ((WordToken *) tokens[4])->super.vptr->getType(tokens[4]));
         assert_string_equal("&arg3$$&",
                             ((WordToken *) tokens[4])->super.vptr->getValue(tokens[4]));
 
         assert_int_equal(
-                INPUT_REDIR_TOKEN,
+                TOK_REDIR_INPUT,
                 ((InputRedirToken *) tokens[5])->super.vptr->getType(tokens[5]));
         assert_string_equal("<",
                             ((InputRedirToken *) tokens[5])->super.vptr->getValue(tokens[5]));
 
         assert_int_equal(
-                WORD_TOKEN,
+                TOK_WORD,
                 ((WordToken *) tokens[6])->super.vptr->getType(tokens[6]));
         assert_string_equal("<file1.txt>",
                             ((WordToken *) tokens[6])->super.vptr->getValue(tokens[6]));
 
         assert_int_equal(
-                OUTPUT_REDIR_TOKEN,
+                TOK_REDIR_OUTPUT,
                 ((OutputRedirToken *) tokens[7])->super.vptr->getType(tokens[7]));
         assert_string_equal(">",
                             ((OutputRedirToken *) tokens[7])->super.vptr->getValue(tokens[7]));
 
         assert_int_equal(
-                WORD_TOKEN,
+                TOK_WORD,
                 ((WordToken *) tokens[8])->super.vptr->getType(tokens[8]));
         assert_string_equal(">file2.txt<",
                             ((WordToken *) tokens[8])->super.vptr->getValue(tokens[8]));
 
         assert_int_equal(
-                WORD_TOKEN,
+                TOK_WORD,
                 ((WordToken *) tokens[9])->super.vptr->getType(tokens[9]));
         assert_string_equal("&&",
                             ((WordToken *) tokens[9])->super.vptr->getValue(tokens[9]));
 
         assert_int_equal(
-                WORD_TOKEN,
+                TOK_WORD,
                 ((WordToken *) tokens[10])->super.vptr->getType(tokens[10]));
         assert_string_equal("\\n",
                             ((WordToken *) tokens[10])->super.vptr->getValue(tokens[10]));
