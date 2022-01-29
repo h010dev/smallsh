@@ -69,6 +69,11 @@ static inline bool StringIterator_hasNext_(StringIterator const * const self)
         return itr != '\0';
 }
 
+/**
+ * @brief Implementation of @c StringIterator::munchChar().
+ * @param self pointer to iterator object
+ * @return string containing copied character
+ */
 static char *StringIterator_munchChar_(StringIterator const * const self)
 {
         // grab character
@@ -79,6 +84,11 @@ static char *StringIterator_munchChar_(StringIterator const * const self)
         return slice;
 }
 
+/**
+ * @brief Implementation of @c StringIterator::munchWord().
+ * @param self pointer to iterator object
+ * @return string containing copied word
+ */
 static char *StringIterator_munchWord_(StringIterator const * const self)
 {
         // grab word
@@ -112,8 +122,7 @@ seek_fin:
  */
 static inline const char *StringIterator_next_(StringIterator const * const self)
 {
-        const char *next = self->_private->current;
-        self->_private->current++;
+        const char *next = self->_private->current++;
         return next;
 }
 
