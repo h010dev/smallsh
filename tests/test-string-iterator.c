@@ -13,7 +13,7 @@
 
 #include "string-iterator.c"
 
-static void StringIterator_ctor_initializesValues(void **state)
+static void StringIterator_ctor_test_initializesValues(void **state)
 {
         (void) state;
         char *string = "hello world";
@@ -354,7 +354,7 @@ int main(void)
 {
         const struct CMUnitTest tests[] = {
                 cmocka_unit_test_setup_teardown(
-                        StringIterator_ctor_initializesValues, NULL, NULL),
+                        StringIterator_ctor_test_initializesValues, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
                         StringIterator_dtor_test_deletesData, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
