@@ -65,7 +65,6 @@ struct TokenPrivate {
  ******************************************************************************/
 /**
  * @brief Virtual method definition for pretty printing a @c Token object.
- *
  * @param self pointer to @c Token object
  */
 static void Token_print_(Token const * const self)

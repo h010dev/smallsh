@@ -4,7 +4,7 @@
  * @date 28 Jan 2022
  * @brief For storing a token node.
  */
-#include <assert.h>
+#include <stdio.h>
 
 #include "node.h"
 
@@ -57,13 +57,99 @@ struct NodePrivate {
  *
  ******************************************************************************/
 /**
- * @brief Virtual method definition for pretty printing an @c Node object.
+ * @brief Pretty-prints info for a bg control node.
+ * @param self pointer to node
+ */
+static void BGControlNode_print_(Node const * const self)
+{
+        (void) self;
+        printf("BG_CONTROL = TRUE,\n");
+}
+
+/**
+ * @brief Pretty-prints info for a command node
+ * @param self pointer to node
+ */
+static void CommandNode_print_(Node const * const self)
+{
+        NodeValue *node_value;
+        CommandValue value;
+
+        node_value = self->vptr->getValue(self);
+        value = node_value->cmd_value;
+
+        printf("CMD (\n");
+        printf("\t\tCOMMAND_NAME = %s,\n",
+               value.argv[0]->super.vptr->getValue((Token *) value.argv[0]));
+        for (size_t i = 1; i < value.argc; i++) {
+                printf("\t\tARGUMENT [%zu] = %s,\n",
+                       i, value.argv[i]->super.vptr->getValue((Token *) value.argv[i]));
+        }
+        printf("),\n");
+}
+
+/**
+ * @brief Pretty-prints info for a comment node
+ * @param self pointer to node
+ */
+static void CommentNode_print_(Node const * const self)
+{
+        (void) self;
+        printf("COMMENT = TRUE,\n");
+}
+
+/**
+ * @brief Pretty-prints info for an io redir node.
+ * @param self pointer to node
+ */
+static void IORedirNode_print_(Node const * const self)
+{
+        NodeValue *node_value;
+        IORedirValue value;
+        ShellTokenType type;
+
+        node_value = self->vptr->getValue(self);
+        value = node_value->ioredir_value;
+        type = value.type;
+        WordToken const * const token = (WordToken const *) value.filename;
+
+        printf("IO_REDIRECTION (\n");
+        if (type == TOK_REDIR_INPUT) {
+                printf("\t\tSTDIN = %s\n",
+                       token->super.vptr->getValue((const Token *const) token));
+        } else if (type == TOK_REDIR_OUTPUT) {
+                printf("\t\tSTDOUT = %s\n",
+                       token->super.vptr->getValue((const Token *const) token));
+        } else {
+                // error
+        }
+        printf("),\n");
+}
+
+/**
+ * @brief Pretty prints a @c Node object.
  * @param self pointer to @c Node object
  */
 static void Node_print_(Node const * const self)
 {
-        (void) self;
-        assert(0);
+        NodeType type = self->_private->type;
+
+        switch (type) {
+                case NODE_CTRL_BG:
+                        BGControlNode_print_(self);
+                        break;
+                case NODE_CMD:
+                        CommandNode_print_(self);
+                        break;
+                case NODE_CMT:
+                        CommentNode_print_(self);
+                        break;
+                case NODE_REDIR:
+                        IORedirNode_print_(self);
+                        break;
+                default:
+                        break;
+        }
 }
 
 /* *****************************************************************************

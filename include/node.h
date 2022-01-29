@@ -25,13 +25,50 @@ typedef struct {
  */
 typedef enum {
         NODE_0 = 0, /**< placeholder token type */
+        NODE_CTRL_BG = 1, /**< background control node */
+        NODE_CMD = 2, /**< command node */
+        NODE_CMT = 3, /**< comment node */
+        NODE_REDIR = 4, /**< io redirection node */
+        NUM_NODES = 5, /**< type count */
 } NodeType;
+
+/**
+ * @brief Generic definition for bg control node, as it doesn't hold any data
+ * internally.
+ */
+typedef int BGControlValue;
+
+/**
+ * @brief Holds a command statement, including its arguments and argument count.
+ */
+typedef struct {
+        size_t argc; /** number of arguments, including command name */
+        WordToken **argv; /** array of command and following args */
+} CommandValue;
+
+/**
+ * @brief Generic definition for comment node, as it doesn't hold any data
+ * internally.
+ */
+typedef int CommentValue;
+
+/**
+ * @brief Holds an io redirection , including the type of io redirection
+ * and the file to redirect to/from.
+ */
+typedef struct {
+        ShellTokenType type; /**< io redirection type */
+        WordToken *filename; /**< file to redirect to/from */
+} IORedirValue;
 
 /**
  * @brief Base object for storing node data.
  */
 typedef union {
-        void *null_value; /**< placeholder node value */
+        BGControlValue bgctrl_value; /**< background control data */
+        CommandValue cmd_value; /**< command statement data */
+        CommentValue cmt_value; /**< comment data */
+        IORedirValue ioredir_value; /**< io redirection data */
 } NodeValue;
 
 /**
