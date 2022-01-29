@@ -134,25 +134,4 @@ void Node_ctor(Node *self, NodeType type);
  */
 void Node_dtor(Node *self);
 
-/**
- * @brief Implementation of @c Node::getType().
- * @param self pointer to @c Node object
- * @return the node's type identifier
- */
-NodeType Node_getType_(Node const *self);
-
-/**
- * @brief Implementation of @c Node::getValue().
- * @param self pointer to @c Node object
- * @return the data stored by @p self
- */
-NodeValue *Node_getValue_(Node const *self);
-
-/**
- * @brief Implementation of @c Node::setValue().
- * @param self pointer to @c Node object
- * @param value the data to assign to @p self
- */
-void Node_setValue_(Node const *self, const NodeValue *value);
-
 #endif //SMALLSH_NODE_H

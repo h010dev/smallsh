@@ -126,6 +126,37 @@ static void IORedirNode_print_(Node const * const self)
         printf("),\n");
 }
 
+// TODO: look into options for implementing deep copying of data
+/**
+ * @brief Return the node's type identifier.
+ * @param self node
+ * @return node type identifier
+ */
+static inline NodeType Node_getType_(Node const *self)
+{
+        return self->_private->type;
+}
+
+/**
+ * @brief Return the node's data.
+ * @param self node
+ * @return node data
+ */
+static inline NodeValue *Node_getValue_(Node const *self)
+{
+        return self->_private->value;
+}
+
+/**
+ * @brief Update the node's data to @p value.
+ * @param self node
+ * @param value value to update @p self with
+ */
+static inline void Node_setValue_(Node const *self, const NodeValue *value)
+{
+        self->_private->value = (NodeValue *) value;
+}
+
 /**
  * @brief Pretty prints a @c Node object.
  * @param self pointer to @c Node object
@@ -206,30 +237,4 @@ void Node_dtor(Node *self)
 
         free(self->_private);
         self->_private = NULL;
-}
-
-/* *****************************************************************************
- * CLASS METHODS
- *
- *
- *
- *
- *
- *
- *
- ******************************************************************************/
-// TODO: look into options for implementing deep copying of data
-inline NodeType Node_getType_(Node const *self)
-{
-        return self->_private->type;
-}
-
-inline NodeValue *Node_getValue_(Node const *self)
-{
-        return self->_private->value;
-}
-
-inline void Node_setValue_(Node const *self, const NodeValue *value)
-{
-        self->_private->value = (NodeValue *) value;
 }
