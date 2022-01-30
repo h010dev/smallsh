@@ -4,10 +4,11 @@
  * @date 27 Jan 2022
  * @brief For parsing a stream of tokens into nodes for later evaluation.
  */
-#include "parser.h"
-#include "token-iterator.h"
-#include "node.h"
-#include "lexer.h"
+#include "parser/parser.h"
+#include "parser/token-iterator.h"
+#include "parser/node.h"
+#include "parser/lexer.h"
+#include "utils/stack.h"
 
 /* *****************************************************************************
  * PRIVATE DEFINITIONS
@@ -29,6 +30,22 @@
  *
  *
  ******************************************************************************/
+/* *****************************************************************************
+ * OBJECTS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
+struct ParserPrivate {
+        size_t n_tokens;
+        Token **tokens;
+        Stack *stack;
+};
+
 /* *****************************************************************************
  * FUNCTIONS
  *
@@ -179,6 +196,58 @@ static Node *parse_ioredir(TokenIterator const *iter)
         return node;
 }
 
+static size_t Parser_parse_(Parser * const self, char *buf)
+{
+        // parse stream into tokens
+        self->_private->tokens = malloc(MAX_TOKENS * sizeof(Token));
+        self->_private->n_tokens = generate_tokens(buf, MAX_TOKENS,
+                                                   self->_private->tokens);
+
+        // parse tokens into nodes
+        self->_private->stack = malloc(sizeof(Stack));
+        Stack_ctor(self->_private->stack, MAX_TOKENS);
+        size_t n_node = parse(self->_private->n_tokens, self->_private->tokens,
+                              self->_private->stack);
+
+        return n_node;
+}
+
+static void Parser_cleanup_(Parser * const self, bool print_tree)
+{
+        while (!self->_private->stack->isEmpty(self->_private->stack)) {
+                Node *node = (Node *) self->_private->stack->pop(self->_private->stack);
+
+                if (print_tree)
+                        node->vptr->print(node);
+
+                // cleanup
+                NodeValue *value = node->vptr->getValue(node);
+                NodeType type = node->vptr->getType(node);
+                if (type == NODE_CMD) {
+                        CommandValue *cmd;
+                        cmd = &value->cmd_value;
+                        for (size_t i = 0; i < cmd->argc; i++) {
+                                cmd->argv[i] = NULL;
+                        }
+                        free(cmd->argv);
+                        cmd->argv = NULL;
+                }
+                Node_dtor(node);
+                free(node);
+                node = NULL;
+        }
+
+        // cleanup
+        for (size_t i = 0; i < self->_private->n_tokens; i++) {
+                Token_dtor(self->_private->tokens[i]);
+                free(self->_private->tokens[i]);
+        }
+        free(self->_private->tokens);
+        Stack_dtor(self->_private->stack);
+        free(self->_private->stack);
+}
+
+
 /* *****************************************************************************
  * PUBLIC DEFINITIONS
  *
@@ -240,63 +309,6 @@ size_t parse(size_t n_tokens, Token *tokens[n_tokens], Stack *node_stack)
         TokenIterator_dtor(&iter);
 
         return count;
-}
-
-struct ParserPrivate {
-        size_t n_tokens;
-        Token **tokens;
-        Stack *stack;
-};
-
-size_t Parser_parse_(Parser * const self, char *buf)
-{
-        // parse stream into tokens
-        self->_private->tokens = malloc(MAX_TOKENS * sizeof(Token));
-        self->_private->n_tokens = generate_tokens(buf, MAX_TOKENS,
-                                                   self->_private->tokens);
-
-        // parse tokens into nodes
-        self->_private->stack = malloc(sizeof(Stack));
-        Stack_ctor(self->_private->stack, MAX_TOKENS);
-        size_t n_node = parse(self->_private->n_tokens, self->_private->tokens,
-                              self->_private->stack);
-
-        return n_node;
-}
-
-void Parser_cleanup_(Parser * const self, bool print_tree)
-{
-        while (!self->_private->stack->isEmpty(self->_private->stack)) {
-                Node *node = (Node *) self->_private->stack->pop(self->_private->stack);
-
-                if (print_tree)
-                        node->vptr->print(node);
-
-                // cleanup
-                NodeValue *value = node->vptr->getValue(node);
-                NodeType type = node->vptr->getType(node);
-                if (type == NODE_CMD) {
-                        CommandValue *cmd;
-                        cmd = &value->cmd_value;
-                        for (size_t i = 0; i < cmd->argc; i++) {
-                                cmd->argv[i] = NULL;
-                        }
-                        free(cmd->argv);
-                        cmd->argv = NULL;
-                }
-                Node_dtor(node);
-                free(node);
-                node = NULL;
-        }
-
-        // cleanup
-        for (size_t i = 0; i < self->_private->n_tokens; i++) {
-                Token_dtor(self->_private->tokens[i]);
-                free(self->_private->tokens[i]);
-        }
-        free(self->_private->tokens);
-        Stack_dtor(self->_private->stack);
-        free(self->_private->stack);
 }
 
 void Parser_ctor(Parser *self)

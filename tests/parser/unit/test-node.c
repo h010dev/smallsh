@@ -7,10 +7,15 @@
 #include <stdarg.h>
 #include <stddef.h>
 #include <setjmp.h>
-#include <cmocka.h>
+#include "cmocka.h"
 #include <stdlib.h>
 
-#include "node.c"
+#include "parser/node.h"
+
+struct NodePrivate {
+        NodeType type;
+        NodeValue *value;
+};
 
 static void Node_ctor_test_initializesValues(void **state)
 {

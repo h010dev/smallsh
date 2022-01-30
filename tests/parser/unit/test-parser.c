@@ -10,11 +10,6 @@
 #include <cmocka.h>
 #include <stdlib.h>
 
-#include "parser.c"
-
-// forward declare to stop ide warnings even though it's included in file
-void generate_tokens(char *buf, size_t n, Token *tokens[n]);
-
 static void parse_bgctrl_test_returnsNode(void **state)
 {
         (void) state;

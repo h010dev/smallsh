@@ -8,7 +8,7 @@
 #define SMALLSH_PARSER_H
 
 #include "token-iterator.h"
-#include "stack.h"
+#include "utils/stack.h"
 
 /**
  * @brief Determines if a token is a comment token.
@@ -41,7 +41,6 @@
 #define is_tok_word(tok) ((ShellTokenType) tok.vptr->getType(&tok) == TOK_WORD)
 
 struct ParserPrivate;
-
 
 typedef struct Parser {
         size_t (*parse) (struct Parser * const self, char *buf);

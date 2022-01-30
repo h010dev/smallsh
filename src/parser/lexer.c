@@ -10,8 +10,8 @@
 #include <stdio.h>
 #endif
 
-#include "lexer.h"
-#include "shell-tokens.h"
+#include "parser/lexer.h"
+#include "parser/shell-tokens.h"
 
 size_t generate_tokens(char *buf, size_t n_tokens, Token *tokens[n_tokens])
 {

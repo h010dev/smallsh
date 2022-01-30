@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "shell-tokens.h"
+#include "parser/shell-tokens.h"
 
 /* *****************************************************************************
  * PRIVATE DEFINITIONS

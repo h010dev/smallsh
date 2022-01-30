@@ -4,7 +4,7 @@
  * @date 28 Jan 2022
  * @brief For iterating over a collection of tokens.
  */
-#include "token-iterator.h"
+#include "parser/token-iterator.h"
 
 /* *****************************************************************************
  * PRIVATE DEFINITIONS

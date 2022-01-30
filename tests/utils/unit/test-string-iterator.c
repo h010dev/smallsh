@@ -8,10 +8,17 @@
 #include <stdarg.h>
 #include <stddef.h>
 #include <setjmp.h>
-#include <cmocka.h>
+#include "cmocka.h"
 #include <stdlib.h>
 
-#include "string-iterator.c"
+#include <string.h>
+
+#include "utils/string-iterator.h"
+
+struct StringIteratorPrivate {
+        const char *string;
+        const char *current;
+};
 
 static void StringIterator_ctor_test_initializesValues(void **state)
 {

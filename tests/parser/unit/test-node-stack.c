@@ -7,10 +7,17 @@
 #include <stdarg.h>
 #include <stddef.h>
 #include <setjmp.h>
-#include <cmocka.h>
+#include "cmocka.h"
 #include <stdlib.h>
 
-#include "node-stack.c"
+#include "utils/stack.h"
+#include "parser/node.h"
+
+struct StackPrivate {
+        size_t size;
+        size_t top;
+        Node **items;
+};
 
 static void NodeStack_ctor_test_initializesValues(void **state)
 {

@@ -17,7 +17,7 @@
 #include <stdio.h>
 #endif
 
-#include "string-iterator.h"
+#include "utils/string-iterator.h"
 
 /* *****************************************************************************
  * PRIVATE DEFINITIONS

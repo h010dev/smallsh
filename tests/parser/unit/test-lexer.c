@@ -7,10 +7,10 @@
 #include <stdarg.h>
 #include <stddef.h>
 #include <setjmp.h>
-#include <cmocka.h>
+#include "cmocka.h"
 #include <stdlib.h>
 
-#include "lexer.h"
+#include "parser/lexer.h"
 
 static void generate_tokens_test_emptyBuffer(void **state)
 {

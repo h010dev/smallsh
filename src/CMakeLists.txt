@@ -1,13 +1,13 @@
 add_executable(
         ${PROJECT_NAME}
         main.c
-        parser.c
-        node.c
-        token-iterator.c
-        lexer.c
-        shell-tokens.c
-        token.c
-        string-iterator.c
+        #parser.c
+        parser/node.c
+        parser/token-iterator.c
+        parser/lexer.c
+        parser/shell-tokens.c
+        parser/token.c
+        utils/string-iterator.c
 )
 target_include_directories(
         "${PROJECT_NAME}"

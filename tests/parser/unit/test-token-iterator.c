@@ -10,8 +10,14 @@
 #include <cmocka.h>
 #include <stdlib.h>
 
-#include "token-iterator.c"
-#include "lexer.h"
+#include "parser/token-iterator.h"
+#include "parser/lexer.h"
+
+struct TokenIteratorPrivate {
+        size_t len;
+        Token **tokens;
+        size_t current;
+};
 
 // TODO: move token array init and destroy to setup and teardown funcs
 static void TokenIterator_ctor_test_initializesValues(void **state)

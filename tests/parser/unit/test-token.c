@@ -2,10 +2,15 @@
 #include <stdarg.h>
 #include <stddef.h>
 #include <setjmp.h>
-#include <cmocka.h>
+#include "cmocka.h"
 #include <stdlib.h>
 
-#include "token.c"
+#include "parser/token.h"
+
+struct TokenPrivate {
+        TokenType type;
+        char *value;
+};
 
 static void Token_ctor_test_initializesValues(void **state)
 {

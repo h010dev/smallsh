@@ -10,7 +10,7 @@
 #ifndef SMALLSH_TOKEN_H
 #define SMALLSH_TOKEN_H
 
-#include "string-iterator.h"
+#include "utils/string-iterator.h"
 
 struct TokenVtbl;
 struct TokenPrivate;
