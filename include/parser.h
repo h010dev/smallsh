@@ -40,6 +40,15 @@
  */
 #define is_tok_word(tok) ((ShellTokenType) tok.vptr->getType(&tok) == TOK_WORD)
 
+struct ParserPrivate;
+
+
+typedef struct Parser {
+        size_t (*parse) (struct Parser * const self, char *buf);
+        void (*cleanup) (struct Parser * const self, bool print_tree);
+        struct ParserPrivate *_private;
+} Parser;
+
 /**
  * @brief Parses token stream from @p tokens into nodes and stores them inside
  * @p node_stack.
@@ -70,5 +79,8 @@
  * no longer needed.
  */
 size_t parse(size_t n_tokens, Token *tokens[n_tokens], Stack *node_stack);
+
+void Parser_ctor(Parser *self);
+void Parser_dtor(Parser *self);
 
 #endif //SMALLSH_PARSER_H

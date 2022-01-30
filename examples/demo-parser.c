@@ -42,46 +42,14 @@ int main(void)
                         exit(EXIT_SUCCESS);
                 }
 
-                // parse stream into tokens
-                Token **tokens = malloc(MAX_TOKENS * sizeof(Token));
-                size_t n_tok = generate_tokens(line, MAX_TOKENS, tokens);
+                Parser parser;
+                Parser_ctor(&parser);
 
-                // parse tokens into nodes
-                Stack *stack = malloc(sizeof(Stack));
-                Stack_ctor(stack, MAX_TOKENS);
-                size_t n_node = parse(n_tok, tokens, stack);
-                (void) n_node;
+                parser.parse(&parser, line);
+                parser.cleanup(&parser, true);
 
-                // display parse tree to stdout
-                while (!stack->isEmpty(stack)) {
-                        Node *node = (Node *) stack->pop(stack);
-                        node->vptr->print(node);
+                Parser_dtor(&parser);
 
-                        // cleanup
-                        NodeValue *value = node->vptr->getValue(node);
-                        NodeType type = node->vptr->getType(node);
-                        if (type == NODE_CMD) {
-                                CommandValue *cmd;
-                                cmd = &value->cmd_value;
-                                for (size_t i = 0; i < cmd->argc; i++) {
-                                        cmd->argv[i] = NULL;
-                                }
-                                free(cmd->argv);
-                                cmd->argv = NULL;
-                        }
-                        Node_dtor(node);
-                        free(node);
-                        node = NULL;
-                }
-
-                // cleanup
-                for (size_t i = 0; i < n_tok; i++) {
-                        Token_dtor(tokens[i]);
-                        free(tokens[i]);
-                }
-                free(tokens);
-                Stack_dtor(stack);
-                free(stack);
                 free(line);
         }
 }
