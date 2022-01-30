@@ -91,6 +91,9 @@ struct TokenIteratorVtbl {
  * <br><br>
  *
  * Source: https://www.state-machine.com/doc/AN_OOP_in_C.pdf*
+ * @pre if @p tokens does not contain exactly @p len tokens ,then @p tokens
+ * must be terminated by a newline token to signify the end of the stream.
+ * Behavior is undefined if this is not the case.
  * @param self @c TokenIterator object to initialize
  * @param len length of the token array
  * @param tokens the token array to iterate over
