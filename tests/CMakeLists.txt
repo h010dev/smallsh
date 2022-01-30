@@ -153,3 +153,28 @@ add_test(
         COMMAND test-node-stack
         WORKING_DIRECTORY /nfs/stak/users/alhussem/cs344/a3
 )
+
+##################### TEST-PARSER ####################
+add_executable(
+        "test-parser"
+        test-parser.c
+        "${PROJECT_SOURCE_DIR}/src/node-stack.c"
+        "${PROJECT_SOURCE_DIR}/src/node.c"
+        "${PROJECT_SOURCE_DIR}/src/lexer.c"
+        "${PROJECT_SOURCE_DIR}/src/token-iterator.c"
+        "${PROJECT_SOURCE_DIR}/src/shell-tokens.c"
+        "${PROJECT_SOURCE_DIR}/src/token.c"
+        "${PROJECT_SOURCE_DIR}/src/string-iterator.c"
+)
+target_include_directories(
+        "test-parser"
+        PRIVATE
+        "${PROJECT_SOURCE_DIR}/src"
+)
+target_link_libraries("test-parser" cmocka)
+
+add_test(
+        NAME "test-parser"
+        COMMAND "test-parser"
+        WORKING_DIRECTORY /nfs/stak/users/alhussem/cs344/a3
+)
