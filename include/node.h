@@ -58,7 +58,7 @@ typedef int CommentValue;
  */
 typedef struct {
         ShellTokenType type; /**< io redirection type */
-        WordToken *filename; /**< file to redirect to/from */
+        WordToken *stream; /**< file to redirect to/from */
 } IORedirValue;
 
 /**
@@ -100,7 +100,7 @@ struct NodeVtbl {
          * @param self pointer to @c Node object
          * @param value union holding data to assign to @p self
          */
-        void (*setValue) (Node const * const self, NodeValue const * const value);
+        void (*setValue) (Node const * const self, NodeValue *value);
 };
 
 /**

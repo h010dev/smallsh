@@ -82,7 +82,7 @@ static void Node_setValue_test_valueAssignment(void **state)
         f1.super.vptr->setValue((Token *) &f1, "file1.txt");
         InputRedirToken_ctor(&t2);
         t2.super.vptr->setValue((Token *) &t2, "<");
-        IORedirValue v4 = { .type = TOK_REDIR_INPUT, .filename = &f1 };
+        IORedirValue v4 = { .type = TOK_REDIR_INPUT, .stream = &f1 };
         NodeValue x1 = { .ioredir_value = v4 };
         Node_ctor(&n4, NODE_REDIR);
         n4.vptr->setValue(&n4, &x1);
@@ -97,7 +97,7 @@ static void Node_setValue_test_valueAssignment(void **state)
         f2.super.vptr->setValue((Token *) &f2, "file2.txt");
         OutputRedirToken_ctor(&t3);
         t3.super.vptr->setValue((Token *) &t3, ">");
-        IORedirValue v5 = { .type = TOK_REDIR_OUTPUT, .filename = &f2 };
+        IORedirValue v5 = { .type = TOK_REDIR_OUTPUT, .stream = &f2 };
         NodeValue x2 = { .ioredir_value = v5 };
         Node_ctor(&n5, NODE_REDIR);
         n4.vptr->setValue(&n5, &x2);
@@ -170,7 +170,7 @@ static void Node_setValue_test_overwriteOrig(void **state)
         InputRedirToken_ctor(&t3);
         t3.super.vptr->setValue((Token *) &t3, "<");
 
-        IORedirValue v7 = { .type = TOK_REDIR_INPUT, .filename = &f1 };
+        IORedirValue v7 = { .type = TOK_REDIR_INPUT, .stream = &f1 };
         NodeValue x1 = { .ioredir_value = v7 };
         n4.vptr->setValue(&n4, &x1);
 
@@ -182,7 +182,7 @@ static void Node_setValue_test_overwriteOrig(void **state)
         InputRedirToken_ctor(&t4);
         t4.super.vptr->setValue((Token *) &t4, "<");
 
-        IORedirValue v8 = { .type = TOK_REDIR_INPUT, .filename = &f2 };
+        IORedirValue v8 = { .type = TOK_REDIR_INPUT, .stream = &f2 };
         NodeValue x2 = { .ioredir_value = v8 };
         n4.vptr->setValue(&n4, &x2);
 
@@ -201,7 +201,7 @@ static void Node_setValue_test_overwriteOrig(void **state)
         OutputRedirToken_ctor(&t5);
         t5.super.vptr->setValue((Token *) &t5, ">");
 
-        IORedirValue v9 = { .type = TOK_REDIR_OUTPUT, .filename = &f3 };
+        IORedirValue v9 = { .type = TOK_REDIR_OUTPUT, .stream = &f3 };
         NodeValue x3 = { .ioredir_value = v9 };
         n5.vptr->setValue(&n5, &x3);
 
@@ -213,7 +213,7 @@ static void Node_setValue_test_overwriteOrig(void **state)
         OutputRedirToken_ctor(&t6);
         t6.super.vptr->setValue((Token *) &t6, ">");
 
-        IORedirValue v10 = { .type = TOK_REDIR_OUTPUT, .filename = &f4 };
+        IORedirValue v10 = { .type = TOK_REDIR_OUTPUT, .stream = &f4 };
         NodeValue x4 = { .ioredir_value = v10 };
         n5.vptr->setValue(&n5, &x4);
 
@@ -309,7 +309,7 @@ static void Node_print_testDisplay(void **state)
         f1.super.vptr->setValue((Token *) &f1, "file1.txt");
         InputRedirToken_ctor(&t2);
         t2.super.vptr->setValue((Token *) &t2, "<");
-        IORedirValue v4 = { .type = TOK_REDIR_INPUT, .filename = &f1 };
+        IORedirValue v4 = { .type = TOK_REDIR_INPUT, .stream = &f1 };
         NodeValue x1 = { .ioredir_value = v4 };
         Node_ctor(&n4, NODE_REDIR);
         n4.vptr->setValue(&n4, &x1);
@@ -324,7 +324,7 @@ static void Node_print_testDisplay(void **state)
         f2.super.vptr->setValue((Token *) &f2, "file2.txt");
         OutputRedirToken_ctor(&t3);
         t3.super.vptr->setValue((Token *) &t3, ">");
-        IORedirValue v5 = { .type = TOK_REDIR_OUTPUT, .filename = &f2 };
+        IORedirValue v5 = { .type = TOK_REDIR_OUTPUT, .stream = &f2 };
         NodeValue x2 = { .ioredir_value = v5 };
         Node_ctor(&n5, NODE_REDIR);
         n4.vptr->setValue(&n5, &x2);

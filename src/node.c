@@ -111,7 +111,7 @@ static void IORedirNode_print_(Node const * const self)
         node_value = self->vptr->getValue(self);
         value = node_value->ioredir_value;
         type = value.type;
-        WordToken const * const token = (WordToken const *) value.filename;
+        WordToken const * const token = (WordToken const *) value.stream;
 
         printf("IO_REDIRECTION (\n");
         if (type == TOK_REDIR_INPUT) {
@@ -152,9 +152,9 @@ static inline NodeValue *Node_getValue_(Node const *self)
  * @param self node
  * @param value value to update @p self with
  */
-static inline void Node_setValue_(Node const *self, const NodeValue *value)
+static inline void Node_setValue_(Node const *self, NodeValue *value)
 {
-        self->_private->value = (NodeValue *) value;
+        self->_private->value = value;
 }
 
 /**
