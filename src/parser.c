@@ -74,12 +74,12 @@ static Node *parse_cmd(TokenIterator const *iter)
         Node_ctor(node, NODE_CMD);
 
         // make new command value to store command and args
-        CommandValue *cmd_val = malloc(sizeof(CommandValue));
+        CommandValue cmd_val;
 
         // parse args into command value
         size_t buf_size = 1; // buffer size for argv
-        cmd_val->argc = 0;
-        cmd_val->argv = malloc(buf_size * sizeof(WordToken));
+        cmd_val.argc = 0;
+        cmd_val.argv = malloc(buf_size * sizeof(WordToken));
 
         while (iter->vptr->has_next(iter)) {
                 Token tok;
@@ -92,20 +92,20 @@ static Node *parse_cmd(TokenIterator const *iter)
                 }
 
                 // resize buf if full
-                if (cmd_val->argc >= buf_size) {
+                if (cmd_val.argc >= buf_size) {
                         buf_size *= 2;
-                        tmp = realloc(cmd_val->argv, buf_size * sizeof(WordToken));
+                        tmp = realloc(cmd_val.argv, buf_size * sizeof(WordToken));
                         if (tmp == NULL) {
                                 return NULL; // error
                         }
-                        cmd_val->argv = tmp;
+                        cmd_val.argv = tmp;
                 }
 
                 // take word
-                cmd_val->argv[cmd_val->argc++] = (WordToken *) iter->vptr->next(iter);
+                cmd_val.argv[cmd_val.argc++] = (WordToken *) iter->vptr->next(iter);
         }
         NodeValue *val = malloc(sizeof(NodeValue));
-        val->cmd_value = *cmd_val;
+        val->cmd_value = cmd_val;
 
         // add parsed words to command node
         node->vptr->setValue((Node *) node, val);
@@ -155,23 +155,23 @@ static Node *parse_ioredir(TokenIterator const *iter)
         }
 
         // make new io redirection value to store io data in
-        IORedirValue *io_val = malloc(sizeof(IORedirValue));
+        IORedirValue io_val;
 
         // set flag depending on if op is an input or output redirection op
         tok = iter->vptr->peek(iter, 0);
         if (is_tok_redir_input(tok)) {
-                io_val->type = TOK_REDIR_INPUT;
+                io_val.type = TOK_REDIR_INPUT;
         } else if (is_tok_redir_output(tok)) {
-                io_val->type = TOK_REDIR_OUTPUT;
+                io_val.type = TOK_REDIR_OUTPUT;
         } else {
                 return NULL; // error
         }
 
         // consume redirection op token and filename word token
         (void) iter->vptr->next(iter);
-        io_val->stream = (WordToken *) iter->vptr->next(iter);
+        io_val.stream = (WordToken *) iter->vptr->next(iter);
         NodeValue *val = malloc(sizeof(NodeValue));
-        val->ioredir_value = *io_val;
+        val->ioredir_value = io_val;
 
         // add parsed io data to node
         node->vptr->setValue((Node *) node, val);
@@ -236,6 +236,8 @@ size_t parse(size_t n_tokens, Token *tokens[n_tokens], Stack *node_stack)
 
                 count++;
         }
+
+        TokenIterator_dtor(&iter);
 
         return count;
 }

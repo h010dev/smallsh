@@ -78,14 +78,27 @@ static void CommandNode_print_(Node const * const self)
         node_value = self->vptr->getValue(self);
         value = node_value->cmd_value;
 
+        // extract command and arg names
+        char **words = malloc(value.argc * sizeof(char *));
+        for (size_t i = 0; i < value.argc; i++) {
+                words[i] = value.argv[i]->super.vptr->getValue((Token *) value.argv[i]);
+        }
+
+        // display to stdout
         printf("CMD (\n");
-        printf("\t\tCOMMAND_NAME = %s,\n",
-               value.argv[0]->super.vptr->getValue((Token *) value.argv[0]));
+        printf("\t\tCOMMAND_NAME = %s,\n", words[0]);
         for (size_t i = 1; i < value.argc; i++) {
-                printf("\t\tARGUMENT [%zu] = %s,\n",
-                       i, value.argv[i]->super.vptr->getValue((Token *) value.argv[i]));
+                printf("\t\tARGUMENT [%zu] = %s,\n", i, words[i]);
         }
         printf("),\n");
+
+        // cleanup
+        for (size_t i = 0; i < value.argc; i++) {
+                free(words[i]);
+                words[i] = NULL;
+        }
+        free(words);
+        words = NULL;
 }
 
 /**
@@ -113,17 +126,22 @@ static void IORedirNode_print_(Node const * const self)
         type = value.type;
         WordToken const * const token = (WordToken const *) value.stream;
 
+        // extract filename
+        char *filename = token->super.vptr->getValue((const Token *const) token);
+
+        // display to stdout
         printf("IO_REDIRECTION (\n");
         if (type == TOK_REDIR_INPUT) {
-                printf("\t\tSTDIN = %s\n",
-                       token->super.vptr->getValue((const Token *const) token));
+                printf("\t\tSTDIN = %s\n", filename);
         } else if (type == TOK_REDIR_OUTPUT) {
-                printf("\t\tSTDOUT = %s\n",
-                       token->super.vptr->getValue((const Token *const) token));
+                printf("\t\tSTDOUT = %s\n", filename);
         } else {
                 // error
         }
         printf("),\n");
+
+        // cleanup
+        free(filename);
 }
 
 // TODO: look into options for implementing deep copying of data
@@ -233,6 +251,7 @@ void Node_dtor(Node *self)
         self->vptr = NULL;
 
         self->_private->type = NODE_0;
+        free(self->_private->value);
         self->_private->value = NULL;
 
         free(self->_private);

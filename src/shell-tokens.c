@@ -5,6 +5,7 @@
  * @brief For parsing and storing the different types of tokens of the shell.
  */
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "shell-tokens.h"
 
@@ -68,6 +69,7 @@ static void BGControlToken_take_(Token const * const self,
         // copy background command symbol into token
         char *slice = iter->vptr->munchChar(iter);
         self_->super.vptr->setValue(self, slice);
+        free(slice);
 }
 
 /**
@@ -100,6 +102,7 @@ static void CommentToken_take_(Token const * const self,
         // copy comment symbol into token
         char *slice = iter->vptr->munchChar(iter);
         self_->super.vptr->setValue(self, slice);
+        free(slice);
 }
 
 /**
@@ -132,6 +135,7 @@ static void InputRedirToken_take_(Token const * const self,
         // copy input redirection symbol into token
         char *slice = iter->vptr->munchChar(iter);
         self_->super.vptr->setValue(self, slice);
+        free(slice);
 }
 
 /**
@@ -163,6 +167,7 @@ static void NewlineToken_take_(Token const * const self,
         // copy output redirection symbol into token
         char *slice = iter->vptr->munchChar(iter);
         self_->super.vptr->setValue(self, slice);
+        free(slice);
 }
 
 /**
@@ -195,6 +200,7 @@ static void OutputRedirToken_take_(Token const * const self,
         // copy output redirection symbol into token
         char *slice = iter->vptr->munchChar(iter);
         self_->super.vptr->setValue(self, slice);
+        free(slice);
 }
 
 /**
@@ -227,6 +233,7 @@ static void WordToken_take_(Token const * const self,
         // copy word into token
         char *slice = iter->vptr->munchWord(iter);
         self_->super.vptr->setValue(self, slice);
+        free(slice);
 }
 
 /* *****************************************************************************

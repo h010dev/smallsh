@@ -42,27 +42,27 @@ size_t generate_tokens(char *buf, size_t n_tokens, Token *tokens[n_tokens])
                         continue;
                 } else if (IS_CMT_SYM(c1, c2)) {
                         // token is a comment
-                        tokens[count] = malloc(sizeof(CommentToken));
+                        tokens[count] = malloc(sizeof(Token));
                         CommentToken_ctor((CommentToken *) tokens[count]);
                 } else if (IS_INPUT_REDIR_OP(c1, c2)) {
                         // token is an input redirection operator
-                        tokens[count] = malloc(sizeof(InputRedirToken));
+                        tokens[count] = malloc(sizeof(Token));
                         InputRedirToken_ctor((InputRedirToken *) tokens[count]);
                 } else if (IS_OUTPUT_REDIR_OP(c1, c2)) {
                         // token is an output redirection operator
-                        tokens[count] = malloc(sizeof(OutputRedirToken));
+                        tokens[count] = malloc(sizeof(Token));
                         OutputRedirToken_ctor((OutputRedirToken *) tokens[count]);
                 } else if (IS_BG_CTRL_OP(c1, c2)) {
                         // token is a background control operator
-                        tokens[count] = malloc(sizeof(BGControlToken));
+                        tokens[count] = malloc(sizeof(Token));
                         BGControlToken_ctor((BGControlToken *) tokens[count]);
                 } else if (IS_NEWLINE(c1)) {
                         // token is a newline
-                        tokens[count] = malloc(sizeof(NewlineToken));
+                        tokens[count] = malloc(sizeof(Token));
                         NewlineToken_ctor((NewlineToken *) tokens[count]);
                 } else {
                         // otherwise, token is a word
-                        tokens[count] = malloc(sizeof(WordToken));
+                        tokens[count] = malloc(sizeof(Token));
                         WordToken_ctor((WordToken *) tokens[count]);
                 }
 
@@ -71,6 +71,8 @@ size_t generate_tokens(char *buf, size_t n_tokens, Token *tokens[n_tokens])
 
                 count++;
         }
+
+        StringIterator_dtor(&iter);
 
 #ifdef DEBUG
         if (count > 0) {
