@@ -15,6 +15,7 @@ set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/install)
 
 # Add subdirs
 add_subdirectory(src)
+add_subdirectory(examples)
 
 # CMocka
 include(cmake/cmocka.cmake)
