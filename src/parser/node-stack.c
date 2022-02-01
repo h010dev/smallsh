@@ -5,8 +5,8 @@
  * @brief Implementation of stack ADT to be used for storing parsed statement
  * nodes.
  */
-#include "utils/stack.h"
 #include "parser/node.h"
+#include "utils/stack.h"
 
 /* *****************************************************************************
  * PRIVATE DEFINITIONS

@@ -8,7 +8,6 @@
 #include "parser/token-iterator.h"
 #include "parser/node.h"
 #include "parser/lexer.h"
-#include "utils/stack.h"
 
 /* *****************************************************************************
  * PRIVATE DEFINITIONS

@@ -1,13 +1,20 @@
+set(
+        SOURCES
+        "${PROJECT_SOURCE_DIR}/src/main.c"
+        "${PROJECT_SOURCE_DIR}/src/smallsh.c"
+        "${PROJECT_SOURCE_DIR}/src/shell/signal-handlers.c"
+        "${PROJECT_SOURCE_DIR}/src/parser/parser.c"
+        "${PROJECT_SOURCE_DIR}/src/parser/node.c"
+        "${PROJECT_SOURCE_DIR}/src/parser/node-stack.c"
+        "${PROJECT_SOURCE_DIR}/src/parser/token-iterator.c"
+        "${PROJECT_SOURCE_DIR}/src/parser/lexer.c"
+        "${PROJECT_SOURCE_DIR}/src/parser/shell-tokens.c"
+        "${PROJECT_SOURCE_DIR}/src/parser/token.c"
+        "${PROJECT_SOURCE_DIR}/src/utils/string-iterator.c"
+)
 add_executable(
         ${PROJECT_NAME}
-        main.c
-        #parser.c
-        parser/node.c
-        parser/token-iterator.c
-        parser/lexer.c
-        parser/shell-tokens.c
-        parser/token.c
-        utils/string-iterator.c
+        ${SOURCES}
 )
 target_include_directories(
         "${PROJECT_NAME}"
