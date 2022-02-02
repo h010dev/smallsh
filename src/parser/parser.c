@@ -103,6 +103,16 @@ static int Parser_parseCmd(Statement *stmt, TokenIterator *iter)
                 stmt->cmd->argv[stmt->cmd->argc++] = Parser_expandWord(word_str);
         }
 
+        // resize array to fit exactly argc + 1 elements for later use with exec
+        char **tmp = realloc(stmt->cmd->argv, (stmt->cmd->argc + 1) * sizeof(char));
+        if (tmp == NULL) {
+                return -1; // error
+        }
+        stmt->cmd->argv = tmp;
+
+        // null terminate argv for exec
+        stmt->cmd->argv[stmt->cmd->argc] = NULL;
+
         // TODO: move these to builtins module
         char *cmd = stmt->cmd->argv[0];
         if (strcmp("cd", cmd) == 0 ||

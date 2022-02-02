@@ -508,6 +508,9 @@ static void Parser_parse_test_singleStatementCmd(void **state)
         // cmd should match input
         assert_string_equal("cmd", cmd->argv[0]);
 
+        // trailing arg should be null
+        assert_null(cmd->argv[cmd->argc]);
+
         // no stdin streams should be parsed
         assert_int_equal(0, stdin_->n);
 
@@ -550,6 +553,9 @@ static void Parser_parse_test_singleStatementBuiltinCD(void **state)
 
         // cmd should match input
         assert_string_equal("cd", cmd->argv[0]);
+
+        // trailing arg should be null
+        assert_null(cmd->argv[cmd->argc]);
 
         // no stdin streams should be parsed
         assert_int_equal(0, stdin_->n);
@@ -594,6 +600,9 @@ static void Parser_parse_test_singleStatementBuiltinExit(void **state)
         // cmd should match input
         assert_string_equal("exit", cmd->argv[0]);
 
+        // trailing arg should be null
+        assert_null(cmd->argv[cmd->argc]);
+
         // no stdin streams should be parsed
         assert_int_equal(0, stdin_->n);
 
@@ -636,6 +645,9 @@ static void Parser_parse_test_singleStatementBuiltinStatus(void **state)
 
         // cmd should match input
         assert_string_equal("status", cmd->argv[0]);
+
+        // trailing arg should be null
+        assert_null(cmd->argv[cmd->argc]);
 
         // no stdin streams should be parsed
         assert_int_equal(0, stdin_->n);
@@ -681,6 +693,9 @@ static void Parser_parse_test_singleStatementBuiltinCDPath(void **state)
         assert_string_equal("cd", cmd->argv[0]);
         assert_string_equal("./parent/child/", cmd->argv[1]);
 
+        // trailing arg should be null
+        assert_null(cmd->argv[cmd->argc]);
+
         // no stdin streams should be parsed
         assert_int_equal(0, stdin_->n);
 
@@ -724,6 +739,9 @@ static void Parser_parse_test_singleStatementBuiltinCDPathBG(void **state)
         // args should match input
         assert_string_equal("cd", cmd->argv[0]);
         assert_string_equal("./parent/child/", cmd->argv[1]);
+
+        // trailing arg should be null
+        assert_null(cmd->argv[cmd->argc]);
 
         // no stdin streams should be parsed
         assert_int_equal(0, stdin_->n);
@@ -770,6 +788,9 @@ static void Parser_parse_test_singleStatementCmdArg(void **state)
         assert_string_equal("echo", cmd->argv[0]);
         assert_string_equal("hello", cmd->argv[1]);
 
+        // trailing arg should be null
+        assert_null(cmd->argv[cmd->argc]);
+
         // no stdin streams should be parsed
         assert_int_equal(0, stdin_->n);
 
@@ -815,6 +836,9 @@ static void Parser_parse_test_singleStatementCmd2Args(void **state)
         assert_string_equal("hello", cmd->argv[1]);
         assert_string_equal("world", cmd->argv[2]);
 
+        // trailing arg should be null
+        assert_null(cmd->argv[cmd->argc]);
+
         // no stdin streams should be parsed
         assert_int_equal(0, stdin_->n);
 
@@ -857,6 +881,9 @@ static void Parser_parse_test_singleStatementCmdStdin(void **state)
 
         // args should match input
         assert_string_equal("echo", cmd->argv[0]);
+
+        // trailing arg should be null
+        assert_null(cmd->argv[cmd->argc]);
 
         // only one stdin streams should be parsed
         assert_int_equal(1, stdin_->n);
@@ -904,6 +931,9 @@ static void Parser_parse_test_singleStatementCmdStdout(void **state)
         // args should match input
         assert_string_equal("echo", cmd->argv[0]);
 
+        // trailing arg should be null
+        assert_null(cmd->argv[cmd->argc]);
+
         // no stdin streams should be parsed
         assert_int_equal(0, stdin_->n);
 
@@ -950,6 +980,9 @@ static void Parser_parse_test_singleStatementCmdBG(void **state)
         // args should match input
         assert_string_equal("echo", cmd->argv[0]);
 
+        // trailing arg should be null
+        assert_null(cmd->argv[cmd->argc]);
+
         // no stdin streams should be parsed
         assert_int_equal(0, stdin_->n);
 
@@ -994,6 +1027,9 @@ static void Parser_parse_test_singleStatementAllTypes01(void **state)
         assert_string_equal("cd", cmd->argv[0]);
         assert_string_equal("~/Documents", cmd->argv[1]);
         assert_string_equal(".", cmd->argv[2]);
+
+        // trailing arg should be null
+        assert_null(cmd->argv[cmd->argc]);
 
         // one stdin stream should open
         assert_int_equal(1, stdin_->n);
@@ -1045,6 +1081,9 @@ static void Parser_parse_test_singleStatementAllTypes02(void **state)
         assert_string_equal("ls", cmd->argv[0]);
         assert_string_equal("~/Documents", cmd->argv[1]);
         assert_string_equal(".", cmd->argv[2]);
+
+        // trailing arg should be null
+        assert_null(cmd->argv[cmd->argc]);
 
         // one stdin stream should open
         assert_int_equal(1, stdin_->n);
