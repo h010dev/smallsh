@@ -3,10 +3,9 @@ enable_testing()
 set(
         PARSER_UNITTEST_SOURCE_FILES
         "${PROJECT_SOURCE_DIR}/src/parser/lexer.c"
-        "${PROJECT_SOURCE_DIR}/src/parser/node.c"
-        "${PROJECT_SOURCE_DIR}/src/parser/node-stack.c"
         "${PROJECT_SOURCE_DIR}/src/parser/parser.c"
         "${PROJECT_SOURCE_DIR}/src/parser/shell-tokens.c"
+        "${PROJECT_SOURCE_DIR}/src/parser/statement.c"
         "${PROJECT_SOURCE_DIR}/src/parser/token.c"
         "${PROJECT_SOURCE_DIR}/src/parser/token-iterator.c"
         "${PROJECT_SOURCE_DIR}/src/utils/string-iterator.c"
@@ -18,9 +17,7 @@ set(
         shell-tokens
         lexer
         token-iterator
-        node
-        node-stack
-        #parser
+        parser
 )
 
 foreach(unit IN LISTS PARSER_UNITTESTS)

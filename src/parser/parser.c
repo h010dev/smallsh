@@ -4,9 +4,15 @@
  * @date 27 Jan 2022
  * @brief For parsing a stream of tokens into nodes for later evaluation.
  */
+#include <sys/types.h>
+#include <stdio.h>
+#include <string.h>
+#include <stddef.h>
+#include <unistd.h>
+#include <stdint.h>
+
 #include "parser/parser.h"
 #include "parser/token-iterator.h"
-#include "parser/node.h"
 #include "parser/lexer.h"
 
 /* *****************************************************************************
@@ -39,10 +45,14 @@
  *
  *
  ******************************************************************************/
+/**
+ * @brief Hides @c Parser members from client code.
+ */
 struct ParserPrivate {
-        size_t n_tokens;
-        Token **tokens;
-        Stack *stack;
+        size_t n_tokens; /**< number of tokens parsed */
+        Token **tokens; /**< parsed tokens */
+        ssize_t n_stmts; /**< number of statements created */
+        Statement **stmts; /**< statements created */
 };
 
 /* *****************************************************************************
@@ -56,50 +66,19 @@ struct ParserPrivate {
  *
  ******************************************************************************/
 /**
- * @brief Returns a new node for the bg control token, and advances the iterator.
- * @param iter iterator containing token stream
- * @return new node holding bg control data
+ * @brief Parses a command into @p stmt command statement.
+ * @param stmt @c Statement object to add command to
+ * @param iter iterator to extract command tokens from
+ * @return 0 on success, -1 on failure
  */
-static Node *parse_bgctrl (TokenIterator const *iter)
+static int Parser_parseCmd(Statement *stmt, TokenIterator *iter)
 {
-        // make new bg control node
-        Node *node = malloc(sizeof(Node));
-        Node_ctor(node, NODE_CTRL_BG);
-
-        // consume bg control token
-        (void) iter->vptr->next(iter);
-
-        // no need to store the actual symbol; any non-zero value will do
-        BGControlValue bg_val = 1;
-        NodeValue *val = malloc(sizeof(NodeValue));
-        val->bgctrl_value = bg_val;
-        node->vptr->setValue((Node *) node, val);
-
-        return node;
-}
-
-/**
- * @brief Returns a new node for the command token, and advances the iterator.
- * @param iter iterator containing token stream
- * @retur new node holding command data
- */
-static Node *parse_cmd(TokenIterator const *iter)
-{
-        // make new command node
-        Node *node = malloc(sizeof(Node));
-        Node_ctor(node, NODE_CMD);
-
-        // make new command value to store command and args
-        CommandValue cmd_val;
-
-        // parse args into command value
-        size_t buf_size = 1; // buffer size for argv
-        cmd_val.argc = 0;
-        cmd_val.argv = malloc(buf_size * sizeof(WordToken));
+        // parse words into statement command
+        size_t buf_size = 1;
 
         while (iter->vptr->has_next(iter)) {
                 Token tok;
-                WordToken **tmp;
+                char **tmp;
 
                 // check if any words left to take
                 tok = iter->vptr->peek(iter, 0);
@@ -108,144 +87,204 @@ static Node *parse_cmd(TokenIterator const *iter)
                 }
 
                 // resize buf if full
-                if (cmd_val.argc >= buf_size) {
+                if (stmt->cmd->argc >= buf_size) {
                         buf_size *= 2;
-                        tmp = realloc(cmd_val.argv, buf_size * sizeof(WordToken));
+                        tmp = realloc(stmt->cmd->argv, buf_size * sizeof(char));
                         if (tmp == NULL) {
-                                return NULL; // error
+                                return -1; // error
                         }
-                        cmd_val.argv = tmp;
+                        stmt->cmd->argv = tmp;
                 }
 
+                // TODO: look into creating add methods to statement class
                 // take word
-                cmd_val.argv[cmd_val.argc++] = (WordToken *) iter->vptr->next(iter);
+                WordToken *word = (WordToken *) iter->vptr->next(iter);
+                char *word_str = word->super.vptr->getValue((Token *) word);
+                stmt->cmd->argv[stmt->cmd->argc++] = Parser_expandWord(word_str);
         }
-        NodeValue *val = malloc(sizeof(NodeValue));
-        val->cmd_value = cmd_val;
 
-        // add parsed words to command node
-        node->vptr->setValue((Node *) node, val);
+        // TODO: move these to builtins module
+        char *cmd = stmt->cmd->argv[0];
+        if (strcmp("cd", cmd) == 0 ||
+            strcmp("exit", cmd) == 0 ||
+            strcmp("status", cmd) == 0) {
+                stmt->flags |= FLAGS_BUILTIN;
+        }
 
-        return node;
+        return 0;
 }
 
 /**
- * @brief Returns a new node for the comment token, and advances the iterator.
- * @param iter iterator containing token stream
- * @return new node holding comment data
+ * @brief Parses an io redirection command into @p stmt command statement.
+ * @param stmt @c Statement object to add io redirection command to
+ * @param iter iterator to extract io redirection tokens from
+ * @param type type of io redirection to store
+ * @return 0 on success, -1 on failure
  */
-static Node *parse_cmt(TokenIterator const *iter)
+static int Parser_parseIORedir(Statement *stmt, TokenIterator *iter, IORedirType type)
 {
-        // make new comment node
-        Node *node = malloc(sizeof(Node));
-        Node_ctor(node, NODE_CMT);
-
-        // consume comment token
-        (void) iter->vptr->next(iter);
-
-        // no need to store the actual symbol; any non-zero value will do
-        CommentValue cmt_val = 1;
-        NodeValue *val = malloc(sizeof(NodeValue));
-        val->cmt_value = cmt_val;
-        node->vptr->setValue((Node *) node, val);
-
-        return node;
-}
-
-/**
- * @brief Returns a new node for an io redirection token, and advances the
- * iterator.
- * @param iter iterator containing token stream
- * @return new node holding io redirection data
- */
-static Node *parse_ioredir(TokenIterator const *iter)
-{
-        // make new io redirection node
-        Node *node = malloc(sizeof(Node));
-        Node_ctor(node, NODE_REDIR);
-
         // filename should be a word token
         Token tok = iter->vptr->peek(iter, 1);
         if (!is_tok_word(tok)) {
-                return NULL; // error
+                return -1; // error
         }
 
-        // make new io redirection value to store io data in
-        IORedirValue io_val;
-
-        // set flag depending on if op is an input or output redirection op
-        tok = iter->vptr->peek(iter, 0);
-        if (is_tok_redir_input(tok)) {
-                io_val.type = TOK_REDIR_INPUT;
-        } else if (is_tok_redir_output(tok)) {
-                io_val.type = TOK_REDIR_OUTPUT;
-        } else {
-                return NULL; // error
-        }
-
-        // consume redirection op token and filename word token
+        // skip past redirection operator
         (void) iter->vptr->next(iter);
-        io_val.stream = (WordToken *) iter->vptr->next(iter);
-        NodeValue *val = malloc(sizeof(NodeValue));
-        val->ioredir_value = io_val;
 
-        // add parsed io data to node
-        node->vptr->setValue((Node *) node, val);
+        // take next word
+        WordToken *word = (WordToken *) iter->vptr->next(iter);
 
-        return node;
+        // switch to type stream
+        char *word_str;
+        char **tmp;
+        switch (type) {
+                case IO_REDIR_STDIN:
+                        // take next word
+                        word_str = word->super.vptr->getValue((Token *) word);
+
+                        // extract word string into statement stdin
+                        stmt->stdin_->streams[stmt->stdin_->n++] = Parser_expandWord(
+                                word_str);
+
+                        // resize strings buf
+                        tmp = realloc(stmt->stdin_->streams, (stmt->stdin_->n + 1) * sizeof(char));
+                        if (tmp == NULL) {
+                                return -1; // error
+                        }
+                        stmt->stdin_->streams = tmp;
+                        break;
+                case IO_REDIR_STDOUT:
+                        // take next word
+                        word_str = word->super.vptr->getValue((Token *) word);
+
+                        // extract word string into statement stdout
+                        stmt->stdout_->streams[stmt->stdout_->n++] = Parser_expandWord(
+                                word_str);
+
+                        // resize strings buf
+                        tmp = realloc(stmt->stdout_->streams, (stmt->stdout_->n + 1) * sizeof(char));
+                        if (tmp == NULL) {
+                                return -1; // error
+                        }
+                        stmt->stdout_->streams = tmp;
+                        break;
+                default:
+                        return -1;
+        }
+
+        return 0;
 }
 
-static size_t Parser_parse_(Parser * const self, char *buf)
+/**
+ * @brief Parses tokens into statements.
+ * @param self @c Parser object
+ * @return number of statements created on success, -1 on failure
+ */
+static ssize_t Parser_parseStatements_(struct Parser * const self)
+{
+        // initialize iterator with token stream
+        TokenIterator iter;
+        TokenIterator_ctor(&iter, self->_private->n_tokens, self->_private->tokens);
+
+        // initialize statements array
+        size_t buf_size = 1;
+        Statement **stmts = malloc(buf_size * sizeof(Statement));
+
+        // evaluate tokens from iterator stream
+        ssize_t cur = 1;
+        ssize_t count = 0; // number of statements consumed
+        while (iter.vptr->has_next(&iter)) {
+                if ((size_t) count >= buf_size) {
+                        buf_size *= 2;
+                        Statement **tmp = realloc(stmts, buf_size * sizeof(Statement));
+                        if (tmp == NULL) {
+                                return -1; // error
+                        }
+                        stmts = tmp;
+                }
+
+                Token tok = iter.vptr->peek(&iter, 0);
+
+                if (is_tok_cmt(tok)) {
+                        break; // done
+                } else if (is_tok_ctrl_bg(tok)) {
+                        if (count == 0) {
+                                // syntax error
+                        }
+                        (void) iter.vptr->next(&iter);
+                        stmts[count - 1]->flags |= FLAGS_BGCTRL;
+                        cur++;
+                } else if (is_tok_redir_input(tok)) {
+                        if (stmts[count] == NULL) {
+                                // syntax error
+                        }
+                        Parser_parseIORedir(stmts[count - 1], &iter,
+                                            IO_REDIR_STDIN);
+                } else if (is_tok_redir_output(tok)) {
+                        if (stmts[count] == NULL) {
+                                // syntax error
+                        }
+                        Parser_parseIORedir(stmts[count - 1], &iter,
+                                            IO_REDIR_STDOUT);
+                } else if (is_tok_word(tok)) {
+                        if (count < cur) {
+                                stmts[count++] = Statement_new();
+                        } else if (stmts[count]->stdin_->n > 0 || stmts[count]->stdout_->n > 0) {
+                                // syntax error
+                                break;
+                        }
+                        Parser_parseCmd(stmts[count - 1], &iter);
+                } else {
+                        // do cleanup
+                        count = -1;
+                        break;
+                }
+        }
+
+        TokenIterator_dtor(&iter);
+
+        self->_private->stmts = stmts;
+        self->_private->n_stmts = count;
+        return count;
+}
+
+// TODO: add free/del method for tokens
+/**
+ * @brief Parses a character stream, creates tokens, and generates command
+ * statements.
+ *
+ * Implementation of @c Parser::parse().
+ *
+ * @param self @c Parser object
+ * @param buf character stream to parse
+ * @return number of statements created on success, -1 on failure
+ * @note Caller is responsible for freeing parsed statements via @c
+ * Statement_del.
+ */
+static ssize_t Parser_parse_(Parser * const self, char *buf)
 {
         // parse stream into tokens
         self->_private->tokens = malloc(MAX_TOKENS * sizeof(Token));
         self->_private->n_tokens = generate_tokens(buf, MAX_TOKENS,
                                                    self->_private->tokens);
 
-        // parse tokens into nodes
-        self->_private->stack = malloc(sizeof(Stack));
-        Stack_ctor(self->_private->stack, MAX_TOKENS);
-        size_t n_node = parse(self->_private->n_tokens, self->_private->tokens,
-                              self->_private->stack);
-
-        return n_node;
+        // parse tokens into statements
+        return Parser_parseStatements_(self);
 }
 
-static void Parser_cleanup_(Parser * const self, bool print_tree)
+/**
+ * @brief Returns parsed statements to caller.
+ *
+ * Implementation of @c Parser::get_statements().
+ *
+ * @param self @c Parser object
+ * @return array of @c Statement objects parsed from character stream
+ */
+static inline Statement **Parser_getStatements_(struct Parser * const self)
 {
-        while (!self->_private->stack->isEmpty(self->_private->stack)) {
-                Node *node = (Node *) self->_private->stack->pop(self->_private->stack);
-
-                if (print_tree)
-                        node->vptr->print(node);
-
-                // cleanup
-                NodeValue *value = node->vptr->getValue(node);
-                NodeType type = node->vptr->getType(node);
-                if (type == NODE_CMD) {
-                        CommandValue *cmd;
-                        cmd = &value->cmd_value;
-                        for (size_t i = 0; i < cmd->argc; i++) {
-                                cmd->argv[i] = NULL;
-                        }
-                        free(cmd->argv);
-                        cmd->argv = NULL;
-                }
-                Node_dtor(node);
-                free(node);
-                node = NULL;
-        }
-
-        // cleanup
-        for (size_t i = 0; i < self->_private->n_tokens; i++) {
-                Token_dtor(self->_private->tokens[i]);
-                free(self->_private->tokens[i]);
-        }
-        free(self->_private->tokens);
-        Stack_dtor(self->_private->stack);
-        free(self->_private->stack);
+        return self->_private->stmts;
 }
-
 
 /* *****************************************************************************
  * PUBLIC DEFINITIONS
@@ -268,6 +307,30 @@ static void Parser_cleanup_(Parser * const self, bool print_tree)
  *
  ******************************************************************************/
 /* *****************************************************************************
+ * CONSTRUCTORS + DESTRUCTORS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
+void Parser_ctor(Parser *self)
+{
+        self->parse = &Parser_parse_;
+        self->get_statements = &Parser_getStatements_;
+        self->print_statement = &Statement_print;
+        self->_private = malloc(sizeof(struct ParserPrivate));
+}
+
+// TODO: implement dtor
+void Parser_dtor(Parser *self)
+{
+        (void) self;
+}
+
+/* *****************************************************************************
  * FUNCTIONS
  *
  *
@@ -277,49 +340,126 @@ static void Parser_cleanup_(Parser * const self, bool print_tree)
  *
  *
  ******************************************************************************/
-size_t parse(size_t n_tokens, Token *tokens[n_tokens], Stack *node_stack)
+char *Parser_insertPID(char *string, char **ptr, size_t *len)
 {
-        // initialize iterator with token stream
-        TokenIterator iter;
-        TokenIterator_ctor(&iter, n_tokens, tokens);
+        char *result;
 
-        // evaluate tokens from iterator stream
-        size_t count = 0; // number of nodes consumed
-        while (iter.vptr->has_next(&iter) && !node_stack->isFull(node_stack)) {
-                Token tok = iter.vptr->peek(&iter, 0);
-
-                if (is_tok_cmt(tok)) {
-                        node_stack->push(node_stack, (void **) parse_cmt(&iter));
-                        count++;
-                        break; // done
-                } else if (is_tok_ctrl_bg(tok)) {
-                        node_stack->push(node_stack, (void **) parse_bgctrl(&iter));
-                } else if (is_tok_redir(tok)) {
-                        node_stack->push(node_stack, (void **) parse_ioredir(&iter));
-                } else if (is_tok_word(tok)) {
-                        node_stack->push(node_stack, (void **) parse_cmd(&iter));
-                } else {
-                        break; // error
-                }
-
-                count++;
+        // get pid and convert to string
+#ifdef TEST
+        // can't test valid results with randomized pid!
+        // TODO: This could be done via mocking getpid() result. Find out how.
+        pid_t pid = 123456;
+#else
+        pid_t pid = getpid();
+#endif
+        char *pid_str = calloc(sizeof(intmax_t) + 1, sizeof(char));
+        if (pid_str == NULL) {
+                return NULL;
         }
 
-        TokenIterator_dtor(&iter);
+        size_t pid_len = snprintf(pid_str, sizeof(intmax_t), "%d", pid);
+        if (pid_len >= sizeof(intmax_t)) {
+                return NULL;
+        }
 
-        return count;
+        // save current index since realloc may change string location
+        ptrdiff_t idx = *ptr - &string[0];
+
+        // update copy size to fit pid
+        size_t new_size = *len + pid_len - 2;
+        result = calloc(new_size, sizeof(char));
+        if (result == NULL) {
+                return NULL;
+        }
+
+        char *tmp = strncpy(result, string, new_size - 1);
+        if (tmp == NULL) {
+                return NULL;
+        }
+
+        result = tmp;
+        result[new_size - 1] = '\0';
+
+        // reset copy pointer to point to end of result string
+        char *new_ptr = &result[0] + idx;
+
+        // extend result string with PID
+        for (size_t i = 0; i < pid_len; i++) {
+                *new_ptr++ = pid_str[i];
+        }
+
+        *len = new_size;
+        *ptr = new_ptr;
+
+        return result;
 }
 
-void Parser_ctor(Parser *self)
+char *Parser_subVar(char *word, char **old_ptr, char **new_ptr, size_t *len)
 {
-        self->parse = &Parser_parse_;
-        self->cleanup = &Parser_cleanup_;
-        self->_private = malloc(sizeof(struct ParserPrivate));
+        char *sub;
+        char nxt;
+
+        // peek ahead to first char of variable to determine type
+        nxt = (*old_ptr)[1];
+        switch (nxt) {
+                case '$':
+                {
+                        // replace var with pid
+                        sub = Parser_insertPID(word, new_ptr, len);
+                        if (sub == NULL) {
+                                return NULL;
+                        }
+
+                        // seek past '$'
+                        (*old_ptr)++;
+                        break;
+                }
+                default:
+                {
+                        sub = word;
+                        // insert '$' at next available position
+                        ptrdiff_t idx = *new_ptr - &sub[0]; // insertion offset
+                        sub[idx] = **old_ptr;
+
+                        // seek to next free position
+                        (*new_ptr)++;
+                        break;
+                }
+        }
+
+        return sub;
 }
 
-void Parser_dtor(Parser *self)
+char *Parser_expandWord(char *word)
 {
-        self->parse = NULL;
-        self->cleanup = NULL;
-        free(self->_private);
+        char *new_word, *old_ptr, *new_ptr;
+        size_t len;
+
+        /*
+         * Allocate space for new word string. At a minimum it will be same
+         * length as original word.
+         */
+        len = strlen(word) + 1;
+        new_word = calloc(len, sizeof(char));
+
+        // track copy and insert positions in respective strings
+        old_ptr = &word[0];
+        new_ptr = &new_word[0];
+
+        /*
+         * Copy over every byte from original word to new word, expanding
+         * variables when required.
+         */
+        for (; *old_ptr != '\0'; old_ptr++) {
+                if (*old_ptr == '$') {
+                        // attempt to perform variable expansion
+                        new_word = Parser_subVar(new_word, &old_ptr, &new_ptr, &len);
+                } else {
+                        // no expansion needed, so just copy over byte
+                        *new_ptr = *old_ptr;
+                        new_ptr++;
+                }
+        }
+
+        return new_word;
 }

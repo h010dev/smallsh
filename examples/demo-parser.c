@@ -11,7 +11,6 @@
 #include <string.h>
 
 #include "parser/parser.h"
-#include "parser/lexer.h"
 
 int main(void)
 {
@@ -45,7 +44,6 @@ int main(void)
                 Parser_ctor(&parser);
 
                 parser.parse(&parser, line);
-                parser.cleanup(&parser, true);
 
                 Parser_dtor(&parser);
 

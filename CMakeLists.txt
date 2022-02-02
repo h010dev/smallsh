@@ -24,5 +24,5 @@ include(CTest)
 
 # cmocka triggers c_flags so remove them for test build
 unset(CMAKE_C_FLAGS)
-set(CMAKE_C_FLAGS "-std=c99")
+set(CMAKE_C_FLAGS "-std=c99 -g -DTEST")
 add_subdirectory(tests)

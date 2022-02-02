@@ -2,8 +2,7 @@ add_executable(
         demo-parser
         demo-parser.c
         "${PROJECT_SOURCE_DIR}/src/parser/parser.c"
-        "${PROJECT_SOURCE_DIR}/src/parser/node-stack.c"
-        "${PROJECT_SOURCE_DIR}/src/parser/node.c"
+        "${PROJECT_SOURCE_DIR}/src/parser/statement.c"
         "${PROJECT_SOURCE_DIR}/src/parser/token-iterator.c"
         "${PROJECT_SOURCE_DIR}/src/parser/lexer.c"
         "${PROJECT_SOURCE_DIR}/src/parser/shell-tokens.c"
