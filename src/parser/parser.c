@@ -89,7 +89,7 @@ static int Parser_parseCmd(Statement *stmt, TokenIterator *iter)
                 // resize buf if full
                 if (stmt->cmd->argc >= buf_size) {
                         buf_size *= 2;
-                        tmp = realloc(stmt->cmd->argv, buf_size * sizeof(char));
+                        tmp = realloc(stmt->cmd->argv, buf_size * sizeof(char *));
                         if (tmp == NULL) {
                                 return -1; // error
                         }
@@ -101,10 +101,11 @@ static int Parser_parseCmd(Statement *stmt, TokenIterator *iter)
                 WordToken *word = (WordToken *) iter->vptr->next(iter);
                 char *word_str = word->super.vptr->getValue((Token *) word);
                 stmt->cmd->argv[stmt->cmd->argc++] = Parser_expandWord(word_str);
+                free(word_str);
         }
 
         // resize array to fit exactly argc + 1 elements for later use with exec
-        char **tmp = realloc(stmt->cmd->argv, (stmt->cmd->argc + 1) * sizeof(char));
+        char **tmp = realloc(stmt->cmd->argv, (stmt->cmd->argc + 1) * sizeof(char *));
         if (tmp == NULL) {
                 return -1; // error
         }
@@ -156,9 +157,10 @@ static int Parser_parseIORedir(Statement *stmt, TokenIterator *iter, IORedirType
                         // extract word string into statement stdin
                         stmt->stdin_->streams[stmt->stdin_->n++] = Parser_expandWord(
                                 word_str);
+                        free(word_str);
 
                         // resize strings buf
-                        tmp = realloc(stmt->stdin_->streams, (stmt->stdin_->n + 1) * sizeof(char));
+                        tmp = realloc(stmt->stdin_->streams, (stmt->stdin_->n + 1) * sizeof(char *));
                         if (tmp == NULL) {
                                 return -1; // error
                         }
@@ -171,9 +173,10 @@ static int Parser_parseIORedir(Statement *stmt, TokenIterator *iter, IORedirType
                         // extract word string into statement stdout
                         stmt->stdout_->streams[stmt->stdout_->n++] = Parser_expandWord(
                                 word_str);
+                        free(word_str);
 
                         // resize strings buf
-                        tmp = realloc(stmt->stdout_->streams, (stmt->stdout_->n + 1) * sizeof(char));
+                        tmp = realloc(stmt->stdout_->streams, (stmt->stdout_->n + 1) * sizeof(char *));
                         if (tmp == NULL) {
                                 return -1; // error
                         }
@@ -337,7 +340,28 @@ void Parser_ctor(Parser *self)
 // TODO: implement dtor
 void Parser_dtor(Parser *self)
 {
-        (void) self;
+        for (size_t i = 0; i < self->_private->n_tokens; i++) {
+                Token_dtor(self->_private->tokens[i]);
+                free(self->_private->tokens[i]);
+                self->_private->tokens[i] = NULL;
+        }
+        free(self->_private->tokens);
+        self->_private->n_tokens = 0;
+        self->_private->tokens = NULL;
+
+        for (ssize_t i = 0; i < self->_private->n_stmts; i++) {
+                Statement_del(&self->_private->stmts[i]);
+        }
+        free(self->_private->stmts);
+        self->_private->n_stmts = 0;
+        self->_private->stmts = NULL;
+
+        free(self->_private);
+        self->_private = NULL;
+
+        self->parse = NULL;
+        self->get_statements = NULL;
+        self->print_statement = NULL;
 }
 
 /* *****************************************************************************

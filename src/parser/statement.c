@@ -74,7 +74,7 @@ void Statement_del(Statement **stmt)
         free((*stmt)->cmd->argv);
         (*stmt)->cmd->argc = 0;
         (*stmt)->cmd->argv = NULL;
-        //free((*stmt)->cmd);
+        free((*stmt)->cmd);
         (*stmt)->cmd = NULL;
 
         // statement io redirection: stdin delete
@@ -85,7 +85,7 @@ void Statement_del(Statement **stmt)
         free((*stmt)->stdin_->streams);
         (*stmt)->stdin_->n = 0;
         (*stmt)->stdin_->streams = NULL;
-        //free((*stmt)->stdin_);
+        free((*stmt)->stdin_);
         (*stmt)->stdin_ = NULL;
 
         // statement io redirection: stdout delete
@@ -96,7 +96,7 @@ void Statement_del(Statement **stmt)
         free((*stmt)->stdout_->streams);
         (*stmt)->stdout_->n = 0;
         (*stmt)->stdout_->streams = NULL;
-        //free((*stmt)->stdout_);
+        free((*stmt)->stdout_);
         (*stmt)->stdout_ = NULL;
 
         // statement flags delete
