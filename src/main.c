@@ -1,7 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
+
+#include "smallsh.h"
 
 int main(void)
 {
-        printf("Hello, smallsh\n");
-        return 0;
+        exit(smallsh_run());
 }
