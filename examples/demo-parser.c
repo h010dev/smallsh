@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "parser/parser.h"
+#include "interpreter/parser.h"
 
 int main(void)
 {

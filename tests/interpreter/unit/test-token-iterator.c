@@ -10,8 +10,8 @@
 #include <cmocka.h>
 #include <stdlib.h>
 
-#include "parser/token-iterator.h"
-#include "parser/lexer.h"
+#include "interpreter/token-iterator.h"
+#include "interpreter/lexer.h"
 
 struct TokenIteratorPrivate {
         size_t ti_len;

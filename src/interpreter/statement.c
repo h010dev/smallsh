@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "parser/statement.h"
+#include "interpreter/statement.h"
 
 /* *****************************************************************************
  * PUBLIC DEFINITIONS

@@ -10,7 +10,7 @@
 #include <cmocka.h>
 #include <stdlib.h>
 
-#include "parser/shell-tokens.h"
+#include "interpreter/shell-tokens.h"
 
 // region CommentToken
 static void comment_token_ctor_test_initializesValues(void **state)

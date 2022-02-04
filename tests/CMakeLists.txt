@@ -1,2 +1,2 @@
 add_subdirectory(utils/unit)
-add_subdirectory(parser/unit)
+add_subdirectory(interpreter/unit)

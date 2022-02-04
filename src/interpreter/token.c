@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "parser/token.h"
+#include "interpreter/token.h"
 
 /* *****************************************************************************
  * PRIVATE DEFINITIONS

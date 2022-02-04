@@ -1,12 +1,12 @@
 add_executable(
         demo-parser
         demo-parser.c
-        "${PROJECT_SOURCE_DIR}/src/parser/parser.c"
-        "${PROJECT_SOURCE_DIR}/src/parser/statement.c"
-        "${PROJECT_SOURCE_DIR}/src/parser/token-iterator.c"
-        "${PROJECT_SOURCE_DIR}/src/parser/lexer.c"
-        "${PROJECT_SOURCE_DIR}/src/parser/shell-tokens.c"
-        "${PROJECT_SOURCE_DIR}/src/parser/token.c"
+        "${PROJECT_SOURCE_DIR}/src/interpreter/parser.c"
+        "${PROJECT_SOURCE_DIR}/src/interpreter/statement.c"
+        "${PROJECT_SOURCE_DIR}/src/interpreter/token-iterator.c"
+        "${PROJECT_SOURCE_DIR}/src/interpreter/lexer.c"
+        "${PROJECT_SOURCE_DIR}/src/interpreter/shell-tokens.c"
+        "${PROJECT_SOURCE_DIR}/src/interpreter/token.c"
         "${PROJECT_SOURCE_DIR}/src/utils/string-iterator.c"
 )
 target_include_directories(

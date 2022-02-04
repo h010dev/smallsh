@@ -3,12 +3,12 @@ set(
         "${PROJECT_SOURCE_DIR}/src/main.c"
         "${PROJECT_SOURCE_DIR}/src/smallsh.c"
         "${PROJECT_SOURCE_DIR}/src/shell/signal-handlers.c"
-        "${PROJECT_SOURCE_DIR}/src/parser/parser.c"
-        "${PROJECT_SOURCE_DIR}/src/parser/statement.c"
-        "${PROJECT_SOURCE_DIR}/src/parser/token-iterator.c"
-        "${PROJECT_SOURCE_DIR}/src/parser/lexer.c"
-        "${PROJECT_SOURCE_DIR}/src/parser/shell-tokens.c"
-        "${PROJECT_SOURCE_DIR}/src/parser/token.c"
+        "${PROJECT_SOURCE_DIR}/src/interpreter/parser.c"
+        "${PROJECT_SOURCE_DIR}/src/interpreter/statement.c"
+        "${PROJECT_SOURCE_DIR}/src/interpreter/token-iterator.c"
+        "${PROJECT_SOURCE_DIR}/src/interpreter/lexer.c"
+        "${PROJECT_SOURCE_DIR}/src/interpreter/shell-tokens.c"
+        "${PROJECT_SOURCE_DIR}/src/interpreter/token.c"
         "${PROJECT_SOURCE_DIR}/src/utils/string-iterator.c"
 )
 add_executable(

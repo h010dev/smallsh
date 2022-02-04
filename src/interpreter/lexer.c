@@ -6,8 +6,8 @@
  */
 #include <stdlib.h>
 
-#include "parser/lexer.h"
-#include "parser/shell-tokens.h"
+#include "interpreter/lexer.h"
+#include "interpreter/shell-tokens.h"
 
 size_t lexer_generate_tokens(char *buf, size_t max_tok, Token *tok[max_tok])
 {

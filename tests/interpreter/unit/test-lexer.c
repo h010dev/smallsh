@@ -10,7 +10,7 @@
 #include "cmocka.h"
 #include <stdlib.h>
 
-#include "parser/lexer.h"
+#include "interpreter/lexer.h"
 
 static void lexer_generate_tokens_test_emptyBuffer(void **state)
 {

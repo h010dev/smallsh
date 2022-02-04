@@ -5,7 +5,7 @@
 #include "cmocka.h"
 #include <stdlib.h>
 
-#include "parser/token.h"
+#include "interpreter/token.h"
 
 struct TokenPrivate {
         TokenType tok_type;

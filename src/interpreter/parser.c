@@ -11,9 +11,9 @@
 #include <unistd.h>
 #include <stdint.h>
 
-#include "parser/parser.h"
-#include "parser/token-iterator.h"
-#include "parser/lexer.h"
+#include "interpreter/parser.h"
+#include "interpreter/token-iterator.h"
+#include "interpreter/lexer.h"
 
 /* *****************************************************************************
  * PRIVATE DEFINITIONS

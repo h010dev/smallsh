@@ -10,7 +10,7 @@
 #include <cmocka.h>
 #include <stdlib.h>
 
-#include "parser/parser.h"
+#include "interpreter/parser.h"
 
 // case 1: empty string
 static void parser_insert_pid_test_retModifiedString01(void **state)
