@@ -6,27 +6,19 @@
  */
 #include <stdlib.h>
 
-#ifdef DEBUG
-#include <stdio.h>
-#endif
-
 #include "parser/lexer.h"
 #include "parser/shell-tokens.h"
 
-size_t generate_tokens(char *buf, size_t n_tokens, Token *tokens[n_tokens])
+size_t lexer_generate_tokens(char *buf, size_t max_tok, Token *tok[max_tok])
 {
-#ifdef DEBUG
-        printf("%s\n", buf);
-#endif
-
         StringIterator iter;
-        StringIterator_ctor(&iter, buf);
+        string_iterator_ctor(&iter, buf);
 
         size_t count = 0; // number of tokens consumed
         char c1, c2;
 
         while (iter.vptr->has_next(&iter)) {
-                if (count > n_tokens) {
+                if (count > max_tok) {
                         // no more space for tokens
                         break;
                 }
@@ -42,50 +34,37 @@ size_t generate_tokens(char *buf, size_t n_tokens, Token *tokens[n_tokens])
                         continue;
                 } else if (IS_CMT_SYM(c1, c2)) {
                         // token is a comment
-                        tokens[count] = malloc(sizeof(Token));
-                        CommentToken_ctor((CommentToken *) tokens[count]);
+                        tok[count] = malloc(sizeof(Token));
+                        comment_token_ctor((CommentToken *) tok[count]);
                 } else if (IS_INPUT_REDIR_OP(c1, c2)) {
                         // token is an input redirection operator
-                        tokens[count] = malloc(sizeof(Token));
-                        InputRedirToken_ctor((InputRedirToken *) tokens[count]);
+                        tok[count] = malloc(sizeof(Token));
+                        inputredir_token_ctor((InputRedirToken *) tok[count]);
                 } else if (IS_OUTPUT_REDIR_OP(c1, c2)) {
                         // token is an output redirection operator
-                        tokens[count] = malloc(sizeof(Token));
-                        OutputRedirToken_ctor((OutputRedirToken *) tokens[count]);
+                        tok[count] = malloc(sizeof(Token));
+                        outputredir_token_ctor((OutputRedirToken *) tok[count]);
                 } else if (IS_BG_CTRL_OP(c1, c2)) {
                         // token is a background control operator
-                        tokens[count] = malloc(sizeof(Token));
-                        BGControlToken_ctor((BGControlToken *) tokens[count]);
+                        tok[count] = malloc(sizeof(Token));
+                        bgctrl_token_ctor((BGCtrlToken *) tok[count]);
                 } else if (IS_NEWLINE(c1)) {
                         // token is a newline
-                        tokens[count] = malloc(sizeof(Token));
-                        NewlineToken_ctor((NewlineToken *) tokens[count]);
+                        tok[count] = malloc(sizeof(Token));
+                        newline_token_ctor((NewlineToken *) tok[count]);
                 } else {
                         // otherwise, token is a word
-                        tokens[count] = malloc(sizeof(Token));
-                        WordToken_ctor((WordToken *) tokens[count]);
+                        tok[count] = malloc(sizeof(Token));
+                        word_token_ctor((WordToken *) tok[count]);
                 }
 
                 // consume token
-                ((Token *) tokens[count])->vptr->take((Token *) tokens[count], &iter);
+                ((Token *) tok[count])->vptr->take((Token *) tok[count], &iter);
 
                 count++;
         }
 
-        StringIterator_dtor(&iter);
-
-#ifdef DEBUG
-        if (count > 0) {
-                printf("[");
-                size_t i = 0;
-                for (; i < count - 1; i++) {
-                        ((Token *) tokens[i])->vptr->print((Token *) tokens[i]);
-                        printf(", ");
-                }
-                ((Token *) tokens[i])->vptr->print((Token *) tokens[i]);
-                printf("]\n");
-        }
-#endif
+        string_iterator_dtor(&iter);
 
         return count;
 }

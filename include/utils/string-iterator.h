@@ -23,7 +23,7 @@ struct StringIteratorPrivate;
  */
 typedef struct {
         struct StringIteratorVtbl const *vptr; /**< virtual table */
-        struct StringIteratorPrivate *_private; /**< private data */
+        struct StringIteratorPrivate *private; /**< private data */
 } StringIterator;
 
 /**
@@ -81,7 +81,7 @@ struct StringIteratorVtbl {
          * @note The caller is responsible for freeing the return value after
          * they are done using it.
          */
-        char *(*munchChar) (StringIterator const * const self);
+        char *(*munch_char) (StringIterator const * const self);
 
         /**
          * @brief Iterates over a single word and returns copy to caller.
@@ -99,7 +99,7 @@ struct StringIteratorVtbl {
          * @note The caller is responsible for freeing the return value after
          * they are done using it.
          */
-        char *(*munchWord) (StringIterator const * const self);
+        char *(*munch_word) (StringIterator const * const self);
 
         /**
          * @brief Returns character that the iterator is pointing at, then
@@ -164,12 +164,12 @@ struct StringIteratorVtbl {
  *
  * Source: https://www.state-machine.com/doc/AN_OOP_in_C.pdf*
  * @param self @c StringIterator object to initialize
- * @param string the string to iterate over
+ * @param str the string to iterate over
  * @note A copy is made of @p string, so the caller can free/overwrite the
  * string safely after calling this constructor. Note this also means the
- * caller must destroy the data via calling the @c StringIterator_dtor function.
+ * caller must destroy the data via calling the @c string_iterator_dtor function.
  */
-void StringIterator_ctor(StringIterator *self, char *string);
+void string_iterator_ctor(StringIterator *self, char *str);
 
 /**
  * @brief Destroys a @c StringIterator object, freeing its members and
@@ -178,6 +178,6 @@ void StringIterator_ctor(StringIterator *self, char *string);
  * @note The caller is responsible for freeing @p self afterwards if it was
  * originally allocated on the heap.
  */
-void StringIterator_dtor(StringIterator *self);
+void string_iterator_dtor(StringIterator *self);
 
 #endif //SMALLSH_STRING_ITERATOR_H

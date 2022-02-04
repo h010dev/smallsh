@@ -20,7 +20,7 @@ struct TokenPrivate;
  */
 typedef struct {
         struct TokenVtbl const *vptr; /**< virtual table */
-        struct TokenPrivate *_private; /**< private data */
+        struct TokenPrivate *private; /**< private data */
 } Token;
 
 /**
@@ -44,7 +44,7 @@ struct TokenVtbl {
          * @param self pointer to @c Token object
          * @return the token's type identifier
          */
-        TokenType (*getType) (Token const * const self);
+        TokenType (*get_type) (Token const * const self);
 
         /**
          * @brief Returns copy of the string stored by the token.
@@ -53,7 +53,7 @@ struct TokenVtbl {
          * @note The caller is responsible for freeing the return value when
          * they're done using it.
          */
-        char *(*getValue) (Token const * const self);
+        char *(*get_value) (Token const * const self);
 
         /**
          * @brief Prints a pretty-formatted version of @p self.
@@ -66,7 +66,7 @@ struct TokenVtbl {
          * @param self pointer to @c Token object
          * @param value the string to copy to @p self
          */
-        void (*setValue) (Token const * const self, const char * const value);
+        void (*set_value) (Token const * const self, const char * const value);
 
         /**
          * @brief Virtual method definition for 'taking', or storing a string as
@@ -100,7 +100,7 @@ struct TokenVtbl {
  * @param self @c Token object to initialize
  * @param type @c TokenType to to assign to @p self
  */
-void Token_ctor(Token *self, TokenType type);
+void token_ctor(Token *self, TokenType type);
 
 /**
  * @brief Destroys a @c Token object, freeing its members and re-initializing
@@ -112,14 +112,14 @@ void Token_ctor(Token *self, TokenType type);
  * destructor.
  * @param self pointer to @c Token object
  */
-void Token_dtor(Token *self);
+void token_dtor(Token *self);
 
 /**
  * @brief Implementation of @c Token::getType().
  * @param self pointer to @c Token object
  * @return the token's type identifier
  */
-TokenType Token_getType_(Token const *self);
+TokenType token_get_type_(Token const *self);
 
 /**
  * @brief Implementation of @c Token::getValue().
@@ -128,13 +128,13 @@ TokenType Token_getType_(Token const *self);
  * @note The caller is responsible for freeing the return value when they're
  * done using it.
  */
-char *Token_getValue_(Token const *self);
+char *token_get_value_(Token const *self);
 
 /**
  * @brief Implementation of @c Token::setValue().
  * @param self pointer to @c Token object
  * @param value the string to copy to @p self
  */
-void Token_setValue_(Token const *self, const char *value);
+void token_set_value_(Token const *self, const char *value);
 
 #endif //SMALLSH_TOKEN_H

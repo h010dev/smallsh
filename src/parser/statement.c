@@ -39,68 +39,71 @@
  *
  *
  ******************************************************************************/
-Statement *Statement_new(void)
+Statement *statement_new(void)
 {
         Statement *stmt = malloc(sizeof(Statement));
 
         // statement command init
-        stmt->cmd = malloc(sizeof(StmtCmd));
-        stmt->cmd->argc = 0;
-        stmt->cmd->argv = malloc(sizeof(char *));
+        stmt->stmt_cmd = malloc(sizeof(StmtCmd));
+        stmt->stmt_cmd->cmd_argc = 0;
+        stmt->stmt_cmd->cmd_argv = malloc(sizeof(char *));
+        stmt->stmt_cmd->cmd_argv[0] = NULL;
 
         // statement io redirection: stdin init
-        stmt->stdin_ = malloc(sizeof(StmtStdin));
-        stmt->stdin_->n = 0;
-        stmt->stdin_->streams = malloc(sizeof(char *));
+        stmt->stmt_stdin = malloc(sizeof(StmtStdin));
+        stmt->stmt_stdin->stdin_num_streams = 0;
+        stmt->stmt_stdin->stdin_streams = malloc(sizeof(char *));
+        stmt->stmt_stdin->stdin_streams[0] = NULL;
 
         // statement io redirection: stdout init
-        stmt->stdout_ = malloc(sizeof(StmtStdout));
-        stmt->stdout_->n = 0;
-        stmt->stdout_->streams = malloc(sizeof(char *));
+        stmt->stmt_stdout = malloc(sizeof(StmtStdout));
+        stmt->stmt_stdout->stdout_num_streams = 0;
+        stmt->stmt_stdout->stdout_streams = malloc(sizeof(char *));
+        stmt->stmt_stdout->stdout_streams[0] = NULL;
 
         // statement flags init
-        stmt->flags = 0;
+        stmt->stmt_flags = 0;
 
         return stmt;
 }
 
-void Statement_del(Statement **stmt)
+void statement_del(Statement **stmt)
 {
         // statement command delete
-        for (size_t i = 0; i < (*stmt)->cmd->argc; i++) {
-                free((*stmt)->cmd->argv[i]);
-                (*stmt)->cmd->argv[i] = NULL;
+        for (size_t i = 0; i < (*stmt)->stmt_cmd->cmd_argc; i++) {
+                free((*stmt)->stmt_cmd->cmd_argv[i]);
+                (*stmt)->stmt_cmd->cmd_argv[i] = NULL;
         }
-        free((*stmt)->cmd->argv);
-        (*stmt)->cmd->argc = 0;
-        (*stmt)->cmd->argv = NULL;
-        free((*stmt)->cmd);
-        (*stmt)->cmd = NULL;
+        free((*stmt)->stmt_cmd->cmd_argv);
+        (*stmt)->stmt_cmd->cmd_argc = 0;
+        (*stmt)->stmt_cmd->cmd_argv = NULL;
+        free((*stmt)->stmt_cmd);
+        (*stmt)->stmt_cmd = NULL;
 
         // statement io redirection: stdin delete
-        for (size_t i = 0; i < (*stmt)->stdin_->n; i++) {
-                free((*stmt)->stdin_->streams[i]);
-                (*stmt)->stdin_->streams[i] = NULL;
+        for (size_t i = 0; i < (*stmt)->stmt_stdin->stdin_num_streams; i++) {
+                free((*stmt)->stmt_stdin->stdin_streams[i]);
+                (*stmt)->stmt_stdin->stdin_streams[i] = NULL;
         }
-        free((*stmt)->stdin_->streams);
-        (*stmt)->stdin_->n = 0;
-        (*stmt)->stdin_->streams = NULL;
-        free((*stmt)->stdin_);
-        (*stmt)->stdin_ = NULL;
+        free((*stmt)->stmt_stdin->stdin_streams);
+        (*stmt)->stmt_stdin->stdin_num_streams = 0;
+        (*stmt)->stmt_stdin->stdin_streams = NULL;
+        free((*stmt)->stmt_stdin);
+        (*stmt)->stmt_stdin = NULL;
 
         // statement io redirection: stdout delete
-        for (size_t i = 0; i < (*stmt)->stdout_->n; i++) {
-                free((*stmt)->stdout_->streams[i]);
-                (*stmt)->stdout_->streams[i] = NULL;
+        for (size_t i = 0; i < (*stmt)->stmt_stdout->stdout_num_streams; i++) {
+                free((*stmt)->stmt_stdout->stdout_streams[i]);
+                (*stmt)->stmt_stdout->stdout_streams[i] = NULL;
         }
-        free((*stmt)->stdout_->streams);
-        (*stmt)->stdout_->n = 0;
-        (*stmt)->stdout_->streams = NULL;
-        free((*stmt)->stdout_);
-        (*stmt)->stdout_ = NULL;
+        free((*stmt)->stmt_stdout->stdout_streams);
+        (*stmt)->stmt_stdout->stdout_num_streams = 0;
+        (*stmt)->stmt_stdout->stdout_streams = NULL;
+        free((*stmt)->stmt_stdout);
+        (*stmt)->stmt_stdout = NULL;
 
         // statement flags delete
-        (*stmt)->flags = FLAGS_0;
+        (*stmt)->stmt_flags = FLAGS_NONE;
 
         // statement delete
         free(*stmt);
@@ -117,30 +120,30 @@ void Statement_del(Statement **stmt)
  *
  *
  ******************************************************************************/
-void Statement_print(Statement const * const self)
+void statement_print(const Statement *self)
 {
         printf("STATEMENT(\n");
         printf("\tFLAGS(\n");
-        if (self->flags == FLAGS_BGCTRL) {
+        if (self->stmt_flags == FLAGS_BGCTRL) {
                 printf("\t\tBG_CTRL,\n");
         }
         printf("\t)\n");
 
         printf("\tCMD(\n");
-        for (size_t i = 0; i < self->cmd->argc; i++) {
-                printf("\t\tARG [%zu] = %s,\n", i, self->cmd->argv[i]);
+        for (size_t i = 0; i < self->stmt_cmd->cmd_argc; i++) {
+                printf("\t\tARG [%zu] = %s,\n", i, self->stmt_cmd->cmd_argv[i]);
         }
         printf("\t)\n");
 
         printf("\tSTDIN(\n");
-        for (size_t i = 0; i < self->stdin_->n; i++) {
-                printf("\t\t[%zu] = %s,\n", i, self->stdin_->streams[i]);
+        for (size_t i = 0; i < self->stmt_stdin->stdin_num_streams; i++) {
+                printf("\t\t[%zu] = %s,\n", i, self->stmt_stdin->stdin_streams[i]);
         }
         printf("\t)\n");
 
         printf("\tSTDOUT(\n");
-        for (size_t i = 0; i < self->stdout_->n; i++) {
-                printf("\t\t[%zu] = %s,\n", i, self->stdout_->streams[i]);
+        for (size_t i = 0; i < self->stmt_stdout->stdout_num_streams; i++) {
+                printf("\t\t[%zu] = %s,\n", i, self->stmt_stdout->stdout_streams[i]);
         }
         printf("\t)\n");
         printf(")\n");

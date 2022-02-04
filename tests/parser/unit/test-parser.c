@@ -13,7 +13,7 @@
 #include "parser/parser.h"
 
 // case 1: empty string
-static void Parser_insertPID_test_retModifiedString01(void **state)
+static void parser_insert_pid_test_retModifiedString01(void **state)
 {
         (void) state;
 
@@ -23,7 +23,7 @@ static void Parser_insertPID_test_retModifiedString01(void **state)
         size_t len = 0;
 
         // try inserting pid into string
-        char *res = Parser_insertPID(str, &ptr, &len);
+        char *res = parser_insert_pid(str, &ptr, &len);
 
         // should end up with this:
         char *exp = "123456";
@@ -39,7 +39,7 @@ static void Parser_insertPID_test_retModifiedString01(void **state)
 }
 
 // case 2: single char string, ptr at start
-static void Parser_insertPID_test_retModifiedString02(void **state)
+static void parser_insert_pid_test_retModifiedString02(void **state)
 {
         (void) state;
 
@@ -49,7 +49,7 @@ static void Parser_insertPID_test_retModifiedString02(void **state)
         size_t len = 1;
 
         // try inserting pid into string
-        char *res = Parser_insertPID(str, &ptr, &len);
+        char *res = parser_insert_pid(str, &ptr, &len);
 
         // should end up with this:
         char *exp = "123456";
@@ -65,7 +65,7 @@ static void Parser_insertPID_test_retModifiedString02(void **state)
 }
 
 // case 3: single char string, ptr at end
-static void Parser_insertPID_test_retModifiedString03(void **state)
+static void parser_insert_pid_test_retModifiedString03(void **state)
 {
         (void) state;
 
@@ -75,7 +75,7 @@ static void Parser_insertPID_test_retModifiedString03(void **state)
         size_t len = 1;
 
         // try inserting pid into string
-        char *res = Parser_insertPID(str, &ptr, &len);
+        char *res = parser_insert_pid(str, &ptr, &len);
 
         // should end up with this:
         char *exp = "a123456";
@@ -91,7 +91,7 @@ static void Parser_insertPID_test_retModifiedString03(void **state)
 }
 
 // case 4: multi-char string, ptr at end
-static void Parser_insertPID_test_retModifiedString04(void **state)
+static void parser_insert_pid_test_retModifiedString04(void **state)
 {
         (void) state;
 
@@ -101,7 +101,7 @@ static void Parser_insertPID_test_retModifiedString04(void **state)
         size_t len = 3;
 
         // try inserting pid into string
-        char *res = Parser_insertPID(str, &ptr, &len);
+        char *res = parser_insert_pid(str, &ptr, &len);
 
         // should end up with this:
         char *exp = "abc123456";
@@ -117,7 +117,7 @@ static void Parser_insertPID_test_retModifiedString04(void **state)
 }
 
 // word only contains pid expansion
-static void Parser_subVar_test_subPID01(void **state)
+static void parser_substitute_variable_test_subPID01(void **state)
 {
         (void) state;
 
@@ -129,7 +129,8 @@ static void Parser_subVar_test_subPID01(void **state)
         char *new_ptr = &new_word[0];
 
         // try expanding word with pid
-        char *res = Parser_subVar(new_word, &old_ptr, &new_ptr, &len);
+        char *res = parser_substitute_variable(new_word, &old_ptr, &new_ptr,
+                                               &len);
 
         // should end up with this:
         char *exp = "123456";
@@ -148,7 +149,7 @@ static void Parser_subVar_test_subPID01(void **state)
 }
 
 // word only contains single '$'
-static void Parser_subVar_test_subPID02(void **state)
+static void parser_substitute_variable_test_subPID02(void **state)
 {
         (void) state;
 
@@ -160,7 +161,8 @@ static void Parser_subVar_test_subPID02(void **state)
         char *new_ptr = &new_word[0];
 
         // try expanding word with pid
-        char *res = Parser_subVar(new_word, &old_ptr, &new_ptr, &len);
+        char *res = parser_substitute_variable(new_word, &old_ptr, &new_ptr,
+                                               &len);
 
         // should end up with this:
         char *exp = "$";
@@ -179,7 +181,7 @@ static void Parser_subVar_test_subPID02(void **state)
 }
 
 // word contains multiple-'$' and chars
-static void Parser_subVar_test_subPID03(void **state)
+static void parser_substitute_variable_test_subPID03(void **state)
 {
         (void) state;
 
@@ -195,7 +197,8 @@ static void Parser_subVar_test_subPID03(void **state)
         char *new_ptr = &new_word[4];
 
         // try expanding word with pid
-        char *res = Parser_subVar(new_word, &old_ptr, &new_ptr, &len);
+        char *res = parser_substitute_variable(new_word, &old_ptr, &new_ptr,
+                                               &len);
 
         // should end up with this:
         char *exp = "abcd123456";
@@ -214,7 +217,7 @@ static void Parser_subVar_test_subPID03(void **state)
 }
 
 // case 1: no expansions
-static void Parser_expandWord_test_expandStr01(void **state)
+static void parser_expand_word_test_expandStr01(void **state)
 {
         (void) state;
 
@@ -222,7 +225,7 @@ static void Parser_expandWord_test_expandStr01(void **state)
         char *word = "abcdefg";
 
         // try expanding word
-        char *res = Parser_expandWord(word);
+        char *res = parser_expand_word(word);
 
         // should end up with this:
         char *exp = "abcdefg";
@@ -231,7 +234,7 @@ static void Parser_expandWord_test_expandStr01(void **state)
 }
 
 // case 2: single '$' string
-static void Parser_expandWord_test_expandStr02(void **state)
+static void parser_expand_word_test_expandStr02(void **state)
 {
         (void) state;
 
@@ -239,7 +242,7 @@ static void Parser_expandWord_test_expandStr02(void **state)
         char *word = "$";
 
         // try expanding word
-        char *res = Parser_expandWord(word);
+        char *res = parser_expand_word(word);
 
         // should end up with this:
         char *exp = "$";
@@ -248,7 +251,7 @@ static void Parser_expandWord_test_expandStr02(void **state)
 }
 
 // case 3: single expansion only
-static void Parser_expandWord_test_expandStr03(void **state)
+static void parser_expand_word_test_expandStr03(void **state)
 {
         (void) state;
 
@@ -256,7 +259,7 @@ static void Parser_expandWord_test_expandStr03(void **state)
         char *word = "$$";
 
         // try expanding word
-        char *res = Parser_expandWord(word);
+        char *res = parser_expand_word(word);
 
         // should end up with this:
         char *exp = "123456";
@@ -265,7 +268,7 @@ static void Parser_expandWord_test_expandStr03(void **state)
 }
 
 // case 4: single expansion at string beginning
-static void Parser_expandWord_test_expandStr04(void **state)
+static void parser_expand_word_test_expandStr04(void **state)
 {
         (void) state;
 
@@ -273,7 +276,7 @@ static void Parser_expandWord_test_expandStr04(void **state)
         char *word = "$$abcdefg";
 
         // try expanding word
-        char *res = Parser_expandWord(word);
+        char *res = parser_expand_word(word);
 
         // should end up with this:
         char *exp = "123456abcdefg";
@@ -282,7 +285,7 @@ static void Parser_expandWord_test_expandStr04(void **state)
 }
 
 // case 5: single expansion at string middle
-static void Parser_expandWord_test_expandStr05(void **state)
+static void parser_expand_word_test_expandStr05(void **state)
 {
         (void) state;
 
@@ -290,7 +293,7 @@ static void Parser_expandWord_test_expandStr05(void **state)
         char *word = "abc$$def";
 
         // try expanding word
-        char *res = Parser_expandWord(word);
+        char *res = parser_expand_word(word);
 
         // should end up with this:
         char *exp = "abc123456def";
@@ -299,7 +302,7 @@ static void Parser_expandWord_test_expandStr05(void **state)
 }
 
 // case 6: single expansion at string end
-static void Parser_expandWord_test_expandStr06(void **state)
+static void parser_expand_word_test_expandStr06(void **state)
 {
         (void) state;
 
@@ -307,7 +310,7 @@ static void Parser_expandWord_test_expandStr06(void **state)
         char *word = "abcdefg$$";
 
         // try expanding word
-        char *res = Parser_expandWord(word);
+        char *res = parser_expand_word(word);
 
         // should end up with this:
         char *exp = "abcdefg123456";
@@ -316,7 +319,7 @@ static void Parser_expandWord_test_expandStr06(void **state)
 }
 
 // case 7: multiple solo '$' chars
-static void Parser_expandWord_test_expandStr07(void **state)
+static void parser_expand_word_test_expandStr07(void **state)
 {
         (void) state;
 
@@ -324,7 +327,7 @@ static void Parser_expandWord_test_expandStr07(void **state)
         char *word = "$abc$d$ef$ghij$k$";
 
         // try expanding word
-        char *res = Parser_expandWord(word);
+        char *res = parser_expand_word(word);
 
         // should end up with this:
         char *exp = "$abc$d$ef$ghij$k$";
@@ -333,7 +336,7 @@ static void Parser_expandWord_test_expandStr07(void **state)
 }
 
 // case 8: multiple consecutive expansions 01
-static void Parser_expandWord_test_expandStr08(void **state)
+static void parser_expand_word_test_expandStr08(void **state)
 {
         (void) state;
 
@@ -342,13 +345,13 @@ static void Parser_expandWord_test_expandStr08(void **state)
         char *exp = "123456123456123456123456";
 
         // try expanding word
-        char *res = Parser_expandWord(word);
+        char *res = parser_expand_word(word);
         assert_non_null(res);
         assert_string_equal(exp, res);
 }
 
 // case 9: multiple consecutive expansions 02
-static void Parser_expandWord_test_expandStr09(void **state)
+static void parser_expand_word_test_expandStr09(void **state)
 {
         (void) state;
 
@@ -369,13 +372,13 @@ static void Parser_expandWord_test_expandStr09(void **state)
         exp[1026 * 6] = '\0';
 
         // try expanding word
-        char *res = Parser_expandWord(word);
+        char *res = parser_expand_word(word);
         assert_non_null(res);
         assert_string_equal(exp, res);
 }
 
 // case 10: multiple expansions
-static void Parser_expandWord_test_expandStr10(void **state)
+static void parser_expand_word_test_expandStr10(void **state)
 {
         (void) state;
 
@@ -383,7 +386,7 @@ static void Parser_expandWord_test_expandStr10(void **state)
         char *word = "$$a$$bc$$def$$ghij$$$$$";
 
         // try expanding word
-        char *res = Parser_expandWord(word);
+        char *res = parser_expand_word(word);
 
         // should end up with this:
         char *exp = "123456a123456bc123456def123456ghij123456123456$";
@@ -391,13 +394,13 @@ static void Parser_expandWord_test_expandStr10(void **state)
         assert_string_equal(exp, res);
 }
 
-static void Parser_parse_test_emptyString01(void **state)
+static void parser_parse_test_emptyString01(void **state)
 {
         (void) state;
 
         // setup parser
         Parser parser;
-        Parser_ctor(&parser);
+        parser_ctor(&parser);
 
         // setup line
         char *line = "\n";
@@ -409,16 +412,16 @@ static void Parser_parse_test_emptyString01(void **state)
         assert_int_equal(0, n_stmts);
 
         // statements should not be null, even though empty
-        assert_non_null(parser.get_statements(&parser));
+        assert_non_null(parser.get_statement(&parser));
 }
 
-static void Parser_parse_test_emptyString02(void **state)
+static void parser_parse_test_emptyString02(void **state)
 {
         (void) state;
 
         // setup parser
         Parser parser;
-        Parser_ctor(&parser);
+        parser_ctor(&parser);
 
         // setup line
         char *line = "     \t\t\t   \t   \n       \n            \t\t";
@@ -430,16 +433,16 @@ static void Parser_parse_test_emptyString02(void **state)
         assert_int_equal(0, n_stmts);
 
         // statements should not be null, even though empty
-        assert_non_null(parser.get_statements(&parser));
+        assert_non_null(parser.get_statement(&parser));
 }
 
-static void Parser_parse_test_emptyString03(void **state)
+static void parser_parse_test_emptyString03(void **state)
 {
         (void) state;
 
         // setup parser
         Parser parser;
-        Parser_ctor(&parser);
+        parser_ctor(&parser);
 
         // setup line
         char *line = "#\n";
@@ -451,16 +454,16 @@ static void Parser_parse_test_emptyString03(void **state)
         assert_int_equal(0, n_stmts);
 
         // statements should not be null, even though empty
-        assert_non_null(parser.get_statements(&parser));
+        assert_non_null(parser.get_statement(&parser));
 }
 
-static void Parser_parse_test_emptyString04(void **state)
+static void parser_parse_test_emptyString04(void **state)
 {
         (void) state;
 
         // setup parser
         Parser parser;
-        Parser_ctor(&parser);
+        parser_ctor(&parser);
 
         // setup line
         char *line = "# cmd arg1 arg2 < f1 > f2 &\n";
@@ -472,16 +475,16 @@ static void Parser_parse_test_emptyString04(void **state)
         assert_int_equal(0, n_stmts);
 
         // statements should not be null, even though empty
-        assert_non_null(parser.get_statements(&parser));
+        assert_non_null(parser.get_statement(&parser));
 }
 
-static void Parser_parse_test_singleStatementCmd(void **state)
+static void parser_parse_test_singleStatementCmd(void **state)
 {
         (void) state;
 
         // setup parser
         Parser parser;
-        Parser_ctor(&parser);
+        parser_ctor(&parser);
 
         // setup line
         char *line = "cmd\n";
@@ -493,41 +496,41 @@ static void Parser_parse_test_singleStatementCmd(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statements(&parser);
+        Statement **stmts = parser.get_statement(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
-        StmtCmd *cmd = stmts[0]->cmd;
-        StmtStdin *stdin_ = stmts[0]->stdin_;
-        StmtStdout *stdout_ = stmts[0]->stdout_;
-        StmtFlags flags = stmts[0]->flags;
+        StmtCmd *cmd = stmts[0]->stmt_cmd;
+        StmtStdin *stdin_ = stmts[0]->stmt_stdin;
+        StmtStdout *stdout_ = stmts[0]->stmt_stdout;
+        StmtFlags flags = stmts[0]->stmt_flags;
 
         // only single command should be parsed
-        assert_int_equal(1, cmd->argc);
+        assert_int_equal(1, cmd->cmd_argc);
 
         // cmd should match input
-        assert_string_equal("cmd", cmd->argv[0]);
+        assert_string_equal("cmd", cmd->cmd_argv[0]);
 
         // trailing arg should be null
-        assert_null(cmd->argv[cmd->argc]);
+        assert_null(cmd->cmd_argv[cmd->cmd_argc]);
 
         // no stdin streams should be parsed
-        assert_int_equal(0, stdin_->n);
+        assert_int_equal(0, stdin_->stdin_num_streams);
 
         // no stdout streams should be parsed
-        assert_int_equal(0, stdout_->n);
+        assert_int_equal(0, stdout_->stdout_num_streams);
 
         // flags should be set to zero
-        assert_int_equal(FLAGS_0, flags);
+        assert_int_equal(FLAGS_NONE, flags);
 }
 
-static void Parser_parse_test_singleStatementBuiltinCD(void **state)
+static void parser_parse_test_singleStatementBuiltinCD(void **state)
 {
         (void) state;
 
         // setup parser
         Parser parser;
-        Parser_ctor(&parser);
+        parser_ctor(&parser);
 
         // setup line
         char *line = "cd\n";
@@ -539,41 +542,41 @@ static void Parser_parse_test_singleStatementBuiltinCD(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statements(&parser);
+        Statement **stmts = parser.get_statement(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
-        StmtCmd *cmd = stmts[0]->cmd;
-        StmtStdin *stdin_ = stmts[0]->stdin_;
-        StmtStdout *stdout_ = stmts[0]->stdout_;
-        StmtFlags flags = stmts[0]->flags;
+        StmtCmd *cmd = stmts[0]->stmt_cmd;
+        StmtStdin *stdin_ = stmts[0]->stmt_stdin;
+        StmtStdout *stdout_ = stmts[0]->stmt_stdout;
+        StmtFlags flags = stmts[0]->stmt_flags;
 
         // only single command should be parsed
-        assert_int_equal(1, cmd->argc);
+        assert_int_equal(1, cmd->cmd_argc);
 
         // cmd should match input
-        assert_string_equal("cd", cmd->argv[0]);
+        assert_string_equal("cd", cmd->cmd_argv[0]);
 
         // trailing arg should be null
-        assert_null(cmd->argv[cmd->argc]);
+        assert_null(cmd->cmd_argv[cmd->cmd_argc]);
 
         // no stdin streams should be parsed
-        assert_int_equal(0, stdin_->n);
+        assert_int_equal(0, stdin_->stdin_num_streams);
 
         // no stdout streams should be parsed
-        assert_int_equal(0, stdout_->n);
+        assert_int_equal(0, stdout_->stdout_num_streams);
 
         // flags should be set to builtins
         assert_int_equal(FLAGS_BUILTIN, flags);
 }
 
-static void Parser_parse_test_singleStatementBuiltinExit(void **state)
+static void parser_parse_test_singleStatementBuiltinExit(void **state)
 {
         (void) state;
 
         // setup parser
         Parser parser;
-        Parser_ctor(&parser);
+        parser_ctor(&parser);
 
         // setup line
         char *line = "exit\n";
@@ -585,41 +588,41 @@ static void Parser_parse_test_singleStatementBuiltinExit(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statements(&parser);
+        Statement **stmts = parser.get_statement(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
-        StmtCmd *cmd = stmts[0]->cmd;
-        StmtStdin *stdin_ = stmts[0]->stdin_;
-        StmtStdout *stdout_ = stmts[0]->stdout_;
-        StmtFlags flags = stmts[0]->flags;
+        StmtCmd *cmd = stmts[0]->stmt_cmd;
+        StmtStdin *stdin_ = stmts[0]->stmt_stdin;
+        StmtStdout *stdout_ = stmts[0]->stmt_stdout;
+        StmtFlags flags = stmts[0]->stmt_flags;
 
         // only single command should be parsed
-        assert_int_equal(1, cmd->argc);
+        assert_int_equal(1, cmd->cmd_argc);
 
         // cmd should match input
-        assert_string_equal("exit", cmd->argv[0]);
+        assert_string_equal("exit", cmd->cmd_argv[0]);
 
         // trailing arg should be null
-        assert_null(cmd->argv[cmd->argc]);
+        assert_null(cmd->cmd_argv[cmd->cmd_argc]);
 
         // no stdin streams should be parsed
-        assert_int_equal(0, stdin_->n);
+        assert_int_equal(0, stdin_->stdin_num_streams);
 
         // no stdout streams should be parsed
-        assert_int_equal(0, stdout_->n);
+        assert_int_equal(0, stdout_->stdout_num_streams);
 
         // flags should be set to builtins
         assert_int_equal(FLAGS_BUILTIN, flags);
 }
 
-static void Parser_parse_test_singleStatementBuiltinStatus(void **state)
+static void parser_parse_test_singleStatementBuiltinStatus(void **state)
 {
         (void) state;
 
         // setup parser
         Parser parser;
-        Parser_ctor(&parser);
+        parser_ctor(&parser);
 
         // setup line
         char *line = "status\n";
@@ -631,41 +634,41 @@ static void Parser_parse_test_singleStatementBuiltinStatus(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statements(&parser);
+        Statement **stmts = parser.get_statement(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
-        StmtCmd *cmd = stmts[0]->cmd;
-        StmtStdin *stdin_ = stmts[0]->stdin_;
-        StmtStdout *stdout_ = stmts[0]->stdout_;
-        StmtFlags flags = stmts[0]->flags;
+        StmtCmd *cmd = stmts[0]->stmt_cmd;
+        StmtStdin *stdin_ = stmts[0]->stmt_stdin;
+        StmtStdout *stdout_ = stmts[0]->stmt_stdout;
+        StmtFlags flags = stmts[0]->stmt_flags;
 
         // only single command should be parsed
-        assert_int_equal(1, cmd->argc);
+        assert_int_equal(1, cmd->cmd_argc);
 
         // cmd should match input
-        assert_string_equal("status", cmd->argv[0]);
+        assert_string_equal("status", cmd->cmd_argv[0]);
 
         // trailing arg should be null
-        assert_null(cmd->argv[cmd->argc]);
+        assert_null(cmd->cmd_argv[cmd->cmd_argc]);
 
         // no stdin streams should be parsed
-        assert_int_equal(0, stdin_->n);
+        assert_int_equal(0, stdin_->stdin_num_streams);
 
         // no stdout streams should be parsed
-        assert_int_equal(0, stdout_->n);
+        assert_int_equal(0, stdout_->stdout_num_streams);
 
         // flags should be set to builtins
         assert_int_equal(FLAGS_BUILTIN, flags);
 }
 
-static void Parser_parse_test_singleStatementBuiltinCDPath(void **state)
+static void parser_parse_test_singleStatementBuiltinCDPath(void **state)
 {
         (void) state;
 
         // setup parser
         Parser parser;
-        Parser_ctor(&parser);
+        parser_ctor(&parser);
 
         // setup line
         char *line = "cd ./parent/child/ \n";
@@ -677,42 +680,42 @@ static void Parser_parse_test_singleStatementBuiltinCDPath(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statements(&parser);
+        Statement **stmts = parser.get_statement(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
-        StmtCmd *cmd = stmts[0]->cmd;
-        StmtStdin *stdin_ = stmts[0]->stdin_;
-        StmtStdout *stdout_ = stmts[0]->stdout_;
-        StmtFlags flags = stmts[0]->flags;
+        StmtCmd *cmd = stmts[0]->stmt_cmd;
+        StmtStdin *stdin_ = stmts[0]->stmt_stdin;
+        StmtStdout *stdout_ = stmts[0]->stmt_stdout;
+        StmtFlags flags = stmts[0]->stmt_flags;
 
         // only two args should be parsed
-        assert_int_equal(2, cmd->argc);
+        assert_int_equal(2, cmd->cmd_argc);
 
         // args should match input
-        assert_string_equal("cd", cmd->argv[0]);
-        assert_string_equal("./parent/child/", cmd->argv[1]);
+        assert_string_equal("cd", cmd->cmd_argv[0]);
+        assert_string_equal("./parent/child/", cmd->cmd_argv[1]);
 
         // trailing arg should be null
-        assert_null(cmd->argv[cmd->argc]);
+        assert_null(cmd->cmd_argv[cmd->cmd_argc]);
 
         // no stdin streams should be parsed
-        assert_int_equal(0, stdin_->n);
+        assert_int_equal(0, stdin_->stdin_num_streams);
 
         // no stdout streams should be parsed
-        assert_int_equal(0, stdout_->n);
+        assert_int_equal(0, stdout_->stdout_num_streams);
 
         // flags should be set to builtins
         assert_int_equal(FLAGS_BUILTIN, flags);
 }
 
-static void Parser_parse_test_singleStatementBuiltinCDPathBG(void **state)
+static void parser_parse_test_singleStatementBuiltinCDPathBG(void **state)
 {
         (void) state;
 
         // setup parser
         Parser parser;
-        Parser_ctor(&parser);
+        parser_ctor(&parser);
 
         // setup line
         char *line = "cd ./parent/child/ &\n";
@@ -724,43 +727,43 @@ static void Parser_parse_test_singleStatementBuiltinCDPathBG(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statements(&parser);
+        Statement **stmts = parser.get_statement(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
-        StmtCmd *cmd = stmts[0]->cmd;
-        StmtStdin *stdin_ = stmts[0]->stdin_;
-        StmtStdout *stdout_ = stmts[0]->stdout_;
-        StmtFlags flags = stmts[0]->flags;
+        StmtCmd *cmd = stmts[0]->stmt_cmd;
+        StmtStdin *stdin_ = stmts[0]->stmt_stdin;
+        StmtStdout *stdout_ = stmts[0]->stmt_stdout;
+        StmtFlags flags = stmts[0]->stmt_flags;
 
         // only two args should be parsed
-        assert_int_equal(2, cmd->argc);
+        assert_int_equal(2, cmd->cmd_argc);
 
         // args should match input
-        assert_string_equal("cd", cmd->argv[0]);
-        assert_string_equal("./parent/child/", cmd->argv[1]);
+        assert_string_equal("cd", cmd->cmd_argv[0]);
+        assert_string_equal("./parent/child/", cmd->cmd_argv[1]);
 
         // trailing arg should be null
-        assert_null(cmd->argv[cmd->argc]);
+        assert_null(cmd->cmd_argv[cmd->cmd_argc]);
 
         // no stdin streams should be parsed
-        assert_int_equal(0, stdin_->n);
+        assert_int_equal(0, stdin_->stdin_num_streams);
 
         // no stdout streams should be parsed
-        assert_int_equal(0, stdout_->n);
+        assert_int_equal(0, stdout_->stdout_num_streams);
 
         // flags should be set to builtins
         int exp_flags = FLAGS_BGCTRL | FLAGS_BUILTIN;
         assert_int_equal(exp_flags, flags);
 }
 
-static void Parser_parse_test_singleStatementCmdArg(void **state)
+static void parser_parse_test_singleStatementCmdArg(void **state)
 {
         (void) state;
 
         // setup parser
         Parser parser;
-        Parser_ctor(&parser);
+        parser_ctor(&parser);
 
         // setup line
         char *line = "echo hello \n";
@@ -772,42 +775,42 @@ static void Parser_parse_test_singleStatementCmdArg(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statements(&parser);
+        Statement **stmts = parser.get_statement(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
-        StmtCmd *cmd = stmts[0]->cmd;
-        StmtStdin *stdin_ = stmts[0]->stdin_;
-        StmtStdout *stdout_ = stmts[0]->stdout_;
-        StmtFlags flags = stmts[0]->flags;
+        StmtCmd *cmd = stmts[0]->stmt_cmd;
+        StmtStdin *stdin_ = stmts[0]->stmt_stdin;
+        StmtStdout *stdout_ = stmts[0]->stmt_stdout;
+        StmtFlags flags = stmts[0]->stmt_flags;
 
         // only two args should be parsed
-        assert_int_equal(2, cmd->argc);
+        assert_int_equal(2, cmd->cmd_argc);
 
         // args should match input
-        assert_string_equal("echo", cmd->argv[0]);
-        assert_string_equal("hello", cmd->argv[1]);
+        assert_string_equal("echo", cmd->cmd_argv[0]);
+        assert_string_equal("hello", cmd->cmd_argv[1]);
 
         // trailing arg should be null
-        assert_null(cmd->argv[cmd->argc]);
+        assert_null(cmd->cmd_argv[cmd->cmd_argc]);
 
         // no stdin streams should be parsed
-        assert_int_equal(0, stdin_->n);
+        assert_int_equal(0, stdin_->stdin_num_streams);
 
         // no stdout streams should be parsed
-        assert_int_equal(0, stdout_->n);
+        assert_int_equal(0, stdout_->stdout_num_streams);
 
         // flags should not be set
-        assert_int_equal(FLAGS_0, flags);
+        assert_int_equal(FLAGS_NONE, flags);
 }
 
-static void Parser_parse_test_singleStatementCmd2Args(void **state)
+static void parser_parse_test_singleStatementCmd2Args(void **state)
 {
         (void) state;
 
         // setup parser
         Parser parser;
-        Parser_ctor(&parser);
+        parser_ctor(&parser);
 
         // setup line
         char *line = "echo hello world\n";
@@ -819,43 +822,43 @@ static void Parser_parse_test_singleStatementCmd2Args(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statements(&parser);
+        Statement **stmts = parser.get_statement(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
-        StmtCmd *cmd = stmts[0]->cmd;
-        StmtStdin *stdin_ = stmts[0]->stdin_;
-        StmtStdout *stdout_ = stmts[0]->stdout_;
-        StmtFlags flags = stmts[0]->flags;
+        StmtCmd *cmd = stmts[0]->stmt_cmd;
+        StmtStdin *stdin_ = stmts[0]->stmt_stdin;
+        StmtStdout *stdout_ = stmts[0]->stmt_stdout;
+        StmtFlags flags = stmts[0]->stmt_flags;
 
         // only three args should be parsed
-        assert_int_equal(3, cmd->argc);
+        assert_int_equal(3, cmd->cmd_argc);
 
         // args should match input
-        assert_string_equal("echo", cmd->argv[0]);
-        assert_string_equal("hello", cmd->argv[1]);
-        assert_string_equal("world", cmd->argv[2]);
+        assert_string_equal("echo", cmd->cmd_argv[0]);
+        assert_string_equal("hello", cmd->cmd_argv[1]);
+        assert_string_equal("world", cmd->cmd_argv[2]);
 
         // trailing arg should be null
-        assert_null(cmd->argv[cmd->argc]);
+        assert_null(cmd->cmd_argv[cmd->cmd_argc]);
 
         // no stdin streams should be parsed
-        assert_int_equal(0, stdin_->n);
+        assert_int_equal(0, stdin_->stdin_num_streams);
 
         // no stdout streams should be parsed
-        assert_int_equal(0, stdout_->n);
+        assert_int_equal(0, stdout_->stdout_num_streams);
 
         // flags should not be set
-        assert_int_equal(FLAGS_0, flags);
+        assert_int_equal(FLAGS_NONE, flags);
 }
 
-static void Parser_parse_test_singleStatementCmdStdin(void **state)
+static void parser_parse_test_singleStatementCmdStdin(void **state)
 {
         (void) state;
 
         // setup parser
         Parser parser;
-        Parser_ctor(&parser);
+        parser_ctor(&parser);
 
         // setup line
         char *line = "echo < file1.txt \n";
@@ -867,44 +870,44 @@ static void Parser_parse_test_singleStatementCmdStdin(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statements(&parser);
+        Statement **stmts = parser.get_statement(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
-        StmtCmd *cmd = stmts[0]->cmd;
-        StmtStdin *stdin_ = stmts[0]->stdin_;
-        StmtStdout *stdout_ = stmts[0]->stdout_;
-        StmtFlags flags = stmts[0]->flags;
+        StmtCmd *cmd = stmts[0]->stmt_cmd;
+        StmtStdin *stdin_ = stmts[0]->stmt_stdin;
+        StmtStdout *stdout_ = stmts[0]->stmt_stdout;
+        StmtFlags flags = stmts[0]->stmt_flags;
 
         // only 1 arg should be parsed
-        assert_int_equal(1, cmd->argc);
+        assert_int_equal(1, cmd->cmd_argc);
 
         // args should match input
-        assert_string_equal("echo", cmd->argv[0]);
+        assert_string_equal("echo", cmd->cmd_argv[0]);
 
         // trailing arg should be null
-        assert_null(cmd->argv[cmd->argc]);
+        assert_null(cmd->cmd_argv[cmd->cmd_argc]);
 
         // only one stdin streams should be parsed
-        assert_int_equal(1, stdin_->n);
+        assert_int_equal(1, stdin_->stdin_num_streams);
 
         // stream should match
-        assert_string_equal("file1.txt", stdin_->streams[0]);
+        assert_string_equal("file1.txt", stdin_->stdin_streams[0]);
 
         // no stdout streams should be parsed
-        assert_int_equal(0, stdout_->n);
+        assert_int_equal(0, stdout_->stdout_num_streams);
 
         // flags should not be set
-        assert_int_equal(FLAGS_0, flags);
+        assert_int_equal(FLAGS_NONE, flags);
 }
 
-static void Parser_parse_test_singleStatementCmdStdout(void **state)
+static void parser_parse_test_singleStatementCmdStdout(void **state)
 {
         (void) state;
 
         // setup parser
         Parser parser;
-        Parser_ctor(&parser);
+        parser_ctor(&parser);
 
         // setup line
         char *line = "echo > file1.txt \n";
@@ -916,44 +919,44 @@ static void Parser_parse_test_singleStatementCmdStdout(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statements(&parser);
+        Statement **stmts = parser.get_statement(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
-        StmtCmd *cmd = stmts[0]->cmd;
-        StmtStdin *stdin_ = stmts[0]->stdin_;
-        StmtStdout *stdout_ = stmts[0]->stdout_;
-        StmtFlags flags = stmts[0]->flags;
+        StmtCmd *cmd = stmts[0]->stmt_cmd;
+        StmtStdin *stdin_ = stmts[0]->stmt_stdin;
+        StmtStdout *stdout_ = stmts[0]->stmt_stdout;
+        StmtFlags flags = stmts[0]->stmt_flags;
 
         // only 1 arg should be parsed
-        assert_int_equal(1, cmd->argc);
+        assert_int_equal(1, cmd->cmd_argc);
 
         // args should match input
-        assert_string_equal("echo", cmd->argv[0]);
+        assert_string_equal("echo", cmd->cmd_argv[0]);
 
         // trailing arg should be null
-        assert_null(cmd->argv[cmd->argc]);
+        assert_null(cmd->cmd_argv[cmd->cmd_argc]);
 
         // no stdin streams should be parsed
-        assert_int_equal(0, stdin_->n);
+        assert_int_equal(0, stdin_->stdin_num_streams);
 
         // only one stdout streams should be parsed
-        assert_int_equal(1, stdout_->n);
+        assert_int_equal(1, stdout_->stdout_num_streams);
 
         // stream should match
-        assert_string_equal("file1.txt", stdout_->streams[0]);
+        assert_string_equal("file1.txt", stdout_->stdout_streams[0]);
 
         // flags should not be set
-        assert_int_equal(FLAGS_0, flags);
+        assert_int_equal(FLAGS_NONE, flags);
 }
 
-static void Parser_parse_test_singleStatementCmdBG(void **state)
+static void parser_parse_test_singleStatementCmdBG(void **state)
 {
         (void) state;
 
         // setup parser
         Parser parser;
-        Parser_ctor(&parser);
+        parser_ctor(&parser);
 
         // setup line
         char *line = "echo & \n";
@@ -965,41 +968,41 @@ static void Parser_parse_test_singleStatementCmdBG(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statements(&parser);
+        Statement **stmts = parser.get_statement(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
-        StmtCmd *cmd = stmts[0]->cmd;
-        StmtStdin *stdin_ = stmts[0]->stdin_;
-        StmtStdout *stdout_ = stmts[0]->stdout_;
-        StmtFlags flags = stmts[0]->flags;
+        StmtCmd *cmd = stmts[0]->stmt_cmd;
+        StmtStdin *stdin_ = stmts[0]->stmt_stdin;
+        StmtStdout *stdout_ = stmts[0]->stmt_stdout;
+        StmtFlags flags = stmts[0]->stmt_flags;
 
         // only 1 arg should be parsed
-        assert_int_equal(1, cmd->argc);
+        assert_int_equal(1, cmd->cmd_argc);
 
         // args should match input
-        assert_string_equal("echo", cmd->argv[0]);
+        assert_string_equal("echo", cmd->cmd_argv[0]);
 
         // trailing arg should be null
-        assert_null(cmd->argv[cmd->argc]);
+        assert_null(cmd->cmd_argv[cmd->cmd_argc]);
 
         // no stdin streams should be parsed
-        assert_int_equal(0, stdin_->n);
+        assert_int_equal(0, stdin_->stdin_num_streams);
 
         // no stdout streams should be parsed
-        assert_int_equal(0, stdout_->n);
+        assert_int_equal(0, stdout_->stdout_num_streams);
 
         // flags should be set to bg
         assert_int_equal(FLAGS_BGCTRL, flags);
 }
 
-static void Parser_parse_test_singleStatementAllTypes01(void **state)
+static void parser_parse_test_singleStatementAllTypes01(void **state)
 {
         (void) state;
 
         // setup parser
         Parser parser;
-        Parser_ctor(&parser);
+        parser_ctor(&parser);
 
         // setup line
         char *line = "cd ~/Documents . > f1.txt < f2.txt & #\n";
@@ -1011,49 +1014,49 @@ static void Parser_parse_test_singleStatementAllTypes01(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statements(&parser);
+        Statement **stmts = parser.get_statement(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
-        StmtCmd *cmd = stmts[0]->cmd;
-        StmtStdin *stdin_ = stmts[0]->stdin_;
-        StmtStdout *stdout_ = stmts[0]->stdout_;
-        StmtFlags flags = stmts[0]->flags;
+        StmtCmd *cmd = stmts[0]->stmt_cmd;
+        StmtStdin *stdin_ = stmts[0]->stmt_stdin;
+        StmtStdout *stdout_ = stmts[0]->stmt_stdout;
+        StmtFlags flags = stmts[0]->stmt_flags;
 
         // only 3 arg should be parsed
-        assert_int_equal(3, cmd->argc);
+        assert_int_equal(3, cmd->cmd_argc);
 
         // args should match input
-        assert_string_equal("cd", cmd->argv[0]);
-        assert_string_equal("~/Documents", cmd->argv[1]);
-        assert_string_equal(".", cmd->argv[2]);
+        assert_string_equal("cd", cmd->cmd_argv[0]);
+        assert_string_equal("~/Documents", cmd->cmd_argv[1]);
+        assert_string_equal(".", cmd->cmd_argv[2]);
 
         // trailing arg should be null
-        assert_null(cmd->argv[cmd->argc]);
+        assert_null(cmd->cmd_argv[cmd->cmd_argc]);
 
         // one stdin stream should open
-        assert_int_equal(1, stdin_->n);
+        assert_int_equal(1, stdin_->stdin_num_streams);
 
         // stream name should match
-        assert_string_equal("f2.txt", stdin_->streams[0]);
+        assert_string_equal("f2.txt", stdin_->stdin_streams[0]);
 
         // one stdout streams should open
-        assert_int_equal(1, stdout_->n);
+        assert_int_equal(1, stdout_->stdout_num_streams);
 
         // stream name should match
-        assert_string_equal("f1.txt", stdout_->streams[0]);
+        assert_string_equal("f1.txt", stdout_->stdout_streams[0]);
 
         // flags should be set to bg and builtin
         assert_int_equal(FLAGS_BGCTRL | FLAGS_BUILTIN, flags);
 }
 
-static void Parser_parse_test_singleStatementAllTypes02(void **state)
+static void parser_parse_test_singleStatementAllTypes02(void **state)
 {
         (void) state;
 
         // setup parser
         Parser parser;
-        Parser_ctor(&parser);
+        parser_ctor(&parser);
 
         // setup line
         char *line = "ls ~/Documents . > f1.txt < f2.txt &\n";
@@ -1065,37 +1068,37 @@ static void Parser_parse_test_singleStatementAllTypes02(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statements(&parser);
+        Statement **stmts = parser.get_statement(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
-        StmtCmd *cmd = stmts[0]->cmd;
-        StmtStdin *stdin_ = stmts[0]->stdin_;
-        StmtStdout *stdout_ = stmts[0]->stdout_;
-        StmtFlags flags = stmts[0]->flags;
+        StmtCmd *cmd = stmts[0]->stmt_cmd;
+        StmtStdin *stdin_ = stmts[0]->stmt_stdin;
+        StmtStdout *stdout_ = stmts[0]->stmt_stdout;
+        StmtFlags flags = stmts[0]->stmt_flags;
 
         // only 3 arg should be parsed
-        assert_int_equal(3, cmd->argc);
+        assert_int_equal(3, cmd->cmd_argc);
 
         // args should match input
-        assert_string_equal("ls", cmd->argv[0]);
-        assert_string_equal("~/Documents", cmd->argv[1]);
-        assert_string_equal(".", cmd->argv[2]);
+        assert_string_equal("ls", cmd->cmd_argv[0]);
+        assert_string_equal("~/Documents", cmd->cmd_argv[1]);
+        assert_string_equal(".", cmd->cmd_argv[2]);
 
         // trailing arg should be null
-        assert_null(cmd->argv[cmd->argc]);
+        assert_null(cmd->cmd_argv[cmd->cmd_argc]);
 
         // one stdin stream should open
-        assert_int_equal(1, stdin_->n);
+        assert_int_equal(1, stdin_->stdin_num_streams);
 
         // stream name should match
-        assert_string_equal("f2.txt", stdin_->streams[0]);
+        assert_string_equal("f2.txt", stdin_->stdin_streams[0]);
 
         // one stdout streams should open
-        assert_int_equal(1, stdout_->n);
+        assert_int_equal(1, stdout_->stdout_num_streams);
 
         // stream name should match
-        assert_string_equal("f1.txt", stdout_->streams[0]);
+        assert_string_equal("f1.txt", stdout_->stdout_streams[0]);
 
         // flags should be set to bg
         assert_int_equal(FLAGS_BGCTRL, flags);
@@ -1105,73 +1108,73 @@ int main(void)
 {
         const struct CMUnitTest tests[] = {
                 cmocka_unit_test_setup_teardown(
-                        Parser_insertPID_test_retModifiedString01, NULL, NULL),
+                        parser_insert_pid_test_retModifiedString01, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_insertPID_test_retModifiedString02, NULL, NULL),
+                        parser_insert_pid_test_retModifiedString02, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_insertPID_test_retModifiedString03, NULL, NULL),
+                        parser_insert_pid_test_retModifiedString03, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_insertPID_test_retModifiedString04, NULL, NULL),
+                        parser_insert_pid_test_retModifiedString04, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_subVar_test_subPID01, NULL, NULL),
+                        parser_substitute_variable_test_subPID01, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_subVar_test_subPID02, NULL, NULL),
+                        parser_substitute_variable_test_subPID02, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_subVar_test_subPID03, NULL, NULL),
+                        parser_substitute_variable_test_subPID03, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_expandWord_test_expandStr01, NULL, NULL),
+                        parser_expand_word_test_expandStr01, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_expandWord_test_expandStr02, NULL, NULL),
+                        parser_expand_word_test_expandStr02, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_expandWord_test_expandStr03, NULL, NULL),
+                        parser_expand_word_test_expandStr03, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_expandWord_test_expandStr04, NULL, NULL),
+                        parser_expand_word_test_expandStr04, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_expandWord_test_expandStr05, NULL, NULL),
+                        parser_expand_word_test_expandStr05, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_expandWord_test_expandStr06, NULL, NULL),
+                        parser_expand_word_test_expandStr06, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_expandWord_test_expandStr07, NULL, NULL),
+                        parser_expand_word_test_expandStr07, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_expandWord_test_expandStr08, NULL, NULL),
+                        parser_expand_word_test_expandStr08, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_expandWord_test_expandStr09, NULL, NULL),
+                        parser_expand_word_test_expandStr09, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_expandWord_test_expandStr10, NULL, NULL),
+                        parser_expand_word_test_expandStr10, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_parse_test_emptyString01, NULL, NULL),
+                        parser_parse_test_emptyString01, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_parse_test_emptyString02, NULL, NULL),
+                        parser_parse_test_emptyString02, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_parse_test_emptyString03, NULL, NULL),
+                        parser_parse_test_emptyString03, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_parse_test_emptyString04, NULL, NULL),
+                        parser_parse_test_emptyString04, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_parse_test_singleStatementCmd, NULL, NULL),
+                        parser_parse_test_singleStatementCmd, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_parse_test_singleStatementBuiltinCD, NULL, NULL),
+                        parser_parse_test_singleStatementBuiltinCD, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_parse_test_singleStatementBuiltinExit, NULL, NULL),
+                        parser_parse_test_singleStatementBuiltinExit, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_parse_test_singleStatementBuiltinStatus, NULL, NULL),
+                        parser_parse_test_singleStatementBuiltinStatus, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_parse_test_singleStatementBuiltinCDPath, NULL, NULL),
+                        parser_parse_test_singleStatementBuiltinCDPath, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_parse_test_singleStatementBuiltinCDPathBG, NULL, NULL),
+                        parser_parse_test_singleStatementBuiltinCDPathBG, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_parse_test_singleStatementCmdArg, NULL, NULL),
+                        parser_parse_test_singleStatementCmdArg, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_parse_test_singleStatementCmd2Args, NULL, NULL),
+                        parser_parse_test_singleStatementCmd2Args, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_parse_test_singleStatementCmdStdin, NULL, NULL),
+                        parser_parse_test_singleStatementCmdStdin, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_parse_test_singleStatementCmdStdout, NULL, NULL),
+                        parser_parse_test_singleStatementCmdStdout, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_parse_test_singleStatementCmdBG, NULL, NULL),
+                        parser_parse_test_singleStatementCmdBG, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_parse_test_singleStatementAllTypes01, NULL, NULL),
+                        parser_parse_test_singleStatementAllTypes01, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        Parser_parse_test_singleStatementAllTypes02, NULL, NULL),
+                        parser_parse_test_singleStatementAllTypes02, NULL, NULL),
         };
 
         return cmocka_run_group_tests(tests, NULL, NULL);

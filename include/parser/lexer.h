@@ -41,13 +41,13 @@
  * @brief Given an text stream @p buf, scans stream and generates @c Token
  * objects to store in @p tokens.
  * @param buf text stream to scan
- * @param n_tokens size of @p tokens array
- * @param tokens array of pointers to @c Token objects to store token data
+ * @param max_tok size of @p tokens array
+ * @param tok array of pointers to @c Token objects to store token data
  * @return number of tokens parsed from stream
  * @note Caller should verify that the number of tokens parsed is less than
  * @p n_tokens. If this is not the case, then input stream was not fully
  * tokenized.
  */
-size_t generate_tokens(char *buf, size_t n_tokens, Token *tokens[n_tokens]);
+size_t lexer_generate_tokens(char *buf, size_t max_tok, Token *tok[max_tok]);
 
 #endif //SMALLSH_LEXER_H

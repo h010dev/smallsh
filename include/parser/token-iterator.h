@@ -19,7 +19,7 @@ struct TokenIteratorPrivate;
  */
 typedef struct {
         struct TokenIteratorVtbl const *vptr; /**< virtual table */
-        struct TokenIteratorPrivate *_private; /**< private data */
+        struct TokenIteratorPrivate *private; /**< private data */
 } TokenIterator;
 
 /**
@@ -96,13 +96,13 @@ struct TokenIteratorVtbl {
  * Behavior is undefined if this is not the case.
  * @param self @c TokenIterator object to initialize
  * @param len length of the token array
- * @param tokens the token array to iterate over
+ * @param tok the token array to iterate over
  * @note No copy is made of @p tokens, so the caller must not free or modify
  * the parameter until they are finished using the iterator. Likewise, the
  * caller cannot guarantee that the tokens array is left unmodified at the end
  * of the iterators lifespan.
  */
-void TokenIterator_ctor(TokenIterator *self, size_t len, Token *tokens[len]);
+void token_iterator_ctor(TokenIterator *self, size_t len, Token *tok[len]);
 
 /**
  * @brief Destroys a @c TokenIterator object, freeing its members and
@@ -113,6 +113,6 @@ void TokenIterator_ctor(TokenIterator *self, size_t len, Token *tokens[len]);
  * @param self The caller is responsible for freeing @p self afterwards if it
  * was originally allocated on the heap.
  */
-void TokenIterator_dtor(TokenIterator *self);
+void token_iterator_dtor(TokenIterator *self);
 
 #endif //SMALLSH_TOKEN_ITERATOR_H

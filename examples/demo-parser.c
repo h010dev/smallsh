@@ -41,11 +41,11 @@ int main(void)
                 }
 
                 Parser parser;
-                Parser_ctor(&parser);
+                parser_ctor(&parser);
 
                 parser.parse(&parser, line);
 
-                Parser_dtor(&parser);
+                parser_dtor(&parser);
 
                 free(line);
         }

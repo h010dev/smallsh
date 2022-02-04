@@ -49,8 +49,8 @@
  * @brief Hides @c Token members from sub-classes and client code.
  */
 struct TokenPrivate {
-        TokenType type; /**< the token's type */
-        char *value; /**< the string value stored by this token */
+        TokenType tok_type; /**< the token's type */
+        char *tok_value; /**< the string value stored by this token */
 };
 
 /* *****************************************************************************
@@ -67,7 +67,7 @@ struct TokenPrivate {
  * @brief Virtual method definition for pretty printing a @c Token object.
  * @param self pointer to @c Token object
  */
-static void Token_print_(Token const * const self)
+static void token_print_(Token const * const self)
 {
         (void) self;
         assert(0);
@@ -84,8 +84,7 @@ static void Token_print_(Token const * const self)
  * @param self pointer to @c Token object
  * @param iter pointer to @c StringIterator object
  */
-static void Token_take_(Token const * const self,
-                        StringIterator const * const iter)
+static void token_take_(Token const * const self, StringIterator const * const iter)
 {
         (void) self;
         (void) iter;
@@ -122,33 +121,33 @@ static void Token_take_(Token const * const self,
  *
  *
  ******************************************************************************/
-void Token_ctor(Token * const self, TokenType type)
+void token_ctor(Token *self, TokenType type)
 {
         static struct TokenVtbl const vtbl = {
-                .getType = &Token_getType_,
-                .getValue = &Token_getValue_,
-                .print = &Token_print_,
-                .setValue = &Token_setValue_,
-                .take = &Token_take_,
+                .get_type = &token_get_type_,
+                .get_value = &token_get_value_,
+                .print = &token_print_,
+                .set_value = &token_set_value_,
+                .take = &token_take_,
         };
         self->vptr = &vtbl;
-        self->_private = malloc(sizeof(struct TokenPrivate));
+        self->private = malloc(sizeof(struct TokenPrivate));
 
-        self->_private->type = type;
-        self->_private->value = NULL;
+        self->private->tok_type = type;
+        self->private->tok_value = NULL;
 }
 
-void Token_dtor(Token *self)
+void token_dtor(Token *self)
 {
         self->vptr = NULL;
 
-        self->_private->type = TOK_0;
+        self->private->tok_type = TOK_0;
 
-        free(self->_private->value);
-        self->_private->value = NULL;
+        free(self->private->tok_value);
+        self->private->tok_value = NULL;
 
-        free(self->_private);
-        self->_private = NULL;
+        free(self->private);
+        self->private = NULL;
 }
 
 /* *****************************************************************************
@@ -161,27 +160,27 @@ void Token_dtor(Token *self)
  *
  *
  ******************************************************************************/
-inline TokenType Token_getType_(Token const * const self)
+inline TokenType token_get_type_(const Token *self)
 {
-        return self->_private->type;
+        return self->private->tok_type;
 }
 
-char *Token_getValue_(Token const * const self)
+char *token_get_value_(const Token *self)
 {
-        if (self->_private->value == NULL)
+        if (self->private->tok_value == NULL)
                 return NULL;
 
-        char *value = strdup(self->_private->value);
+        char *value = strdup(self->private->tok_value);
         return value;
 }
 
-void Token_setValue_(Token const * const self, const char * const value)
+void token_set_value_(const Token *self, const char *value)
 {
         // free original value before re-initializing it with new data
-        if (self->_private->value != NULL) {
-                free(self->_private->value);
-                self->_private->value = NULL;
+        if (self->private->tok_value != NULL) {
+                free(self->private->tok_value);
+                self->private->tok_value = NULL;
         }
 
-        self->_private->value = strdup(value);
+        self->private->tok_value = strdup(value);
 }

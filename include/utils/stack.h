@@ -22,14 +22,14 @@ struct Stack {
          * @param self stack
          * @return true if empty, false if not
          */
-        bool (*isEmpty) (Stack const * const self);
+        bool (*is_empty) (Stack const * const self);
 
         /**
          * @brief Determine if the stack is full or not.
          * @param self stack
          * @return true if full, false if not
          */
-        bool (*isFull) (Stack const * const self);
+        bool (*is_full) (Stack const * const self);
 
         /**
          * @brief Get a copy of the item at the top of the stack, without
@@ -56,7 +56,7 @@ struct Stack {
         /**
          * @brief Hide internal members.
          */
-        struct StackPrivate *_private;
+        struct StackPrivate *private;
 };
 
 /**
@@ -64,12 +64,12 @@ struct Stack {
  * @param self stack
  * @param size stack max size
  */
-void Stack_ctor(Stack *self, size_t size);
+void stack_ctor(Stack *self, size_t size);
 
 /**
  * @brief Destroy @p self.
  * @param self stack
  */
-void Stack_dtor(Stack *self);
+void stack_dtor(Stack *self);
 
 #endif //SMALLSH_STACK_H

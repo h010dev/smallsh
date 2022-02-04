@@ -43,7 +43,7 @@ typedef enum {
  */
 typedef struct {
         Token super; /**< inherits from @c Token */
-} BGControlToken;
+} BGCtrlToken;
 
 /**
  * @brief Constructs a new @c BackgroundCommandToken object.
@@ -56,7 +56,7 @@ typedef struct {
  * Source: https://www.state-machine.com/doc/AN_OOP_in_C.pdf*
  * @param self @c BackgroundCommandToken object to initialize
  */
-void BGControlToken_ctor(BGControlToken *self);
+void bgctrl_token_ctor(BGCtrlToken *self);
 
 /**
  * @brief Destroys a @c BackgroundCommandToken object, freeing its members and
@@ -65,7 +65,7 @@ void BGControlToken_ctor(BGControlToken *self);
  * @note The caller is responsible for freeing @p self afterwards if it was
  * originally allocated on the heap.
  */
-void BGControlToken_dtor(BGControlToken *self);
+void bgctrl_token_dtor(BGCtrlToken *self);
 
 /* *****************************************************************************
  * CommentToken
@@ -100,7 +100,7 @@ typedef struct {
  * Source: https://www.state-machine.com/doc/AN_OOP_in_C.pdf*
  * @param self @c CommentToken object to initialize
  */
-void CommentToken_ctor(CommentToken *self);
+void comment_token_ctor(CommentToken *self);
 
 /**
  * @brief Destroys a @c CommentToken object, freeing its members and
@@ -109,7 +109,7 @@ void CommentToken_ctor(CommentToken *self);
  * @note The caller is responsible for freeing @p self afterwards if it was
  * originally allocated on the heap.
  */
-void CommentToken_dtor(CommentToken *self);
+void comment_token_dtor(CommentToken *self);
 
 /* *****************************************************************************
  * InputRedirToken
@@ -145,7 +145,7 @@ typedef struct {
  * Source: https://www.state-machine.com/doc/AN_OOP_in_C.pdf*
  * @param self @c InputRedirectionToken object to initialize
  */
-void InputRedirToken_ctor(InputRedirToken *self);
+void inputredir_token_ctor(InputRedirToken *self);
 
 /**
  * @brief Destroys an @c InputRedirToken object, freeing its members and
@@ -154,7 +154,7 @@ void InputRedirToken_ctor(InputRedirToken *self);
  * @note The caller is responsible for freeing @p self afterwards if it was
  * originally allocated on the heap.
  */
-void InputRedirToken_dtor(InputRedirToken *self);
+void inputredir_token_dtor(InputRedirToken *self);
 
 /* *****************************************************************************
  * NewlineToken
@@ -189,7 +189,7 @@ typedef struct {
  * Source: https://www.state-machine.com/doc/AN_OOP_in_C.pdf*
  * @param self @c NewlineToken object to initialize
  */
-void NewlineToken_ctor(NewlineToken *self);
+void newline_token_ctor(NewlineToken *self);
 
 /**
  * @brief Destroys an @c NewlineToken object, freeing its members and
@@ -198,7 +198,7 @@ void NewlineToken_ctor(NewlineToken *self);
  * @note The caller is responsible for freeing @p self afterwards if it was
  * originally allocated on the heap.
  */
-void NewlineToken_dtor(NewlineToken *self);
+void newline_token_dtor(NewlineToken *self);
 
 /* *****************************************************************************
  * OutputRedirToken
@@ -234,7 +234,7 @@ typedef struct {
  * Source: https://www.state-machine.com/doc/AN_OOP_in_C.pdf*
  * @param self @c OutputRedirToken object to initialize
  */
-void OutputRedirToken_ctor(OutputRedirToken *self);
+void outputredir_token_ctor(OutputRedirToken *self);
 
 /**
  * @brief Destroys an @c OutputRedirToken object, freeing its members and
@@ -243,7 +243,7 @@ void OutputRedirToken_ctor(OutputRedirToken *self);
  * @note The caller is responsible for freeing @p self afterwards if it was
  * originally allocated on the heap.
  */
-void OutputRedirToken_dtor(OutputRedirToken *self);
+void outputredir_token_dtor(OutputRedirToken *self);
 
 /* *****************************************************************************
  * WordToken
@@ -278,7 +278,7 @@ typedef struct {
  * Source: https://www.state-machine.com/doc/AN_OOP_in_C.pdf*
  * @param self @c WordToken object to initialize
  */
-void WordToken_ctor(WordToken *self);
+void word_token_ctor(WordToken *self);
 
 /**
  * @brief Destroys a @c CommandToken object, freeing its members and
@@ -287,6 +287,6 @@ void WordToken_ctor(WordToken *self);
  * @note The caller is responsible for freeing @p self afterwards if it was
  * originally allocated on the heap.
  */
-void WordToken_dtor(WordToken *self);
+void word_token_dtor(WordToken *self);
 
 #endif //SMALLSH_SHELL_TOKENS_H

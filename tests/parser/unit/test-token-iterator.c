@@ -14,59 +14,59 @@
 #include "parser/lexer.h"
 
 struct TokenIteratorPrivate {
-        size_t len;
-        Token **tokens;
-        size_t current;
+        size_t ti_len;
+        Token **ti_tok;
+        size_t ti_cur;
 };
 
 // TODO: move token array init and destroy to setup and teardown funcs
-static void TokenIterator_ctor_test_initializesValues(void **state)
+static void token_iterator_ctor_test_initializesValues(void **state)
 {
         (void) state;
 
         // create token array
         char *buf = "# cmd arg1 arg2 arg3$$ < file1.txt > file2.txt &\n";
         Token *tokens[MAX_TOKENS];
-        size_t count = generate_tokens(buf, MAX_TOKENS, tokens);
+        size_t count = lexer_generate_tokens(buf, MAX_TOKENS, tokens);
 
         TokenIterator iter;
-        TokenIterator_ctor(&iter, count, tokens);
+        token_iterator_ctor(&iter, count, tokens);
 
-        assert_int_equal(count, iter._private->len);
-        assert_int_equal(0, iter._private->current);
+        assert_int_equal(count, iter.private->ti_len);
+        assert_int_equal(0, iter.private->ti_cur);
         for (size_t i = 0; i < count; i++) {
-                assert_memory_equal(tokens[i], iter._private->tokens[i], sizeof(Token));
+                assert_memory_equal(tokens[i], iter.private->ti_tok[i], sizeof(Token));
         }
 }
 
-static void TokenIterator_dtor_test_deletesData(void **state)
+static void token_iterator_dtor_test_deletesData(void **state)
 {
         (void) state;
 
         // create token array
         char *buf = "# cmd arg1 arg2 arg3$$ < file1.txt > file2.txt &\n";
         Token *tokens[MAX_TOKENS];
-        size_t count = generate_tokens(buf, MAX_TOKENS, tokens);
+        size_t count = lexer_generate_tokens(buf, MAX_TOKENS, tokens);
 
         TokenIterator iter;
-        TokenIterator_ctor(&iter, count, tokens);
-        TokenIterator_dtor(&iter);
+        token_iterator_ctor(&iter, count, tokens);
+        token_iterator_dtor(&iter);
 
         assert_null(iter.vptr);
-        assert_null(iter._private);
+        assert_null(iter.private);
 }
 
-static void TokenIterator_next_test_advancesCurrent(void **state)
+static void token_iterator_next_test_advancesCurrent(void **state)
 {
         (void) state;
 
         // create token array
         char *buf = "# cmd arg1 arg2 arg3$$ < file1.txt > file2.txt &\n";
         Token *tokens[MAX_TOKENS];
-        size_t count = generate_tokens(buf, MAX_TOKENS, tokens);
+        size_t count = lexer_generate_tokens(buf, MAX_TOKENS, tokens);
 
         TokenIterator iter;
-        TokenIterator_ctor(&iter, count, tokens);
+        token_iterator_ctor(&iter, count, tokens);
 
         for (size_t i = 0; i < count; i++) {
                 Token *cur = iter.vptr->next(&iter);
@@ -74,17 +74,17 @@ static void TokenIterator_next_test_advancesCurrent(void **state)
         }
 }
 
-static void TokenIterator_peek_test_returnsCurrent(void **state)
+static void token_iterator_peek_test_returnsCurrent(void **state)
 {
         (void) state;
 
         // create token array
         char *buf = "# cmd arg1 arg2 arg3$$ < file1.txt > file2.txt &\n";
         Token *tokens[MAX_TOKENS];
-        size_t count = generate_tokens(buf, MAX_TOKENS, tokens);
+        size_t count = lexer_generate_tokens(buf, MAX_TOKENS, tokens);
 
         TokenIterator iter;
-        TokenIterator_ctor(&iter, count, tokens);
+        token_iterator_ctor(&iter, count, tokens);
 
         for (size_t i = 0; i < count; i++) {
                 Token cur = iter.vptr->peek(&iter, 0);
@@ -93,17 +93,17 @@ static void TokenIterator_peek_test_returnsCurrent(void **state)
         }
 }
 
-static void TokenIterator_peek_test_returnsOffset(void **state)
+static void token_iterator_peek_test_returnsOffset(void **state)
 {
         (void) state;
 
         // create token array
         char *buf = "# cmd arg1 arg2 arg3$$ < file1.txt > file2.txt &\n";
         Token *tokens[MAX_TOKENS];
-        size_t count = generate_tokens(buf, MAX_TOKENS, tokens);
+        size_t count = lexer_generate_tokens(buf, MAX_TOKENS, tokens);
 
         TokenIterator iter;
-        TokenIterator_ctor(&iter, count, tokens);
+        token_iterator_ctor(&iter, count, tokens);
 
         // skip last token since newline token is end of iterable
         for (size_t i = 0; i < count - 1; i++) {
@@ -112,20 +112,20 @@ static void TokenIterator_peek_test_returnsOffset(void **state)
         }
 
         // cursor should not change
-        assert_int_equal(0, iter._private->current);
+        assert_int_equal(0, iter.private->ti_cur);
 }
 
-static void TokenIterator_peek_test_Exhausted(void **state)
+static void token_iterator_peek_test_Exhausted(void **state)
 {
         (void) state;
 
         // create token array
         char *buf = "# cmd arg1 arg2 arg3$$ < file1.txt > file2.txt &\n";
         Token *tokens[MAX_TOKENS];
-        size_t count = generate_tokens(buf, MAX_TOKENS, tokens);
+        size_t count = lexer_generate_tokens(buf, MAX_TOKENS, tokens);
 
         TokenIterator iter;
-        TokenIterator_ctor(&iter, count, tokens);
+        token_iterator_ctor(&iter, count, tokens);
 
         // go to last valid token
         for (size_t i = 0; i < count - 2; i++) {
@@ -146,17 +146,17 @@ static void TokenIterator_peek_test_Exhausted(void **state)
         assert_memory_equal(tokens[9], &cur, sizeof(Token));
 }
 
-static void TokenIterator_hasNext_test_currentAtEnd(void **state)
+static void token_iterator_has_next_test_currentAtEnd(void **state)
 {
         (void) state;
 
         // create token array
         char *buf = "# cmd arg1 arg2 arg3$$ < file1.txt > file2.txt &";
         Token *tokens[MAX_TOKENS];
-        size_t count = generate_tokens(buf, MAX_TOKENS, tokens);
+        size_t count = lexer_generate_tokens(buf, MAX_TOKENS, tokens);
 
         TokenIterator iter;
-        TokenIterator_ctor(&iter, count, tokens);
+        token_iterator_ctor(&iter, count, tokens);
 
         // go to last token
         for (size_t i = 0; i < count; i++) {
@@ -167,17 +167,17 @@ static void TokenIterator_hasNext_test_currentAtEnd(void **state)
         assert_false(iter.vptr->has_next(&iter));
 }
 
-static void TokenIterator_hasNext_test_detectsNewlineToken(void **state)
+static void token_iterator_has_next_test_detectsNewlineToken(void **state)
 {
         (void) state;
 
         // create token array
         char *buf = "# cmd arg1 arg2 arg3$$ < file1.txt > file2.txt &\n";
         Token *tokens[MAX_TOKENS];
-        size_t count = generate_tokens(buf, MAX_TOKENS, tokens);
+        size_t count = lexer_generate_tokens(buf, MAX_TOKENS, tokens);
 
         TokenIterator iter;
-        TokenIterator_ctor(&iter, count, tokens);
+        token_iterator_ctor(&iter, count, tokens);
 
         // go to last valid token
         for (size_t i = 0; i < count - 1; i++) {
@@ -192,21 +192,21 @@ int main(void)
 {
         const struct CMUnitTest tests[] = {
                 cmocka_unit_test_setup_teardown(
-                        TokenIterator_ctor_test_initializesValues, NULL, NULL),
+                        token_iterator_ctor_test_initializesValues, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        TokenIterator_dtor_test_deletesData, NULL, NULL),
+                        token_iterator_dtor_test_deletesData, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        TokenIterator_next_test_advancesCurrent, NULL, NULL),
+                        token_iterator_next_test_advancesCurrent, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        TokenIterator_peek_test_returnsCurrent, NULL, NULL),
+                        token_iterator_peek_test_returnsCurrent, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        TokenIterator_peek_test_returnsOffset, NULL, NULL),
+                        token_iterator_peek_test_returnsOffset, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        TokenIterator_peek_test_Exhausted, NULL, NULL),
+                        token_iterator_peek_test_Exhausted, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        TokenIterator_hasNext_test_currentAtEnd, NULL, NULL),
+                        token_iterator_has_next_test_currentAtEnd, NULL, NULL),
                 cmocka_unit_test_setup_teardown(
-                        TokenIterator_hasNext_test_detectsNewlineToken, NULL, NULL),
+                        token_iterator_has_next_test_detectsNewlineToken, NULL, NULL),
         };
 
         return cmocka_run_group_tests(tests, NULL, NULL);

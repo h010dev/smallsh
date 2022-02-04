@@ -49,10 +49,10 @@
  * @brief Hides @c Parser members from client code.
  */
 struct ParserPrivate {
-        size_t n_tokens; /**< number of tokens parsed */
-        Token **tokens; /**< parsed tokens */
-        ssize_t n_stmts; /**< number of statements created */
-        Statement **stmts; /**< statements created */
+        size_t parser_num_tok; /**< number of tokens parsed */
+        Token **parser_tok; /**< parsed tokens */
+        ssize_t parser_num_stmt; /**< number of statements created */
+        Statement **parser_stmt; /**< statements created */
 };
 
 /* *****************************************************************************
@@ -71,7 +71,7 @@ struct ParserPrivate {
  * @param iter iterator to extract command tokens from
  * @return 0 on success, -1 on failure
  */
-static int Parser_parseCmd(Statement *stmt, TokenIterator *iter)
+static int parser_parse_cmd_(Statement *stmt, TokenIterator *iter)
 {
         // parse words into statement command
         size_t buf_size = 1;
@@ -87,39 +87,42 @@ static int Parser_parseCmd(Statement *stmt, TokenIterator *iter)
                 }
 
                 // resize buf if full
-                if (stmt->cmd->argc >= buf_size) {
+                if (stmt->stmt_cmd->cmd_argc >= buf_size) {
                         buf_size *= 2;
-                        tmp = realloc(stmt->cmd->argv, buf_size * sizeof(char *));
+                        tmp = realloc(stmt->stmt_cmd->cmd_argv,
+                                      buf_size * sizeof(char *));
                         if (tmp == NULL) {
                                 return -1; // error
                         }
-                        stmt->cmd->argv = tmp;
+                        stmt->stmt_cmd->cmd_argv = tmp;
                 }
 
                 // TODO: look into creating add methods to statement class
                 // take word
-                WordToken *word = (WordToken *) iter->vptr->next(iter);
-                char *word_str = word->super.vptr->getValue((Token *) word);
-                stmt->cmd->argv[stmt->cmd->argc++] = Parser_expandWord(word_str);
-                free(word_str);
+                WordToken *wt = (WordToken *) iter->vptr->next(iter);
+                char *wt_str = wt->super.vptr->get_value((Token *) wt);
+                stmt->stmt_cmd->cmd_argv[stmt->stmt_cmd->cmd_argc++] =
+                        parser_expand_word(wt_str);
+                free(wt_str);
         }
 
         // resize array to fit exactly argc + 1 elements for later use with exec
-        char **tmp = realloc(stmt->cmd->argv, (stmt->cmd->argc + 1) * sizeof(char *));
+        char **tmp = realloc(stmt->stmt_cmd->cmd_argv,
+                             (stmt->stmt_cmd->cmd_argc + 1) * sizeof(char *));
         if (tmp == NULL) {
                 return -1; // error
         }
-        stmt->cmd->argv = tmp;
+        stmt->stmt_cmd->cmd_argv = tmp;
 
         // null terminate argv for exec
-        stmt->cmd->argv[stmt->cmd->argc] = NULL;
+        stmt->stmt_cmd->cmd_argv[stmt->stmt_cmd->cmd_argc] = NULL;
 
         // TODO: move these to builtins module
-        char *cmd = stmt->cmd->argv[0];
+        char *cmd = stmt->stmt_cmd->cmd_argv[0];
         if (strcmp("cd", cmd) == 0 ||
             strcmp("exit", cmd) == 0 ||
             strcmp("status", cmd) == 0) {
-                stmt->flags |= FLAGS_BUILTIN;
+                stmt->stmt_flags |= FLAGS_BUILTIN;
         }
 
         return 0;
@@ -132,7 +135,8 @@ static int Parser_parseCmd(Statement *stmt, TokenIterator *iter)
  * @param type type of io redirection to store
  * @return 0 on success, -1 on failure
  */
-static int Parser_parseIORedir(Statement *stmt, TokenIterator *iter, IORedirType type)
+static int parser_parse_ioredir_(Statement *stmt, TokenIterator *iter,
+                                 IORedirType type)
 {
         // filename should be a word token
         Token tok = iter->vptr->peek(iter, 1);
@@ -144,43 +148,47 @@ static int Parser_parseIORedir(Statement *stmt, TokenIterator *iter, IORedirType
         (void) iter->vptr->next(iter);
 
         // take next word
-        WordToken *word = (WordToken *) iter->vptr->next(iter);
+        WordToken *wt = (WordToken *) iter->vptr->next(iter);
 
         // switch to type stream
-        char *word_str;
+        char *wt_str;
         char **tmp;
         switch (type) {
-                case IO_REDIR_STDIN:
+                case IOREDIR_STDIN:
                         // take next word
-                        word_str = word->super.vptr->getValue((Token *) word);
+                        wt_str = wt->super.vptr->get_value((Token *) wt);
 
                         // extract word string into statement stdin
-                        stmt->stdin_->streams[stmt->stdin_->n++] = Parser_expandWord(
-                                word_str);
-                        free(word_str);
+                        stmt->stmt_stdin->stdin_streams[stmt->stmt_stdin->stdin_num_streams++] =
+                                parser_expand_word(wt_str);
+                        free(wt_str);
 
                         // resize strings buf
-                        tmp = realloc(stmt->stdin_->streams, (stmt->stdin_->n + 1) * sizeof(char *));
+                        tmp = realloc(stmt->stmt_stdin->stdin_streams,
+                                      (stmt->stmt_stdin->stdin_num_streams + 1) * sizeof(char *));
                         if (tmp == NULL) {
                                 return -1; // error
                         }
-                        stmt->stdin_->streams = tmp;
+                        stmt->stmt_stdin->stdin_streams = tmp;
+                        stmt->stmt_stdin->stdin_streams[stmt->stmt_stdin->stdin_num_streams] = NULL;
                         break;
-                case IO_REDIR_STDOUT:
+                case IOREDIR_STDOUT:
                         // take next word
-                        word_str = word->super.vptr->getValue((Token *) word);
+                        wt_str = wt->super.vptr->get_value((Token *) wt);
 
                         // extract word string into statement stdout
-                        stmt->stdout_->streams[stmt->stdout_->n++] = Parser_expandWord(
-                                word_str);
-                        free(word_str);
+                        stmt->stmt_stdout->stdout_streams[stmt->stmt_stdout->stdout_num_streams++] =
+                                parser_expand_word(wt_str);
+                        free(wt_str);
 
                         // resize strings buf
-                        tmp = realloc(stmt->stdout_->streams, (stmt->stdout_->n + 1) * sizeof(char *));
+                        tmp = realloc(stmt->stmt_stdout->stdout_streams,
+                                      (stmt->stmt_stdout->stdout_num_streams + 1) * sizeof(char *));
                         if (tmp == NULL) {
                                 return -1; // error
                         }
-                        stmt->stdout_->streams = tmp;
+                        stmt->stmt_stdout->stdout_streams = tmp;
+                        stmt->stmt_stdout->stdout_streams[stmt->stmt_stdout->stdout_num_streams] = NULL;
                         break;
                 default:
                         return -1;
@@ -194,11 +202,12 @@ static int Parser_parseIORedir(Statement *stmt, TokenIterator *iter, IORedirType
  * @param self @c Parser object
  * @return number of statements created on success, -1 on failure
  */
-static ssize_t Parser_parseStatements_(struct Parser * const self)
+static ssize_t parser_parse_statements_(struct Parser * const self)
 {
         // initialize iterator with token stream
         TokenIterator iter;
-        TokenIterator_ctor(&iter, self->_private->n_tokens, self->_private->tokens);
+        token_iterator_ctor(&iter, self->private->parser_num_tok,
+                            self->private->parser_tok);
 
         // initialize statements array
         size_t buf_size = 1;
@@ -226,28 +235,29 @@ static ssize_t Parser_parseStatements_(struct Parser * const self)
                                 // syntax error
                         }
                         (void) iter.vptr->next(&iter);
-                        stmts[count - 1]->flags |= FLAGS_BGCTRL;
+                        stmts[count - 1]->stmt_flags |= FLAGS_BGCTRL;
                         cur++;
                 } else if (is_tok_redir_input(tok)) {
                         if (stmts[count] == NULL) {
                                 // syntax error
                         }
-                        Parser_parseIORedir(stmts[count - 1], &iter,
-                                            IO_REDIR_STDIN);
+                        parser_parse_ioredir_(stmts[count - 1], &iter,
+                                              IOREDIR_STDIN);
                 } else if (is_tok_redir_output(tok)) {
                         if (stmts[count] == NULL) {
                                 // syntax error
                         }
-                        Parser_parseIORedir(stmts[count - 1], &iter,
-                                            IO_REDIR_STDOUT);
+                        parser_parse_ioredir_(stmts[count - 1], &iter,
+                                              IOREDIR_STDOUT);
                 } else if (is_tok_word(tok)) {
                         if (count < cur) {
-                                stmts[count++] = Statement_new();
-                        } else if (stmts[count]->stdin_->n > 0 || stmts[count]->stdout_->n > 0) {
+                                stmts[count++] = statement_new();
+                        } else if (stmts[count]->stmt_stdin->stdin_num_streams > 0 ||
+                        stmts[count]->stmt_stdout->stdout_num_streams > 0) {
                                 // syntax error
                                 break;
                         }
-                        Parser_parseCmd(stmts[count - 1], &iter);
+                        parser_parse_cmd_(stmts[count - 1], &iter);
                 } else {
                         // do cleanup
                         count = -1;
@@ -255,10 +265,10 @@ static ssize_t Parser_parseStatements_(struct Parser * const self)
                 }
         }
 
-        TokenIterator_dtor(&iter);
+        token_iterator_dtor(&iter);
 
-        self->_private->stmts = stmts;
-        self->_private->n_stmts = count;
+        self->private->parser_stmt = stmts;
+        self->private->parser_num_stmt = count;
         return count;
 }
 
@@ -273,17 +283,17 @@ static ssize_t Parser_parseStatements_(struct Parser * const self)
  * @param buf character stream to parse
  * @return number of statements created on success, -1 on failure
  * @note Caller is responsible for freeing parsed statements via @c
- * Statement_del.
+ * statement_del.
  */
-static ssize_t Parser_parse_(Parser * const self, char *buf)
+static ssize_t parser_parse_(Parser * const self, char *buf)
 {
         // parse stream into tokens
-        self->_private->tokens = malloc(MAX_TOKENS * sizeof(Token));
-        self->_private->n_tokens = generate_tokens(buf, MAX_TOKENS,
-                                                   self->_private->tokens);
+        self->private->parser_tok = malloc(MAX_TOKENS * sizeof(Token));
+        self->private->parser_num_tok = lexer_generate_tokens(buf, MAX_TOKENS,
+                                                              self->private->parser_tok);
 
         // parse tokens into statements
-        return Parser_parseStatements_(self);
+        return parser_parse_statements_(self);
 }
 
 /**
@@ -294,9 +304,9 @@ static ssize_t Parser_parse_(Parser * const self, char *buf)
  * @param self @c Parser object
  * @return array of @c Statement objects parsed from character stream
  */
-static inline Statement **Parser_getStatements_(struct Parser * const self)
+static inline Statement **parser_get_statements_(struct Parser * const self)
 {
-        return self->_private->stmts;
+        return self->private->parser_stmt;
 }
 
 /* *****************************************************************************
@@ -329,38 +339,37 @@ static inline Statement **Parser_getStatements_(struct Parser * const self)
  *
  *
  ******************************************************************************/
-void Parser_ctor(Parser *self)
+void parser_ctor(Parser *self)
 {
-        self->parse = &Parser_parse_;
-        self->get_statements = &Parser_getStatements_;
-        self->print_statement = &Statement_print;
-        self->_private = malloc(sizeof(struct ParserPrivate));
+        self->parse = &parser_parse_;
+        self->get_statement = &parser_get_statements_;
+        self->print_statement = &statement_print;
+        self->private = malloc(sizeof(struct ParserPrivate));
 }
 
-// TODO: implement dtor
-void Parser_dtor(Parser *self)
+void parser_dtor(Parser *self)
 {
-        for (size_t i = 0; i < self->_private->n_tokens; i++) {
-                Token_dtor(self->_private->tokens[i]);
-                free(self->_private->tokens[i]);
-                self->_private->tokens[i] = NULL;
+        for (size_t i = 0; i < self->private->parser_num_tok; i++) {
+                token_dtor(self->private->parser_tok[i]);
+                free(self->private->parser_tok[i]);
+                self->private->parser_tok[i] = NULL;
         }
-        free(self->_private->tokens);
-        self->_private->n_tokens = 0;
-        self->_private->tokens = NULL;
+        free(self->private->parser_tok);
+        self->private->parser_num_tok = 0;
+        self->private->parser_tok = NULL;
 
-        for (ssize_t i = 0; i < self->_private->n_stmts; i++) {
-                Statement_del(&self->_private->stmts[i]);
+        for (ssize_t i = 0; i < self->private->parser_num_stmt; i++) {
+                statement_del(&self->private->parser_stmt[i]);
         }
-        free(self->_private->stmts);
-        self->_private->n_stmts = 0;
-        self->_private->stmts = NULL;
+        free(self->private->parser_stmt);
+        self->private->parser_num_stmt = 0;
+        self->private->parser_stmt = NULL;
 
-        free(self->_private);
-        self->_private = NULL;
+        free(self->private);
+        self->private = NULL;
 
         self->parse = NULL;
-        self->get_statements = NULL;
+        self->get_statement = NULL;
         self->print_statement = NULL;
 }
 
@@ -374,7 +383,7 @@ void Parser_dtor(Parser *self)
  *
  *
  ******************************************************************************/
-char *Parser_insertPID(char *string, char **ptr, size_t *len)
+char *parser_insert_pid(char *str, char **ptr, size_t *len)
 {
         char *result;
 
@@ -397,7 +406,7 @@ char *Parser_insertPID(char *string, char **ptr, size_t *len)
         }
 
         // save current index since realloc may change string location
-        ptrdiff_t idx = *ptr - &string[0];
+        ptrdiff_t idx = *ptr - &str[0];
 
         // update copy size to fit pid
         size_t new_size = *len + pid_len - 2;
@@ -406,7 +415,7 @@ char *Parser_insertPID(char *string, char **ptr, size_t *len)
                 return NULL;
         }
 
-        char *tmp = strncpy(result, string, new_size - 1);
+        char *tmp = strncpy(result, str, new_size - 1);
         if (tmp == NULL) {
                 return NULL;
         }
@@ -428,7 +437,8 @@ char *Parser_insertPID(char *string, char **ptr, size_t *len)
         return result;
 }
 
-char *Parser_subVar(char *word, char **old_ptr, char **new_ptr, size_t *len)
+char *parser_substitute_variable(char *word, char **old_ptr, char **new_ptr,
+                                 size_t *len)
 {
         char *sub;
         char nxt;
@@ -439,7 +449,7 @@ char *Parser_subVar(char *word, char **old_ptr, char **new_ptr, size_t *len)
                 case '$':
                 {
                         // replace var with pid
-                        sub = Parser_insertPID(word, new_ptr, len);
+                        sub = parser_insert_pid(word, new_ptr, len);
                         if (sub == NULL) {
                                 return NULL;
                         }
@@ -464,7 +474,7 @@ char *Parser_subVar(char *word, char **old_ptr, char **new_ptr, size_t *len)
         return sub;
 }
 
-char *Parser_expandWord(char *word)
+char *parser_expand_word(char *word)
 {
         char *new_word, *old_ptr, *new_ptr;
         size_t len;
@@ -487,7 +497,10 @@ char *Parser_expandWord(char *word)
         for (; *old_ptr != '\0'; old_ptr++) {
                 if (*old_ptr == '$') {
                         // attempt to perform variable expansion
-                        new_word = Parser_subVar(new_word, &old_ptr, &new_ptr, &len);
+                        new_word = parser_substitute_variable(new_word,
+                                                              &old_ptr,
+                                                              &new_ptr,
+                                                              &len);
                 } else {
                         // no expansion needed, so just copy over byte
                         *new_ptr = *old_ptr;

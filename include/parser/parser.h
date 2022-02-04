@@ -16,27 +16,27 @@
 /**
  * @brief Determines if a token is a comment token.
  */
-#define is_tok_cmt(tok) ((ShellTokenType) tok.vptr->getType(&tok) == TOK_CMT)
+#define is_tok_cmt(tok) ((ShellTokenType) tok.vptr->get_type(&tok) == TOK_CMT)
 
 /**
  * @brief Determines if a token is a background control token.
  */
-#define is_tok_ctrl_bg(tok) ((ShellTokenType) tok.vptr->getType(&tok) == TOK_CTRL_BG)
+#define is_tok_ctrl_bg(tok) ((ShellTokenType) tok.vptr->get_type(&tok) == TOK_CTRL_BG)
 
 /**
  * @brief Determines if a token is an input redirection token.
  */
-#define is_tok_redir_input(tok) ((ShellTokenType) tok.vptr->getType(&tok) == TOK_REDIR_INPUT)
+#define is_tok_redir_input(tok) ((ShellTokenType) tok.vptr->get_type(&tok) == TOK_REDIR_INPUT)
 
 /**
  * @brief Determines if a token is an output redirection token.
  */
-#define is_tok_redir_output(tok) ((ShellTokenType) tok.vptr->getType(&tok) == TOK_REDIR_OUTPUT)
+#define is_tok_redir_output(tok) ((ShellTokenType) tok.vptr->get_type(&tok) == TOK_REDIR_OUTPUT)
 
 /**
  * @brief Determines if a token is a word token.
  */
-#define is_tok_word(tok) ((ShellTokenType) tok.vptr->getType(&tok) == TOK_WORD)
+#define is_tok_word(tok) ((ShellTokenType) tok.vptr->get_type(&tok) == TOK_WORD)
 
 struct ParserPrivate;
 
@@ -68,7 +68,7 @@ typedef struct Parser {
          * @param buf character stream to parse
          * @return number of statements created on success, -1 on failure
          * @note Caller is responsible for freeing parsed statements via @c
-         * Statement_del.
+         * statement_del.
          */
         ssize_t (*parse) (struct Parser * const self, char *buf);
 
@@ -77,7 +77,7 @@ typedef struct Parser {
          * @param self @c Parser object
          * @return array of @c Statement objects parsed from character stream
          */
-        Statement **(*get_statements) (struct Parser * const self);
+        Statement **(*get_statement) (struct Parser * const self);
 
         /**
          * @brief Prints statement in a pretty-printed format to stdout.
@@ -88,20 +88,20 @@ typedef struct Parser {
         /**
          * @brief @c Parser private data.
          */
-        struct ParserPrivate *_private;
+        struct ParserPrivate *private;
 } Parser;
 
 /**
  * @brief Initializes @p self @c Parser object.
  * @param self @c Parser object to initialize
  */
-void Parser_ctor(Parser *self);
+void parser_ctor(Parser *self);
 
 /**
  * @brief Destroys @p self @c Parser object.
  * @param self @c Parser object to destroy
  */
-void Parser_dtor(Parser *self);
+void parser_dtor(Parser *self);
 
 /**
  * @brief Substitutes all variables in a word string with their literal value,
@@ -112,7 +112,7 @@ void Parser_dtor(Parser *self);
  * @param word word string to expand variables
  * @return new word string containing literal substitutions for all variables
  */
-char *Parser_expandWord(char *word);
+char *parser_expand_word(char *word);
 
 /**
  * @brief Extends @p string with the process's current PID.
@@ -123,12 +123,12 @@ char *Parser_expandWord(char *word);
  * @pre @p ptr must point to the last character ('\\0') in the string. If
  * this is not true, then any remaining bytes after @p ptr will be overwritten
  * by the PID.
- * @param string string to extend
+ * @param str string to extend
  * @param ptr pointer to current position in string
  * @param len input/output param for final string length
  * @return new string with PID at end, or @c NULL on error
  */
-char *Parser_insertPID(char *string, char **ptr, size_t *len);
+char *parser_insert_pid(char *str, char **ptr, size_t *len);
 
 /**
  * @brief Substitutes variable followed by '$' into word and returns result. If
@@ -148,6 +148,6 @@ char *Parser_insertPID(char *string, char **ptr, size_t *len);
  * @return new string with variable substituted at end, or just the '$' if no
  * valid variables present
  */
-char *Parser_subVar(char *word, char **old_ptr, char **new_ptr, size_t *len);
+char *parser_substitute_variable(char *word, char **old_ptr, char **new_ptr, size_t *len);
 
 #endif //SMALLSH_PARSER_H

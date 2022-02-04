@@ -53,8 +53,8 @@
  * @brief Hides @c StringIterator members from client code.
  */
 struct StringIteratorPrivate {
-        const char *string; /**< the string we are iterating over */
-        const char *current; /**< cursor position of string */
+        const char *si_str; /**< the string we are iterating over */
+        const char *si_cur; /**< cursor position of string */
 };
 
 /**
@@ -63,9 +63,9 @@ struct StringIteratorPrivate {
  * @return true if iterator is positioned at parseable character, false
  * otherwise
  */
-static inline bool StringIterator_hasNext_(StringIterator const * const self)
+static inline bool string_iterator_has_next_(StringIterator const * const self)
 {
-        char itr = *self->_private->current;
+        char itr = *self->private->si_cur;
         return itr != '\0';
 }
 
@@ -74,7 +74,7 @@ static inline bool StringIterator_hasNext_(StringIterator const * const self)
  * @param self pointer to iterator object
  * @return string containing copied character
  */
-static char *StringIterator_munchChar_(StringIterator const * const self)
+static char *string_iterator_munch_char_(StringIterator const * const self)
 {
         // grab character
         const char *start = self->vptr->next(self);
@@ -89,7 +89,7 @@ static char *StringIterator_munchChar_(StringIterator const * const self)
  * @param self pointer to iterator object
  * @return string containing copied word
  */
-static char *StringIterator_munchWord_(StringIterator const * const self)
+static char *string_iterator_munch_word_(StringIterator const * const self)
 {
         // grab word
         const char *start = self->vptr->next(self);
@@ -120,17 +120,16 @@ seek_fin:
  * @param self pointer to iterator object
  * @return the character pointed to by the iterator
  */
-static inline const char *StringIterator_next_(StringIterator const * const self)
+static inline const char *string_iterator_next_(StringIterator const * const self)
 {
-        const char *next = self->_private->current++;
+        const char *next = self->private->si_cur++;
         return next;
 }
 
-static char *StringIterator_slice_(StringIterator const * const self,
-                                   const char *from)
+static char *string_iterator_slice_(StringIterator const * const self, const char *from)
 {
-        const char *l_bound = self->_private->string;
-        const char *r_bound = self->_private->current;
+        const char *l_bound = self->private->si_str;
+        const char *r_bound = self->private->si_cur;
 
 #ifdef DEBUG
         printf("&from=%p, &l_bound=%p, &r_bound=%p\n",
@@ -158,15 +157,14 @@ static char *StringIterator_slice_(StringIterator const * const self,
  * @param offset how far ahead to peek
  * @return the character pointed to by the iterator
  */
-static inline char StringIterator_peek_(StringIterator const * const self,
-                                        unsigned int offset)
+static inline char string_iterator_peek_(StringIterator const * const self, unsigned int offset)
 {
         const char *orig, *cur;
         char result;
         unsigned int pos;
 
         // store pointer to originating character
-        orig = self->_private->current;
+        orig = self->private->si_cur;
 
         // seek to offset or end of stream, whichever comes first
         pos = 0;
@@ -182,7 +180,7 @@ static inline char StringIterator_peek_(StringIterator const * const self,
                 result = *cur;
 
         // reset pointer to originating character
-        self->_private->current = orig;
+        self->private->si_cur = orig;
 
         return result;
 }
@@ -217,31 +215,31 @@ static inline char StringIterator_peek_(StringIterator const * const self,
  *
  *
  ******************************************************************************/
-void StringIterator_ctor(StringIterator * const self, char *string)
+void string_iterator_ctor(StringIterator *self, char *str)
 {
         static struct StringIteratorVtbl const vtbl = {
-                .has_next = &StringIterator_hasNext_,
-                .munchChar = &StringIterator_munchChar_,
-                .munchWord = &StringIterator_munchWord_,
-                .next = &StringIterator_next_,
-                .peek = &StringIterator_peek_,
-                .slice = &StringIterator_slice_,
+                .has_next = &string_iterator_has_next_,
+                .munch_char = &string_iterator_munch_char_,
+                .munch_word = &string_iterator_munch_word_,
+                .next = &string_iterator_next_,
+                .peek = &string_iterator_peek_,
+                .slice = &string_iterator_slice_,
         };
         self->vptr = &vtbl;
-        self->_private = malloc(sizeof(struct StringIteratorPrivate));
+        self->private = malloc(sizeof(struct StringIteratorPrivate));
 
-        self->_private->string = strdup(string);
-        self->_private->current = &self->_private->string[0];
+        self->private->si_str = strdup(str);
+        self->private->si_cur = &self->private->si_str[0];
 }
 
-void StringIterator_dtor(StringIterator *self)
+void string_iterator_dtor(StringIterator *self)
 {
         self->vptr = NULL;
 
-        free((char *) self->_private->string);
-        self->_private->string = NULL;
-        self->_private->current = NULL;
+        free((char *) self->private->si_str);
+        self->private->si_str = NULL;
+        self->private->si_cur = NULL;
 
-        free(self->_private);
-        self->_private = NULL;
+        free(self->private);
+        self->private = NULL;
 }

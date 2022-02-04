@@ -14,8 +14,8 @@
  * argument is the command name; and an argument count.
  */
 typedef struct {
-        size_t argc; /**< argument count */
-        char **argv; /**< argument list */
+        size_t cmd_argc; /**< argument count */
+        char **cmd_argv; /**< argument list */
 } StmtCmd;
 
 /**
@@ -25,8 +25,8 @@ typedef struct {
  * number of filenames. These streams will be later opened for stdin.
  */
 typedef struct {
-        size_t n; /**< number of file streams */
-        char **streams; /**< stream list */
+        size_t stdin_num_streams; /**< number of file streams */
+        char **stdin_streams; /**< stream list */
 } StmtStdin;
 
 /**
@@ -36,8 +36,8 @@ typedef struct {
  * number of filenames. These streams will be later opened for stdout.
  */
 typedef struct {
-        size_t n; /**< number of file streams */
-        char **streams; /**< stream list */
+        size_t stdout_num_streams; /**< number of file streams */
+        char **stdout_streams; /**< stream list */
 } StmtStdout;
 
 /**
@@ -45,7 +45,7 @@ typedef struct {
  * boolean properties.
  */
 typedef enum {
-        FLAGS_0 = 0, /**< default flag */
+        FLAGS_NONE = 0, /**< default flag */
         FLAGS_BGCTRL = 1, /**< background control flag */
         FLAGS_BUILTIN = 2, /**< builtin command flag */
 } StmtFlags;
@@ -57,11 +57,11 @@ typedef enum {
  * This object is later passed on to the execution step of the shell.
  */
 typedef struct {
-        StmtCmd *cmd; /**< command */
-        StmtStdin *stdin_; /**< stdin file streams */
-        StmtStdout *stdout_; /**< stdout file streams */
+        StmtCmd *stmt_cmd; /**< command */
+        StmtStdin *stmt_stdin; /**< stdin file streams */
+        StmtStdout *stmt_stdout; /**< stdout file streams */
         // StmtStderr *stderr; /* not supported */
-        StmtFlags flags; /**< special properties */
+        StmtFlags stmt_flags; /**< special properties */
 } Statement;
 
 /**
@@ -69,28 +69,28 @@ typedef struct {
  * IO stream to operate on.
  */
 typedef enum {
-        IO_REDIR_STDIN = 0, /**< stdin stream */
-        IO_REDIR_STDOUT = 1, /**< stdout stream */
+        IOREDIR_STDIN = 0, /**< stdin stream */
+        IOREDIR_STDOUT = 1, /**< stdout stream */
         // IO_REDIR_STDERR = 2, /* not supported */
 } IORedirType;
 
 /**
  * @brief Create and initialize a new @c Statement object.
  * @return new @c Statement object
- * @note Caller is responsible for freeing structure via @c Statement_del.
+ * @note Caller is responsible for freeing structure via @c statement_del.
  */
-Statement *Statement_new(void);
+Statement *statement_new(void);
 
 /**
  * @brief Deletes @p stmt and frees its associated data.
  * @param stmt @c Statement object to delete
  */
-void Statement_del(Statement **stmt);
+void statement_del(Statement **stmt);
 
 /**
  * @brief Pretty-prints a @c Statement object to stdout.
  * @param self @c Statement object to print
  */
-void Statement_print(Statement const *self);
+void statement_print(Statement const *self);
 
 #endif //SMALLSH_STATEMENT_H

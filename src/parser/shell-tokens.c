@@ -45,11 +45,11 @@
  * Prints a pretty formatted display of the @c Token object.
  * @param self pointer to @c BGControlToken object
  */
-static void BGControlToken_print_(Token const * const self)
+static void bgctrl_token_print_(Token const * const self)
 {
-        BGControlToken const * const self_ = (BGControlToken const *) self;
+        BGCtrlToken const * const self_ = (BGCtrlToken const *) self;
 
-        printf("BG_CONTROL:%s", self_->super.vptr->getValue(self));
+        printf("BG_CONTROL:%s", self_->super.vptr->get_value(self));
 }
 
 /**
@@ -61,14 +61,14 @@ static void BGControlToken_print_(Token const * const self)
  * @param self pointer to @c BGControlToken object
  * @param iter pointer to @c StringIterator object
  */
-static void BGControlToken_take_(Token const * const self,
-                                 StringIterator const * const iter)
+static void bgctrl_token_take_(Token const * const self,
+                               StringIterator const * const iter)
 {
-        BGControlToken const * const self_ = (BGControlToken const *) self;
+        BGCtrlToken const * const self_ = (BGCtrlToken const *) self;
 
         // copy background command symbol into token
-        char *slice = iter->vptr->munchChar(iter);
-        self_->super.vptr->setValue(self, slice);
+        char *slice = iter->vptr->munch_char(iter);
+        self_->super.vptr->set_value(self, slice);
         free(slice);
 }
 
@@ -78,11 +78,11 @@ static void BGControlToken_take_(Token const * const self,
  * Prints a pretty formatted display of the @c Token object.
  * @param self pointer to @c CommentToken object
  */
-static void CommentToken_print_(Token const * const self)
+static void comment_token_print_(Token const * const self)
 {
         CommentToken const * const self_ = (CommentToken const *) self;
 
-        printf("COMMENT:%s", self_->super.vptr->getValue(self));
+        printf("COMMENT:%s", self_->super.vptr->get_value(self));
 }
 
 /**
@@ -94,14 +94,14 @@ static void CommentToken_print_(Token const * const self)
  * @param self pointer to @c CommentToken object
  * @param iter pointer to @c StringIterator object
  */
-static void CommentToken_take_(Token const * const self,
-                               StringIterator const * const iter)
+static void comment_token_take_(Token const * const self,
+                                StringIterator const * const iter)
 {
         CommentToken const * const self_ = (CommentToken const *) self;
 
         // copy comment symbol into token
-        char *slice = iter->vptr->munchChar(iter);
-        self_->super.vptr->setValue(self, slice);
+        char *slice = iter->vptr->munch_char(iter);
+        self_->super.vptr->set_value(self, slice);
         free(slice);
 }
 
@@ -111,11 +111,11 @@ static void CommentToken_take_(Token const * const self,
  * Prints a pretty formatted display of the @c Token object.
  * @param self pointer to @c InputRedirToken object
  */
-static void InputRedirToken_print_(Token const * const self)
+static void inputredir_token_print_(Token const * const self)
 {
         InputRedirToken const * const self_ = (InputRedirToken const *) self;
 
-        printf("INPUT_REDIR:%s", self_->super.vptr->getValue(self));
+        printf("INPUT_REDIR:%s", self_->super.vptr->get_value(self));
 }
 
 /**
@@ -127,14 +127,14 @@ static void InputRedirToken_print_(Token const * const self)
  * @param self pointer to @c InputRedirToken object
  * @param iter pointer to @c StringIterator object
  */
-static void InputRedirToken_take_(Token const * const self,
-                                  StringIterator const * const iter)
+static void inputredir_token_take_(Token const * const self,
+                                   StringIterator const * const iter)
 {
         InputRedirToken const * const self_ = (InputRedirToken const *) self;
 
         // copy input redirection symbol into token
-        char *slice = iter->vptr->munchChar(iter);
-        self_->super.vptr->setValue(self, slice);
+        char *slice = iter->vptr->munch_char(iter);
+        self_->super.vptr->set_value(self, slice);
         free(slice);
 }
 
@@ -144,7 +144,7 @@ static void InputRedirToken_take_(Token const * const self,
  * Prints a pretty formatted display of the @c Token object.
  * @param self pointer to @c NewlineToken object
  */
-static void NewlineToken_print_(Token const * const self)
+static void newline_token_print_(Token const * const self)
 {
         (void) self;
         printf("NEWLINE:\\n");
@@ -159,14 +159,14 @@ static void NewlineToken_print_(Token const * const self)
  * @param self pointer to @c NewlineToken object
  * @param iter pointer to @c StringIterator object
  */
-static void NewlineToken_take_(Token const * const self,
-                               StringIterator const * const iter)
+static void newline_token_take_(Token const * const self,
+                                StringIterator const * const iter)
 {
         NewlineToken const * const self_ = (NewlineToken const *) self;
 
         // copy output redirection symbol into token
-        char *slice = iter->vptr->munchChar(iter);
-        self_->super.vptr->setValue(self, slice);
+        char *slice = iter->vptr->munch_char(iter);
+        self_->super.vptr->set_value(self, slice);
         free(slice);
 }
 
@@ -176,11 +176,11 @@ static void NewlineToken_take_(Token const * const self,
  * Prints a pretty formatted display of the @c Token object.
  * @param self pointer to @c OutputRedirToken object
  */
-static void OutputRedirToken_print_(Token const * const self)
+static void outputredir_token_print_(Token const * const self)
 {
         OutputRedirToken const * const self_ = (OutputRedirToken const *) self;
 
-        printf("OUTPUT_REDIR:%s", self_->super.vptr->getValue(self));
+        printf("OUTPUT_REDIR:%s", self_->super.vptr->get_value(self));
 }
 
 /**
@@ -192,14 +192,14 @@ static void OutputRedirToken_print_(Token const * const self)
  * @param self pointer to @c OutputRedirToken object
  * @param iter pointer to @c StringIterator object
  */
-static void OutputRedirToken_take_(Token const * const self,
-                                   StringIterator const * const iter)
+static void outputredir_token_take_(Token const * const self,
+                                    StringIterator const * const iter)
 {
         OutputRedirToken const * const self_ = (OutputRedirToken const *) self;
 
         // copy output redirection symbol into token
-        char *slice = iter->vptr->munchChar(iter);
-        self_->super.vptr->setValue(self, slice);
+        char *slice = iter->vptr->munch_char(iter);
+        self_->super.vptr->set_value(self, slice);
         free(slice);
 }
 
@@ -209,11 +209,11 @@ static void OutputRedirToken_take_(Token const * const self,
  * Prints a pretty formatted display of the @c Token object.
  * @param self pointer to @c WordToken object
  */
-static void WordToken_print_(Token const * const self)
+static void word_token_print_(Token const * const self)
 {
         WordToken const * const self_ = (WordToken const *) self;
 
-        printf("WORD:%s", self_->super.vptr->getValue(self));
+        printf("WORD:%s", self_->super.vptr->get_value(self));
 }
 
 /**
@@ -225,14 +225,14 @@ static void WordToken_print_(Token const * const self)
  * @param self pointer to @c WordToken object
  * @param iter pointer to @c StringIterator object
  */
-static void WordToken_take_(Token const * const self,
-                            StringIterator const * const iter)
+static void word_token_take_(Token const * const self,
+                             StringIterator const * const iter)
 {
         WordToken const * const self_ = (WordToken const *) self;
 
         // copy word into token
-        char *slice = iter->vptr->munchWord(iter);
-        self_->super.vptr->setValue(self, slice);
+        char *slice = iter->vptr->munch_word(iter);
+        self_->super.vptr->set_value(self, slice);
         free(slice);
 }
 
@@ -266,110 +266,110 @@ static void WordToken_take_(Token const * const self,
  *
  *
  ******************************************************************************/
-void BGControlToken_ctor(BGControlToken * const self)
+void bgctrl_token_ctor(BGCtrlToken *self)
 {
         static struct TokenVtbl const vtbl = {
-                .getType = &Token_getType_,
-                .getValue = &Token_getValue_,
-                .print = &BGControlToken_print_,
-                .setValue = &Token_setValue_,
-                .take = &BGControlToken_take_,
+                .get_type = &token_get_type_,
+                .get_value = &token_get_value_,
+                .print = &bgctrl_token_print_,
+                .set_value = &token_set_value_,
+                .take = &bgctrl_token_take_,
         };
-        Token_ctor(&self->super, (TokenType) TOK_CTRL_BG);
+        token_ctor(&self->super, (TokenType) TOK_CTRL_BG);
         self->super.vptr = &vtbl;
 }
 
-void BGControlToken_dtor(BGControlToken *self)
+void bgctrl_token_dtor(BGCtrlToken *self)
 {
-        Token_dtor(&self->super);
+        token_dtor(&self->super);
 }
 
-void CommentToken_ctor(CommentToken * const self)
+void comment_token_ctor(CommentToken *self)
 {
         static struct TokenVtbl const vtbl = {
-                .getType = &Token_getType_,
-                .getValue = &Token_getValue_,
-                .print = &CommentToken_print_,
-                .setValue = &Token_setValue_,
-                .take = &CommentToken_take_,
+                .get_type = &token_get_type_,
+                .get_value = &token_get_value_,
+                .print = &comment_token_print_,
+                .set_value = &token_set_value_,
+                .take = &comment_token_take_,
         };
-        Token_ctor(&self->super, (TokenType) TOK_CMT);
+        token_ctor(&self->super, (TokenType) TOK_CMT);
         self->super.vptr = &vtbl;
 }
 
-void CommentToken_dtor(CommentToken *self)
+void comment_token_dtor(CommentToken *self)
 {
-        Token_dtor(&self->super);
+        token_dtor(&self->super);
 }
 
-void InputRedirToken_ctor(InputRedirToken * const self)
+void inputredir_token_ctor(InputRedirToken *self)
 {
         static struct TokenVtbl const vtbl = {
-                .getType = &Token_getType_,
-                .getValue = &Token_getValue_,
-                .print = &InputRedirToken_print_,
-                .setValue = &Token_setValue_,
-                .take = &InputRedirToken_take_,
+                .get_type = &token_get_type_,
+                .get_value = &token_get_value_,
+                .print = &inputredir_token_print_,
+                .set_value = &token_set_value_,
+                .take = &inputredir_token_take_,
         };
-        Token_ctor(&self->super, (TokenType) TOK_REDIR_INPUT);
+        token_ctor(&self->super, (TokenType) TOK_REDIR_INPUT);
         self->super.vptr = &vtbl;
 }
 
-void InputRedirToken_dtor(InputRedirToken *self)
+void inputredir_token_dtor(InputRedirToken *self)
 {
-        Token_dtor(&self->super);
+        token_dtor(&self->super);
 }
 
-void NewlineToken_ctor(NewlineToken *self)
+void newline_token_ctor(NewlineToken *self)
 {
         static struct TokenVtbl const vtbl = {
-                .getType = &Token_getType_,
-                .getValue = &Token_getValue_,
-                .print = &NewlineToken_print_,
-                .setValue = &Token_setValue_,
-                .take = &NewlineToken_take_,
+                .get_type = &token_get_type_,
+                .get_value = &token_get_value_,
+                .print = &newline_token_print_,
+                .set_value = &token_set_value_,
+                .take = &newline_token_take_,
         };
-        Token_ctor(&self->super, (TokenType) TOK_CTRL_NEWLINE);
+        token_ctor(&self->super, (TokenType) TOK_CTRL_NEWLINE);
         self->super.vptr = &vtbl;
 }
 
-void NewlineToken_dtor(NewlineToken *self)
+void newline_token_dtor(NewlineToken *self)
 {
-        Token_dtor(&self->super);
+        token_dtor(&self->super);
 }
 
-void OutputRedirToken_ctor(OutputRedirToken *self)
+void outputredir_token_ctor(OutputRedirToken *self)
 {
         static struct TokenVtbl const vtbl = {
-                .getType = &Token_getType_,
-                .getValue = &Token_getValue_,
-                .print = &OutputRedirToken_print_,
-                .setValue = &Token_setValue_,
-                .take = &OutputRedirToken_take_,
+                .get_type = &token_get_type_,
+                .get_value = &token_get_value_,
+                .print = &outputredir_token_print_,
+                .set_value = &token_set_value_,
+                .take = &outputredir_token_take_,
         };
-        Token_ctor(&self->super, (TokenType) TOK_REDIR_OUTPUT);
+        token_ctor(&self->super, (TokenType) TOK_REDIR_OUTPUT);
         self->super.vptr = &vtbl;
 }
 
-void OutputRedirToken_dtor(OutputRedirToken *self)
+void outputredir_token_dtor(OutputRedirToken *self)
 {
-        Token_dtor(&self->super);
+        token_dtor(&self->super);
 }
 
-void WordToken_ctor(WordToken *self)
+void word_token_ctor(WordToken *self)
 {
         static struct TokenVtbl const vtbl = {
-                .getType = &Token_getType_,
-                .getValue = &Token_getValue_,
-                .print = &WordToken_print_,
-                .setValue = &Token_setValue_,
-                .take = &WordToken_take_,
+                .get_type = &token_get_type_,
+                .get_value = &token_get_value_,
+                .print = &word_token_print_,
+                .set_value = &token_set_value_,
+                .take = &word_token_take_,
         };
-        Token_ctor(&self->super, (TokenType) TOK_WORD);
+        token_ctor(&self->super, (TokenType) TOK_WORD);
         self->super.vptr = &vtbl;
 }
 
-void WordToken_dtor(WordToken *self)
+void word_token_dtor(WordToken *self)
 {
-        Token_dtor(&self->super);
+        token_dtor(&self->super);
 }
