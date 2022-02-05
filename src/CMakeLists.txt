@@ -3,6 +3,7 @@ set(
         "${PROJECT_SOURCE_DIR}/src/main.c"
         "${PROJECT_SOURCE_DIR}/src/smallsh.c"
         "${PROJECT_SOURCE_DIR}/src/shell/signal-handlers.c"
+        "${PROJECT_SOURCE_DIR}/src/builtins/cd.c"
         "${PROJECT_SOURCE_DIR}/src/interpreter/parser.c"
         "${PROJECT_SOURCE_DIR}/src/interpreter/statement.c"
         "${PROJECT_SOURCE_DIR}/src/interpreter/token-iterator.c"
