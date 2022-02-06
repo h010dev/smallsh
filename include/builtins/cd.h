@@ -4,7 +4,6 @@
  * @date 04 Feb 2022
  * @brief cd builtin command.
  */
-
 #ifndef SMALLSH_CD_H
 #define SMALLSH_CD_H
 
