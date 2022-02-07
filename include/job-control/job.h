@@ -13,14 +13,37 @@
 #include <termios.h>
 #include "process.h"
 
-typedef struct {
-        char *job_cmd;
-        Process job_proc;
-        pid_t job_pgid;
-        struct termios tmodes;
-        char *job_stdin;
-        char *job_stdout;
-        unsigned job_spec;
-} Job;
+typedef struct Job Job;
+
+/**
+ * @brief Job object.
+ */
+struct Job {
+        Process *job_proc; /**< process object */
+        pid_t job_pgid; /**< PGID */
+        char *job_stdin; /**< STDIN filename */
+        char *job_stdout; /**< STDOUT filename */
+        unsigned job_spec; /**< position within job table */
+        bool job_bg; /**< whether or not job is to run in background */
+        Job *job_next; /**< next job in table */
+};
+
+/**
+ * @brief Initializes values for a @c Job object.
+ * @param self job object to initialize
+ * @param proc job's process object
+ * @param pgid job's PGID
+ * @param infile job's STDIN filename
+ * @param outfile job's STDOUT filename
+ * @param bg whether or not job is to be run in background
+ */
+void job_ctor(Job *self, Process *proc, pid_t pgid, char *infile, char *outfile,
+              bool bg);
+
+/**
+ * @brief Cleans up and frees job resources.
+ * @param self job to clean up
+ */
+void job_dtor(Job *self);
 
 #endif //SMALLSH_JOB_H
