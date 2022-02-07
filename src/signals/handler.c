@@ -33,7 +33,7 @@ void handler_handle_sigtstp(int sig)
          * caught.
          */
         errno = 0;
-        if (write(pfd2[1], "x", 1) == -1 && errno != EAGAIN) {
+        if (write(pipe_sigtstp[1], "x", 1) == -1 && errno != EAGAIN) {
                 perror("write");
                 _exit(1);
         }
@@ -75,7 +75,7 @@ void handler_handle_sigchld(int sig)
                  * Write DTO to pipe.
                  */
                 errno = 0;
-                if (write(pfd[1], &dto, sizeof(dto)) == -1 && errno != EAGAIN) {
+                if (write(pipe_sigchld[1], &dto, sizeof(dto)) == -1 && errno != EAGAIN) {
                         perror("write");
                         _exit(1);
                 }
