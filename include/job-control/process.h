@@ -14,17 +14,41 @@
 #include <stdbool.h>
 #include <sys/types.h>
 
+/**
+ * @brief A Process object holds information related to running a program.
+ */
 typedef struct {
-        char **argv;
-        pid_t proc_pid;
-        bool proc_completed;
-        int proc_status;
+        char **argv; /**< process arguments */
+        pid_t proc_pid; /**< process PID */
+        bool proc_completed; /**< process completion status */
+        int proc_status; /**< process exit status */
 } Process;
 
-/*
- * Launch process.
- *
- * Source: https://www.gnu.org/software/libc/manual/html_node/Launching-Jobs.html
+/**
+ * @brief Initialize a @c Process object.
+ * @param self object to initialize
+ * @param argc argument count for @p argv
+ * @param argv array of arguments for process command
+ * @param pid process PID
+ * @param completed whether or not the process has completed
+ * @param status process exit status
+ */
+void process_ctor(Process *self, size_t argc, char **argv, pid_t pid,
+                  bool completed, int status);
+
+/**
+ * @brief Reset @p self to default values and free any associated memory.
+ * @param self object to free
+ */
+void process_dtor(Process *self);
+
+/**
+ * @brief Launches a new process.
+ * @param proc process to launch
+ * @param pgid process PGID
+ * @param infile STDIN file stream
+ * @param outfile STDOUT file stream
+ * @param foreground whether or not the process is to run in the foreground
  */
 void process_launch(Process *proc, pid_t pgid, char *infile, char *outfile,
                     bool foreground);

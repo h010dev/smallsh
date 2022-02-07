@@ -7,96 +7,287 @@
  * Ideas presented here were retrieved from the following source:
  * https://www.gnu.org/software/libc/manual/html_node/Launching-Jobs.html
  */
-#include <unistd.h>
-#include <stdio.h>
+#define _GNU_SOURCE
+#include <errno.h>
 #include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <sys/stat.h>
+#include <unistd.h>
 
 #include "job-control/process.h"
 #include "core/shell-attrs.h"
-#include "signals/installer.h"
+
+/* *****************************************************************************
+ * PRIVATE DEFINITIONS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
+/* *****************************************************************************
+ * FUNCTIONS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
+/**
+ * @brief Execute program with @p argv as its arguments.
+ *
+ * Wrapper around exec* call that executes new program with @p argv
+ * as its arguments, and displays error on failure.
+ * @param argv arguments to pass to exec* function
+ */
+static void process_exec(char **argv)
+{
+        int status;
+
+        errno = 0;
+        status = execvp(argv[0], argv);
+        if (status == -1) {
+                perror("execvp");
+                _exit(1);
+        }
+}
 
 /**
- * TLPI 34.2
- *
- * If the pid and pgid arguments specify the same process, then a new process
- * group is created, and the specified process is made the leader of the new group.
+ * @brief Creates new process group and assigns current process as the leader.
+ * @param pgid new process group
  */
-void process_new_process_group(pid_t pgid)
+static void process_new_process_group(pid_t *pgid)
 {
         pid_t pid;
 
         pid = getpid();
-        if (pgid == 0) {
-                pgid = pid;
+
+#ifdef DEBUG
+        printf("child: pid=%d\n", pid);
+#endif
+
+        if (*pgid == 0) {
+                *pgid = pid;
         }
-        setpgid(pid, pgid);
+        setpgid(pid, *pgid);
+
+#ifdef DEBUG
+        printf("child: pgid=%d\n", getpgid(pid));
+#endif
 }
 
-void process_set_io_streams(char *infile, char *outfile)
+/**
+ * @brief Opens IO streams for process.
+ *
+ * STDIN, STDOUT redirected to new streams.
+ * @param infile filename to redirect STDIN to
+ * @param outfile filename to redirect STDOUT to
+ */
+static void process_set_io_streams(char *infile, char *outfile)
 {
-        /* Get file descriptors for input/output files. */
+        int status, stdin_flags, stdout_flags, mode;
         int fds[2];
 
-        int stdin_flags = O_RDONLY;
-        int stdout_flags = O_WRONLY | O_CREAT | O_TRUNC;
-        int mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH;
+        stdin_flags = O_RDONLY;
 
-        fds[0] = open(infile, stdin_flags, mode);
-        fds[1] = open(outfile, stdout_flags, mode);
+        /*
+         * Create file for stdout stream if it doesn't exit.
+         */
+        stdout_flags = O_WRONLY | O_CREAT | O_TRUNC;
 
-        /* Set the standard input/output channels of the new process. */
-        if (fds[0] != STDIN_FILENO) {
-                dup2(fds[0], STDIN_FILENO);
-                close(fds[0]);
+        /* -rw-rw-rw- */
+        mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH;
+
+        /*
+         * Set the standard input/output channels of the new process.
+         */
+        if (infile != NULL) {
+                errno = 0;
+                fds[0] = open(infile, stdin_flags, mode);
+                if (fds[0] == -1) {
+                        perror("open");
+                        _exit(1);
+                }
+
+                if (fds[0] != STDIN_FILENO) {
+                        errno = 0;
+                        status = dup2(fds[0], STDIN_FILENO);
+                        if (status == -1) {
+                                perror("dup2");
+                                _exit(1);
+                        }
+
+                        errno = 0;
+                        status = close(fds[0]);
+                        if (status == -1) {
+                                perror("close");
+                                _exit(1);
+                        }
+                }
         }
-        if (fds[1] != STDOUT_FILENO) {
-                dup2(fds[1], STDOUT_FILENO);
-                close(fds[1]);
+
+        if (outfile != NULL) {
+                errno = 0;
+                fds[1] = open(outfile, stdout_flags, mode);
+                if (fds[1] == -1) {
+                        perror("open");
+                        _exit(1);
+                }
+
+                if (fds[1] != STDOUT_FILENO) {
+                        errno = 0;
+                        status = dup2(fds[1], STDOUT_FILENO);
+                        if (status == -1) {
+                                perror("dup2");
+                                _exit(1);
+                        }
+
+                        errno = 0;
+                        status = close(fds[1]);
+                        if (status == -1) {
+                                perror("close");
+                                _exit(1);
+                        }
+                }
         }
 }
 
-void process_exec(char **argv)
+/* *****************************************************************************
+ * PUBLIC DEFINITIONS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
+/* *****************************************************************************
+ * CONSTRUCTORS + DESTRUCTORS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
+void process_ctor(Process *self, size_t argc, char **argv, pid_t pid,
+                  bool completed, int status)
 {
-        /* Exec new process. Make sure we exit. */
-        execvp(argv[0], argv);
-        perror("execvp");
-        _exit(1);
+        /*
+         * Copy over argv array.
+         */
+        char **tmp = malloc((argc + 1) * sizeof(char *));
+        if (tmp == NULL) {
+                fprintf(stderr, "malloc\n");
+                _exit(1); // error
+        }
+        self->argv = tmp;
+
+        for (size_t i = 0; i < argc; i++) {
+                errno = 0;
+                self->argv[i] = strdup(argv[i]);
+                if (self->argv[i] == NULL) {
+                        perror("strdup");
+                        _exit(1); // error
+                }
+        }
+
+        /* null terminate list */
+        self->argv[argc] = NULL;
+
+        /*
+         * Initialize remaining variables
+         */
+        self->proc_pid = pid;
+        self->proc_completed = completed;
+        self->proc_status = status;
 }
 
+void process_dtor(Process *self)
+{
+        /*
+         * Free argv array
+         */
+        for (size_t i = 0; self->argv[i] != NULL; i++) {
+                free(self->argv[i]);
+                self->argv[i] = NULL;
+        }
+        free(self->argv);
+        self->argv = NULL;
+
+        /*
+         * Reset remaining variables.
+         */
+        self->proc_pid = 0;
+        self->proc_completed = false;
+        self->proc_status = 0;
+}
+
+/* *****************************************************************************
+ * FUNCTIONS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
 void process_launch(Process *proc, pid_t pgid, char *infile, char *outfile,
                     bool foreground)
 {
+        int status;
+
         if (shell_is_interactive) {
-                /* Put the process into the process group and give the process
-                 * group the terminal, if appropriate. */
+                process_new_process_group(&pgid);
 
-                process_new_process_group(pgid);
-
-                /**
-                 * TLPI 34.5
-                 *
-                 * Within a session, only one process can be in the foreground
-                 * at a particular moment. The foreground process group
-                 * is the only process that can freely read and write on the
-                 * controlling terminal. If the calling process has a controlling
-                 * terminal, and the file descriptor fd refers to that terminal,
-                 * then tcsetpgrp() sets the foreground process group of the
-                 * terminal to the value specified in pgid, which must match
-                 * the process group ID of one of the processes in the
-                 * calling process's session.
+                /*
+                 * If we are running in the foreground, set the process as the
+                 * controlling foreground process.
                  */
                 if (foreground) {
-                        tcsetpgrp(shell_terminal, pgid);
+                        errno = 0;
+                        status = tcsetpgrp(shell_terminal, pgid);
+                        if (status == -1) {
+                                perror("tcsetpgrp");
+                                _exit(1);
+                        }
                 }
 
-                /* Set the handling for job control signals back to the default */
-                installer_uninstall_job_control_signals();
+                /*
+                 * Allow SIGINT to terminate this process.
+                 */
+                signal(SIGINT, SIG_DFL);
         }
 
-        /* Set the standard input/output channels of the new process. */
         process_set_io_streams(infile, outfile);
-
-        /* Exec new process. Make sure we exit. */
         process_exec(proc->argv);
 }
