@@ -1,26 +1,136 @@
 /**
+ * @file installer.c
+ * @author Mohamed Al-Hussein
  * @date 05 Feb 2022
+ * @brief Contains functions for installing signals.
+ *
+ * Ideas presented here were retrieved from the following sources:
+ * https://www.gnu.org/software/libc/manual/html_node/Initializing-the-Shell.html
+ * https://www.gnu.org/software/libc/manual/html_node/Launching-Jobs.html
  */
+#define _GNU_SOURCE
+#include <errno.h>
 #include <signal.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+
+#include "signals/installer.h"
+#include "signals/handler.h"
 
 void installer_install_job_control_signals(void)
 {
-        /* ignore interactive and job-control signals */
-        signal(SIGINT, SIG_IGN);
-        signal(SIGQUIT, SIG_IGN);
-        signal(SIGTSTP, SIG_IGN);
-        signal(SIGTTIN, SIG_IGN);
-        signal(SIGTTOU, SIG_IGN);
-        signal(SIGCHLD, SIG_IGN);
+        sighandler_t status;
+
+        /*
+         * Ignore interactive and job-control signals.
+         */
+        errno = 0;
+        status = signal(SIGINT, SIG_IGN);
+        if (status == SIG_ERR) {
+                perror("signal");
+                _exit(1);
+        }
+
+        /*
+         * Shell should ignore read/write signals since it is allowed to
+         * perform IO.
+         */
+        errno = 0;
+        status = signal(SIGTTIN, SIG_IGN);
+        if (status == SIG_ERR) {
+                perror("signal");
+                _exit(1);
+        }
+
+        errno = 0;
+        status = signal(SIGTTOU, SIG_IGN);
+        if (status == SIG_ERR) {
+                perror("signal");
+                _exit(1);
+        }
+
+        /*
+         * Shell should handle SIGCHLD events for later delivery.
+         */
+        installer_install_sigchld_handler();
+
+        /*
+         * Shell should handle SIGTSTP events to enable/disable fg only mode.
+         */
+        installer_install_sigtstp_handler();
 }
 
-void installer_uninstall_job_control_signals(void)
+void installer_install_sigchld_handler(void)
 {
-        /* Set the handling for job control signals back to the default */
-        signal(SIGINT, SIG_DFL);
-        signal(SIGQUIT, SIG_DFL);
-        signal(SIGTSTP, SIG_DFL);
-        signal(SIGTTIN, SIG_DFL);
-        signal(SIGTTOU, SIG_DFL);
-        signal(SIGCHLD, SIG_DFL);
+        struct sigaction sa;
+        sigset_t block_set;
+        int status;
+
+        /*
+         * Ignore SIGTSTP signals within this handler.
+         */
+        memset(&sa, 0, sizeof(sa));
+
+        errno = 0;
+        status = sigemptyset(&block_set);
+        if (status == -1) {
+                perror("sigemptyset");
+                _exit(1);
+        }
+
+        errno = 0;
+        status = sigaddset(&block_set, SIGTSTP);
+        if (status == -1) {
+                perror("sigaddset");
+                _exit(1);
+        }
+
+        sa.sa_mask = block_set;
+        sa.sa_flags = SA_RESTART;
+        sa.sa_handler = handler_handle_sigchld;
+
+        errno = 0;
+        status = sigaction(SIGCHLD, &sa, NULL);
+        if (status == -1) {
+                perror("sigaction");
+                _exit(1);
+        }
+}
+
+void installer_install_sigtstp_handler(void)
+{
+        struct sigaction sa;
+        sigset_t block_set;
+        int status;
+
+        /*
+         * Ignore SIGCHLD signals within this handler.
+         */
+        memset(&sa, 0, sizeof(sa));
+
+        errno = 0;
+        status = sigemptyset(&block_set);
+        if (status == -1) {
+                perror("sigemptyset");
+                _exit(1);
+        }
+
+        errno = 0;
+        status = sigaddset(&block_set, SIGCHLD);
+        if (status == -1) {
+                perror("sigaddset");
+                _exit(1);
+        }
+
+        sa.sa_mask = block_set;
+        sa.sa_flags = SA_RESTART;
+        sa.sa_handler = handler_handle_sigtstp;
+
+        errno = 0;
+        status = sigaction(SIGTSTP, &sa, NULL);
+        if (status == -1) {
+                perror("sigaction");
+                _exit(1);
+        }
 }

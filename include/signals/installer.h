@@ -1,13 +1,29 @@
 /**
+ * @file installer.h
+ * @author Mohamed Al-Hussein
  * @date 05 Feb 2022
+ * @brief Contains functions for installing signals.
+ *
+ * Ideas presented here were retrieved from the following sources:
+ * https://www.gnu.org/software/libc/manual/html_node/Initializing-the-Shell.html
+ * https://www.gnu.org/software/libc/manual/html_node/Launching-Jobs.html
  */
 #ifndef SMALLSH_INSTALLER_H
 #define SMALLSH_INSTALLER_H
 
-/* Source: https://www.gnu.org/software/libc/manual/html_node/Initializing-the-Shell.html */
+/**
+ * @brief Installs job control signals for the shell.
+ */
 void installer_install_job_control_signals(void);
 
-/* Source: https://www.gnu.org/software/libc/manual/html_node/Launching-Jobs.html */
-void installer_uninstall_job_control_signals(void);
+/**
+ * @brief Installs a SIGCHLD handler for the shell.
+ */
+void installer_install_sigchld_handler(void);
+
+/**
+ * @brief Installs a SIGTSTP handler for the shell.
+ */
+void installer_install_sigtstp_handler(void);
 
 #endif //SMALLSH_INSTALLER_H
