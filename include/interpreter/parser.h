@@ -38,6 +38,8 @@
  */
 #define is_tok_word(tok) ((ShellTokenType) tok.vptr->get_type(&tok) == TOK_WORD)
 
+#define is_tok_ctrl_newline(tok) ((ShellTokenType) tok.vptr->get_type(&tok) == TOK_CTRL_NEWLINE)
+
 struct ParserPrivate;
 
 /**
@@ -77,7 +79,7 @@ typedef struct Parser {
          * @param self @c Parser object
          * @return array of @c Statement objects parsed from character stream
          */
-        Statement **(*get_statement) (struct Parser * const self);
+        Statement **(*get_statements) (struct Parser * const self);
 
         /**
          * @brief Prints statement in a pretty-printed format to stdout.

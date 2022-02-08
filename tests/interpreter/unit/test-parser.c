@@ -412,7 +412,7 @@ static void parser_parse_test_emptyString01(void **state)
         assert_int_equal(0, n_stmts);
 
         // statements should not be null, even though empty
-        assert_non_null(parser.get_statement(&parser));
+        assert_non_null(parser.get_statements(&parser));
 }
 
 static void parser_parse_test_emptyString02(void **state)
@@ -433,7 +433,7 @@ static void parser_parse_test_emptyString02(void **state)
         assert_int_equal(0, n_stmts);
 
         // statements should not be null, even though empty
-        assert_non_null(parser.get_statement(&parser));
+        assert_non_null(parser.get_statements(&parser));
 }
 
 static void parser_parse_test_emptyString03(void **state)
@@ -454,7 +454,7 @@ static void parser_parse_test_emptyString03(void **state)
         assert_int_equal(0, n_stmts);
 
         // statements should not be null, even though empty
-        assert_non_null(parser.get_statement(&parser));
+        assert_non_null(parser.get_statements(&parser));
 }
 
 static void parser_parse_test_emptyString04(void **state)
@@ -475,7 +475,7 @@ static void parser_parse_test_emptyString04(void **state)
         assert_int_equal(0, n_stmts);
 
         // statements should not be null, even though empty
-        assert_non_null(parser.get_statement(&parser));
+        assert_non_null(parser.get_statements(&parser));
 }
 
 static void parser_parse_test_singleStatementCmd(void **state)
@@ -496,7 +496,7 @@ static void parser_parse_test_singleStatementCmd(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statement(&parser);
+        Statement **stmts = parser.get_statements(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
@@ -542,7 +542,7 @@ static void parser_parse_test_singleStatementBuiltinCD(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statement(&parser);
+        Statement **stmts = parser.get_statements(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
@@ -588,7 +588,7 @@ static void parser_parse_test_singleStatementBuiltinExit(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statement(&parser);
+        Statement **stmts = parser.get_statements(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
@@ -634,7 +634,7 @@ static void parser_parse_test_singleStatementBuiltinStatus(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statement(&parser);
+        Statement **stmts = parser.get_statements(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
@@ -680,7 +680,7 @@ static void parser_parse_test_singleStatementBuiltinCDPath(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statement(&parser);
+        Statement **stmts = parser.get_statements(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
@@ -727,7 +727,7 @@ static void parser_parse_test_singleStatementBuiltinCDPathBG(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statement(&parser);
+        Statement **stmts = parser.get_statements(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
@@ -775,7 +775,7 @@ static void parser_parse_test_singleStatementCmdArg(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statement(&parser);
+        Statement **stmts = parser.get_statements(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
@@ -822,7 +822,7 @@ static void parser_parse_test_singleStatementCmd2Args(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statement(&parser);
+        Statement **stmts = parser.get_statements(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
@@ -870,7 +870,7 @@ static void parser_parse_test_singleStatementCmdStdin(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statement(&parser);
+        Statement **stmts = parser.get_statements(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
@@ -919,7 +919,7 @@ static void parser_parse_test_singleStatementCmdStdout(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statement(&parser);
+        Statement **stmts = parser.get_statements(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
@@ -968,7 +968,7 @@ static void parser_parse_test_singleStatementCmdBG(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statement(&parser);
+        Statement **stmts = parser.get_statements(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
@@ -1014,7 +1014,7 @@ static void parser_parse_test_singleStatementAllTypes01(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statement(&parser);
+        Statement **stmts = parser.get_statements(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid
@@ -1068,7 +1068,7 @@ static void parser_parse_test_singleStatementAllTypes02(void **state)
         assert_int_equal(1, n_stmts);
 
         // statements should not be null
-        Statement **stmts = parser.get_statement(&parser);
+        Statement **stmts = parser.get_statements(&parser);
         assert_non_null(stmts);
 
         // all fields in statement should be valid

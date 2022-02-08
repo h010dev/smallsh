@@ -237,6 +237,13 @@ static ssize_t parser_parse_statements_(struct Parser * const self)
                         (void) iter.vptr->next(&iter);
                         stmts[count - 1]->stmt_flags |= FLAGS_BGCTRL;
                         cur++;
+                } else if (is_tok_ctrl_newline(tok)) {
+                        if (count == 0) {
+                                // empty line
+                                break;
+                        }
+                        (void) iter.vptr->next(&iter);
+                        cur++;
                 } else if (is_tok_redir_input(tok)) {
                         if (stmts[count] == NULL) {
                                 // syntax error
@@ -342,7 +349,7 @@ static inline Statement **parser_get_statements_(struct Parser * const self)
 void parser_ctor(Parser *self)
 {
         self->parse = &parser_parse_;
-        self->get_statement = &parser_get_statements_;
+        self->get_statements = &parser_get_statements_;
         self->print_statement = &statement_print;
         self->private = malloc(sizeof(struct ParserPrivate));
 }
@@ -369,7 +376,7 @@ void parser_dtor(Parser *self)
         self->private = NULL;
 
         self->parse = NULL;
-        self->get_statement = NULL;
+        self->get_statements = NULL;
         self->print_statement = NULL;
 }
 

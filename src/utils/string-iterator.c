@@ -131,21 +131,12 @@ static char *string_iterator_slice_(StringIterator const * const self, const cha
         const char *l_bound = self->private->si_str;
         const char *r_bound = self->private->si_cur;
 
-#ifdef DEBUG
-        printf("&from=%p, &l_bound=%p, &r_bound=%p\n",
-               (void *) from, (void *) l_bound, (void *) r_bound);
-#endif
-
         if (from < l_bound || from >= r_bound) {
                 /* error out of bounds */
                 return NULL;
         }
 
         ptrdiff_t len = r_bound - from;
-
-#ifdef DEBUG
-        printf("len=%ld\n", len);
-#endif
 
         char *slice = strndup(from, len);
         return slice;
