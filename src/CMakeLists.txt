@@ -10,6 +10,8 @@ set(
         "${PROJECT_SOURCE_DIR}/src/signals/installer.c"
         "${PROJECT_SOURCE_DIR}/src/signals/handler.c"
         "${PROJECT_SOURCE_DIR}/src/builtins/cd.c"
+        "${PROJECT_SOURCE_DIR}/src/builtins/status.c"
+        "${PROJECT_SOURCE_DIR}/src/builtins/exit.c"
         "${PROJECT_SOURCE_DIR}/src/interpreter/parser.c"
         "${PROJECT_SOURCE_DIR}/src/interpreter/statement.c"
         "${PROJECT_SOURCE_DIR}/src/interpreter/token-iterator.c"
