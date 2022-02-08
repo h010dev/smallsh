@@ -7,6 +7,8 @@
  * Ideas presented here were retrieved from the following source:
  * https://www.gnu.org/software/libc/manual/html_node/Data-Structures.html
  */
+#define _GNU_SOURCE
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -118,8 +120,19 @@ static void job_table_clean_(struct JobTable const * const self)
                                 } else if (cur->job_spec == last_spec_02) {
                                         printf("-");
                                 }
-                                printf("\tDone\t\t\t%s\n",
-                                       cur->job_proc->argv[0]);
+
+                                printf("\t%d", cur->job_proc->proc_pid);
+
+                                printf("\tDone");
+
+                                if (cur->job_proc->proc_status == 0) {
+                                        printf("\tEXIT 0");
+                                } else {
+                                        printf("\tTERM %d",
+                                               cur->job_proc->proc_status);
+                                }
+
+                                printf("\t\t%s\n", cur->job_proc->argv[0]);
                         }
 
                         /*
@@ -178,6 +191,21 @@ static Job *job_table_find_job_(struct JobTable const * const self,
 
         /* job not found */
         return NULL;
+}
+
+static void job_table_killall_(struct JobTable const * const self)
+{
+        struct JobTablePrivate *priv = self->private;
+
+        Job *job = priv->jt_head;
+
+        while (job != NULL) {
+                pid_t pid = job->job_proc->proc_pid;
+                kill(pid, SIGTERM);
+                job = job->job_next;
+        }
+
+        self->clean(self);
 }
 
 static void job_table_list_jobs_(struct JobTable const * const self)
@@ -272,10 +300,11 @@ void job_table_ctor(JobTable *self)
          * Init table functions.
          */
         self->add_job = &job_table_add_job_;
+        self->clean = &job_table_clean_;
         self->find_job = &job_table_find_job_;
+        self->killall = &job_table_killall_;
         self->list_jobs = &job_table_list_jobs_;
         self->update = &job_table_update_;
-        self->clean = &job_table_clean_;
 
         /*
          * Init table data.
@@ -305,10 +334,11 @@ void job_table_dtor(JobTable *self)
          * Reset function pointers.
          */
         self->add_job = NULL;
+        self->clean = NULL;
         self->find_job = NULL;
+        self->killall = NULL;
         self->list_jobs = NULL;
         self->update = NULL;
-        self->clean = NULL;
 
         /*
          * Free table data.

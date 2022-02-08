@@ -41,6 +41,8 @@ struct JobTable {
          */
         Job *(*find_job) (struct JobTable const * const self, pid_t job_pgid);
 
+        void (*killall) (struct JobTable const * const self);
+
         /**
          * @brief List all jobs in a pretty-printed format.
          * @param self table to print
