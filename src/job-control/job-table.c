@@ -133,6 +133,7 @@ static void job_table_clean_(struct JobTable const * const self)
                                 priv->jt_head = head->job_next;
 
                                 job_dtor(head);
+                                free(head);
                                 head = NULL;
 
                                 cur = priv->jt_head;
@@ -145,6 +146,7 @@ static void job_table_clean_(struct JobTable const * const self)
                                 cur = pre->job_next;
 
                                 job_dtor(old);
+                                free(old);
                                 old = NULL;
                         }
                         priv->jt_job_count--;
@@ -294,6 +296,7 @@ void job_table_dtor(JobTable *self)
                 Job *head = priv->jt_head;
                 priv->jt_head = head->job_next;
                 job_dtor(head);
+                free(head);
                 head = NULL;
         }
         self->private->jt_job_count = 0;

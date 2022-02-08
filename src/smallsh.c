@@ -124,7 +124,7 @@ static void smallsh_init(void)
                                  *
                                  * This is only triggered via CLion's run mode.
                                  */
-                                perror("shell is session leader\n");
+                                perror("shell is session leader");
                         } else {
                                 perror("Couldn't put shell in its own process group");
                                 _exit(1);

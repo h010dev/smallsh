@@ -99,9 +99,15 @@ void job_ctor(Job *self, Process *proc, pid_t pgid, char *infile, char *outfile,
 void job_dtor(Job *self)
 {
         /*
+         * Free process object.
+         */
+        process_dtor(self->job_proc);
+        free(self->job_proc);
+        self->job_proc = NULL;
+
+        /*
          * Clear variables.
          */
-        self->job_proc = 0;
         self->job_pgid = 0;
         self->job_bg = false;
         self->job_next = NULL;
