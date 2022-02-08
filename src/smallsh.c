@@ -19,7 +19,10 @@
 
 #include "smallsh.h"
 #include "builtins/cd.h"
+#include "builtins/exit.h"
+#include "builtins/status.h"
 #include "core/dtos.h"
+#include "core/error.h"
 #include "core/shell-attrs.h"
 #include "job-control/job-control.h"
 #include "job-control/job-table.h"
@@ -56,9 +59,8 @@
  *
  *
  ******************************************************************************/
-static volatile int smallsh_errno = 0;
-static JobTable job_table;
 static bool smallsh_fg_only_mode = false;
+int smallsh_status = 0;
 
 static fd_set readfds;
 static int ready, nfds;
@@ -116,8 +118,8 @@ static void smallsh_init(void)
 #endif
 
                 errno = 0;
-                int status = setpgid(shell_pgid, shell_pgid);
-                if (status == -1) {
+                int status_ = setpgid(shell_pgid, shell_pgid);
+                if (status_ == -1) {
                         if (errno == EPERM && shell_pgid == getpgrp()) {
                                 /*
                                  * Process is session leader; do nothing.
@@ -378,7 +380,7 @@ static ssize_t smallsh_read_input(char **cmd)
  */
 static int smallsh_eval(char *cmd)
 {
-        int status;
+        int status_;
         Parser parser;
         ssize_t n_stmts;
         Statement *stmt;
@@ -455,8 +457,7 @@ static int smallsh_eval(char *cmd)
                 /*
                  * Run job.
                  */
-                job_control_launch_job(&job, foreground);
-                status = 0;
+                status_ = job_control_launch_job(&job, foreground);
         }
         /*
          * Statement is a builtin.
@@ -468,23 +469,23 @@ static int smallsh_eval(char *cmd)
                 cmd_name = stmt->stmt_cmd->cmd_argv[0];
                 if (strcmp("exit", cmd_name) == 0) {
                         /* do cleanup here */
-                        status = 1;
+                        status_ = 1;
                 } else if (strcmp("cd", cmd_name) == 0) {
                         char *dirname = stmt->stmt_cmd->cmd_argv[1];
                         cd(dirname);
-                        status = 0;
+                        status_ = 0;
                 } else if (strcmp("status", cmd_name) == 0) {
-                        /* return status here */
-                        status = 0;
+                        status(smallsh_status);
+                        status_ = 0;
                 } else {
                         /* error */
-                        status = -1;
+                        status_ = -1;
                 }
         }
 
         parser_dtor(&parser);
 
-        return status;
+        return status_;
 }
 
 /* *****************************************************************************
@@ -521,7 +522,7 @@ int smallsh_run(void)
 {
         ssize_t n_read;
         char *cmd;
-        int status;
+        int status_;
 
         smallsh_init();
 
@@ -548,28 +549,38 @@ int smallsh_run(void)
                 cmd = NULL;
                 n_read = smallsh_read_input(&cmd);
                 if (n_read == -1) {
-                        status = EXIT_FAILURE;
+                        status_ = EXIT_FAILURE;
                         break;
                 }
 
                 /*
                  * Evaluate command.
                  */
-                status = smallsh_eval(cmd);
-                if (status == -1) {
+                status_ = smallsh_eval(cmd);
+                if (status_ == -1) {
+                        if (smallsh_errno == SMSH_EOPEN) {
+                                /* do nothing */
+                                smallsh_errno = 0;
+                                smallsh_status = 1;
+                        } else {
+                                free(cmd);
+                                status_ = EXIT_FAILURE;
+                                break;
+                        }
+                } else if (status_ == 1) {
                         free(cmd);
-                        status = EXIT_FAILURE;
-                        break;
-                } else if (status == 1) {
-                        free(cmd);
-                        status = EXIT_SUCCESS;
+                        status_ = EXIT_SUCCESS;
                         break;
                 }
 
                 free(cmd);
         } while (1);
 
+        if (status_ == EXIT_SUCCESS) {
+                exit_();
+        }
+
         job_table_dtor(&job_table);
 
-        return status;
+        return status_;
 }
