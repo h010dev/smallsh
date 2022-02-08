@@ -19,6 +19,7 @@
 
 #include "job-control/process.h"
 #include "core/shell-attrs.h"
+#include "core/error.h"
 
 /* *****************************************************************************
  * PRIVATE DEFINITIONS
@@ -40,6 +41,18 @@
  *
  *
  ******************************************************************************/
+/* *****************************************************************************
+ * OBJECTS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
+static bool is_fg = false;
+
 /* *****************************************************************************
  * FUNCTIONS
  *
@@ -100,7 +113,7 @@ static void process_new_process_group(pid_t *pgid)
  * @param infile filename to redirect STDIN to
  * @param outfile filename to redirect STDOUT to
  */
-static void process_set_io_streams(char *infile, char *outfile)
+static int process_set_io_streams(char *infile, char *outfile)
 {
         int status, stdin_flags, stdout_flags, mode;
         int fds[2];
@@ -122,8 +135,32 @@ static void process_set_io_streams(char *infile, char *outfile)
                 errno = 0;
                 fds[0] = open(infile, stdin_flags, mode);
                 if (fds[0] == -1) {
-                        perror("open");
-                        _exit(1);
+                        smallsh_errno = SMSH_EOPEN;
+                        fprintf(stderr, "cannot open %s for input\n", infile);
+                        return -1;
+                }
+
+                if (fds[0] != STDIN_FILENO) {
+                        errno = 0;
+                        status = dup2(fds[0], STDIN_FILENO);
+                        if (status == -1) {
+                                perror("dup2");
+                                _exit(1);
+                        }
+
+                        errno = 0;
+                        status = close(fds[0]);
+                        if (status == -1) {
+                                perror("close");
+                                _exit(1);
+                        }
+                }
+        } else if (!is_fg) {
+                fds[0] = open("/dev/null", stdin_flags, mode);
+                if (fds[0] == -1) {
+                        smallsh_errno = SMSH_EOPEN;
+                        fprintf(stderr, "cannot open /dev/null for input\n");
+                        return -1;
                 }
 
                 if (fds[0] != STDIN_FILENO) {
@@ -147,8 +184,33 @@ static void process_set_io_streams(char *infile, char *outfile)
                 errno = 0;
                 fds[1] = open(outfile, stdout_flags, mode);
                 if (fds[1] == -1) {
-                        perror("open");
-                        _exit(1);
+                        smallsh_errno = SMSH_EOPEN;
+                        fprintf(stderr, "cannot open %s for output\n", outfile);
+                        return -1;
+                }
+
+                if (fds[1] != STDOUT_FILENO) {
+                        errno = 0;
+                        status = dup2(fds[1], STDOUT_FILENO);
+                        if (status == -1) {
+                                perror("dup2");
+                                _exit(1);
+                        }
+
+                        errno = 0;
+                        status = close(fds[1]);
+                        if (status == -1) {
+                                perror("close");
+                                _exit(1);
+                        }
+                }
+        } else if (!is_fg) {
+                errno = 0;
+                fds[1] = open("/dev/null", stdout_flags, mode);
+                if (fds[1] == -1) {
+                        smallsh_errno = SMSH_EOPEN;
+                        fprintf(stderr, "cannot open /dev/null for output\n");
+                        return -1;
                 }
 
                 if (fds[1] != STDOUT_FILENO) {
@@ -167,6 +229,8 @@ static void process_set_io_streams(char *infile, char *outfile)
                         }
                 }
         }
+
+        return 0;
 }
 
 /* *****************************************************************************
@@ -267,6 +331,8 @@ void process_launch(Process *proc, pid_t pgid, char *infile, char *outfile,
 {
         int status;
 
+        is_fg = foreground;
+
         if (shell_is_interactive) {
                 process_new_process_group(&pgid);
 
@@ -289,6 +355,10 @@ void process_launch(Process *proc, pid_t pgid, char *infile, char *outfile,
                 signal(SIGINT, SIG_DFL);
         }
 
-        process_set_io_streams(infile, outfile);
+        smallsh_errno = 0;
+        status = process_set_io_streams(infile, outfile);
+        if (status == -1) {
+                return;
+        }
         process_exec(proc->argv);
 }

@@ -22,6 +22,7 @@
 
 #include "job-control/job-control.h"
 #include "core/shell-attrs.h"
+#include "core/error.h"
 
 void job_control_wait_for_job(Job *job)
 {
@@ -116,6 +117,7 @@ void job_control_wait_for_job(Job *job)
          */
         job->job_proc->proc_completed = true;
         job->job_proc->proc_status = exit_status;
+        smallsh_status = exit_status;
 
 #ifdef DEBUG
         if (WIFSIGNALED(exit_status)) {
@@ -168,7 +170,7 @@ void job_control_foreground_job(Job *job)
 #endif
 }
 
-void job_control_launch_job(Job **job, bool foreground)
+int job_control_launch_job(Job **job, bool foreground)
 {
         int status;
         Job *job_;
@@ -189,6 +191,11 @@ void job_control_launch_job(Job **job, bool foreground)
 
                 process_launch(job_->job_proc, job_->job_pgid, job_->job_stdin,
                                job_->job_stdout, foreground);
+
+                /*
+                 * If we reach this point, an error occurred.
+                 */
+                return -1;
 
 #ifdef DEBUG
                 sigset_t pending;
@@ -237,4 +244,6 @@ void job_control_launch_job(Job **job, bool foreground)
         } else {
                 /* background job; do nothing */
         }
+
+        return 0;
 }

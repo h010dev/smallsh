@@ -37,7 +37,8 @@ void job_control_foreground_job(Job *job);
  * @brief Creates new child process and runs @p job within child.
  * @param job job to run
  * @param foreground whether or not the job should run in the foreground
+ * @return 0 on success, -1 on failure
  */
-void job_control_launch_job(Job **job, bool foreground);
+int job_control_launch_job(Job **job, bool foreground);
 
 #endif //SMALLSH_JOB_CONTROL_H
