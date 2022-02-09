@@ -22,7 +22,6 @@
 
 #include "job-control/job-control.h"
 #include "core/shell-attrs.h"
-#include "core/error.h"
 
 void job_control_wait_for_job(Job *job)
 {
@@ -32,10 +31,6 @@ void job_control_wait_for_job(Job *job)
         int opt;
         bool sigtstp_raised;
         int status;
-
-#ifdef DEBUG
-        setbuf(stderr, NULL);
-#endif
 
         opt = WEXITED | WSTOPPED | WNOWAIT; /* don't collect child */
         sigtstp_raised = false;
@@ -49,7 +44,7 @@ void job_control_wait_for_job(Job *job)
         for (;;) {
                 errno = 0;
                 child = waitid(P_PID, job->job_proc->proc_pid, &info, opt);
-                if (child == -1) {
+                if (child == -1 && errno != ECHILD) {
                         /* Error ! */
                         perror("waitid");
                         _exit(1);
@@ -58,9 +53,6 @@ void job_control_wait_for_job(Job *job)
                 if (info.si_code == CLD_STOPPED) {
                         if (info.si_status == SIGTSTP) {
                                 sigtstp_raised = true;
-#ifdef DEBUG
-                                fprintf(stderr, "CLD_STOPPED & SIGTSTP\n");
-#endif
                                 /*
                                  * We want to ignore SIGTSTP, so collect child
                                  * resume it, and wait again.
@@ -80,16 +72,10 @@ void job_control_wait_for_job(Job *job)
                                         _exit(1);
                                 }
                         } else {
-#ifdef DEBUG
-                                fprintf(stderr, "CLD_STOPPED\n");
-#endif
                                 exit_status = info.si_status;
                                 break;
                         }
                 } else {
-#ifdef DEBUG
-                        fprintf(stderr, "OTHER\n");
-#endif
                         exit_status = info.si_status;
                         break;
                 }
@@ -118,26 +104,12 @@ void job_control_wait_for_job(Job *job)
         job->job_proc->proc_completed = true;
         job->job_proc->proc_status = exit_status;
         smallsh_status = exit_status;
-
-#ifdef DEBUG
-        if (WIFSIGNALED(exit_status)) {
-                int sig = WTERMSIG(exit_status);
-                if (sig == SIGINT) {
-                        fprintf(stderr, "sigint received after sgtstp\n");
-                } else if (sig == SIGTSTP) {
-                        fprintf(stderr, "sigtstp received now\n");
-                }
-        } else if (WIFEXITED(exit_status)) {
-                fprintf(stderr, "exited normally\n");
-        } else {
-                // error
-        }
-#endif
 }
 
 void job_control_foreground_job(Job *job)
 {
         int status;
+
 #ifdef DEBUG
         printf("0: tcgrp=%d\n", tcgetpgrp(shell_terminal));
 #endif
@@ -180,70 +152,49 @@ int job_control_launch_job(Job **job, bool foreground)
 
         spawn_pid = fork();
         if (spawn_pid == 0) {
-#ifdef DEBUG
-                sigset_t block_set;
-
-                sigemptyset(&block_set);
-                sigaddset(&block_set, SIGTSTP);
-
-                sigprocmask(SIG_BLOCK, &block_set, NULL);
-#endif
-
                 process_launch(job_->job_proc, job_->job_pgid, job_->job_stdin,
                                job_->job_stdout, foreground);
 
                 /*
                  * If we reach this point, an error occurred.
                  */
+                _exit(1);
                 return -1;
-
-#ifdef DEBUG
-                sigset_t pending;
-                sigpending(&pending);
-                if (sigismember(&pending, SIGTSTP)) {
-                        printf("sigtstp pending...\n");
-                }
-                if (sigismember(&pending, SIGINT)) {
-                        printf("sigint pending...\n");
-                }
-                if (sigismember(&pending, SIGCHLD)) {
-                        printf("sigchld pending...\n");
-                }
-
-                sigprocmask(SIG_UNBLOCK, &block_set, NULL);
-#endif
         } else if (spawn_pid < 0) {
                 perror("fork");
                 _exit(1);
         } else {
-#ifdef DEBUG
-                printf("parent: pid=%d\n", spawn_pid);
-#endif
                 job_->job_proc->proc_pid = spawn_pid;
-                if (shell_is_interactive) {
-                        if (job_->job_pgid == 0) {
-                                job_->job_pgid = spawn_pid;
-                        }
+                if (job_->job_pgid == 0) {
+                        job_->job_pgid = spawn_pid;
+                }
 
-                        errno = 0;
-                        status = setpgid(spawn_pid, job_->job_pgid);
-                        if (status == -1) {
-                                perror("setpgid");
-                                _exit(1);
-                        }
-#ifdef DEBUG
-                        printf("parent: pgid=%d\n", getpgid(spawn_pid));
-#endif
+                errno = 0;
+                status = setpgid(spawn_pid, job_->job_pgid);
+                if (status == -1 && errno != EACCES) {
+                        perror("setpgid");
+                        _exit(1);
                 }
         }
 
-        if (!shell_is_interactive) {
+        if (foreground) {
+                if (shell_is_interactive) {
+                        job_control_foreground_job(job_);
+                } else {
+                        job_control_wait_for_job(job_);
+                }
+        } else {
+                /* background job; do nothing */
+        }
+
+        /*
+        if (!shell_is_interactive && !smallsh_forced_interactive_mode) {
                 job_control_wait_for_job(job_);
         } else if (foreground) {
                 job_control_foreground_job(job_);
         } else {
-                /* background job; do nothing */
         }
+        */
 
         return 0;
 }

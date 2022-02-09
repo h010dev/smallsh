@@ -92,18 +92,10 @@ static void process_new_process_group(pid_t *pgid)
 
         pid = getpid();
 
-#ifdef DEBUG
-        printf("child: pid=%d\n", pid);
-#endif
-
         if (*pgid == 0) {
                 *pgid = pid;
         }
         setpgid(pid, *pgid);
-
-#ifdef DEBUG
-        printf("child: pgid=%d\n", getpgid(pid));
-#endif
 }
 
 /**
@@ -333,9 +325,9 @@ void process_launch(Process *proc, pid_t pgid, char *infile, char *outfile,
 
         is_fg = foreground;
 
-        if (shell_is_interactive) {
-                process_new_process_group(&pgid);
+        process_new_process_group(&pgid);
 
+        if (shell_is_interactive) {
                 /*
                  * If we are running in the foreground, set the process as the
                  * controlling foreground process.
@@ -348,12 +340,12 @@ void process_launch(Process *proc, pid_t pgid, char *infile, char *outfile,
                                 _exit(1);
                         }
                 }
-
-                /*
-                 * Allow SIGINT to terminate this process.
-                 */
-                signal(SIGINT, SIG_DFL);
         }
+
+        /*
+         * Allow SIGINT to terminate this process.
+         */
+        signal(SIGINT, SIG_DFL);
 
         smallsh_errno = 0;
         status = process_set_io_streams(infile, outfile);

@@ -83,65 +83,75 @@ static struct timeval timeout;
  */
 static void smallsh_init(void)
 {
+        int status_;
+
+        setbuf(stdout, NULL);
+        setbuf(stderr, NULL);
+
         /*
          * See if we are running interactively.
+         *
+         * When running from a test script, STDIN will not be a tty, and thus
+         * we will not be in interactive mode.
          */
         shell_terminal = STDIN_FILENO;
         shell_is_interactive = isatty(shell_terminal);
 
 #ifdef DEBUG
-        printf("orig tcpgrp=%d\n", tcgetpgrp(shell_terminal));
-        printf("orig pgrp=%ld\n", (long) getpgrp());
+        printf("pid=%5ld, ppid=%5ld, pgrp=%5ld, sid=%5ld\n", (long) getpid(),
+               (long) getppid(), (long) getpgrp(), (long) getsid(0));
+        printf("original tcpgrp=%d\n", tcgetpgrp(shell_terminal));
 #endif
 
         if (shell_is_interactive) {
+                shell_pgid = getpgrp();
+
                 /*
                  * Loop until we are in the foreground.
                  */
-                shell_pgid = getpgrp();
                 while (tcgetpgrp(shell_terminal) != shell_pgid) {
                         kill(-shell_pgid, SIGTTIN);
                 }
+        }
 
-                /*
-                 * Ignore interactive and job-control signals.
-                 */
-                installer_install_job_control_signals();
+        /*
+         * Ignore interactive and job-control signals.
+         */
+        installer_install_job_control_signals();
 
-                /* Put ourselves in our own process group.
-                 */
-                shell_pgid = getpid();
+        /*
+         * Put ourselves in our own process group.
+         */
+        shell_pgid = getpid();
 
-#ifdef DEBUG
-                printf("pid=%5ld, ppid=%5ld, pgrp=%5ld, sid=%5ld\n", (long) getpid(),
-                       (long) getppid(), (long) getpgrp(), (long) getsid(0));
-#endif
-
-                errno = 0;
-                int status_ = setpgid(shell_pgid, shell_pgid);
-                if (status_ == -1) {
-                        if (errno == EPERM && shell_pgid == getpgrp()) {
-                                /*
-                                 * Process is session leader; do nothing.
-                                 *
-                                 * This is only triggered via CLion's run mode.
-                                 */
-                                perror("shell is session leader");
-                        } else {
-                                perror("Couldn't put shell in its own process group");
-                                _exit(1);
-                        }
+        errno = 0;
+        status_ = setpgid(shell_pgid, shell_pgid);
+        if (status_ == -1) {
+                if (errno == EPERM && shell_pgid == getpgrp()) {
+                        /*
+                         * Process is session leader; do nothing.
+                         *
+                         * This is only triggered via CLion's run mode.
+                         */
+                        perror("shell is session leader");
+                } else {
+                        perror("Couldn't put shell in its own process group");
+                        _exit(1);
                 }
+        }
 
+        if (shell_is_interactive) {
                 /*
                  * Grab control of the terminal.
                  */
                 tcsetpgrp(shell_terminal, shell_pgid);
+        }
 
 #ifdef DEBUG
-                printf("final tcpgrp=%d\n", tcgetpgrp(shell_terminal));
+        printf("final tcpgrp=%d\n", tcgetpgrp(shell_terminal));
+        printf("final pid=%5ld, ppid=%5ld, pgrp=%5ld, sid=%5ld\n", (long) getpid(),
+               (long) getppid(), (long) getpgrp(), (long) getsid(0));
 #endif
-        }
 }
 
 /**
@@ -286,9 +296,9 @@ static void smallsh_consume_events(void)
                 if (ch == 'x') {
                         smallsh_fg_only_mode = !smallsh_fg_only_mode;
                         if (smallsh_fg_only_mode) {
-                                printf("Entering foreground-only mode (& is now ignored)\n");
+                                write(STDOUT_FILENO, "Entering foreground-only mode (& is now ignored)\n", 50);
                         } else {
-                                printf("Exiting foreground-only mode\n");
+                                write(STDOUT_FILENO, "Entering foreground-only mode\n", 31);
                         }
                 }
         }
@@ -355,8 +365,9 @@ static ssize_t smallsh_read_input(char **cmd)
         /*
          * Prompt user for command.
          */
-        if(fputs(": ", stdout) == EOF) {
-                return EXIT_FAILURE;
+        if (write(STDOUT_FILENO, ": ", 2) == -1) {
+                perror("write");
+                _exit(1);
         }
 
         /*
@@ -409,7 +420,7 @@ static int smallsh_eval(char *cmd)
         /*
          * Can have multiple statements, but we only want first one.
          */
-        stmt = parser.get_statement(&parser)[0];
+        stmt = parser.get_statements(&parser)[0];
 
         /*
          * Statement is not a builtin.
