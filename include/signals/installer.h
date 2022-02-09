@@ -17,6 +17,12 @@
 void installer_install_job_control_signals(void);
 
 /**
+ * @brief Installs process signals for foreground/background child processes.
+ * @param foreground whether or not process will run in foreground
+ */
+void installer_install_child_process_signals(bool foreground);
+
+/**
  * @brief Installs a SIGCHLD handler for the shell.
  */
 void installer_install_sigchld_handler(void);

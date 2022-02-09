@@ -4,7 +4,7 @@
  * @date 05 Feb 2022
  * @brief Functions for performing shell job control.
  *
- * Ideas presented here were retrieved from the following sources:
+ * Some of the ideas presented here were retrieved from the following sources:
  * https://www.gnu.org/software/libc/manual/html_node/Launching-Jobs.html
  * https://www.gnu.org/software/libc/manual/html_node/Freground-and-Background.html
  * https://www.gnu.org/software/libc/manual/html_node/Stopped-and-Terminated-Jobs.html
@@ -45,16 +45,17 @@ void job_control_wait_for_job(Job *job)
                 errno = 0;
                 child = waitid(P_PID, job->job_proc->proc_pid, &info, opt);
                 if (child == -1 && errno != ECHILD) {
-                        /* Error ! */
                         perror("waitid");
                         _exit(1);
                 }
 
+                /* Child was stopped. */
                 if (info.si_code == CLD_STOPPED) {
                         if (info.si_status == SIGTSTP) {
                                 sigtstp_raised = true;
+
                                 /*
-                                 * We want to ignore SIGTSTP, so collect child
+                                 * We want to ignore SIGTSTP, so collect child,
                                  * resume it, and wait again.
                                  */
                                 errno = 0;
@@ -67,7 +68,6 @@ void job_control_wait_for_job(Job *job)
                                 errno = 0;
                                 status = kill(child, SIGCONT);
                                 if (status == -1) {
-                                        /* Error ! */
                                         perror("kill");
                                         _exit(1);
                                 }
@@ -75,31 +75,31 @@ void job_control_wait_for_job(Job *job)
                                 exit_status = info.si_status;
                                 break;
                         }
-                } else {
+                }
+                /* Child was terminated (normally or via a signal). */
+                else {
                         exit_status = info.si_status;
                         break;
                 }
         }
 
         /*
-         * Re-raise sigtstp signal to stopped child. This is done because
-         * signal handlers are removed when child execs a program, so all
-         * we get is a sigtstp with default behavior.
+         * Re-raise SIGTSTP signal to shell. This is done because signal
+         * handlers are removed when child execs a program, so all we get is a
+         * SIGTSTP signal with default behavior.
          */
         if (sigtstp_raised) {
                 errno = 0;
                 status = kill(getpid(), SIGTSTP);
                 if (status == -1) {
-                        /* Error ! */
                         perror("kill");
                         _exit(1);
                 }
         }
 
         /*
-         * Mark job as completed and update its status
-         * so that it can be later removed from the job table and relayed
-         * to user.
+         * Mark job as completed and update its status so that it can be later
+         * removed from the job table and relayed to user.
          */
         job->job_proc->proc_completed = true;
         job->job_proc->proc_status = exit_status;
@@ -114,7 +114,7 @@ void job_control_foreground_job(Job *job)
         printf("0: tcgrp=%d\n", tcgetpgrp(shell_terminal));
 #endif
 
-        /* put the job into the foreground */
+        /* Put the job into the foreground. */
         errno = 0;
         status = tcsetpgrp(shell_terminal, job->job_pgid);
         if (status == -1) {
@@ -126,10 +126,10 @@ void job_control_foreground_job(Job *job)
         printf("1: tcgrp=%d\n", tcgetpgrp(shell_terminal));
 #endif
 
-        /* wait for it to report */
+        /* Wait for it to report. */
         job_control_wait_for_job(job);
 
-        /* put the shell back in the foreground */
+        /* Put the shell back in the foreground. */
         errno = 0;
         status = tcsetpgrp(shell_terminal, shell_pgid);
         if (status == -1) {
@@ -155,15 +155,14 @@ int job_control_launch_job(Job **job, bool foreground)
                 process_launch(job_->job_proc, job_->job_pgid, job_->job_stdin,
                                job_->job_stdout, foreground);
 
-                /*
-                 * If we reach this point, an error occurred.
-                 */
+                /* If we reach this point, an error occurred. */
                 _exit(1);
                 return -1;
         } else if (spawn_pid < 0) {
                 perror("fork");
                 _exit(1);
         } else {
+                /* Put job into its own group and make it the process leader. */
                 job_->job_proc->proc_pid = spawn_pid;
                 if (job_->job_pgid == 0) {
                         job_->job_pgid = spawn_pid;
@@ -179,22 +178,17 @@ int job_control_launch_job(Job **job, bool foreground)
 
         if (foreground) {
                 if (shell_is_interactive) {
+                        /*
+                         * Give job control over foreground if we are in
+                         * interactive mode.
+                         */
                         job_control_foreground_job(job_);
                 } else {
+                        /* Otherwise, just wait for job to complete. */
                         job_control_wait_for_job(job_);
                 }
-        } else {
-                /* background job; do nothing */
         }
-
-        /*
-        if (!shell_is_interactive && !smallsh_forced_interactive_mode) {
-                job_control_wait_for_job(job_);
-        } else if (foreground) {
-                job_control_foreground_job(job_);
-        } else {
-        }
-        */
+        /* Background job; do nothing. */
 
         return 0;
 }

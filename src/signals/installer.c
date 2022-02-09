@@ -11,6 +11,7 @@
 #define _GNU_SOURCE
 #include <errno.h>
 #include <signal.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
@@ -59,6 +60,45 @@ void installer_install_job_control_signals(void)
          * Shell should handle SIGTSTP events to enable/disable fg only mode.
          */
         installer_install_sigtstp_handler();
+}
+
+void installer_install_child_process_signals(bool foreground)
+{
+        sighandler_t sig_status;
+
+        /* Allow SIGINT to terminate this process. */
+        errno = 0;
+        sig_status = signal(SIGINT, SIG_DFL);
+        if (sig_status == SIG_ERR) {
+                perror("signal");
+                _exit(1);
+        }
+
+        /*
+         * Background process groups should exhibit default behavior (i.e. stop)
+         * when attempting to read/write to terminal.
+         *
+         * Since background process groups are by default redirected to
+         * /dev/null by this shell if they do not explicitly specify input/output
+         * redirections, SIGTTIN/SIGTTOU signals should not be emitted in
+         * general. However, it helps to be explicit that this is the expected
+         * behavior with the code segment below.
+         */
+        if (!foreground) {
+                errno = 0;
+                sig_status = signal(SIGTTIN, SIG_DFL);
+                if (sig_status == SIG_ERR) {
+                        perror("signal");
+                        _exit(1);
+                }
+
+                errno = 0;
+                sig_status = signal(SIGTTOU, SIG_DFL);
+                if (sig_status == SIG_ERR) {
+                        perror("signal");
+                        _exit(1);
+                }
+        }
 }
 
 void installer_install_sigchld_handler(void)

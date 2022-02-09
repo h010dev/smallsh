@@ -11,6 +11,9 @@ set(
         "${PROJECT_SOURCE_DIR}/src/job-control/job.c"
         "${PROJECT_SOURCE_DIR}/src/job-control/process.c"
         "${PROJECT_SOURCE_DIR}/src/job-control/job-table.c"
+        "${PROJECT_SOURCE_DIR}/src/signals/installer.c"
+        "${PROJECT_SOURCE_DIR}/src/signals/handler.c"
+        "${PROJECT_SOURCE_DIR}/src/signals/dispatcher.c"
 )
 
 set(

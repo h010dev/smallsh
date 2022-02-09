@@ -4,13 +4,12 @@
  * @date 05 Feb 2022
  * @brief Contain information about a single child process.
  *
- * Ideas presented here were retrieved from the following source:
+ * Some of the ideas presented here were retrieved from the following source:
  * https://www.gnu.org/software/libc/manual/html_node/Launching-Jobs.html
  */
 #define _GNU_SOURCE
 #include <errno.h>
 #include <fcntl.h>
-#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -18,6 +17,7 @@
 #include <unistd.h>
 
 #include "job-control/process.h"
+#include "signals/installer.h"
 #include "core/shell-attrs.h"
 #include "core/error.h"
 
@@ -41,18 +41,6 @@
  *
  *
  ******************************************************************************/
-/* *****************************************************************************
- * OBJECTS
- *
- *
- *
- *
- *
- *
- *
- ******************************************************************************/
-static bool is_fg = false;
-
 /* *****************************************************************************
  * FUNCTIONS
  *
@@ -86,7 +74,7 @@ static void process_exec(char **argv)
  * @brief Creates new process group and assigns current process as the leader.
  * @param pgid new process group
  */
-static void process_new_process_group(pid_t *pgid)
+static void process_set_group(pid_t *pgid)
 {
         pid_t pid;
 
@@ -104,57 +92,55 @@ static void process_new_process_group(pid_t *pgid)
  * STDIN, STDOUT redirected to new streams.
  * @param infile filename to redirect STDIN to
  * @param outfile filename to redirect STDOUT to
+ * @param foreground whether or not the process will run in foreground
  */
-static int process_set_io_streams(char *infile, char *outfile)
+static int process_set_io_streams(char *infile, char *outfile, bool foreground)
 {
         int status, stdin_flags, stdout_flags, mode;
+        char *default_io;
         int fds[2];
+
+        default_io = "/dev/null";
 
         stdin_flags = O_RDONLY;
 
-        /*
-         * Create file for stdout stream if it doesn't exit.
-         */
+        /* Create file for stdout stream if it doesn't exit. */
         stdout_flags = O_WRONLY | O_CREAT | O_TRUNC;
 
-        /* -rw-rw-rw- */
-        mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH;
+        /* -rw-rw---- */
+        mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP;
 
         /*
-         * Set the standard input/output channels of the new process.
+         * Redirect to default stream if process will run in background, and
+         * the user failed to specify any input/output redirections.
          */
+        if (infile == NULL && !foreground) {
+                infile = default_io;
+        }
+
+        if (outfile == NULL && !foreground) {
+                outfile = default_io;
+        }
+
+        /*
+         * At this point, infile/outfile can only be null if the process will
+         * run in foreground and the user did not specify any redirections for
+         * the respective streams.
+         */
+
+        /* Set the standard input stream of the new process. */
         if (infile != NULL) {
+                /* Attempt to open input stream. */
                 errno = 0;
                 fds[0] = open(infile, stdin_flags, mode);
                 if (fds[0] == -1) {
                         smallsh_errno = SMSH_EOPEN;
                         fprintf(stderr, "cannot open %s for input\n", infile);
+                        fflush(stderr);
                         return -1;
                 }
 
-                if (fds[0] != STDIN_FILENO) {
-                        errno = 0;
-                        status = dup2(fds[0], STDIN_FILENO);
-                        if (status == -1) {
-                                perror("dup2");
-                                _exit(1);
-                        }
-
-                        errno = 0;
-                        status = close(fds[0]);
-                        if (status == -1) {
-                                perror("close");
-                                _exit(1);
-                        }
-                }
-        } else if (!is_fg) {
-                fds[0] = open("/dev/null", stdin_flags, mode);
-                if (fds[0] == -1) {
-                        smallsh_errno = SMSH_EOPEN;
-                        fprintf(stderr, "cannot open /dev/null for input\n");
-                        return -1;
-                }
-
+                /* Duplicate STDIN if stream is not already pointing to STDIN. */
                 if (fds[0] != STDIN_FILENO) {
                         errno = 0;
                         status = dup2(fds[0], STDIN_FILENO);
@@ -172,39 +158,19 @@ static int process_set_io_streams(char *infile, char *outfile)
                 }
         }
 
+        /* Set the standard output stream of the new process. */
         if (outfile != NULL) {
+                /* Attempt to open input stream. */
                 errno = 0;
                 fds[1] = open(outfile, stdout_flags, mode);
                 if (fds[1] == -1) {
                         smallsh_errno = SMSH_EOPEN;
                         fprintf(stderr, "cannot open %s for output\n", outfile);
+                        fflush(stderr);
                         return -1;
                 }
 
-                if (fds[1] != STDOUT_FILENO) {
-                        errno = 0;
-                        status = dup2(fds[1], STDOUT_FILENO);
-                        if (status == -1) {
-                                perror("dup2");
-                                _exit(1);
-                        }
-
-                        errno = 0;
-                        status = close(fds[1]);
-                        if (status == -1) {
-                                perror("close");
-                                _exit(1);
-                        }
-                }
-        } else if (!is_fg) {
-                errno = 0;
-                fds[1] = open("/dev/null", stdout_flags, mode);
-                if (fds[1] == -1) {
-                        smallsh_errno = SMSH_EOPEN;
-                        fprintf(stderr, "cannot open /dev/null for output\n");
-                        return -1;
-                }
-
+                /* Duplicate STDOUT if stream is not already pointing to STDOUT. */
                 if (fds[1] != STDOUT_FILENO) {
                         errno = 0;
                         status = dup2(fds[1], STDOUT_FILENO);
@@ -258,13 +224,11 @@ static int process_set_io_streams(char *infile, char *outfile)
 void process_ctor(Process *self, size_t argc, char **argv, pid_t pid,
                   bool completed, int status)
 {
-        /*
-         * Copy over argv array.
-         */
+        /* Copy over argv array. */
         char **tmp = malloc((argc + 1) * sizeof(char *));
         if (tmp == NULL) {
                 fprintf(stderr, "malloc\n");
-                _exit(1); // error
+                _exit(1);
         }
         self->argv = tmp;
 
@@ -273,16 +237,14 @@ void process_ctor(Process *self, size_t argc, char **argv, pid_t pid,
                 self->argv[i] = strdup(argv[i]);
                 if (self->argv[i] == NULL) {
                         perror("strdup");
-                        _exit(1); // error
+                        _exit(1);
                 }
         }
 
-        /* null terminate list */
+        /* Null-terminate list. */
         self->argv[argc] = NULL;
 
-        /*
-         * Initialize remaining variables
-         */
+        /* Initialize remaining variables. */
         self->proc_pid = pid;
         self->proc_completed = completed;
         self->proc_status = status;
@@ -290,9 +252,7 @@ void process_ctor(Process *self, size_t argc, char **argv, pid_t pid,
 
 void process_dtor(Process *self)
 {
-        /*
-         * Free argv array
-         */
+        /* Free argv array. */
         for (size_t i = 0; self->argv[i] != NULL; i++) {
                 free(self->argv[i]);
                 self->argv[i] = NULL;
@@ -300,9 +260,7 @@ void process_dtor(Process *self)
         free(self->argv);
         self->argv = NULL;
 
-        /*
-         * Reset remaining variables.
-         */
+        /* Reset remaining variables. */
         self->proc_pid = 0;
         self->proc_completed = false;
         self->proc_status = 0;
@@ -323,9 +281,7 @@ void process_launch(Process *proc, pid_t pgid, char *infile, char *outfile,
 {
         int status;
 
-        is_fg = foreground;
-
-        process_new_process_group(&pgid);
+        process_set_group(&pgid);
 
         if (shell_is_interactive) {
                 /*
@@ -342,15 +298,13 @@ void process_launch(Process *proc, pid_t pgid, char *infile, char *outfile,
                 }
         }
 
-        /*
-         * Allow SIGINT to terminate this process.
-         */
-        signal(SIGINT, SIG_DFL);
+        installer_install_child_process_signals(foreground);
 
         smallsh_errno = 0;
-        status = process_set_io_streams(infile, outfile);
+        status = process_set_io_streams(infile, outfile, foreground);
         if (status == -1) {
                 return;
         }
+
         process_exec(proc->argv);
 }
