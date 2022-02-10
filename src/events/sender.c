@@ -106,17 +106,3 @@ int sender_notify_sigchld(struct Channel ch)
 
         return 0;
 }
-
-int sender_notify_sigtstp(struct Channel ch)
-{
-        /*
-         * Write a single byte to pipe to notify listener that SIGTSTP was
-         * caught.
-         */
-        errno = 0;
-        if (write(ch.ch_write, "x", 1) == -1 && errno != EAGAIN) {
-                return -1;
-        }
-
-        return 0;
-}

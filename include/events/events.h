@@ -12,7 +12,6 @@
 #include "sender.h"
 
 Channel ch_sigchld; /**< communication channel for SIGCHLD events */
-Channel ch_sigtstp; /**< communication channel for SIGTSTP events */
 Receiver rcv; /**< list of channels waiting on new events */
 Sender snd; /**< list of channels to notify on new events */
 

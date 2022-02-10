@@ -50,17 +50,6 @@ int receiver_add(Receiver *self, Channel *ch);
 int receiver_cb_sigchld(struct Channel ch);
 
 /**
- * @brief Callback handler responsible for consuming and responding to SIGTSTP
- * events.
- *
- * This function will read all events from channel pipe, then update the global
- * foreground-only flag to change it to its next state.
- * @param ch @c Channel to update
- * @return 0 on success, -1 on failure
- */
-int receiver_cb_sigtstp(struct Channel ch);
-
-/**
  * @brief Consumes events for all of the channels in its notification list,
  * calling their respective callback handlers on receipt of relevant data.
  *

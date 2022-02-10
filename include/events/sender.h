@@ -68,24 +68,4 @@ void sender_dtor(Sender *self);
  */
 int sender_notify_sigchld(struct Channel ch);
 
-/**
- * @brief Sends data received via a SIGTSTP signal to @p self.
- *
- * This function abstracts the signal-handling step used in the self-pipe trick
- * (TLPI section 63.5.2) in an attempt to relay SIGTSTP events while doing its
- * best at remaining async-safe.
- *
- * Only async-safe system calls are made within this function, and the only
- * global data type that is being accessed within is the pipe's write file
- * descriptor, which is done so for reads only, and without any dereferences.
- * The file descriptor is initialized on program startup, and remains unchanged
- * until program termination.
- *
- * The data sent is used to notify the shell that it should switch its
- * foreground-only mode on or off depending on its current state.
- * @param ch @c Channel to send data to
- * @return 0 on success, -1 on failure
- */
-int sender_notify_sigtstp(struct Channel ch);
-
 #endif //SMALLSH_SENDER_H

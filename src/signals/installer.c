@@ -132,39 +132,5 @@ void installer_install_sigchld_handler(void)
 
 void installer_install_sigtstp_handler(void)
 {
-        handler_install_fg_only_mode();
-
-        /*
-        struct sigaction sa;
-        sigset_t block_set;
-        int status;
-
-        // Ignore SIGCHLD signals within this handler.
-        memset(&sa, 0, sizeof(sa));
-
-        errno = 0;
-        status = sigemptyset(&block_set);
-        if (status == -1) {
-                perror("sigemptyset");
-                _exit(1);
-        }
-
-        errno = 0;
-        status = sigaddset(&block_set, SIGCHLD);
-        if (status == -1) {
-                perror("sigaddset");
-                _exit(1);
-        }
-
-        sa.sa_mask = block_set;
-        sa.sa_flags = SA_RESTART;
-        sa.sa_handler = handler_handle_sigtstp;
-
-        errno = 0;
-        status = sigaction(SIGTSTP, &sa, NULL);
-        if (status == -1) {
-                perror("sigaction");
-                _exit(1);
-        }
-        */
+        handler_switch_enable_fg_only_mode();
 }

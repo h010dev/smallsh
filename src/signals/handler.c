@@ -24,7 +24,7 @@ void handler_enable_fg_only_mode(int sig)
 
         fg_flag = 1;
         write(STDOUT_FILENO, fg_on, sizeof(fg_on));
-        handler_uninstall_fg_only_mode();
+        handler_switch_disable_fg_only_mode();
 }
 
 void handler_disable_fg_only_mode(int sig)
@@ -35,7 +35,7 @@ void handler_disable_fg_only_mode(int sig)
 
         fg_flag = 0;
         write(STDOUT_FILENO, fg_off, sizeof(fg_off));
-        handler_install_fg_only_mode();
+        handler_switch_enable_fg_only_mode();
 }
 
 void handler_handle_sigchld(int sig)
@@ -56,26 +56,7 @@ void handler_handle_sigchld(int sig)
         errno = saved_errno;
 }
 
-void handler_handle_sigtstp(int sig)
-{
-        (void) sig;
-
-        int status;
-        int saved_errno;
-
-        saved_errno = errno;
-
-        status = sender_notify_sigtstp(ch_sigtstp);
-        if (status == -1) {
-                fprintf(stderr, "sender_notify_sigtstp()");
-                fflush(stderr);
-                _exit(1);
-        }
-
-        errno = saved_errno;
-}
-
-void handler_install_fg_only_mode(void)
+void handler_switch_enable_fg_only_mode(void)
 {
         struct sigaction sa;
         sigset_t block_set;
@@ -110,7 +91,7 @@ void handler_install_fg_only_mode(void)
         }
 }
 
-void handler_uninstall_fg_only_mode(void)
+void handler_switch_disable_fg_only_mode(void)
 {
         struct sigaction sa;
         sigset_t block_set;

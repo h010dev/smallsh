@@ -20,12 +20,6 @@ int events_init(void)
                 return -1;
         }
 
-        status = channel_ctor(&ch_sigtstp, receiver_cb_sigtstp);
-        if (status == -1) {
-                fprintf(stderr, "channel_ctor()");
-                return -1;
-        }
-
         /* Initialize event handler */
         status = receiver_ctor(&rcv, 2);
         if (status == -1) {
@@ -34,12 +28,6 @@ int events_init(void)
         }
 
         status = receiver_add(&rcv, &ch_sigchld);
-        if (status == -1) {
-                fprintf(stderr, "receiver_add()");
-                return -1;
-        }
-
-        status = receiver_add(&rcv, &ch_sigtstp);
         if (status == -1) {
                 fprintf(stderr, "receiver_add()");
                 return -1;
@@ -58,12 +46,6 @@ int events_init(void)
                 return -1;
         }
 
-        status = sender_add(&snd, &ch_sigtstp);
-        if (status == -1) {
-                fprintf(stderr, "sender_add()");
-                return -1;
-        }
-
         return 0;
 }
 
@@ -73,7 +55,6 @@ void events_cleanup(void)
         sender_dtor(&snd);
 
         channel_dtor(&ch_sigchld);
-        channel_dtor(&ch_sigtstp);
 }
 
 int events_notify(void)

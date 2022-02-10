@@ -120,54 +120,6 @@ int receiver_cb_sigchld(struct Channel ch)
         return 0;
 }
 
-int receiver_cb_sigtstp(struct Channel ch)
-{
-        ssize_t n_write;
-        char ch_;
-        char fg_on[] = "Entering foreground-only mode (& is now ignored)\n";
-        char fg_off[] = "Exiting foreground-only mode\n";
-
-        ch_ = 'a'; /* default garbage value */
-
-        for (;;) {
-                /* Drain pipe of any data. */
-                errno = 0;
-                if (read(ch.ch_read, &ch_, 1) == -1) {
-                        if (errno == EAGAIN) {
-                                break;
-                        } else {
-                                fprintf(stderr, "Failed to receive data: %s\n",
-                                        strerror(errno));
-                                return -1;
-                        }
-                }
-        }
-
-        /* Switch foreground-only mode. */
-        if (ch_ == 'x') {
-                smallsh_fg_only_mode = !smallsh_fg_only_mode;
-                if (smallsh_fg_only_mode) {
-                        errno = 0;
-                        n_write = write(STDOUT_FILENO, fg_on, sizeof(fg_on));
-                        if (n_write == -1) {
-                                fprintf(stderr, "Failed to write message: %s\n",
-                                        strerror(errno));
-                                return -1;
-                        }
-                } else {
-                        errno = 0;
-                        n_write = write(STDOUT_FILENO, fg_off, sizeof(fg_off));
-                        if (n_write == -1) {
-                                fprintf(stderr, "Failed to write message: %s\n",
-                                        strerror(errno));
-                                return -1;
-                        }
-                }
-        }
-
-        return 0;
-}
-
 int receiver_consume_events(Receiver *self)
 {
         int ready, n_fds;
