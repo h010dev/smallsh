@@ -164,6 +164,36 @@ static int smallsh_eval(char *cmd)
 }
 
 /**
+ * @brief Inspects flag set by SIGTSTP handler to determine if foreground-only
+ * mode has been triggered.
+ *
+ * Sets global variable @c smallsh_fg_only_mode accordingly.
+ *
+ * Source: https://edstem.org/us/courses/16718/discussion/1067170
+ * @return true if fg mode has changed, false otherwise
+ */
+static bool smallsh_fg_only_mode_triggered(void)
+{
+        bool trigger;
+
+        sigset_t mask;
+        sigemptyset(&mask);
+        sigaddset(&mask, SIGTSTP);
+
+        sigprocmask(SIG_BLOCK, &mask, NULL);
+
+        trigger = false;
+        if (smallsh_fg_only_mode != fg_flag) {
+                smallsh_fg_only_mode = !smallsh_fg_only_mode;
+                trigger = true;
+        }
+
+        sigprocmask(SIG_UNBLOCK, &mask, NULL);
+
+        return trigger;
+}
+
+/**
  * @brief Initialize shell and bring it to the foreground process group.
  *
  * Do not proceed until this is the case.
@@ -238,10 +268,10 @@ static ssize_t smallsh_read_input(char **cmd)
         len = 0;
         errno = 0;
         n_read = getline(cmd, &len, stdin);
-        if (n_read == -1) {
+        if (n_read == -1 && errno != 0) {
                 fprintf(stderr, "getline(): %s\n", strerror(errno));
                 fflush(stderr);
-                return -1;
+                smallsh_errno = -1;
         }
 
         return n_read;
@@ -277,28 +307,6 @@ static ssize_t smallsh_read_input(char **cmd)
  *
  *
  ******************************************************************************/
-
-bool smallsh_fg_only_mode_triggered(void)
-{
-        bool trigger;
-
-        sigset_t mask;
-        sigemptyset(&mask);
-        sigaddset(&mask, SIGTSTP);
-
-        sigprocmask(SIG_BLOCK, &mask, NULL);
-
-        trigger = false;
-        if (smallsh_fg_only_mode != fg_flag) {
-                smallsh_fg_only_mode = !smallsh_fg_only_mode;
-                trigger = true;
-        }
-
-        sigprocmask(SIG_UNBLOCK, &mask, NULL);
-
-        return trigger;
-}
-
 int smallsh_run(void)
 {
         ssize_t n_read;
@@ -328,11 +336,11 @@ int smallsh_run(void)
                         break;
                 }
 
-read_input:
                 /* Read command from user. */
                 cmd = NULL;
+                smallsh_errno = 0;
                 n_read = smallsh_read_input(&cmd);
-                if (n_read == -1) {
+                if (n_read == -1 && smallsh_errno != 0) {
                         fprintf(stderr, "smallsh_read_input()\n");
                         fflush(stderr);
                         status_ = EXIT_FAILURE;
@@ -345,7 +353,6 @@ read_input:
                  */
                 if (smallsh_fg_only_mode_triggered()) {
                         /* Re-prompt user. */
-                        goto read_input;
                 }
 
                 /* Evaluate command. */
