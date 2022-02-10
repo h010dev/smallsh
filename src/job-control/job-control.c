@@ -14,6 +14,7 @@
 #include <signal.h>
 #include <stdio.h>
 #include <sys/wait.h>
+#include <termios.h>
 #include <unistd.h>
 
 #include "globals.h"
@@ -111,10 +112,6 @@ void job_control_foreground_job(Job *job)
 {
         int status;
 
-#ifdef DEBUG
-        printf("0: tcgrp=%d\n", tcgetpgrp(shell_terminal));
-#endif
-
         /* Put the job into the foreground. */
         errno = 0;
         status = tcsetpgrp(shell_terminal, job->job_pgid);
@@ -122,10 +119,6 @@ void job_control_foreground_job(Job *job)
                 perror("tcsetpgrp");
                 _exit(1);
         }
-
-#ifdef DEBUG
-        printf("1: tcgrp=%d\n", tcgetpgrp(shell_terminal));
-#endif
 
         /* Wait for it to report. */
         job_control_wait_for_job(job);
@@ -138,9 +131,7 @@ void job_control_foreground_job(Job *job)
                 _exit(1);
         }
 
-#ifdef DEBUG
-        printf("2: tcgrp=%d\n", tcgetpgrp(shell_terminal));
-#endif
+        tcflush(shell_terminal, TCIOFLUSH);
 }
 
 int job_control_launch_job(Job **job, bool foreground)
@@ -158,7 +149,6 @@ int job_control_launch_job(Job **job, bool foreground)
 
                 /* If we reach this point, an error occurred. */
                 _exit(1);
-                return -1;
         } else if (spawn_pid < 0) {
                 perror("fork");
                 _exit(1);
