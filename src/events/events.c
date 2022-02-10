@@ -52,13 +52,13 @@ int events_init(void)
                 return -1;
         }
 
-        status = sender_add(&snd, ch_sigchld);
+        status = sender_add(&snd, &ch_sigchld);
         if (status == -1) {
                 fprintf(stderr, "sender_add()");
                 return -1;
         }
 
-        status = sender_add(&snd, ch_sigtstp);
+        status = sender_add(&snd, &ch_sigtstp);
         if (status == -1) {
                 fprintf(stderr, "sender_add()");
                 return -1;

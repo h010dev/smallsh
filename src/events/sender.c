@@ -45,13 +45,13 @@ void sender_dtor(Sender *self)
         self->_ch = NULL;
 }
 
-int sender_add(Sender *self, Channel ch)
+int sender_add(Sender *self, Channel *ch)
 {
         int flags, status;
 
         /* Set write end to non-blocking. */
         errno = 0;
-        flags = fcntl(ch.ch_write, F_GETFL);
+        flags = fcntl(ch->ch_write, F_GETFL);
         if (flags == -1) {
                 fprintf(stderr, "Failed to add to Sender: %s\n", strerror(errno));
                 return -1;
@@ -59,7 +59,7 @@ int sender_add(Sender *self, Channel ch)
         flags |= O_NONBLOCK;
 
         errno = 0;
-        status = fcntl(ch.ch_write, F_SETFL, flags);
+        status = fcntl(ch->ch_write, F_SETFL, flags);
         if (status == -1) {
                 fprintf(stderr, "Failed to add to Sender: %s\n", strerror(errno));
                 return -1;
@@ -71,12 +71,12 @@ int sender_add(Sender *self, Channel ch)
                 return -1;
         }
 
-        self->_ch[self->_snd_n_ch++] = &ch;
+        self->_ch[self->_snd_n_ch++] = ch;
 
         return 0;
 }
 
-int sender_notify_sigchld(struct Channel self)
+int sender_notify_sigchld(struct Channel ch)
 {
         int status;
         pid_t child_pid;
@@ -96,7 +96,7 @@ int sender_notify_sigchld(struct Channel self)
 
                 /* Write DTO to pipe. */
                 errno = 0;
-                if (write(self.ch_write, &dto, sizeof(dto)) == -1 && errno != EAGAIN) {
+                if (write(ch.ch_write, &dto, sizeof(dto)) == -1 && errno != EAGAIN) {
                         return -1;
                 }
         }
@@ -107,14 +107,14 @@ int sender_notify_sigchld(struct Channel self)
         return 0;
 }
 
-int sender_notify_sigtstp(struct Channel self)
+int sender_notify_sigtstp(struct Channel ch)
 {
         /*
          * Write a single byte to pipe to notify listener that SIGTSTP was
          * caught.
          */
         errno = 0;
-        if (write(self.ch_write, "x", 1) == -1 && errno != EAGAIN) {
+        if (write(ch.ch_write, "x", 1) == -1 && errno != EAGAIN) {
                 return -1;
         }
 

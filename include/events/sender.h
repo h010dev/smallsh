@@ -29,7 +29,7 @@ typedef struct {
  * @param ch @c Channel to add to sender
  * @return 0 on success, -1 on failure
  */
-int sender_add(Sender *self, Channel ch);
+int sender_add(Sender *self, Channel *ch);
 
 /**
  * @brief Initializes @p self with provided data.
