@@ -18,8 +18,8 @@
 
 #include "job-control/process.h"
 #include "signals/installer.h"
-#include "core/shell-attrs.h"
-#include "core/error.h"
+#include "globals.h"
+#include "error.h"
 
 /* *****************************************************************************
  * PRIVATE DEFINITIONS

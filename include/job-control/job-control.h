@@ -13,6 +13,9 @@
 #define SMALLSH_JOB_CONTROL_H
 
 #include "job.h"
+#include "job-table.h"
+
+JobTable job_table; /**< shell global job-control table */
 
 /*
  * Foreground / background process.

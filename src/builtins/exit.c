@@ -3,7 +3,7 @@
 //
 
 #include "builtins/exit.h"
-#include "core/shell-attrs.h"
+#include "job-control/job-control.h"
 
 void exit_(void)
 {

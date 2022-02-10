@@ -16,12 +16,13 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
+#include "globals.h"
+
 #ifdef DEBUG
 #include <string.h>
 #endif
 
 #include "job-control/job-control.h"
-#include "core/shell-attrs.h"
 
 void job_control_wait_for_job(Job *job)
 {
