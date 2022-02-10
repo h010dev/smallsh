@@ -9,23 +9,18 @@
  */
 #define _GNU_SOURCE
 #include <errno.h>
-#include <fcntl.h>
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/select.h>
 #include <unistd.h>
 
 #include "smallsh.h"
-#include "builtins/cd.h"
-#include "builtins/exit.h"
-#include "builtins/status.h"
-#include "core/dtos.h"
-#include "core/error.h"
-#include "core/shell-attrs.h"
+#include "globals.h"
+#include "builtins/builtins.h"
+#include "error.h"
+#include "events/events.h"
 #include "job-control/job-control.h"
-#include "job-control/job-table.h"
 #include "interpreter/parser.h"
 #include "signals/installer.h"
 
@@ -59,12 +54,7 @@
  *
  *
  ******************************************************************************/
-static bool smallsh_fg_only_mode = false;
 int smallsh_status = 0;
-
-static fd_set readfds;
-static int ready, nfds;
-static struct timeval timeout;
 
 /* *****************************************************************************
  * FUNCTIONS
@@ -152,204 +142,6 @@ static void smallsh_init(void)
         printf("final pid=%5ld, ppid=%5ld, pgrp=%5ld, sid=%5ld\n", (long) getpid(),
                (long) getppid(), (long) getpgrp(), (long) getsid(0));
 #endif
-}
-
-/**
- * @brief Configure event listeners to capture new signal-generated events.
- *
- * Source: TLPI section 63.9
- */
-static void smallsh_config_event_listeners(void)
-{
-        int flags;
-
-        /*
-         * Open new pipes for signal events.
-         */
-        if (pipe(pipe_sigchld) == -1) {
-                fprintf(stderr, "pipe\n");
-                _exit(1);
-        }
-        if (pipe(pipe_sigtstp) == -1) {
-                fprintf(stderr, "pipe\n");
-                _exit(1);
-        }
-
-        /*
-         * Initialize pipes for select poll.
-         */
-        FD_ZERO(&readfds);
-        FD_SET(pipe_sigchld[0], &readfds);
-        nfds = pipe_sigchld[0] + 1;
-        FD_SET(pipe_sigchld[1], &readfds);
-        if (pipe_sigtstp[1] > nfds) {
-                nfds = pipe_sigtstp[1] + 1;
-        }
-
-        /*
-         * Configure pipes to be non-blocking.
-         */
-        flags = fcntl(pipe_sigchld[0], F_GETFL);
-        if (flags == -1) {
-                fprintf(stderr, "fcntl-F_GETFL\n");
-                _exit(1);
-        }
-        flags |= O_NONBLOCK;
-        if (fcntl(pipe_sigchld[0], F_SETFL, flags) == -1) {
-                fprintf(stderr, "fcntl-F_SETFL\n");
-                _exit(1);
-        }
-
-        flags = fcntl(pipe_sigchld[1], F_GETFL);
-        if (flags == -1) {
-                fprintf(stderr, "fcntl-F_GETFL\n");
-                _exit(1);
-        }
-        flags |= O_NONBLOCK;
-        if (fcntl(pipe_sigchld[1], F_SETFL, flags) == -1) {
-                fprintf(stderr, "fcntl-F_SETFL\n");
-                _exit(1);
-        }
-
-        flags = fcntl(pipe_sigtstp[0], F_GETFL);
-        if (flags == -1) {
-                fprintf(stderr, "fcntl-F_GETFL\n");
-                _exit(1);
-        }
-        flags |= O_NONBLOCK;
-        if (fcntl(pipe_sigtstp[0], F_SETFL, flags) == -1) {
-                fprintf(stderr, "fcntl-F_SETFL\n");
-                _exit(1);
-        }
-
-        flags = fcntl(pipe_sigtstp[1], F_GETFL);
-        if (flags == -1) {
-                fprintf(stderr, "fcntl-F_GETFL\n");
-                _exit(1);
-        }
-        flags |= O_NONBLOCK;
-        if (fcntl(pipe_sigtstp[1], F_SETFL, flags) == -1) {
-                fprintf(stderr, "fcntl-F_SETFL\n");
-                _exit(1);
-        }
-
-        /*
-         * Don't block; just poll for file descriptors.
-         *
-         * Source: TLPI section 63.2.1
-         */
-        timeout.tv_sec = 0;
-        timeout.tv_usec = 0;
-}
-
-/**
- * @brief Poll for new signal-related events and consume in.
- */
-static void smallsh_consume_events(void)
-{
-        char ch;
-        SigchldDTO dto;
-
-        /*
-         * Read in new data from signal-pipes.
-         */
-        errno = 0;
-        while ((ready = select(nfds, &readfds, NULL, NULL, &timeout)) == -1 &&
-               errno == EINTR)
-                ;
-        if (ready == -1 && errno != EINTR) {
-                fprintf(stderr, "select\n");
-                _exit(1);
-        }
-
-        /*
-         * SIGTSTP signal(s) received.
-         */
-        if (FD_ISSET(pipe_sigtstp[0], &readfds)) {
-                ch = 'a'; /* default garbage value */
-
-#ifdef DEBUG
-                printf("A tstp signal was caught\n");
-#endif
-
-                for (;;) {
-                        /*
-                         * Drain pipe of any data.
-                         */
-                        if (read(pipe_sigtstp[0], &ch, 1) == -1) {
-                                if (errno == EAGAIN) {
-                                        break;
-                                } else {
-                                        fprintf(stderr, "read\n");
-                                        _exit(1);
-                                }
-                        }
-
-#ifdef DEBUG
-                        putc(ch, stdout);
-#endif
-
-                }
-                /*
-                 * Switch foreground-only mode.
-                 */
-                if (ch == 'x') {
-                        smallsh_fg_only_mode = !smallsh_fg_only_mode;
-                        if (smallsh_fg_only_mode) {
-                                write(STDOUT_FILENO, "Entering foreground-only mode (& is now ignored)\n", 50);
-                        } else {
-                                write(STDOUT_FILENO, "Entering foreground-only mode\n", 31);
-                        }
-                }
-        }
-        /*
-         * SIGCHLD signal(s) received.
-         */
-        else if (FD_ISSET(pipe_sigchld[0], &readfds)) {
-
-#ifdef DEBUG
-                printf("A signal was caught\n");
-#endif
-
-                for (;;) {
-                        /*
-                         * Drain pipe and for any SIGCHLD DTOs.
-                         */
-                        if (read(pipe_sigchld[0], &dto, sizeof(dto)) == -1) {
-                                if (errno == EAGAIN) {
-                                        break;
-                                } else {
-                                        fprintf(stderr, "read\n");
-                                        _exit(1);
-                                }
-                        }
-
-#ifdef DEBUG
-                        printf("Received SigchldDTO: pid=%d, status=%d\n",
-                               dto.chld_pid, dto.chld_status);
-#endif
-
-                        /*
-                         * Update relevant job in job table.
-                         */
-                        job_table.update(&job_table, dto.chld_pid, dto.chld_status);
-                }
-        }
-
-        /*
-         * Reset pipe file descriptors.
-         */
-        FD_ZERO(&readfds);
-        FD_SET(pipe_sigchld[0], &readfds);
-        FD_SET(pipe_sigtstp[0], &readfds);
-}
-
-/**
- * @brief Notify user of any new signal-related events.
- */
-static void smallsh_notify_events(void)
-{
-        job_table.clean(&job_table);
 }
 
 /**
@@ -535,28 +327,30 @@ int smallsh_run(void)
         char *cmd;
         int status_;
 
-        smallsh_init();
+        /* Setup event listener to catch signal events and related data. */
+        status_ = events_init();
+        if (status_ == -1) {
+                fprintf(stderr, "events_init()");
+                fflush(stderr);
+                return EXIT_FAILURE;
+        }
 
-        /*
-         * Setup event listeners to catch signal events and related data.
-         */
-        smallsh_config_event_listeners();
+        smallsh_init();
 
         job_table_ctor(&job_table);
 
-        /*
-         * Run event loop forever until shell termination.
-         */
+        /* Run event loop forever until shell termination. */
         do {
-                /*
-                 * Consume new events and notify user about them.
-                 */
-                smallsh_consume_events();
-                smallsh_notify_events();
+                /* Notify user about new job-control events. */
+                status_ = events_notify();
+                if (status_ == -1) {
+                        fprintf(stderr, "events_notify()\n");
+                        fflush(stderr);
+                        status_ = EXIT_FAILURE;
+                        break;
+                }
 
-                /*
-                 * Read command from user.
-                 */
+                /* Read command from user. */
                 cmd = NULL;
                 n_read = smallsh_read_input(&cmd);
                 if (n_read == -1) {
@@ -564,13 +358,11 @@ int smallsh_run(void)
                         break;
                 }
 
-                /*
-                 * Evaluate command.
-                 */
+                /* Evaluate command. */
                 status_ = smallsh_eval(cmd);
                 if (status_ == -1) {
                         if (smallsh_errno == SMSH_EOPEN) {
-                                /* do nothing */
+                                /* Do nothing. */
                                 smallsh_errno = 0;
                                 smallsh_status = 1;
                         } else {
@@ -592,6 +384,8 @@ int smallsh_run(void)
         }
 
         job_table_dtor(&job_table);
+
+        events_cleanup();
 
         return status_;
 }
