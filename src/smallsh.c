@@ -67,116 +67,6 @@ int smallsh_status = 0;
  *
  ******************************************************************************/
 /**
- * @brief Initialize shell and bring it to the foreground process group.
- *
- * Do not proceed until this is the case.
- */
-static void smallsh_init(void)
-{
-        int status_;
-
-        setbuf(stdout, NULL);
-        setbuf(stderr, NULL);
-
-        /*
-         * See if we are running interactively.
-         *
-         * When running from a test script, STDIN will not be a tty, and thus
-         * we will not be in interactive mode.
-         */
-        shell_terminal = STDIN_FILENO;
-        shell_is_interactive = isatty(shell_terminal);
-
-#ifdef DEBUG
-        printf("pid=%5ld, ppid=%5ld, pgrp=%5ld, sid=%5ld\n", (long) getpid(),
-               (long) getppid(), (long) getpgrp(), (long) getsid(0));
-        printf("original tcpgrp=%d\n", tcgetpgrp(shell_terminal));
-#endif
-
-        if (shell_is_interactive) {
-                shell_pgid = getpgrp();
-
-                /*
-                 * Loop until we are in the foreground.
-                 */
-                while (tcgetpgrp(shell_terminal) != shell_pgid) {
-                        kill(-shell_pgid, SIGTTIN);
-                }
-        }
-
-        /*
-         * Ignore interactive and job-control signals.
-         */
-        installer_install_job_control_signals();
-
-        /*
-         * Put ourselves in our own process group.
-         */
-        shell_pgid = getpid();
-
-        errno = 0;
-        status_ = setpgid(shell_pgid, shell_pgid);
-        if (status_ == -1) {
-                if (errno == EPERM && shell_pgid == getpgrp()) {
-                        /*
-                         * Process is session leader; do nothing.
-                         *
-                         * This is only triggered via CLion's run mode.
-                         */
-                        perror("shell is session leader");
-                } else {
-                        perror("Couldn't put shell in its own process group");
-                        _exit(1);
-                }
-        }
-
-        if (shell_is_interactive) {
-                /*
-                 * Grab control of the terminal.
-                 */
-                tcsetpgrp(shell_terminal, shell_pgid);
-        }
-
-#ifdef DEBUG
-        printf("final tcpgrp=%d\n", tcgetpgrp(shell_terminal));
-        printf("final pid=%5ld, ppid=%5ld, pgrp=%5ld, sid=%5ld\n", (long) getpid(),
-               (long) getppid(), (long) getpgrp(), (long) getsid(0));
-#endif
-}
-
-/**
- * @brief Prompt user for command and read input to @p cmd.
- * @param cmd command to store input in
- * @return number of characters read
- */
-static ssize_t smallsh_read_input(char **cmd)
-{
-        ssize_t n_read;
-        size_t len;
-
-        /*
-         * Prompt user for command.
-         */
-        if (write(STDOUT_FILENO, ": ", 2) == -1) {
-                perror("write");
-                _exit(1);
-        }
-
-        /*
-         * Read input command from user.
-         */
-        len = 0;
-
-        errno = 0;
-        n_read = getline(cmd, &len, stdin);
-        if (n_read == -1) {
-                return -1;
-        }
-
-        return n_read;
-}
-
-/**
  * @brief Evaluate a command entered by the user.
  * @param cmd command to evaluate
  * @return 0 or 1 on success, -1 on failure
@@ -195,9 +85,7 @@ static int smallsh_eval(char *cmd)
         bool foreground;
         Job *job;
 
-        /*
-         * Parse command into statements for evaluation.
-         */
+        /* Parse command into statements for evaluation. */
         parser_ctor(&parser);
 
         n_stmts = parser.parse(&parser, cmd);
@@ -209,18 +97,12 @@ static int smallsh_eval(char *cmd)
                 return 0; /* no statements parsed */
         }
 
-        /*
-         * Can have multiple statements, but we only want first one.
-         */
+        /* Can have multiple statements, but we only want first one. */
         stmt = parser.get_statements(&parser)[0];
 
-        /*
-         * Statement is not a builtin.
-         */
+        /* Statement is not a builtin. */
         if ((stmt->stmt_flags & FLAGS_BUILTIN) == 0) {
-                /*
-                 * Create process object.
-                 */
+                /* Create process object. */
                 job_proc = malloc(sizeof(Process));
                 process_ctor(job_proc, stmt->stmt_cmd->cmd_argc,
                              stmt->stmt_cmd->cmd_argv, 0, false, 0);
@@ -246,29 +128,19 @@ static int smallsh_eval(char *cmd)
                         foreground = false;
                 }
 
-                /*
-                 * Create job object.
-                 */
+                /* Create job object. */
                 job = malloc(sizeof(Job));
                 job_ctor(job, job_proc, 0, infile, outfile, !foreground);
 
-                /*
-                 * Add job to job table.
-                 */
+                /* Add job to job table. */
                 job_table.add_job(&job_table, job);
 
-                /*
-                 * Run job.
-                 */
+                /* Run job. */
                 status_ = job_control_launch_job(&job, foreground);
         }
-        /*
-         * Statement is a builtin.
-         */
+                /* Statement is a builtin. */
         else {
-                /*
-                 * Determine builtin name and run it.
-                 */
+                /* Determine builtin name and run it. */
                 cmd_name = stmt->stmt_cmd->cmd_argv[0];
                 if (strcmp("exit", cmd_name) == 0) {
                         /* do cleanup here */
@@ -289,6 +161,90 @@ static int smallsh_eval(char *cmd)
         parser_dtor(&parser);
 
         return status_;
+}
+
+/**
+ * @brief Initialize shell and bring it to the foreground process group.
+ *
+ * Do not proceed until this is the case.
+ */
+static void smallsh_init(void)
+{
+        int status_;
+
+        /*
+         * See if we are running interactively.
+         *
+         * When running from a test script, STDIN will not be a tty, and thus
+         * we will not be in interactive mode.
+         */
+        shell_terminal = STDIN_FILENO;
+        shell_is_interactive = isatty(shell_terminal);
+
+        if (shell_is_interactive) {
+                shell_pgid = getpgrp();
+
+                /* Loop until we are in the foreground. */
+                while (tcgetpgrp(shell_terminal) != shell_pgid) {
+                        kill(-shell_pgid, SIGTTIN);
+                }
+        }
+
+        /* Ignore interactive and job-control signals. */
+        installer_install_job_control_signals();
+
+        /* Put ourselves in our own process group. */
+        shell_pgid = getpid();
+
+        errno = 0;
+        status_ = setpgid(shell_pgid, shell_pgid);
+        if (status_ == -1) {
+                if (errno == EPERM && shell_pgid == getpgrp()) {
+                        /*
+                         * Process is session leader; do nothing.
+                         *
+                         * This is only triggered via CLion's run mode.
+                         */
+                        perror("shell is session leader");
+                } else {
+                        perror("Couldn't put shell in its own process group");
+                        _exit(1);
+                }
+        }
+
+        if (shell_is_interactive) {
+                /* Grab control of the terminal. */
+                tcsetpgrp(shell_terminal, shell_pgid);
+        }
+}
+
+/**
+ * @brief Prompt user for command and read input to @p cmd.
+ * @param cmd command to store input in
+ * @return number of characters read
+ */
+static ssize_t smallsh_read_input(char **cmd)
+{
+        ssize_t n_read;
+        size_t len;
+
+        /* Prompt user for command. */
+        if (write(STDOUT_FILENO, ": ", 2) == -1) {
+                perror("write");
+                _exit(1);
+        }
+
+        /* Read input command from user. */
+        len = 0;
+        errno = 0;
+        n_read = getline(cmd, &len, stdin);
+        if (n_read == -1) {
+                fprintf(stderr, "getline(): %s\n", strerror(errno));
+                fflush(stderr);
+                return -1;
+        }
+
+        return n_read;
 }
 
 /* *****************************************************************************
@@ -321,6 +277,28 @@ static int smallsh_eval(char *cmd)
  *
  *
  ******************************************************************************/
+
+bool smallsh_fg_only_mode_triggered(void)
+{
+        bool trigger;
+
+        sigset_t mask;
+        sigemptyset(&mask);
+        sigaddset(&mask, SIGTSTP);
+
+        sigprocmask(SIG_BLOCK, &mask, NULL);
+
+        trigger = false;
+        if (smallsh_fg_only_mode != fg_flag) {
+                smallsh_fg_only_mode = !smallsh_fg_only_mode;
+                trigger = true;
+        }
+
+        sigprocmask(SIG_UNBLOCK, &mask, NULL);
+
+        return trigger;
+}
+
 int smallsh_run(void)
 {
         ssize_t n_read;
@@ -350,12 +328,24 @@ int smallsh_run(void)
                         break;
                 }
 
+read_input:
                 /* Read command from user. */
                 cmd = NULL;
                 n_read = smallsh_read_input(&cmd);
                 if (n_read == -1) {
+                        fprintf(stderr, "smallsh_read_input()\n");
+                        fflush(stderr);
                         status_ = EXIT_FAILURE;
                         break;
+                }
+
+                /*
+                 * Check if SIGTSTP triggered fg-only mode on/off and update
+                 * shell's state accordingly.
+                 */
+                if (smallsh_fg_only_mode_triggered()) {
+                        /* Re-prompt user. */
+                        goto read_input;
                 }
 
                 /* Evaluate command. */

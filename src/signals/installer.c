@@ -23,9 +23,7 @@ void installer_install_job_control_signals(void)
 {
         sighandler_t status;
 
-        /*
-         * Ignore interactive and job-control signals.
-         */
+        /* Ignore interactive and job-control signals. */
         errno = 0;
         status = signal(SIGINT, SIG_IGN);
         if (status == SIG_ERR) {
@@ -51,14 +49,10 @@ void installer_install_job_control_signals(void)
                 _exit(1);
         }
 
-        /*
-         * Shell should handle SIGCHLD events for later delivery.
-         */
+        /* Shell should handle SIGCHLD events for later delivery. */
         installer_install_sigchld_handler();
 
-        /*
-         * Shell should handle SIGTSTP events to enable/disable fg only mode.
-         */
+        /* Shell should handle SIGTSTP events to enable/disable fg only mode. */
         installer_install_sigtstp_handler();
 }
 
@@ -107,9 +101,7 @@ void installer_install_sigchld_handler(void)
         sigset_t block_set;
         int status;
 
-        /*
-         * Ignore SIGTSTP signals within this handler.
-         */
+        /* Ignore SIGTSTP signals within this handler. */
         memset(&sa, 0, sizeof(sa));
 
         errno = 0;
@@ -140,13 +132,14 @@ void installer_install_sigchld_handler(void)
 
 void installer_install_sigtstp_handler(void)
 {
+        handler_install_fg_only_mode();
+
+        /*
         struct sigaction sa;
         sigset_t block_set;
         int status;
 
-        /*
-         * Ignore SIGCHLD signals within this handler.
-         */
+        // Ignore SIGCHLD signals within this handler.
         memset(&sa, 0, sizeof(sa));
 
         errno = 0;
@@ -173,4 +166,5 @@ void installer_install_sigtstp_handler(void)
                 perror("sigaction");
                 _exit(1);
         }
+        */
 }

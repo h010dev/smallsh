@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="OS1 (8bc7352d-fb7d-42c2-a190-f3fff53e3166)" remoteFilesAllowedToDisappearOnAutoupload="false" showNewOnTargetInSync="false">
+  <component name="PublishConfigData" autoUpload="Always" remoteFilesAllowedToDisappearOnAutoupload="false" showNewOnTargetInSync="false">
     <serverData>
+      <paths name="Docker (50f368d4-1451-4c59-9fc3-976df8372e4d)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/user/a3" local="$PROJECT_DIR$" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/out/build-docker" />
+            <excludedPath local="true" path="$PROJECT_DIR$/out/build" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
       <paths name="OS1 (8bc7352d-fb7d-42c2-a190-f3fff53e3166)">
         <serverdata>
           <mappings>
@@ -10,6 +21,7 @@
           <excludedPaths>
             <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug" />
             <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-os1" />
+            <excludedPath local="true" path="$PROJECT_DIR$/out/build-docker" />
             <excludedPath local="true" path="$PROJECT_DIR$/out/build" />
           </excludedPaths>
         </serverdata>

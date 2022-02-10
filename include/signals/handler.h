@@ -19,9 +19,12 @@ void handler_handle_sigchld(int sig);
  */
 void handler_handle_sigtstp(int sig);
 
-// 34.6.1
-void dispatcher_dispatch_sighup(pid_t pid);
-void handler_handle_sighup(int sig);
-void handler_handle_sigint(int sig);
+void handler_enable_fg_only_mode(int sig);
+
+void handler_disable_fg_only_mode(int sig);
+
+void handler_install_fg_only_mode(void);
+
+void handler_uninstall_fg_only_mode(void);
 
 #endif //SMALLSH_HANDLER_H
