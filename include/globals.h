@@ -15,5 +15,6 @@ int shell_is_interactive; /**< whether or not shell is in interactive mode */
 pid_t shell_pgid; /**< shell's PGID */
 int shell_terminal; /**< shell's terminal file */
 int smallsh_status;
+bool smallsh_line_buffer;
 
 #endif //SMALLSH_GLOBALS_H

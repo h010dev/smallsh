@@ -94,6 +94,7 @@ static int smallsh_eval(char *cmd)
                 return -1; /* error */
         } else if (n_stmts == 0) {
                 parser_dtor(&parser);
+                smallsh_line_buffer = true;
                 return 0; /* no statements parsed */
         }
 
@@ -118,7 +119,11 @@ static int smallsh_eval(char *cmd)
                 }
                 if (n_out > 0) {
                         outfile = st_out->stdout_streams[n_out - 1];
+                        smallsh_line_buffer = true;
                 } else {
+                        if (!shell_is_interactive) {
+                                write(STDOUT_FILENO, "\n", 1);
+                        }
                         outfile = NULL;
                 }
 
@@ -126,6 +131,10 @@ static int smallsh_eval(char *cmd)
                         foreground = true;
                 } else{
                         foreground = false;
+                }
+
+                if (smallsh_fg_only_mode && (stmt->stmt_flags & FLAGS_BGCTRL) != 0 && outfile == NULL) {
+                        smallsh_line_buffer = true;
                 }
 
                 /* Create job object. */
@@ -143,12 +152,13 @@ static int smallsh_eval(char *cmd)
                 /* Determine builtin name and run it. */
                 cmd_name = stmt->stmt_cmd->cmd_argv[0];
                 if (strcmp("exit", cmd_name) == 0) {
-                        /* do cleanup here */
                         status_ = 1;
+                        smallsh_line_buffer = true;
                 } else if (strcmp("cd", cmd_name) == 0) {
                         char *dirname = stmt->stmt_cmd->cmd_argv[1];
                         cd(dirname);
                         status_ = 0;
+                        smallsh_line_buffer = true;
                 } else if (strcmp("status", cmd_name) == 0) {
                         status(smallsh_status);
                         status_ = 0;
@@ -271,7 +281,7 @@ static ssize_t smallsh_read_input(char **cmd)
         if (n_read == -1 && errno != 0) {
                 fprintf(stderr, "getline(): %s\n", strerror(errno));
                 fflush(stderr);
-                smallsh_errno = -1;
+                return -1;
         }
 
         return n_read;
@@ -340,11 +350,15 @@ int smallsh_run(void)
                 cmd = NULL;
                 smallsh_errno = 0;
                 n_read = smallsh_read_input(&cmd);
-                if (n_read == -1 && smallsh_errno != 0) {
+                if (n_read == -1) {
+                        /*
                         fprintf(stderr, "smallsh_read_input()\n");
                         fflush(stderr);
                         status_ = EXIT_FAILURE;
                         break;
+                        */
+                        free(cmd);
+                        continue;
                 }
 
                 /*
@@ -373,11 +387,19 @@ int smallsh_run(void)
                         break;
                 }
 
+                if (!shell_is_interactive && smallsh_line_buffer) {
+                        write(STDOUT_FILENO, "\n", 1);
+                }
+                smallsh_line_buffer = false;
+
                 free(cmd);
         } while (1);
 
         if (status_ == EXIT_SUCCESS) {
                 exit_();
+        }
+        if (!shell_is_interactive && smallsh_line_buffer) {
+                write(STDOUT_FILENO, "\n", 1);
         }
 
         job_table_dtor(&job_table);
