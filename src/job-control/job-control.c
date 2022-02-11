@@ -25,17 +25,18 @@
 
 #include "job-control/job-control.h"
 
-void job_control_wait_for_job(Job *job)
+static void job_control_wait_for_job(Job *job)
 {
         int exit_status;
         pid_t child;
         siginfo_t info;
         int opt;
-        bool sigtstp_raised;
+        bool sigtstp_raised, normal_termination;
         int status;
 
         opt = WEXITED | WSTOPPED | WNOWAIT; /* don't collect child */
         sigtstp_raised = false;
+        normal_termination = false;
 
         /*
          * Loop until the child process is terminated due to any signal but
@@ -78,11 +79,22 @@ void job_control_wait_for_job(Job *job)
                                 break;
                         }
                 }
-                /* Child was terminated (normally or via a signal). */
+                /* Child was terminated normally. */
+                else if (info.si_code == CLD_EXITED) {
+                        exit_status = info.si_status;
+                        normal_termination = true;
+                        break;
+                }
+                /* Child was terminated by signal. */
                 else {
                         exit_status = info.si_status;
                         break;
                 }
+        }
+
+        if (WIFSIGNALED(exit_status) && !normal_termination) {
+                fprintf(stdout, "terminated by signal %d\n", WTERMSIG(exit_status));
+                fflush(stdout);
         }
 
         /*
@@ -108,7 +120,20 @@ void job_control_wait_for_job(Job *job)
         smallsh_status = exit_status;
 }
 
-void job_control_foreground_job(Job *job)
+static void job_control_background_job(Job *job)
+{
+        fprintf(stdout, "[%d]\t%d\n", job->job_spec, job->job_proc->proc_pid);
+        fflush(stdout);
+}
+
+/**
+ * @brief Run @p job in the foreground.
+ *
+ * Puts @p job into the foreground, waits for it to complete, then puts
+ * shell back into foreground.
+ * @param job job to run
+ */
+static void job_control_foreground_job(Job *job)
 {
         int status;
 
@@ -167,6 +192,7 @@ int job_control_launch_job(Job **job, bool foreground)
                 }
         }
 
+        /* Foreground job. */
         if (foreground) {
                 if (shell_is_interactive) {
                         /*
@@ -179,7 +205,10 @@ int job_control_launch_job(Job **job, bool foreground)
                         job_control_wait_for_job(job_);
                 }
         }
-        /* Background job; do nothing. */
+        /* Background job. */
+        else {
+               job_control_background_job(job_);
+        }
 
         return 0;
 }

@@ -17,25 +17,6 @@
 
 JobTable job_table; /**< shell global job-control table */
 
-/*
- * Foreground / background process.
- *
- * Source: https://www.gnu.org/software/libc/manual/html_node/Foreground-and-Background.html
- */
-/* Put job j in the foreground. If cont is nonzero, restore the saved terminal
- * modes and send the process group a SIGCONT signal to wake it up before we
- * block.
- */
-
-/**
- * @brief Run @p job in the foreground.
- *
- * Puts @p job into the foreground, waits for it to complete, then puts
- * shell back into foreground.
- * @param job job to run
- */
-void job_control_foreground_job(Job *job);
-
 /**
  * @brief Creates new child process and runs @p job within child.
  * @param job job to run
