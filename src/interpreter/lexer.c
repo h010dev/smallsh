@@ -32,10 +32,14 @@ size_t lexer_generate_tokens(char *buf, size_t max_tok, Token *tok[max_tok])
                         // ignore whitespace
                         iter.vptr->next(&iter);
                         continue;
-                } else if (IS_CMT_SYM(c1, c2)) {
-                        // token is a comment
-                        tok[count] = malloc(sizeof(Token));
-                        comment_token_ctor((CommentToken *) tok[count]);
+                } else if (IS_CMT_SYM(c1)) {
+                        if (count == 0) {
+                                // token is a comment
+                                tok[count] = malloc(sizeof(Token));
+                                comment_token_ctor((CommentToken *) tok[count]);
+                        } else {
+                                goto consume_word;
+                        }
                 } else if (IS_INPUT_REDIR_OP(c1, c2)) {
                         // token is an input redirection operator
                         tok[count] = malloc(sizeof(Token));
@@ -53,6 +57,7 @@ size_t lexer_generate_tokens(char *buf, size_t max_tok, Token *tok[max_tok])
                         tok[count] = malloc(sizeof(Token));
                         newline_token_ctor((NewlineToken *) tok[count]);
                 } else {
+consume_word:
                         // otherwise, token is a word
                         tok[count] = malloc(sizeof(Token));
                         word_token_ctor((WordToken *) tok[count]);
