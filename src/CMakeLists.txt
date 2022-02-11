@@ -10,7 +10,6 @@ set(
         "${PROJECT_SOURCE_DIR}/src/events/sender.c"
         "${PROJECT_SOURCE_DIR}/src/events/receiver.c"
         "${PROJECT_SOURCE_DIR}/src/events/channel.c"
-        "${PROJECT_SOURCE_DIR}/src/signals/dispatcher.c"
         "${PROJECT_SOURCE_DIR}/src/signals/installer.c"
         "${PROJECT_SOURCE_DIR}/src/signals/handler.c"
         "${PROJECT_SOURCE_DIR}/src/builtins/builtins.c"
