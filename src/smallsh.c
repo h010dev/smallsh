@@ -15,11 +15,10 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "smallsh.h"
-#include "globals.h"
 #include "builtins/builtins.h"
 #include "error.h"
 #include "events/events.h"
+#include "globals.h"
 #include "job-control/job-control.h"
 #include "interpreter/parser.h"
 #include "signals/installer.h"
@@ -44,18 +43,6 @@
  *
  *
  ******************************************************************************/
-/* *****************************************************************************
- * OBJECTS
- *
- *
- *
- *
- *
- *
- *
- ******************************************************************************/
-int smallsh_status = 0;
-
 /* *****************************************************************************
  * FUNCTIONS
  *
@@ -121,8 +108,12 @@ static int smallsh_eval(char *cmd)
                         outfile = st_out->stdout_streams[n_out - 1];
                         smallsh_line_buffer = true;
                 } else {
-                        if (!shell_is_interactive) {
-                                write(STDOUT_FILENO, "\n", 1);
+                        if (!smallsh_interactive_mode) {
+#ifdef TEST_SCRIPT
+                                if (strcmp("echo", stmt->stmt_cmd->cmd_argv[0]) != 0) {
+                                        write(STDOUT_FILENO, "\n", 1);
+                                }
+#endif
                         }
                         outfile = NULL;
                 }
@@ -133,13 +124,20 @@ static int smallsh_eval(char *cmd)
                         foreground = false;
                 }
 
-                if (smallsh_fg_only_mode && (stmt->stmt_flags & FLAGS_BGCTRL) != 0 && outfile == NULL) {
-                        smallsh_line_buffer = true;
+                if (!smallsh_interactive_mode) {
+#ifdef TEST_SCRIPT
+                        if (smallsh_fg_only_mode) {
+                                if ((stmt->stmt_flags & FLAGS_BGCTRL) != 0) {
+                                        if (outfile == NULL) {
+                                                smallsh_line_buffer = true;
+                                        }
+                                }
+                        }
+#endif
                 }
-
                 /* Create job object. */
                 job = malloc(sizeof(Job));
-                job_ctor(job, job_proc, 0, infile, outfile, !foreground);
+                job_ctor(job, cmd, job_proc, 0, infile, outfile, !foreground);
 
                 /* Add job to job table. */
                 job_table.add_job(&job_table, job);
@@ -147,7 +145,7 @@ static int smallsh_eval(char *cmd)
                 /* Run job. */
                 status_ = job_control_launch_job(&job, foreground);
         }
-                /* Statement is a builtin. */
+        /* Statement is a builtin. */
         else {
                 /* Determine builtin name and run it. */
                 cmd_name = stmt->stmt_cmd->cmd_argv[0];
@@ -160,10 +158,10 @@ static int smallsh_eval(char *cmd)
                         status_ = 0;
                         smallsh_line_buffer = true;
                 } else if (strcmp("status", cmd_name) == 0) {
-                        status(smallsh_status);
+                        status();
                         status_ = 0;
                 } else {
-                        /* error */
+                        /* Error */
                         status_ = -1;
                 }
         }
@@ -180,27 +178,20 @@ static int smallsh_eval(char *cmd)
  * Sets global variable @c smallsh_fg_only_mode accordingly.
  *
  * Source: https://edstem.org/us/courses/16718/discussion/1067170
- * @return true if fg mode has changed, false otherwise
  */
-static bool smallsh_fg_only_mode_triggered(void)
+static void smallsh_inspect_fg_only_mode_flag(void)
 {
-        bool trigger;
-
         sigset_t mask;
         sigemptyset(&mask);
         sigaddset(&mask, SIGTSTP);
 
         sigprocmask(SIG_BLOCK, &mask, NULL);
 
-        trigger = false;
-        if (smallsh_fg_only_mode != fg_flag) {
+        if (smallsh_fg_only_mode != smallsh_fg_only_mode_flag) {
                 smallsh_fg_only_mode = !smallsh_fg_only_mode;
-                trigger = true;
         }
 
         sigprocmask(SIG_UNBLOCK, &mask, NULL);
-
-        return trigger;
 }
 
 /**
@@ -218,15 +209,15 @@ static void smallsh_init(void)
          * When running from a test script, STDIN will not be a tty, and thus
          * we will not be in interactive mode.
          */
-        shell_terminal = STDIN_FILENO;
-        shell_is_interactive = isatty(shell_terminal);
+        smallsh_shell_terminal = STDIN_FILENO;
+        smallsh_interactive_mode = isatty(smallsh_shell_terminal);
 
-        if (shell_is_interactive) {
-                shell_pgid = getpgrp();
+        if (smallsh_interactive_mode) {
+                smallsh_shell_pgid = getpgrp();
 
                 /* Loop until we are in the foreground. */
-                while (tcgetpgrp(shell_terminal) != shell_pgid) {
-                        kill(-shell_pgid, SIGTTIN);
+                while (tcgetpgrp(smallsh_shell_terminal) != smallsh_shell_pgid) {
+                        kill(-smallsh_shell_pgid, SIGTTIN);
                 }
         }
 
@@ -234,27 +225,26 @@ static void smallsh_init(void)
         installer_install_job_control_signals();
 
         /* Put ourselves in our own process group. */
-        shell_pgid = getpid();
+        smallsh_shell_pgid = getpid();
 
         errno = 0;
-        status_ = setpgid(shell_pgid, shell_pgid);
+        status_ = setpgid(smallsh_shell_pgid, smallsh_shell_pgid);
         if (status_ == -1) {
-                if (errno == EPERM && shell_pgid == getpgrp()) {
+                if (errno == EPERM && smallsh_shell_pgid == getpgrp()) {
                         /*
                          * Process is session leader; do nothing.
                          *
                          * This is only triggered via CLion's run mode.
                          */
-                        perror("shell is session leader");
                 } else {
-                        perror("Couldn't put shell in its own process group");
+                        print_error_msg("Couldn't put shell in its own process group");
                         _exit(1);
                 }
         }
 
-        if (shell_is_interactive) {
+        if (smallsh_interactive_mode) {
                 /* Grab control of the terminal. */
-                tcsetpgrp(shell_terminal, shell_pgid);
+                tcsetpgrp(smallsh_shell_terminal, smallsh_shell_pgid);
         }
 }
 
@@ -270,7 +260,7 @@ static ssize_t smallsh_read_input(char **cmd)
 
         /* Prompt user for command. */
         if (write(STDOUT_FILENO, ": ", 2) == -1) {
-                perror("write");
+                print_error_msg("write");
                 _exit(1);
         }
 
@@ -279,11 +269,13 @@ static ssize_t smallsh_read_input(char **cmd)
         errno = 0;
         n_read = getline(cmd, &len, stdin);
         if (n_read == -1 && errno != 0) {
-                fprintf(stderr, "getline(): %s\n", strerror(errno));
-                fflush(stderr);
+                print_error_msg("getline()");
                 return -1;
         }
-
+#ifdef TEST_SCRIPT_ECHO_COMMANDS
+        fprintf(stdout, "%s", *cmd);
+        fflush(stdout);
+#endif
         return n_read;
 }
 
@@ -317,7 +309,10 @@ static ssize_t smallsh_read_input(char **cmd)
  *
  *
  ******************************************************************************/
-int smallsh_run(void)
+/**
+ * @brief Run shell's main event loop until terminated.
+ */
+int main(void)
 {
         ssize_t n_read;
         char *cmd;
@@ -326,68 +321,54 @@ int smallsh_run(void)
         /* Setup event listener to catch signal events and related data. */
         status_ = events_init();
         if (status_ == -1) {
-                fprintf(stderr, "events_init()");
-                fflush(stderr);
-                return EXIT_FAILURE;
+                print_error_msg("events_init()");
+                _exit(1);
         }
 
         smallsh_init();
 
         job_table_ctor(&job_table);
 
+        smallsh_errno = 0;
+
         /* Run event loop forever until shell termination. */
         do {
                 /* Notify user about new job-control events. */
                 status_ = events_notify();
                 if (status_ == -1) {
-                        fprintf(stderr, "events_notify()\n");
-                        fflush(stderr);
+                        print_error_msg("events_notify()");
                         status_ = EXIT_FAILURE;
                         break;
                 }
 
                 /* Read command from user. */
                 cmd = NULL;
-                smallsh_errno = 0;
                 n_read = smallsh_read_input(&cmd);
                 if (n_read == -1) {
-                        /*
-                        fprintf(stderr, "smallsh_read_input()\n");
-                        fflush(stderr);
+                        print_error_msg("smallsh_read_input()");
                         status_ = EXIT_FAILURE;
                         break;
-                        */
-                        free(cmd);
-                        continue;
                 }
 
                 /*
                  * Check if SIGTSTP triggered fg-only mode on/off and update
                  * shell's state accordingly.
                  */
-                if (smallsh_fg_only_mode_triggered()) {
-                        /* Re-prompt user. */
-                }
+                smallsh_inspect_fg_only_mode_flag();
 
                 /* Evaluate command. */
                 status_ = smallsh_eval(cmd);
                 if (status_ == -1) {
-                        if (smallsh_errno == SMSH_EOPEN) {
-                                /* Do nothing. */
-                                smallsh_errno = 0;
-                                smallsh_status = 1;
-                        } else {
-                                free(cmd);
-                                status_ = EXIT_FAILURE;
-                                break;
-                        }
+                        free(cmd);
+                        status_ = EXIT_FAILURE;
+                        break;
                 } else if (status_ == 1) {
                         free(cmd);
                         status_ = EXIT_SUCCESS;
                         break;
                 }
 
-                if (!shell_is_interactive && smallsh_line_buffer) {
+                if (!smallsh_interactive_mode && smallsh_line_buffer) {
                         write(STDOUT_FILENO, "\n", 1);
                 }
                 smallsh_line_buffer = false;
@@ -395,16 +376,5 @@ int smallsh_run(void)
                 free(cmd);
         } while (1);
 
-        if (status_ == EXIT_SUCCESS) {
-                exit_();
-        }
-        if (!shell_is_interactive && smallsh_line_buffer) {
-                write(STDOUT_FILENO, "\n", 1);
-        }
-
-        job_table_dtor(&job_table);
-
-        events_cleanup();
-
-        return status_;
+        exit_(status_);
 }
