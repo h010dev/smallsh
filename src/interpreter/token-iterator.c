@@ -99,7 +99,6 @@ static inline Token token_iterator_peek_(TokenIterator const * const self,
         } while (pos <= offset && self->vptr->has_next(self));
 
         if (pos <= offset) {
-                // TODO: find a better way to return null if possible
                 // newline token acts as null terminator for token array
                 NewlineToken n;
                 newline_token_ctor(&n);
@@ -143,7 +142,6 @@ static inline Token token_iterator_peek_(TokenIterator const * const self,
  *
  *
  ******************************************************************************/
-// TODO: look into benefits/tradeoffs for deep-copying the tokens array
 void token_iterator_ctor(TokenIterator *self, size_t len, Token *tok[len])
 {
         static struct TokenIteratorVtbl const vtbl = {

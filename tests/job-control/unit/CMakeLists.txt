@@ -19,6 +19,10 @@ set(
         "${PROJECT_SOURCE_DIR}/src/events/receiver.c"
         "${PROJECT_SOURCE_DIR}/src/events/sender.c"
         "${PROJECT_SOURCE_DIR}/src/events/dto.c"
+        "${PROJECT_SOURCE_DIR}/src/builtins/builtins.c"
+        "${PROJECT_SOURCE_DIR}/src/builtins/cd.c"
+        "${PROJECT_SOURCE_DIR}/src/builtins/status.c"
+        "${PROJECT_SOURCE_DIR}/src/builtins/exit.c"
 )
 
 set(

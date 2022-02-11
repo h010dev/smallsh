@@ -19,7 +19,6 @@ struct TokenIteratorPrivate {
         size_t ti_cur;
 };
 
-// TODO: move token array init and destroy to setup and teardown funcs
 static void token_iterator_ctor_test_initializesValues(void **state)
 {
         (void) state;

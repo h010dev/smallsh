@@ -38,6 +38,7 @@ size_t lexer_generate_tokens(char *buf, size_t max_tok, Token *tok[max_tok])
                                 tok[count] = malloc(sizeof(Token));
                                 comment_token_ctor((CommentToken *) tok[count]);
                         } else {
+                                /* Comment symbol is part of a word token. */
                                 goto consume_word;
                         }
                 } else if (IS_INPUT_REDIR_OP(c1, c2)) {

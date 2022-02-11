@@ -148,7 +148,8 @@ static char *string_iterator_slice_(StringIterator const * const self, const cha
  * @param offset how far ahead to peek
  * @return the character pointed to by the iterator
  */
-static inline char string_iterator_peek_(StringIterator const * const self, unsigned int offset)
+static inline char string_iterator_peek_(StringIterator const * const self,
+                                         unsigned int offset)
 {
         const char *orig, *cur;
         char result;

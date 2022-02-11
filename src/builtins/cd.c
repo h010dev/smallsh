@@ -12,16 +12,46 @@
 
 #include "builtins/cd.h"
 
+/* *****************************************************************************
+ * PUBLIC DEFINITIONS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
+/* *****************************************************************************
+ * FUNCTIONS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
 void cd(char *dirname)
 {
         int status;
 
-        /* Default to home directory if dirname not supplied. */
+        /* Default to $HOME directory if dirname not supplied. */
         if (dirname == NULL) {
                 dirname = getenv("HOME");
                 if (dirname == NULL) {
-                        /* No match found! */
-                        fprintf(stderr, "getenv(): %s\n", strerror(errno));
+                        /* $HOME env var not defined. */
+                        fprintf(stderr, "$HOME: %s\n", strerror(errno));
                         fflush(stderr);
                         return;
                 }
@@ -30,6 +60,7 @@ void cd(char *dirname)
         errno = 0;
         status = chdir(dirname);
         if (status == -1) {
+                /* Couldn't cd into directory. */
                 fprintf(stderr, "-smallsh: cd: %s: %s\n", dirname, strerror(errno));
                 fflush(stderr);
         }

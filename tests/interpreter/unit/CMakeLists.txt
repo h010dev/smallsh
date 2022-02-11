@@ -13,6 +13,15 @@ set(
         "${PROJECT_SOURCE_DIR}/src/builtins/cd.c"
         "${PROJECT_SOURCE_DIR}/src/builtins/status.c"
         "${PROJECT_SOURCE_DIR}/src/builtins/exit.c"
+        "${PROJECT_SOURCE_DIR}/src/job-control/job-control.c"
+        "${PROJECT_SOURCE_DIR}/src/job-control/job-table.c"
+        "${PROJECT_SOURCE_DIR}/src/job-control/job.c"
+        "${PROJECT_SOURCE_DIR}/src/job-control/process.c"
+        "${PROJECT_SOURCE_DIR}/src/events/events.c"
+        "${PROJECT_SOURCE_DIR}/src/events/dto.c"
+        "${PROJECT_SOURCE_DIR}/src/events/sender.c"
+        "${PROJECT_SOURCE_DIR}/src/events/receiver.c"
+        "${PROJECT_SOURCE_DIR}/src/events/channel.c"
 )
 
 set(

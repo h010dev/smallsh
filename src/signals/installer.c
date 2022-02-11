@@ -19,43 +19,36 @@
 #include "signals/installer.h"
 #include "signals/handler.h"
 
-void installer_install_job_control_signals(void)
-{
-        sighandler_t status;
-
-        /* Ignore interactive and job-control signals. */
-        errno = 0;
-        status = signal(SIGINT, SIG_IGN);
-        if (status == SIG_ERR) {
-                perror("signal");
-                _exit(1);
-        }
-
-        /*
-         * Shell should ignore read/write signals since it is allowed to
-         * perform IO.
-         */
-        errno = 0;
-        status = signal(SIGTTIN, SIG_IGN);
-        if (status == SIG_ERR) {
-                perror("signal");
-                _exit(1);
-        }
-
-        errno = 0;
-        status = signal(SIGTTOU, SIG_IGN);
-        if (status == SIG_ERR) {
-                perror("signal");
-                _exit(1);
-        }
-
-        /* Shell should handle SIGCHLD events for later delivery. */
-        installer_install_sigchld_handler();
-
-        /* Shell should handle SIGTSTP events to enable/disable fg only mode. */
-        installer_install_sigtstp_handler();
-}
-
+/* *****************************************************************************
+ * PUBLIC DEFINITIONS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
+/* *****************************************************************************
+ * FUNCTIONS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
 void installer_install_child_process_signals(bool foreground)
 {
         sighandler_t sig_status;
@@ -93,6 +86,43 @@ void installer_install_child_process_signals(bool foreground)
                         _exit(1);
                 }
         }
+}
+
+void installer_install_job_control_signals(void)
+{
+        sighandler_t status;
+
+        /* Ignore SIGINT when shell is foreground process. */
+        errno = 0;
+        status = signal(SIGINT, SIG_IGN);
+        if (status == SIG_ERR) {
+                perror("signal");
+                _exit(1);
+        }
+
+        /*
+         * Shell should ignore read/write signals since it is allowed to
+         * perform IO.
+         */
+        errno = 0;
+        status = signal(SIGTTIN, SIG_IGN);
+        if (status == SIG_ERR) {
+                perror("signal");
+                _exit(1);
+        }
+
+        errno = 0;
+        status = signal(SIGTTOU, SIG_IGN);
+        if (status == SIG_ERR) {
+                perror("signal");
+                _exit(1);
+        }
+
+        /* Shell should handle SIGCHLD events for later delivery. */
+        installer_install_sigchld_handler();
+
+        /* Shell should handle SIGTSTP events to enable/disable fg-only mode. */
+        installer_install_sigtstp_handler();
 }
 
 void installer_install_sigchld_handler(void)

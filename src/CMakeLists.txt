@@ -1,13 +1,12 @@
 set(
         SOURCES
-        "${PROJECT_SOURCE_DIR}/src/main.c"
         "${PROJECT_SOURCE_DIR}/src/smallsh.c"
+        "${PROJECT_SOURCE_DIR}/src/error.c"
         "${PROJECT_SOURCE_DIR}/src/job-control/job-control.c"
         "${PROJECT_SOURCE_DIR}/src/job-control/job-table.c"
         "${PROJECT_SOURCE_DIR}/src/job-control/job.c"
         "${PROJECT_SOURCE_DIR}/src/job-control/process.c"
         "${PROJECT_SOURCE_DIR}/src/events/events.c"
-        "${PROJECT_SOURCE_DIR}/src/events/dto.c"
         "${PROJECT_SOURCE_DIR}/src/events/sender.c"
         "${PROJECT_SOURCE_DIR}/src/events/receiver.c"
         "${PROJECT_SOURCE_DIR}/src/events/channel.c"
@@ -25,7 +24,7 @@ set(
         "${PROJECT_SOURCE_DIR}/src/interpreter/shell-tokens.c"
         "${PROJECT_SOURCE_DIR}/src/interpreter/token.c"
         "${PROJECT_SOURCE_DIR}/src/utils/string-iterator.c"
-)
+        error.c)
 add_executable(
         ${PROJECT_NAME}
         ${SOURCES}

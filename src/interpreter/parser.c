@@ -105,7 +105,6 @@ static int parser_parse_cmd_(Statement *stmt, TokenIterator *iter)
                         stmt->stmt_cmd->cmd_argv = tmp;
                 }
 
-                // TODO: look into creating add methods to statement class
                 // take word
                 WordToken *wt = (WordToken *) iter->vptr->next(iter);
                 char *wt_str = wt->super.vptr->get_value((Token *) wt);
@@ -164,36 +163,42 @@ static int parser_parse_ioredir_(Statement *stmt, TokenIterator *iter,
                         wt_str = wt->super.vptr->get_value((Token *) wt);
 
                         // extract word string into statement stdin
-                        stmt->stmt_stdin->stdin_streams[stmt->stmt_stdin->stdin_num_streams++] =
+                        stmt->stmt_stdin->stdin_streams[
+                                stmt->stmt_stdin->stdin_num_streams++] =
                                 parser_expand_word(wt_str);
                         free(wt_str);
 
                         // resize strings buf
                         tmp = realloc(stmt->stmt_stdin->stdin_streams,
-                                      (stmt->stmt_stdin->stdin_num_streams + 1) * sizeof(char *));
+                                      (stmt->stmt_stdin->stdin_num_streams + 1)
+                                      * sizeof(char *));
                         if (tmp == NULL) {
                                 return -1; // error
                         }
                         stmt->stmt_stdin->stdin_streams = tmp;
-                        stmt->stmt_stdin->stdin_streams[stmt->stmt_stdin->stdin_num_streams] = NULL;
+                        stmt->stmt_stdin->stdin_streams[
+                                stmt->stmt_stdin->stdin_num_streams] = NULL;
                         break;
                 case IOREDIR_STDOUT:
                         // take next word
                         wt_str = wt->super.vptr->get_value((Token *) wt);
 
                         // extract word string into statement stdout
-                        stmt->stmt_stdout->stdout_streams[stmt->stmt_stdout->stdout_num_streams++] =
+                        stmt->stmt_stdout->stdout_streams[
+                                stmt->stmt_stdout->stdout_num_streams++] =
                                 parser_expand_word(wt_str);
                         free(wt_str);
 
                         // resize strings buf
                         tmp = realloc(stmt->stmt_stdout->stdout_streams,
-                                      (stmt->stmt_stdout->stdout_num_streams + 1) * sizeof(char *));
+                                      (stmt->stmt_stdout->stdout_num_streams + 1)
+                                      * sizeof(char *));
                         if (tmp == NULL) {
                                 return -1; // error
                         }
                         stmt->stmt_stdout->stdout_streams = tmp;
-                        stmt->stmt_stdout->stdout_streams[stmt->stmt_stdout->stdout_num_streams] = NULL;
+                        stmt->stmt_stdout->stdout_streams[
+                                stmt->stmt_stdout->stdout_num_streams] = NULL;
                         break;
                 default:
                         return -1;
@@ -232,12 +237,13 @@ static ssize_t parser_parse_statements_(struct Parser * const self)
                 }
 
                 Token tok1 = iter.vptr->peek(&iter, 0);
+#ifdef DEMO
                 Token tok2 = iter.vptr->peek(&iter, 1);
+#endif
 
                 if (is_tok_cmt(tok1)) {
                         break; // done
                 } else if (is_tok_ctrl_bg(tok1)) {
-#define DEMO
 #ifdef DEMO
                         if (is_tok_ctrl_newline(tok2)) {
                                 (void) iter.vptr->next(&iter);
@@ -293,7 +299,6 @@ static ssize_t parser_parse_statements_(struct Parser * const self)
         return count;
 }
 
-// TODO: add free/del method for tokens
 /**
  * @brief Parses a character stream, creates tokens, and generates command
  * statements.
@@ -411,7 +416,6 @@ char *parser_insert_pid(char *str, char **ptr, size_t *len)
         // get pid and convert to string
 #ifdef TEST
         // can't test valid results with randomized pid!
-        // TODO: This could be done via mocking getpid() result. Find out how.
         pid_t pid = 123456;
 #else
         pid_t pid = getpid();

@@ -1,11 +1,52 @@
-//
-// Created by mohamed on 2/3/22.
-//
+/**
+ * @file status.c
+ * @author Mohamed Al-Hussein
+ * @date 03 Feb 2022
+ * @brief status builtin command.
+ */
 #include <stdio.h>
 
-//https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_08_02
-int status(int status)
+#include "builtins/status.h"
+#include "error.h"
+#include "globals.h"
+
+/* *****************************************************************************
+ * PUBLIC DEFINITIONS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
+/* *****************************************************************************
+ * FUNCTIONS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
+void status()
 {
-        fprintf(stdout, "exit value %d\n", status);
-        return 0;
+        if (!smallsh_interactive_mode) {
+                fprintf(stdout, "\nexit value %d\n", smallsh_errno);
+        } else {
+                fprintf(stdout, "exit value %d\n", smallsh_errno);
+        }
+
+        fflush(stdout);
 }
