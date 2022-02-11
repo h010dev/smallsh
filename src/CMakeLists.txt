@@ -14,6 +14,7 @@ set(
         "${PROJECT_SOURCE_DIR}/src/signals/dispatcher.c"
         "${PROJECT_SOURCE_DIR}/src/signals/installer.c"
         "${PROJECT_SOURCE_DIR}/src/signals/handler.c"
+        "${PROJECT_SOURCE_DIR}/src/builtins/builtins.c"
         "${PROJECT_SOURCE_DIR}/src/builtins/cd.c"
         "${PROJECT_SOURCE_DIR}/src/builtins/status.c"
         "${PROJECT_SOURCE_DIR}/src/builtins/exit.c"

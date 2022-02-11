@@ -14,6 +14,7 @@
 #include "interpreter/parser.h"
 #include "interpreter/token-iterator.h"
 #include "interpreter/lexer.h"
+#include "builtins/builtins.h"
 
 /* *****************************************************************************
  * PRIVATE DEFINITIONS
@@ -124,11 +125,8 @@ static int parser_parse_cmd_(Statement *stmt, TokenIterator *iter)
         // null terminate argv for exec
         stmt->stmt_cmd->cmd_argv[stmt->stmt_cmd->cmd_argc] = NULL;
 
-        // TODO: move these to builtins module
-        char *cmd = stmt->stmt_cmd->cmd_argv[0];
-        if (strcmp("cd", cmd) == 0 ||
-            strcmp("exit", cmd) == 0 ||
-            strcmp("status", cmd) == 0) {
+        /* Check if command is a supported builtin. */
+        if (builtins_is_supported(stmt->stmt_cmd->cmd_argv[0])) {
                 stmt->stmt_flags |= FLAGS_BUILTIN;
         }
 
