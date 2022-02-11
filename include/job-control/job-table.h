@@ -64,7 +64,16 @@ struct JobTable {
         struct JobTablePrivate *private;
 };
 
+/**
+ * @brief Initializes @p self.
+ * @param self @c JobTable object to initialize
+ */
 void job_table_ctor(JobTable *self);
+
+/**
+ * @brief De-initializes self and frees up its resources.
+ * @param self @c JobTable object to de-initialize
+ */
 void job_table_dtor(JobTable *self);
 
 #endif //SMALLSH_JOB_TABLE_H

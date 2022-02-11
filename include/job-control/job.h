@@ -10,7 +10,6 @@
 #ifndef SMALLSH_JOB_H
 #define SMALLSH_JOB_H
 
-#include <termios.h>
 #include "process.h"
 
 typedef struct Job Job;
@@ -19,6 +18,7 @@ typedef struct Job Job;
  * @brief Job object.
  */
 struct Job {
+        char *job_cmd; /**< command typed by user for this job */
         Process *job_proc; /**< process object */
         pid_t job_pgid; /**< PGID */
         char *job_stdin; /**< STDIN filename */
@@ -31,14 +31,15 @@ struct Job {
 /**
  * @brief Initializes values for a @c Job object.
  * @param self job object to initialize
+ * @param cmd job command entered by user
  * @param proc job's process object
  * @param pgid job's PGID
  * @param infile job's STDIN filename
  * @param outfile job's STDOUT filename
  * @param bg whether or not job is to be run in background
  */
-void job_ctor(Job *self, Process *proc, pid_t pgid, char *infile, char *outfile,
-              bool bg);
+void job_ctor(Job *self, char *cmd, Process *proc, pid_t pgid, char *infile,
+              char *outfile, bool bg);
 
 /**
  * @brief Cleans up and frees job resources.

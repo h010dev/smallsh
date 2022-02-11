@@ -104,25 +104,26 @@ static void job_table_clean_(struct JobTable const * const self)
                         /* Background job completed; notify user. */
                         if (cur->job_bg) {
                                 /* Print job info. */
-                                printf("[%d]", cur->job_spec);
+                                fprintf(stdout, "[%d]", cur->job_spec);
                                 if (cur->job_spec == last_spec_01) {
-                                        printf("+");
+                                        fprintf(stdout, "+");
                                 } else if (cur->job_spec == last_spec_02) {
-                                        printf("-");
+                                        fprintf(stdout, "-");
                                 }
 
-                                printf("\t%d", cur->job_proc->proc_pid);
+                                fprintf(stdout, "\t%d", cur->job_proc->proc_pid);
 
-                                printf("\tDone");
+                                fprintf(stdout, "\tDone");
 
                                 if (cur->job_proc->proc_status == 0) {
-                                        printf("\tEXIT 0");
+                                        fprintf(stdout, "\t\texit value 0");
                                 } else {
-                                        printf("\tTERM %d",
+                                        fprintf(stdout, "\t\tterminated by signal %d",
                                                cur->job_proc->proc_status);
                                 }
 
-                                printf("\t\t%s\n", cur->job_proc->argv[0]);
+                                fprintf(stdout, "\t\t%s\n", cur->job_cmd);
+                                fflush(stdout);
                         }
 
                         /* Remove job and free its memory. */

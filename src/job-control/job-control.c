@@ -18,6 +18,7 @@
 #include <unistd.h>
 
 #include "globals.h"
+#include "error.h"
 
 #ifdef DEBUG
 #include <string.h>
@@ -117,7 +118,7 @@ static void job_control_wait_for_job(Job *job)
          */
         job->job_proc->proc_completed = true;
         job->job_proc->proc_status = exit_status;
-        smallsh_status = exit_status;
+        smallsh_errno = exit_status;
 }
 
 static void job_control_background_job(Job *job)
@@ -139,7 +140,7 @@ static void job_control_foreground_job(Job *job)
 
         /* Put the job into the foreground. */
         errno = 0;
-        status = tcsetpgrp(shell_terminal, job->job_pgid);
+        status = tcsetpgrp(smallsh_shell_terminal, job->job_pgid);
         if (status == -1) {
                 perror("tcsetpgrp");
                 _exit(1);
@@ -150,13 +151,14 @@ static void job_control_foreground_job(Job *job)
 
         /* Put the shell back in the foreground. */
         errno = 0;
-        status = tcsetpgrp(shell_terminal, shell_pgid);
+        status = tcsetpgrp(smallsh_shell_terminal, smallsh_shell_pgid);
         if (status == -1) {
                 perror("tcsetpgrp");
                 _exit(1);
         }
 
-        tcflush(shell_terminal, TCIOFLUSH);
+        /* Clear terminal buffers. */
+        tcflush(smallsh_shell_terminal, TCIOFLUSH);
 }
 
 int job_control_launch_job(Job **job, bool foreground)
@@ -194,7 +196,7 @@ int job_control_launch_job(Job **job, bool foreground)
 
         /* Foreground job. */
         if (foreground) {
-                if (shell_is_interactive) {
+                if (smallsh_interactive_mode) {
                         /*
                          * Give job control over foreground if we are in
                          * interactive mode.

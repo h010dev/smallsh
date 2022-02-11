@@ -135,7 +135,7 @@ static int process_set_io_streams(char *infile, char *outfile, bool foreground)
                 errno = 0;
                 fds[0] = open(infile, stdin_flags, mode);
                 if (fds[0] == -1) {
-                        smallsh_errno = SMSH_EOPEN;
+                        smallsh_errno = 1;
                         fprintf(stderr, "-smallsh: %s: %s\n", infile, strerror(errno));
                         fflush(stderr);
                         return -1;
@@ -165,7 +165,7 @@ static int process_set_io_streams(char *infile, char *outfile, bool foreground)
                 errno = 0;
                 fds[1] = open(outfile, stdout_flags, mode);
                 if (fds[1] == -1) {
-                        smallsh_errno = SMSH_EOPEN;
+                        smallsh_errno = 1;
                         fprintf(stderr, "-smallsh: %s: %s\n", outfile, strerror(errno));
                         fflush(stderr);
                         return -1;
@@ -284,14 +284,14 @@ void process_launch(Process *proc, pid_t pgid, char *infile, char *outfile,
 
         process_set_group(&pgid);
 
-        if (shell_is_interactive) {
+        if (smallsh_interactive_mode) {
                 /*
                  * If we are running in the foreground, set the process as the
                  * controlling foreground process.
                  */
                 if (foreground) {
                         errno = 0;
-                        status = tcsetpgrp(shell_terminal, pgid);
+                        status = tcsetpgrp(smallsh_shell_terminal, pgid);
                         if (status == -1) {
                                 perror("tcsetpgrp");
                                 _exit(1);
