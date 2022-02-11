@@ -77,13 +77,20 @@ static int parser_parse_cmd_(Statement *stmt, TokenIterator *iter)
         size_t buf_size = 1;
 
         while (iter->vptr->has_next(iter)) {
-                Token tok;
+                Token tok1, tok2;
                 char **tmp;
 
                 // check if any words left to take
-                tok = iter->vptr->peek(iter, 0);
-                if (!is_tok_word(tok)) {
-                        break; // done
+                tok1 = iter->vptr->peek(iter, 0);
+                tok2 = iter->vptr->peek(iter, 1);
+                if (!is_tok_word(tok1)) {
+                        if (is_tok_ctrl_bg(tok1)) {
+                                if (is_tok_ctrl_newline(tok2)) {
+                                        break; // done
+                                }
+                        } else if (!is_tok_word(tok1)) {
+                                break; // done
+                        }
                 }
 
                 // resize buf if full
@@ -226,37 +233,46 @@ static ssize_t parser_parse_statements_(struct Parser * const self)
                         stmts = tmp;
                 }
 
-                Token tok = iter.vptr->peek(&iter, 0);
+                Token tok1 = iter.vptr->peek(&iter, 0);
+                Token tok2 = iter.vptr->peek(&iter, 1);
 
-                if (is_tok_cmt(tok)) {
+                if (is_tok_cmt(tok1)) {
                         break; // done
-                } else if (is_tok_ctrl_bg(tok)) {
+                } else if (is_tok_ctrl_bg(tok1)) {
+#define DEMO
+#ifdef DEMO
+                        if (is_tok_ctrl_newline(tok2)) {
+                                (void) iter.vptr->next(&iter);
+                                stmts[count - 1]->stmt_flags |= FLAGS_BGCTRL;
+                                break;
+                        }
+#endif
                         if (count == 0) {
                                 // syntax error
                         }
                         (void) iter.vptr->next(&iter);
                         stmts[count - 1]->stmt_flags |= FLAGS_BGCTRL;
                         cur++;
-                } else if (is_tok_ctrl_newline(tok)) {
+                } else if (is_tok_ctrl_newline(tok1)) {
                         if (count == 0) {
                                 // empty line
                                 break;
                         }
                         (void) iter.vptr->next(&iter);
                         cur++;
-                } else if (is_tok_redir_input(tok)) {
+                } else if (is_tok_redir_input(tok1)) {
                         if (stmts[count] == NULL) {
                                 // syntax error
                         }
                         parser_parse_ioredir_(stmts[count - 1], &iter,
                                               IOREDIR_STDIN);
-                } else if (is_tok_redir_output(tok)) {
+                } else if (is_tok_redir_output(tok1)) {
                         if (stmts[count] == NULL) {
                                 // syntax error
                         }
                         parser_parse_ioredir_(stmts[count - 1], &iter,
                                               IOREDIR_STDOUT);
-                } else if (is_tok_word(tok)) {
+                } else if (is_tok_word(tok1)) {
                         if (count < cur) {
                                 stmts[count++] = statement_new();
                         } else if (stmts[count]->stmt_stdin->stdin_num_streams > 0 ||
