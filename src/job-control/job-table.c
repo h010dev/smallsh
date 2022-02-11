@@ -66,16 +66,13 @@ static void job_table_add_job_(struct JobTable const * const self, Job *job)
 {
         struct JobTablePrivate *priv = self->private;
 
+        /* Case 1: Table is empty. */
         if (priv->jt_head == NULL) {
-                /*
-                 * Case 1: Table is empty.
-                 */
                 priv->jt_head = job;
                 job->job_spec = 1;
-        } else {
-                /*
-                 * Case 2: Table contains at least one job.
-                 */
+        }
+        /* Case 2: Table contains at least one job. */
+        else {
                 Job *head = priv->jt_head;
                 job->job_next = head;
                 job->job_spec = head->job_spec + 1;
@@ -88,32 +85,25 @@ static void job_table_clean_(struct JobTable const * const self)
 {
         struct JobTablePrivate *priv = self->private;
 
-        /*
-         * Track last and second last jobs for display options.
-         */
+        /* Track last and second last jobs for display options. */
         unsigned last_spec_01 = 0;
         unsigned last_spec_02 = 0;
 
         Job *pre = NULL;
         Job *cur = priv->jt_head;
         while (cur != NULL) {
-                /*
-                 * Mark last and second last jobs for print display.
-                 */
+                /* Mark last and second last jobs for print display. */
                 if (last_spec_01 == 0) {
                         last_spec_01 = cur->job_spec;
                 } else if (last_spec_02 == 0) {
                         last_spec_02 = cur->job_spec;
                 }
 
-                /*
-                 * Remove completed job and print info.
-                 */
+                /* Remove completed job and print info. */
                 if (cur->job_proc->proc_completed) {
+                        /* Background job completed; notify user. */
                         if (cur->job_bg) {
-                                /*
-                                 * Print job info.
-                                 */
+                                /* Print job info. */
                                 printf("[%d]", cur->job_spec);
                                 if (cur->job_spec == last_spec_01) {
                                         printf("+");
@@ -135,13 +125,9 @@ static void job_table_clean_(struct JobTable const * const self)
                                 printf("\t\t%s\n", cur->job_proc->argv[0]);
                         }
 
-                        /*
-                         * Remove job and free its memory.
-                         */
+                        /* Remove job and free its memory. */
+                        /* Case 1: Job was at list head. */
                         if (cur == priv->jt_head) {
-                                /*
-                                 * Case 1: Job was at list head.
-                                 */
                                 Job *head = priv->jt_head;
                                 priv->jt_head = head->job_next;
 
@@ -150,10 +136,9 @@ static void job_table_clean_(struct JobTable const * const self)
                                 head = NULL;
 
                                 cur = priv->jt_head;
-                        } else {
-                                /*
-                                 * Case 2: Job was n positions after list head.
-                                 */
+                        }
+                        /* Case 2: Job was n positions after list head. */
+                        else {
                                 Job *old = cur;
                                 pre->job_next = cur->job_next;
                                 cur = pre->job_next;
@@ -163,10 +148,9 @@ static void job_table_clean_(struct JobTable const * const self)
                                 old = NULL;
                         }
                         priv->jt_job_count--;
-                } else {
-                        /*
-                         * Job is not yet completed.
-                         */
+                }
+                /* Job is not yet completed. */
+                else {
                         pre = cur;
                         cur = cur->job_next;
                 }
@@ -178,9 +162,7 @@ static Job *job_table_find_job_(struct JobTable const * const self,
 {
         struct JobTablePrivate *priv = self->private;
 
-        /*
-         * Search all entries for job with matching PGID.
-         */
+        /* Search all entries for job with matching PGID. */
         Job *job = priv->jt_head;
         while (job != NULL) {
                 if (job->job_pgid == job_pgid) {
@@ -189,7 +171,7 @@ static Job *job_table_find_job_(struct JobTable const * const self,
                 job = job->job_next;
         }
 
-        /* job not found */
+        /* Job not found. */
         return NULL;
 }
 
@@ -237,9 +219,7 @@ static int job_table_update_(struct JobTable const * const self, pid_t pid,
 {
         struct JobTablePrivate *priv = self->private;
 
-        /*
-         * Find job with matching PID.
-         */
+        /* Find job with matching PID. */
         Job *job = priv->jt_head;
         while (job != NULL) {
                 if (job->job_proc->proc_pid == pid) {
@@ -248,16 +228,12 @@ static int job_table_update_(struct JobTable const * const self, pid_t pid,
                 job = job->job_next;
         }
 
-        /*
-         * Error! Job not found.
-         */
+        /* Error! Job not found. */
         if (job == NULL) {
                 return -1;
         }
 
-        /*
-         * Update job status.
-         */
+        /* Update job status. */
         job->job_proc->proc_status = status;
         job->job_proc->proc_completed = true;
 
@@ -296,9 +272,7 @@ static int job_table_update_(struct JobTable const * const self, pid_t pid,
  ******************************************************************************/
 void job_table_ctor(JobTable *self)
 {
-        /*
-         * Init table functions.
-         */
+        /* Init table functions. */
         self->add_job = &job_table_add_job_;
         self->clean = &job_table_clean_;
         self->find_job = &job_table_find_job_;
@@ -306,9 +280,7 @@ void job_table_ctor(JobTable *self)
         self->list_jobs = &job_table_list_jobs_;
         self->update = &job_table_update_;
 
-        /*
-         * Init table data.
-         */
+        /* Init table data. */
         self->private = malloc(sizeof(struct JobTablePrivate));
         self->private->jt_job_count = 0;
         self->private->jt_head = NULL;
@@ -318,9 +290,7 @@ void job_table_dtor(JobTable *self)
 {
         struct JobTablePrivate *priv = self->private;
 
-        /*
-         * Free all Jobs.
-         */
+        /* Free all jobs. */
         while (priv->jt_head != NULL) {
                 Job *head = priv->jt_head;
                 priv->jt_head = head->job_next;
@@ -330,9 +300,7 @@ void job_table_dtor(JobTable *self)
         }
         self->private->jt_job_count = 0;
 
-        /*
-         * Reset function pointers.
-         */
+        /* Reset function pointers. */
         self->add_job = NULL;
         self->clean = NULL;
         self->find_job = NULL;
@@ -340,9 +308,7 @@ void job_table_dtor(JobTable *self)
         self->list_jobs = NULL;
         self->update = NULL;
 
-        /*
-         * Free table data.
-         */
+        /* Free table data. */
         free(self->private);
         self->private = NULL;
 }

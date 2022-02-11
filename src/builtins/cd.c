@@ -5,6 +5,7 @@
  * @brief cd builtin command.
  */
 #include <errno.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -14,23 +15,22 @@
 void cd(char *dirname)
 {
         int status;
-        char *msg;
 
-        /* default to home directory if dirname not supplied */
+        /* Default to home directory if dirname not supplied. */
         if (dirname == NULL) {
                 dirname = getenv("HOME");
                 if (dirname == NULL) {
-                        /* no match found! error */
-                        msg = "$HOME is not defined!\n";
-                        write(STDERR_FILENO, msg, strlen(msg));
+                        /* No match found! */
+                        fprintf(stderr, "getenv(): %s\n", strerror(errno));
+                        fflush(stderr);
                         return;
                 }
         }
 
-        errno = 0; /* chdir sets errno on failure */
+        errno = 0;
         status = chdir(dirname);
         if (status == -1) {
-                msg = strerror(errno);
-                write(STDERR_FILENO, msg, strlen(msg));
+                fprintf(stderr, "-smallsh: cd: %s: %s\n", dirname, strerror(errno));
+                fflush(stderr);
         }
 }

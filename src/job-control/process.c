@@ -65,7 +65,8 @@ static void process_exec(char **argv)
         errno = 0;
         status = execvp(argv[0], argv);
         if (status == -1) {
-                perror("execvp");
+                fprintf(stderr, "-smallsh: %s: %s\n", argv[0], strerror(errno));
+                fflush(stderr);
                 _exit(1);
         }
 }
@@ -135,7 +136,7 @@ static int process_set_io_streams(char *infile, char *outfile, bool foreground)
                 fds[0] = open(infile, stdin_flags, mode);
                 if (fds[0] == -1) {
                         smallsh_errno = SMSH_EOPEN;
-                        fprintf(stderr, "cannot open %s for input\n", infile);
+                        fprintf(stderr, "-smallsh: %s: %s\n", infile, strerror(errno));
                         fflush(stderr);
                         return -1;
                 }
@@ -165,7 +166,7 @@ static int process_set_io_streams(char *infile, char *outfile, bool foreground)
                 fds[1] = open(outfile, stdout_flags, mode);
                 if (fds[1] == -1) {
                         smallsh_errno = SMSH_EOPEN;
-                        fprintf(stderr, "cannot open %s for output\n", outfile);
+                        fprintf(stderr, "-smallsh: %s: %s\n", outfile, strerror(errno));
                         fflush(stderr);
                         return -1;
                 }

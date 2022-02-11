@@ -35,7 +35,7 @@
 
 // comment symbols
 #define CMT_SYM '#'
-#define IS_CMT_SYM(c1, c2) (c1 == CMT_SYM && IS_TERMINAL(c2))
+#define IS_CMT_SYM(c1) (c1 == CMT_SYM)
 
 /**
  * @brief Given an text stream @p buf, scans stream and generates @c Token
