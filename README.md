@@ -13,12 +13,18 @@ chmod u+x ./build.sh && ./build.sh
 mkdir -p build/bin && \
     gcc --std=c99 \
         -g -Wall -Wextra -Werror -pedantic \
+        -DTEST_SCRIPT -DDEMO \
         -o smallsh \
-        src/main.c \
         src/smallsh.c \
+        src/error.c \
+        src/builtins/builtins.c \
         src/builtins/cd.c \
         src/builtins/exit.c \
         src/builtins/status.c \
+        src/events/channel.c \
+        src/events/events.c \
+        src/events/receiver.c \
+        src/events/sender.c \
         src/interpreter/lexer.c \
         src/interpreter/parser.c \
         src/interpreter/shell-tokens.c \
@@ -29,7 +35,6 @@ mkdir -p build/bin && \
         src/job-control/job-control.c \
         src/job-control/job-table.c \
         src/job-control/process.c \
-        src/signals/dispatcher.c \
         src/signals/handler.c \
         src/signals/installer.c \
         src/utils/string-iterator.c \
