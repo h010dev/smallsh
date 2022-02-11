@@ -41,6 +41,13 @@ struct JobTable {
          */
         Job *(*find_job) (struct JobTable const * const self, pid_t job_pgid);
 
+        /**
+         * @brief Kills all children in table.
+         *
+         * Called on program exit to clean up any unterminated children
+         * the shell created.
+         * @param self table containing child processes
+         */
         void (*killall) (struct JobTable const * const self);
 
         /**

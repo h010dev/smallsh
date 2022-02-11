@@ -60,7 +60,6 @@ typedef struct {
         StmtCmd *stmt_cmd; /**< command */
         StmtStdin *stmt_stdin; /**< stdin file streams */
         StmtStdout *stmt_stdout; /**< stdout file streams */
-        // StmtStderr *stderr; /* not supported */
         StmtFlags stmt_flags; /**< special properties */
 } Statement;
 
@@ -71,7 +70,6 @@ typedef struct {
 typedef enum {
         IOREDIR_STDIN = 0, /**< stdin stream */
         IOREDIR_STDOUT = 1, /**< stdout stream */
-        // IO_REDIR_STDERR = 2, /* not supported */
 } IORedirType;
 
 /**

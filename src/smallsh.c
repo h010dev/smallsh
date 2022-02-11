@@ -110,6 +110,7 @@ static int smallsh_eval(char *cmd)
                 } else {
                         if (!smallsh_interactive_mode) {
 #ifdef TEST_SCRIPT
+                                /* Add newline to end of empty non-echo commands. */
                                 if (strcmp("echo", stmt->stmt_cmd->cmd_argv[0]) != 0) {
                                         write(STDOUT_FILENO, "\n", 1);
                                 }
@@ -126,6 +127,7 @@ static int smallsh_eval(char *cmd)
 
                 if (!smallsh_interactive_mode) {
 #ifdef TEST_SCRIPT
+                        /* Some fun magic to make output pretty for test script. */
                         if (smallsh_fg_only_mode) {
                                 if ((stmt->stmt_flags & FLAGS_BGCTRL) != 0) {
                                         if (outfile == NULL) {
@@ -197,7 +199,8 @@ static void smallsh_inspect_fg_only_mode_flag(void)
 /**
  * @brief Initialize shell and bring it to the foreground process group.
  *
- * Do not proceed until this is the case.
+ * Do not proceed until this is the case (but make an exception for the
+ * test script in this case).
  */
 static void smallsh_init(void)
 {
@@ -273,6 +276,7 @@ static ssize_t smallsh_read_input(char **cmd)
                 return -1;
         }
 #ifdef TEST_SCRIPT_ECHO_COMMANDS
+        /* Displays commands as if they were typed live in terminal */
         fprintf(stdout, "%s", *cmd);
         fflush(stdout);
 #endif
@@ -368,10 +372,15 @@ int main(void)
                         break;
                 }
 
-                if (!smallsh_interactive_mode && smallsh_line_buffer) {
-                        write(STDOUT_FILENO, "\n", 1);
+                if (!smallsh_interactive_mode) {
+#ifdef TEST_SCRIPT
+                        /* Add an extra newline to make output pretty. */
+                        if (smallsh_line_buffer) {
+                                write(STDOUT_FILENO, "\n", 1);
+                        }
+                        smallsh_line_buffer = false;
+#endif
                 }
-                smallsh_line_buffer = false;
 
                 free(cmd);
         } while (1);
