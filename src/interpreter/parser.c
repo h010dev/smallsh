@@ -427,6 +427,7 @@ char *parser_insert_pid(char *str, char **ptr, size_t *len)
 
         size_t pid_len = snprintf(pid_str, sizeof(intmax_t), "%d", pid);
         if (pid_len >= sizeof(intmax_t)) {
+                free(pid_str);
                 return NULL;
         }
 
@@ -437,6 +438,7 @@ char *parser_insert_pid(char *str, char **ptr, size_t *len)
         size_t new_size = *len + pid_len - 2;
         result = calloc(new_size, sizeof(char));
         if (result == NULL) {
+                free(pid_str);
                 return NULL;
         }
 
@@ -458,6 +460,8 @@ char *parser_insert_pid(char *str, char **ptr, size_t *len)
 
         *len = new_size;
         *ptr = new_ptr;
+
+        free(pid_str);
 
         return result;
 }

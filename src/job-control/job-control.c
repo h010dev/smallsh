@@ -38,6 +38,7 @@ static void job_control_wait_for_job(Job *job)
         opt = WEXITED | WSTOPPED | WNOWAIT; /* don't collect child */
         sigtstp_raised = false;
         normal_termination = false;
+        exit_status = 0;
 
         /*
          * Loop until the child process is terminated due to any signal but
