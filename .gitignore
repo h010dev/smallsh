@@ -78,3 +78,6 @@ fabric.properties
 
 # other
 notes.txt
+
+# doxygen
+*.bak
