@@ -23,7 +23,8 @@ set(
         "${PROJECT_SOURCE_DIR}/src/interpreter/shell-tokens.c"
         "${PROJECT_SOURCE_DIR}/src/interpreter/token.c"
         "${PROJECT_SOURCE_DIR}/src/utils/string-iterator.c"
-        error.c)
+        error.c
+)
 add_executable(
         ${PROJECT_NAME}
         ${SOURCES}
