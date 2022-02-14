@@ -12,12 +12,8 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -42,36 +38,16 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="examples.html"><span>Examples</span></a></li>
-      <li>
-        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
-          </span>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
-    </ul>
-  </div>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -110,10 +86,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif //SMALLSH_INSTALLER_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="ainstaller_8h_html_a7c1ed2760a22437c5de3c2b9b90478eb"><div class="ttname"><a href="installer_8h.html#a7c1ed2760a22437c5de3c2b9b90478eb">installer_install_job_control_signals</a></div><div class="ttdeci">void installer_install_job_control_signals(void)</div><div class="ttdoc">Installs job control signals for the shell.</div><div class="ttdef"><b>Definition:</b> <a href="installer_8c_source.html#l00091">installer.c:91</a></div></div>
-<div class="ttc" id="ainstaller_8h_html_a963d72a8e8a655acf2f907c84cf88d96"><div class="ttname"><a href="installer_8h.html#a963d72a8e8a655acf2f907c84cf88d96">installer_install_sigtstp_handler</a></div><div class="ttdeci">void installer_install_sigtstp_handler(void)</div><div class="ttdoc">Installs a SIGTSTP handler for the shell.</div><div class="ttdef"><b>Definition:</b> <a href="installer_8c_source.html#l00163">installer.c:163</a></div></div>
-<div class="ttc" id="ainstaller_8h_html_a750bd792d342928d440d74517e7feb3d"><div class="ttname"><a href="installer_8h.html#a750bd792d342928d440d74517e7feb3d">installer_install_sigchld_handler</a></div><div class="ttdeci">void installer_install_sigchld_handler(void)</div><div class="ttdoc">Installs a SIGCHLD handler for the shell.</div><div class="ttdef"><b>Definition:</b> <a href="installer_8c_source.html#l00128">installer.c:128</a></div></div>
-<div class="ttc" id="ainstaller_8h_html_a87e2f64616e9868727fe6cb667f1875d"><div class="ttname"><a href="installer_8h.html#a87e2f64616e9868727fe6cb667f1875d">installer_install_child_process_signals</a></div><div class="ttdeci">void installer_install_child_process_signals(bool foreground)</div><div class="ttdoc">Installs process signals for foreground/background child processes.</div><div class="ttdef"><b>Definition:</b> <a href="installer_8c_source.html#l00052">installer.c:52</a></div></div>
+<div class="ttc" id="ainstaller_8h_html_a7c1ed2760a22437c5de3c2b9b90478eb"><div class="ttname"><a href="installer_8h.html#a7c1ed2760a22437c5de3c2b9b90478eb">installer_install_job_control_signals</a></div><div class="ttdeci">void installer_install_job_control_signals(void)</div><div class="ttdoc">Installs job control signals for the shell.</div><div class="ttdef"><b>Definition:</b> installer.c:91</div></div>
+<div class="ttc" id="ainstaller_8h_html_a963d72a8e8a655acf2f907c84cf88d96"><div class="ttname"><a href="installer_8h.html#a963d72a8e8a655acf2f907c84cf88d96">installer_install_sigtstp_handler</a></div><div class="ttdeci">void installer_install_sigtstp_handler(void)</div><div class="ttdoc">Installs a SIGTSTP handler for the shell.</div><div class="ttdef"><b>Definition:</b> installer.c:163</div></div>
+<div class="ttc" id="ainstaller_8h_html_a750bd792d342928d440d74517e7feb3d"><div class="ttname"><a href="installer_8h.html#a750bd792d342928d440d74517e7feb3d">installer_install_sigchld_handler</a></div><div class="ttdeci">void installer_install_sigchld_handler(void)</div><div class="ttdoc">Installs a SIGCHLD handler for the shell.</div><div class="ttdef"><b>Definition:</b> installer.c:128</div></div>
+<div class="ttc" id="ainstaller_8h_html_a87e2f64616e9868727fe6cb667f1875d"><div class="ttname"><a href="installer_8h.html#a87e2f64616e9868727fe6cb667f1875d">installer_install_child_process_signals</a></div><div class="ttdeci">void installer_install_child_process_signals(bool foreground)</div><div class="ttdoc">Installs process signals for foreground/background child processes.</div><div class="ttdef"><b>Definition:</b> installer.c:52</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

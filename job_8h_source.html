@@ -12,12 +12,8 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -42,36 +38,16 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="examples.html"><span>Examples</span></a></li>
-      <li>
-        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
-          </span>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
-    </ul>
-  </div>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -122,19 +98,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif //SMALLSH_JOB_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="ajob_8h_html_ae753ae058dce09d5cfddfda98605ce38"><div class="ttname"><a href="job_8h.html#ae753ae058dce09d5cfddfda98605ce38">job_dtor</a></div><div class="ttdeci">void job_dtor(Job *self)</div><div class="ttdoc">Cleans up and frees job resources.</div><div class="ttdef"><b>Definition:</b> <a href="job_8c_source.html#l00094">job.c:94</a></div></div>
-<div class="ttc" id="astructJob_html_a40a2f93f6d780660fcd8f18cdd90bd63"><div class="ttname"><a href="structJob.html#a40a2f93f6d780660fcd8f18cdd90bd63">Job::job_next</a></div><div class="ttdeci">Job * job_next</div><div class="ttdef"><b>Definition:</b> <a href="job_8h_source.html#l00028">job.h:28</a></div></div>
-<div class="ttc" id="astructJob_html_a36c1be174036537075982364957f169e"><div class="ttname"><a href="structJob.html#a36c1be174036537075982364957f169e">Job::job_bg</a></div><div class="ttdeci">bool job_bg</div><div class="ttdef"><b>Definition:</b> <a href="job_8h_source.html#l00027">job.h:27</a></div></div>
-<div class="ttc" id="astructJob_html_ac67363527f5083ceb9e54cc137809461"><div class="ttname"><a href="structJob.html#ac67363527f5083ceb9e54cc137809461">Job::job_spec</a></div><div class="ttdeci">unsigned job_spec</div><div class="ttdef"><b>Definition:</b> <a href="job_8h_source.html#l00026">job.h:26</a></div></div>
-<div class="ttc" id="astructJob_html_a032db2e0cefb8cdafa56bf28589592ca"><div class="ttname"><a href="structJob.html#a032db2e0cefb8cdafa56bf28589592ca">Job::job_stdin</a></div><div class="ttdeci">char * job_stdin</div><div class="ttdef"><b>Definition:</b> <a href="job_8h_source.html#l00024">job.h:24</a></div></div>
-<div class="ttc" id="astructJob_html_ab3cbc4a493297b48e4583f28e1ca2af1"><div class="ttname"><a href="structJob.html#ab3cbc4a493297b48e4583f28e1ca2af1">Job::job_proc</a></div><div class="ttdeci">Process * job_proc</div><div class="ttdef"><b>Definition:</b> <a href="job_8h_source.html#l00022">job.h:22</a></div></div>
+<div class="ttc" id="ajob_8h_html_ae753ae058dce09d5cfddfda98605ce38"><div class="ttname"><a href="job_8h.html#ae753ae058dce09d5cfddfda98605ce38">job_dtor</a></div><div class="ttdeci">void job_dtor(Job *self)</div><div class="ttdoc">Cleans up and frees job resources.</div><div class="ttdef"><b>Definition:</b> job.c:94</div></div>
+<div class="ttc" id="astructJob_html_a40a2f93f6d780660fcd8f18cdd90bd63"><div class="ttname"><a href="structJob.html#a40a2f93f6d780660fcd8f18cdd90bd63">Job::job_next</a></div><div class="ttdeci">Job * job_next</div><div class="ttdef"><b>Definition:</b> job.h:28</div></div>
+<div class="ttc" id="astructJob_html_a36c1be174036537075982364957f169e"><div class="ttname"><a href="structJob.html#a36c1be174036537075982364957f169e">Job::job_bg</a></div><div class="ttdeci">bool job_bg</div><div class="ttdef"><b>Definition:</b> job.h:27</div></div>
+<div class="ttc" id="astructJob_html_ac67363527f5083ceb9e54cc137809461"><div class="ttname"><a href="structJob.html#ac67363527f5083ceb9e54cc137809461">Job::job_spec</a></div><div class="ttdeci">unsigned job_spec</div><div class="ttdef"><b>Definition:</b> job.h:26</div></div>
+<div class="ttc" id="astructJob_html_a032db2e0cefb8cdafa56bf28589592ca"><div class="ttname"><a href="structJob.html#a032db2e0cefb8cdafa56bf28589592ca">Job::job_stdin</a></div><div class="ttdeci">char * job_stdin</div><div class="ttdef"><b>Definition:</b> job.h:24</div></div>
+<div class="ttc" id="astructJob_html_ab3cbc4a493297b48e4583f28e1ca2af1"><div class="ttname"><a href="structJob.html#ab3cbc4a493297b48e4583f28e1ca2af1">Job::job_proc</a></div><div class="ttdeci">Process * job_proc</div><div class="ttdef"><b>Definition:</b> job.h:22</div></div>
 <div class="ttc" id="aprocess_8h_html"><div class="ttname"><a href="process_8h.html">process.h</a></div><div class="ttdoc">Contain information about a single child process.</div></div>
-<div class="ttc" id="ajob_8h_html_ae6da664e847549992adf52d196e88207"><div class="ttname"><a href="job_8h.html#ae6da664e847549992adf52d196e88207">job_ctor</a></div><div class="ttdeci">void job_ctor(Job *self, char *cmd, Process *proc, pid_t pgid, char *infile, char *outfile, bool bg)</div><div class="ttdoc">Initializes values for a Job object.</div><div class="ttdef"><b>Definition:</b> <a href="job_8c_source.html#l00047">job.c:47</a></div></div>
-<div class="ttc" id="astructJob_html_ae70631db07d83e18f16de610450996c8"><div class="ttname"><a href="structJob.html#ae70631db07d83e18f16de610450996c8">Job::job_pgid</a></div><div class="ttdeci">pid_t job_pgid</div><div class="ttdef"><b>Definition:</b> <a href="job_8h_source.html#l00023">job.h:23</a></div></div>
-<div class="ttc" id="astructJob_html_a2e60e24663691e1e99d2957f25a2b33c"><div class="ttname"><a href="structJob.html#a2e60e24663691e1e99d2957f25a2b33c">Job::job_cmd</a></div><div class="ttdeci">char * job_cmd</div><div class="ttdef"><b>Definition:</b> <a href="job_8h_source.html#l00021">job.h:21</a></div></div>
-<div class="ttc" id="astructJob_html"><div class="ttname"><a href="structJob.html">Job</a></div><div class="ttdoc">Job object.</div><div class="ttdef"><b>Definition:</b> <a href="job_8h_source.html#l00020">job.h:20</a></div></div>
-<div class="ttc" id="astructProcess_html"><div class="ttname"><a href="structProcess.html">Process</a></div><div class="ttdoc">A Process object holds information related to running a program.</div><div class="ttdef"><b>Definition:</b> <a href="process_8h_source.html#l00020">process.h:20</a></div></div>
-<div class="ttc" id="astructJob_html_a55dccb6e47cd2d29ca2e9f71cd258ab8"><div class="ttname"><a href="structJob.html#a55dccb6e47cd2d29ca2e9f71cd258ab8">Job::job_stdout</a></div><div class="ttdeci">char * job_stdout</div><div class="ttdef"><b>Definition:</b> <a href="job_8h_source.html#l00025">job.h:25</a></div></div>
+<div class="ttc" id="ajob_8h_html_ae6da664e847549992adf52d196e88207"><div class="ttname"><a href="job_8h.html#ae6da664e847549992adf52d196e88207">job_ctor</a></div><div class="ttdeci">void job_ctor(Job *self, char *cmd, Process *proc, pid_t pgid, char *infile, char *outfile, bool bg)</div><div class="ttdoc">Initializes values for a Job object.</div><div class="ttdef"><b>Definition:</b> job.c:47</div></div>
+<div class="ttc" id="astructJob_html_ae70631db07d83e18f16de610450996c8"><div class="ttname"><a href="structJob.html#ae70631db07d83e18f16de610450996c8">Job::job_pgid</a></div><div class="ttdeci">pid_t job_pgid</div><div class="ttdef"><b>Definition:</b> job.h:23</div></div>
+<div class="ttc" id="astructJob_html_a2e60e24663691e1e99d2957f25a2b33c"><div class="ttname"><a href="structJob.html#a2e60e24663691e1e99d2957f25a2b33c">Job::job_cmd</a></div><div class="ttdeci">char * job_cmd</div><div class="ttdef"><b>Definition:</b> job.h:21</div></div>
+<div class="ttc" id="astructJob_html"><div class="ttname"><a href="structJob.html">Job</a></div><div class="ttdoc">Job object.</div><div class="ttdef"><b>Definition:</b> job.h:20</div></div>
+<div class="ttc" id="astructProcess_html"><div class="ttname"><a href="structProcess.html">Process</a></div><div class="ttdoc">A Process object holds information related to running a program.</div><div class="ttdef"><b>Definition:</b> process.h:20</div></div>
+<div class="ttc" id="astructJob_html_a55dccb6e47cd2d29ca2e9f71cd258ab8"><div class="ttname"><a href="structJob.html#a55dccb6e47cd2d29ca2e9f71cd258ab8">Job::job_stdout</a></div><div class="ttdeci">char * job_stdout</div><div class="ttdef"><b>Definition:</b> job.h:25</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

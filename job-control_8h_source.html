@@ -12,12 +12,8 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -42,36 +38,16 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="examples.html"><span>Examples</span></a></li>
-      <li>
-        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
-          </span>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
-    </ul>
-  </div>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -108,11 +84,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#endif //SMALLSH_JOB_CONTROL_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="ajob-control_8h_html_a769af495eaeafe093339399f540b00eb"><div class="ttname"><a href="job-control_8h.html#a769af495eaeafe093339399f540b00eb">job_table</a></div><div class="ttdeci">JobTable job_table</div><div class="ttdef"><b>Definition:</b> <a href="job-control_8h_source.html#l00018">job-control.h:18</a></div></div>
-<div class="ttc" id="ajob-control_8h_html_a38f9ae8374c2f7dad8e6cfe2f8eb3720"><div class="ttname"><a href="job-control_8h.html#a38f9ae8374c2f7dad8e6cfe2f8eb3720">job_control_launch_job</a></div><div class="ttdeci">int job_control_launch_job(Job **job, bool foreground)</div><div class="ttdoc">Creates new child process and runs job within child.</div><div class="ttdef"><b>Definition:</b> <a href="job-control_8c_source.html#l00165">job-control.c:165</a></div></div>
+<div class="ttc" id="ajob-control_8h_html_a769af495eaeafe093339399f540b00eb"><div class="ttname"><a href="job-control_8h.html#a769af495eaeafe093339399f540b00eb">job_table</a></div><div class="ttdeci">JobTable job_table</div><div class="ttdef"><b>Definition:</b> job-control.h:18</div></div>
+<div class="ttc" id="ajob-control_8h_html_a38f9ae8374c2f7dad8e6cfe2f8eb3720"><div class="ttname"><a href="job-control_8h.html#a38f9ae8374c2f7dad8e6cfe2f8eb3720">job_control_launch_job</a></div><div class="ttdeci">int job_control_launch_job(Job **job, bool foreground)</div><div class="ttdoc">Creates new child process and runs job within child.</div><div class="ttdef"><b>Definition:</b> job-control.c:165</div></div>
 <div class="ttc" id="ajob_8h_html"><div class="ttname"><a href="job_8h.html">job.h</a></div><div class="ttdoc">Contain information about a a single job.</div></div>
-<div class="ttc" id="astructJob_html"><div class="ttname"><a href="structJob.html">Job</a></div><div class="ttdoc">Job object.</div><div class="ttdef"><b>Definition:</b> <a href="job_8h_source.html#l00020">job.h:20</a></div></div>
-<div class="ttc" id="astructJobTable_html"><div class="ttname"><a href="structJobTable.html">JobTable</a></div><div class="ttdoc">JobTable object.</div><div class="ttdef"><b>Definition:</b> <a href="job-table_8h_source.html#l00021">job-table.h:21</a></div></div>
+<div class="ttc" id="astructJob_html"><div class="ttname"><a href="structJob.html">Job</a></div><div class="ttdoc">Job object.</div><div class="ttdef"><b>Definition:</b> job.h:20</div></div>
+<div class="ttc" id="astructJobTable_html"><div class="ttname"><a href="structJobTable.html">JobTable</a></div><div class="ttdoc">JobTable object.</div><div class="ttdef"><b>Definition:</b> job-table.h:21</div></div>
 <div class="ttc" id="ajob-table_8h_html"><div class="ttname"><a href="job-table_8h.html">job-table.h</a></div><div class="ttdoc">Contain information about a collection of jobs.</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -12,12 +12,8 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -42,36 +38,16 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="examples.html"><span>Examples</span></a></li>
-      <li>
-        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
-          </span>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
-    </ul>
-  </div>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -131,8 +107,6 @@ Functions</h2></td></tr>
 <div class="textblock"><p>Contain information about a collection of jobs. </p>
 <dl class="section author"><dt>Author</dt><dd>Mohamed Al-Hussein </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>05 Feb 2022 Ideas presented here were retrieved from the following source: <a href="https://www.gnu.org/software/libc/manual/html_node/Data-Structures.html">https://www.gnu.org/software/libc/manual/html_node/Data-Structures.html</a> </dd></dl>
-
-<p class="definition">Definition in file <a class="el" href="job-table_8h_source.html">job-table.h</a>.</p>
 </div><h2 class="groupheader">Typedef Documentation</h2>
 <a id="aea6b7d23519611fdf40ed4e8caffb077"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aea6b7d23519611fdf40ed4e8caffb077">&#9670;&nbsp;</a></span>JobTable</h2>
@@ -145,8 +119,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="job-table_8h_source.html#l00016">16</a> of file <a class="el" href="job-table_8h_source.html">job-table.h</a>.</p>
 
 </div>
 </div>
@@ -175,25 +147,9 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="job-table_8c_source.html#l00274">274</a> of file <a class="el" href="job-table_8c_source.html">job-table.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;{</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        <span class="comment">/* Init table functions. */</span></div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        <span class="keyword">self</span>-&gt;add_job = &amp;<a class="code" href="job-table_8c.html#a2a61959e8c13721807af596dc4560b9c">job_table_add_job_</a>;</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        <span class="keyword">self</span>-&gt;clean = &amp;<a class="code" href="job-table_8c.html#a66c44bcdd6f804d115968494c8b2b1e4">job_table_clean_</a>;</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        <span class="keyword">self</span>-&gt;find_job = &amp;<a class="code" href="job-table_8c.html#ab0ce98e45b01372350cbcacdc316da07">job_table_find_job_</a>;</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        <span class="keyword">self</span>-&gt;killall = &amp;<a class="code" href="job-table_8c.html#ae72b01b25b2580aefb99c52fb7d894d8">job_table_killall_</a>;</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        <span class="keyword">self</span>-&gt;list_jobs = &amp;<a class="code" href="job-table_8c.html#ae06e64baa09cfc819c701670d52cae30">job_table_list_jobs_</a>;</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        <span class="keyword">self</span>-&gt;update = &amp;<a class="code" href="job-table_8c.html#a8df0fe0f169f40ddd3fffdd1a9b0cd01">job_table_update_</a>;</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        <span class="comment">/* Init table data. */</span></div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        <span class="keyword">self</span>-&gt;private = malloc(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> <a class="code" href="structJobTablePrivate.html">JobTablePrivate</a>));</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        <span class="keyword">self</span>-&gt;private-&gt;jt_job_count = 0;</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        <span class="keyword">self</span>-&gt;private-&gt;jt_head = NULL;</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="job-table_8c_source.html#l00065">job_table_add_job_()</a>, <a class="el" href="job-table_8c_source.html#l00084">job_table_clean_()</a>, <a class="el" href="job-table_8c_source.html#l00161">job_table_find_job_()</a>, <a class="el" href="job-table_8c_source.html#l00179">job_table_killall_()</a>, <a class="el" href="job-table_8c_source.html#l00194">job_table_list_jobs_()</a>, and <a class="el" href="job-table_8c_source.html#l00218">job_table_update_()</a>.</p>
+<p class="reference">References <a class="el" href="job-table_8c.html#a2a61959e8c13721807af596dc4560b9c">job_table_add_job_()</a>, <a class="el" href="job-table_8c.html#a66c44bcdd6f804d115968494c8b2b1e4">job_table_clean_()</a>, <a class="el" href="job-table_8c.html#ab0ce98e45b01372350cbcacdc316da07">job_table_find_job_()</a>, <a class="el" href="job-table_8c.html#ae72b01b25b2580aefb99c52fb7d894d8">job_table_killall_()</a>, <a class="el" href="job-table_8c.html#ae06e64baa09cfc819c701670d52cae30">job_table_list_jobs_()</a>, and <a class="el" href="job-table_8c.html#a8df0fe0f169f40ddd3fffdd1a9b0cd01">job_table_update_()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="smallsh_8c_source.html#l00331">main()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="smallsh_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main()</a>.</p>
 
 </div>
 </div>
@@ -221,52 +177,13 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="job-table_8c_source.html#l00290">290</a> of file <a class="el" href="job-table_8c_source.html">job-table.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;{</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        <span class="keyword">struct </span><a class="code" href="structJobTablePrivate.html">JobTablePrivate</a> *priv = <span class="keyword">self</span>-&gt;private;</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; </div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        <span class="comment">/* Free all jobs. */</span></div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        <span class="keywordflow">while</span> (priv-&gt;<a class="code" href="structJobTablePrivate.html#a4507d14ad7291bb1a50cc077bad1c14a">jt_head</a> != NULL) {</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;                <a class="code" href="structJob.html">Job</a> *head = priv-&gt;<a class="code" href="structJobTablePrivate.html#a4507d14ad7291bb1a50cc077bad1c14a">jt_head</a>;</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;                priv-&gt;<a class="code" href="structJobTablePrivate.html#a4507d14ad7291bb1a50cc077bad1c14a">jt_head</a> = head-&gt;<a class="code" href="structJob.html#a40a2f93f6d780660fcd8f18cdd90bd63">job_next</a>;</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;                <a class="code" href="job_8h.html#ae753ae058dce09d5cfddfda98605ce38">job_dtor</a>(head);</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                free(head);</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                head = NULL;</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        }</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        <span class="keyword">self</span>-&gt;private-&gt;jt_job_count = 0;</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160; </div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        <span class="comment">/* Reset function pointers. */</span></div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;        <span class="keyword">self</span>-&gt;add_job = NULL;</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;        <span class="keyword">self</span>-&gt;clean = NULL;</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;        <span class="keyword">self</span>-&gt;find_job = NULL;</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;        <span class="keyword">self</span>-&gt;killall = NULL;</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        <span class="keyword">self</span>-&gt;list_jobs = NULL;</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;        <span class="keyword">self</span>-&gt;update = NULL;</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        <span class="comment">/* Free table data. */</span></div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        free(self-&gt;<a class="code" href="structJobTable.html#a3a87c3c2832bf86dc2050e4e092ca1dd">private</a>);</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        <span class="keyword">self</span>-&gt;private = NULL;</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="job_8c_source.html#l00094">job_dtor()</a>, <a class="el" href="job_8h_source.html#l00028">Job::job_next</a>, and <a class="el" href="job-table_8c_source.html#l00052">JobTablePrivate::jt_head</a>.</p>
+<p class="reference">References <a class="el" href="job_8h.html#ae753ae058dce09d5cfddfda98605ce38">job_dtor()</a>, <a class="el" href="structJob.html#a40a2f93f6d780660fcd8f18cdd90bd63">Job::job_next</a>, and <a class="el" href="structJobTablePrivate.html#a4507d14ad7291bb1a50cc077bad1c14a">JobTablePrivate::jt_head</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="exit_8c_source.html#l00045">exit_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="exit_8c.html#a06b48ef7aaf752e58a067f127259920c">exit_()</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
-<div class="ttc" id="astructJobTablePrivate_html"><div class="ttname"><a href="structJobTablePrivate.html">JobTablePrivate</a></div><div class="ttdoc">Contains internal data for JobTable.</div><div class="ttdef"><b>Definition:</b> <a href="job-table_8c_source.html#l00050">job-table.c:50</a></div></div>
-<div class="ttc" id="astructJobTablePrivate_html_a4507d14ad7291bb1a50cc077bad1c14a"><div class="ttname"><a href="structJobTablePrivate.html#a4507d14ad7291bb1a50cc077bad1c14a">JobTablePrivate::jt_head</a></div><div class="ttdeci">Job * jt_head</div><div class="ttdef"><b>Definition:</b> <a href="job-table_8c_source.html#l00052">job-table.c:52</a></div></div>
-<div class="ttc" id="ajob_8h_html_ae753ae058dce09d5cfddfda98605ce38"><div class="ttname"><a href="job_8h.html#ae753ae058dce09d5cfddfda98605ce38">job_dtor</a></div><div class="ttdeci">void job_dtor(Job *self)</div><div class="ttdoc">Cleans up and frees job resources.</div><div class="ttdef"><b>Definition:</b> <a href="job_8c_source.html#l00094">job.c:94</a></div></div>
-<div class="ttc" id="astructJob_html_a40a2f93f6d780660fcd8f18cdd90bd63"><div class="ttname"><a href="structJob.html#a40a2f93f6d780660fcd8f18cdd90bd63">Job::job_next</a></div><div class="ttdeci">Job * job_next</div><div class="ttdef"><b>Definition:</b> <a href="job_8h_source.html#l00028">job.h:28</a></div></div>
-<div class="ttc" id="ajob-table_8c_html_ab0ce98e45b01372350cbcacdc316da07"><div class="ttname"><a href="job-table_8c.html#ab0ce98e45b01372350cbcacdc316da07">job_table_find_job_</a></div><div class="ttdeci">static Job * job_table_find_job_(struct JobTable const *const self, pid_t job_pgid)</div><div class="ttdef"><b>Definition:</b> <a href="job-table_8c_source.html#l00161">job-table.c:161</a></div></div>
-<div class="ttc" id="ajob-table_8c_html_ae72b01b25b2580aefb99c52fb7d894d8"><div class="ttname"><a href="job-table_8c.html#ae72b01b25b2580aefb99c52fb7d894d8">job_table_killall_</a></div><div class="ttdeci">static void job_table_killall_(struct JobTable const *const self)</div><div class="ttdef"><b>Definition:</b> <a href="job-table_8c_source.html#l00179">job-table.c:179</a></div></div>
-<div class="ttc" id="astructJobTable_html_a3a87c3c2832bf86dc2050e4e092ca1dd"><div class="ttname"><a href="structJobTable.html#a3a87c3c2832bf86dc2050e4e092ca1dd">JobTable::private</a></div><div class="ttdeci">struct JobTablePrivate * private</div><div class="ttdoc">Contains internal data for table.</div><div class="ttdef"><b>Definition:</b> <a href="job-table_8h_source.html#l00071">job-table.h:71</a></div></div>
-<div class="ttc" id="ajob-table_8c_html_a8df0fe0f169f40ddd3fffdd1a9b0cd01"><div class="ttname"><a href="job-table_8c.html#a8df0fe0f169f40ddd3fffdd1a9b0cd01">job_table_update_</a></div><div class="ttdeci">static int job_table_update_(struct JobTable const *const self, pid_t pid, int status)</div><div class="ttdef"><b>Definition:</b> <a href="job-table_8c_source.html#l00218">job-table.c:218</a></div></div>
-<div class="ttc" id="astructJob_html"><div class="ttname"><a href="structJob.html">Job</a></div><div class="ttdoc">Job object.</div><div class="ttdef"><b>Definition:</b> <a href="job_8h_source.html#l00020">job.h:20</a></div></div>
-<div class="ttc" id="ajob-table_8c_html_a66c44bcdd6f804d115968494c8b2b1e4"><div class="ttname"><a href="job-table_8c.html#a66c44bcdd6f804d115968494c8b2b1e4">job_table_clean_</a></div><div class="ttdeci">static void job_table_clean_(struct JobTable const *const self)</div><div class="ttdef"><b>Definition:</b> <a href="job-table_8c_source.html#l00084">job-table.c:84</a></div></div>
-<div class="ttc" id="ajob-table_8c_html_ae06e64baa09cfc819c701670d52cae30"><div class="ttname"><a href="job-table_8c.html#ae06e64baa09cfc819c701670d52cae30">job_table_list_jobs_</a></div><div class="ttdeci">static void job_table_list_jobs_(struct JobTable const *const self)</div><div class="ttdef"><b>Definition:</b> <a href="job-table_8c_source.html#l00194">job-table.c:194</a></div></div>
-<div class="ttc" id="ajob-table_8c_html_a2a61959e8c13721807af596dc4560b9c"><div class="ttname"><a href="job-table_8c.html#a2a61959e8c13721807af596dc4560b9c">job_table_add_job_</a></div><div class="ttdeci">static void job_table_add_job_(struct JobTable const *const self, Job *job)</div><div class="ttdef"><b>Definition:</b> <a href="job-table_8c_source.html#l00065">job-table.c:65</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

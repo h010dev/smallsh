@@ -12,12 +12,8 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -42,36 +38,16 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="examples.html"><span>Examples</span></a></li>
-      <li>
-        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
-          </span>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
-    </ul>
-  </div>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -104,9 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="events_8h_source.html">events/events.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="job-control_8h_source.html">job-control/job-control.h</a>&quot;</code><br />
-</div>
-<p><a href="events_8c_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a81ce7d6909034de9c012d78ae23c3f42"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="events_8c.html#a81ce7d6909034de9c012d78ae23c3f42">events_init</a> (void)</td></tr>
@@ -123,8 +97,6 @@ Functions</h2></td></tr>
 <div class="textblock"><p>Contains functions for handling signal-generated events. </p>
 <dl class="section author"><dt>Author</dt><dd>Mohamed Al-Hussein </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>09 Feb 2022 </dd></dl>
-
-<p class="definition">Definition in file <a class="el" href="events_8c_source.html">events.c</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a64bde057407debd7862302dda094b6ed"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a64bde057407debd7862302dda094b6ed">&#9670;&nbsp;</a></span>events_cleanup()</h2>
@@ -144,17 +116,9 @@ Functions</h2></td></tr>
 
 <p>Cleans up the global event-related data structures. </p>
 
-<p class="definition">Definition at line <a class="el" href="events_8c_source.html#l00082">82</a> of file <a class="el" href="events_8c_source.html">events.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;{</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <a class="code" href="receiver_8h.html#aef7638000850183b385a0d89d6c7d283">receiver_dtor</a>(&amp;<a class="code" href="events_8h.html#ae7d874f76a5f3e533ae39b150b48b4f4">rcv</a>);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <a class="code" href="sender_8h.html#a533a37ce0fc01b242ac7f143d4fb106a">sender_dtor</a>(&amp;<a class="code" href="events_8h.html#a4b4f17f8655cd7c89af3d73da19d3958">snd</a>);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <a class="code" href="channel_8h.html#ad7dbfb1df8d67151a8910925f6f08068">channel_dtor</a>(&amp;<a class="code" href="events_8h.html#a38eee5bd80ad6127bd4121865947c0c9">ch_sigchld</a>);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="events_8h_source.html#l00014">ch_sigchld</a>, <a class="el" href="channel_8c_source.html#l00063">channel_dtor()</a>, <a class="el" href="events_8h_source.html#l00015">rcv</a>, <a class="el" href="receiver_8c_source.html#l00076">receiver_dtor()</a>, <a class="el" href="sender_8c_source.html#l00067">sender_dtor()</a>, and <a class="el" href="events_8h_source.html#l00016">snd</a>.</p>
+<p class="reference">References <a class="el" href="events_8h.html#a38eee5bd80ad6127bd4121865947c0c9">ch_sigchld</a>, <a class="el" href="channel_8h.html#ad7dbfb1df8d67151a8910925f6f08068">channel_dtor()</a>, <a class="el" href="events_8h.html#ae7d874f76a5f3e533ae39b150b48b4f4">rcv</a>, <a class="el" href="receiver_8h.html#aef7638000850183b385a0d89d6c7d283">receiver_dtor()</a>, <a class="el" href="sender_8h.html#a533a37ce0fc01b242ac7f143d4fb106a">sender_dtor()</a>, and <a class="el" href="events_8h.html#a4b4f17f8655cd7c89af3d73da19d3958">snd</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="exit_8c_source.html#l00045">exit_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="exit_8c.html#a06b48ef7aaf752e58a067f127259920c">exit_()</a>.</p>
 
 </div>
 </div>
@@ -177,49 +141,9 @@ Functions</h2></td></tr>
 <p>Initializes global event-related data structures. </p>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on failure </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="events_8c_source.html#l00042">42</a> of file <a class="el" href="events_8c_source.html">events.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordtype">int</span> <a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="comment">/* Initialize event channels */</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> = <a class="code" href="channel_8h.html#a3f79b80493f8beb9d16f302076cfe6aa">channel_ctor</a>(&amp;<a class="code" href="events_8h.html#a38eee5bd80ad6127bd4121865947c0c9">ch_sigchld</a>, <a class="code" href="receiver_8h.html#ac01622024f911484d5fa0dc8f5cf2b67">receiver_cb_sigchld</a>);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> == -1) {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                fprintf(stderr, <span class="stringliteral">&quot;channel_ctor()&quot;</span>);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="comment">/* Initialize event handler */</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> = <a class="code" href="receiver_8h.html#a585953486d974aaf07388db57a5753d4">receiver_ctor</a>(&amp;<a class="code" href="events_8h.html#ae7d874f76a5f3e533ae39b150b48b4f4">rcv</a>, 2);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> == -1) {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                fprintf(stderr, <span class="stringliteral">&quot;receiver_ctor()&quot;</span>);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> = <a class="code" href="receiver_8h.html#ad32cfffb857b00b9674f9ccf5ac643df">receiver_add</a>(&amp;<a class="code" href="events_8h.html#ae7d874f76a5f3e533ae39b150b48b4f4">rcv</a>, &amp;<a class="code" href="events_8h.html#a38eee5bd80ad6127bd4121865947c0c9">ch_sigchld</a>);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> == -1) {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                fprintf(stderr, <span class="stringliteral">&quot;receiver_add()&quot;</span>);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        }</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="comment">/* Initialize event notifier */</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> = <a class="code" href="sender_8h.html#a0641c6a72fb9606c6e93200fb13098d1">sender_ctor</a>(&amp;<a class="code" href="events_8h.html#a4b4f17f8655cd7c89af3d73da19d3958">snd</a>, 2);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> == -1) {</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                fprintf(stderr, <span class="stringliteral">&quot;sender_ctor()&quot;</span>);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        }</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> = <a class="code" href="sender_8h.html#aab863276e1e12ef4b211877c91e11acb">sender_add</a>(&amp;<a class="code" href="events_8h.html#a4b4f17f8655cd7c89af3d73da19d3958">snd</a>, &amp;<a class="code" href="events_8h.html#a38eee5bd80ad6127bd4121865947c0c9">ch_sigchld</a>);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> == -1) {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                fprintf(stderr, <span class="stringliteral">&quot;sender_add()&quot;</span>);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        }</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="events_8h_source.html#l00014">ch_sigchld</a>, <a class="el" href="channel_8c_source.html#l00045">channel_ctor()</a>, <a class="el" href="events_8h_source.html#l00015">rcv</a>, <a class="el" href="receiver_8c_source.html#l00099">receiver_add()</a>, <a class="el" href="receiver_8c_source.html#l00137">receiver_cb_sigchld()</a>, <a class="el" href="receiver_8c_source.html#l00050">receiver_ctor()</a>, <a class="el" href="sender_8c_source.html#l00088">sender_add()</a>, <a class="el" href="sender_8c_source.html#l00048">sender_ctor()</a>, <a class="el" href="events_8h_source.html#l00016">snd</a>, and <a class="el" href="status_8c_source.html#l00043">status()</a>.</p>
+<p class="reference">References <a class="el" href="events_8h.html#a38eee5bd80ad6127bd4121865947c0c9">ch_sigchld</a>, <a class="el" href="channel_8h.html#a3f79b80493f8beb9d16f302076cfe6aa">channel_ctor()</a>, <a class="el" href="events_8h.html#ae7d874f76a5f3e533ae39b150b48b4f4">rcv</a>, <a class="el" href="receiver_8h.html#ad32cfffb857b00b9674f9ccf5ac643df">receiver_add()</a>, <a class="el" href="receiver_8h.html#ac01622024f911484d5fa0dc8f5cf2b67">receiver_cb_sigchld()</a>, <a class="el" href="receiver_8h.html#a585953486d974aaf07388db57a5753d4">receiver_ctor()</a>, <a class="el" href="sender_8h.html#aab863276e1e12ef4b211877c91e11acb">sender_add()</a>, <a class="el" href="sender_8h.html#a0641c6a72fb9606c6e93200fb13098d1">sender_ctor()</a>, <a class="el" href="events_8h.html#a4b4f17f8655cd7c89af3d73da19d3958">snd</a>, and <a class="el" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="smallsh_8c_source.html#l00331">main()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="smallsh_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main()</a>.</p>
 
 </div>
 </div>
@@ -241,44 +165,13 @@ Functions</h2></td></tr>
 
 <p>Consumes new events, notifies user of any them, and removes completed jobs from global job table. </p>
 
-<p class="definition">Definition at line <a class="el" href="events_8c_source.html#l00090">90</a> of file <a class="el" href="events_8c_source.html">events.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;{</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordtype">int</span> <a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a>;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> = <a class="code" href="receiver_8h.html#a01961745f5b5ce989aa323b11c533ce8">receiver_consume_events</a>(&amp;<a class="code" href="events_8h.html#ae7d874f76a5f3e533ae39b150b48b4f4">rcv</a>);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> == -1) {</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                fprintf(stderr, <span class="stringliteral">&quot;receiver_consume_events()\n&quot;</span>);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        }</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <a class="code" href="job-control_8h.html#a769af495eaeafe093339399f540b00eb">job_table</a>.<a class="code" href="structJobTable.html#a5117b4005cde5b030b487983530e621c">clean</a>(&amp;<a class="code" href="job-control_8h.html#a769af495eaeafe093339399f540b00eb">job_table</a>);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="job-table_8h_source.html#l00034">JobTable::clean</a>, <a class="el" href="job-control_8h_source.html#l00018">job_table</a>, <a class="el" href="events_8h_source.html#l00015">rcv</a>, <a class="el" href="receiver_8c_source.html#l00161">receiver_consume_events()</a>, and <a class="el" href="status_8c_source.html#l00043">status()</a>.</p>
+<p class="reference">References <a class="el" href="structJobTable.html#a5117b4005cde5b030b487983530e621c">JobTable::clean</a>, <a class="el" href="job-control_8h.html#a769af495eaeafe093339399f540b00eb">job_table</a>, <a class="el" href="events_8h.html#ae7d874f76a5f3e533ae39b150b48b4f4">rcv</a>, <a class="el" href="receiver_8h.html#a01961745f5b5ce989aa323b11c533ce8">receiver_consume_events()</a>, and <a class="el" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="smallsh_8c_source.html#l00331">main()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="smallsh_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main()</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
-<div class="ttc" id="aevents_8h_html_a4b4f17f8655cd7c89af3d73da19d3958"><div class="ttname"><a href="events_8h.html#a4b4f17f8655cd7c89af3d73da19d3958">snd</a></div><div class="ttdeci">Sender snd</div><div class="ttdef"><b>Definition:</b> <a href="events_8h_source.html#l00016">events.h:16</a></div></div>
-<div class="ttc" id="asender_8h_html_a0641c6a72fb9606c6e93200fb13098d1"><div class="ttname"><a href="sender_8h.html#a0641c6a72fb9606c6e93200fb13098d1">sender_ctor</a></div><div class="ttdeci">int sender_ctor(Sender *self, size_t max_ch)</div><div class="ttdoc">Initializes self with provided data.</div><div class="ttdef"><b>Definition:</b> <a href="sender_8c_source.html#l00048">sender.c:48</a></div></div>
-<div class="ttc" id="aevents_8h_html_a38eee5bd80ad6127bd4121865947c0c9"><div class="ttname"><a href="events_8h.html#a38eee5bd80ad6127bd4121865947c0c9">ch_sigchld</a></div><div class="ttdeci">Channel ch_sigchld</div><div class="ttdef"><b>Definition:</b> <a href="events_8h_source.html#l00014">events.h:14</a></div></div>
-<div class="ttc" id="asender_8h_html_aab863276e1e12ef4b211877c91e11acb"><div class="ttname"><a href="sender_8h.html#aab863276e1e12ef4b211877c91e11acb">sender_add</a></div><div class="ttdeci">int sender_add(Sender *self, Channel *ch)</div><div class="ttdoc">Adds a new Channel to its channel list, and initializes its write end.</div><div class="ttdef"><b>Definition:</b> <a href="sender_8c_source.html#l00088">sender.c:88</a></div></div>
-<div class="ttc" id="areceiver_8h_html_aef7638000850183b385a0d89d6c7d283"><div class="ttname"><a href="receiver_8h.html#aef7638000850183b385a0d89d6c7d283">receiver_dtor</a></div><div class="ttdeci">void receiver_dtor(Receiver *self)</div><div class="ttdoc">Resets self's values.</div><div class="ttdef"><b>Definition:</b> <a href="receiver_8c_source.html#l00076">receiver.c:76</a></div></div>
-<div class="ttc" id="achannel_8h_html_a3f79b80493f8beb9d16f302076cfe6aa"><div class="ttname"><a href="channel_8h.html#a3f79b80493f8beb9d16f302076cfe6aa">channel_ctor</a></div><div class="ttdeci">int channel_ctor(Channel *self, int(*cb_handler)(struct Channel))</div><div class="ttdoc">Initializes a self with provided data.</div><div class="ttdef"><b>Definition:</b> <a href="channel_8c_source.html#l00045">channel.c:45</a></div></div>
-<div class="ttc" id="ajob-control_8h_html_a769af495eaeafe093339399f540b00eb"><div class="ttname"><a href="job-control_8h.html#a769af495eaeafe093339399f540b00eb">job_table</a></div><div class="ttdeci">JobTable job_table</div><div class="ttdef"><b>Definition:</b> <a href="job-control_8h_source.html#l00018">job-control.h:18</a></div></div>
-<div class="ttc" id="areceiver_8h_html_a01961745f5b5ce989aa323b11c533ce8"><div class="ttname"><a href="receiver_8h.html#a01961745f5b5ce989aa323b11c533ce8">receiver_consume_events</a></div><div class="ttdeci">int receiver_consume_events(Receiver *self)</div><div class="ttdoc">Consumes events for all of the channels in its notification list, calling their respective callback h...</div><div class="ttdef"><b>Definition:</b> <a href="receiver_8c_source.html#l00161">receiver.c:161</a></div></div>
-<div class="ttc" id="achannel_8h_html_ad7dbfb1df8d67151a8910925f6f08068"><div class="ttname"><a href="channel_8h.html#ad7dbfb1df8d67151a8910925f6f08068">channel_dtor</a></div><div class="ttdeci">void channel_dtor(Channel *self)</div><div class="ttdoc">Resets self's values.</div><div class="ttdef"><b>Definition:</b> <a href="channel_8c_source.html#l00063">channel.c:63</a></div></div>
-<div class="ttc" id="areceiver_8h_html_ad32cfffb857b00b9674f9ccf5ac643df"><div class="ttname"><a href="receiver_8h.html#ad32cfffb857b00b9674f9ccf5ac643df">receiver_add</a></div><div class="ttdeci">int receiver_add(Receiver *self, Channel *ch)</div><div class="ttdoc">Adds a new Channel to its channel list, and initializes its read end.</div><div class="ttdef"><b>Definition:</b> <a href="receiver_8c_source.html#l00099">receiver.c:99</a></div></div>
-<div class="ttc" id="areceiver_8h_html_ac01622024f911484d5fa0dc8f5cf2b67"><div class="ttname"><a href="receiver_8h.html#ac01622024f911484d5fa0dc8f5cf2b67">receiver_cb_sigchld</a></div><div class="ttdeci">int receiver_cb_sigchld(struct Channel ch)</div><div class="ttdoc">Callback handler responsible for consuming and responding to SIGCHLD events.</div><div class="ttdef"><b>Definition:</b> <a href="receiver_8c_source.html#l00137">receiver.c:137</a></div></div>
-<div class="ttc" id="aevents_8h_html_ae7d874f76a5f3e533ae39b150b48b4f4"><div class="ttname"><a href="events_8h.html#ae7d874f76a5f3e533ae39b150b48b4f4">rcv</a></div><div class="ttdeci">Receiver rcv</div><div class="ttdef"><b>Definition:</b> <a href="events_8h_source.html#l00015">events.h:15</a></div></div>
-<div class="ttc" id="astructJobTable_html_a5117b4005cde5b030b487983530e621c"><div class="ttname"><a href="structJobTable.html#a5117b4005cde5b030b487983530e621c">JobTable::clean</a></div><div class="ttdeci">void(* clean)(struct JobTable const *const self)</div><div class="ttdoc">Clean the job table, displaying completed job statuses along the way.</div><div class="ttdef"><b>Definition:</b> <a href="job-table_8h_source.html#l00034">job-table.h:34</a></div></div>
-<div class="ttc" id="asender_8h_html_a533a37ce0fc01b242ac7f143d4fb106a"><div class="ttname"><a href="sender_8h.html#a533a37ce0fc01b242ac7f143d4fb106a">sender_dtor</a></div><div class="ttdeci">void sender_dtor(Sender *self)</div><div class="ttdoc">Resets self's values.</div><div class="ttdef"><b>Definition:</b> <a href="sender_8c_source.html#l00067">sender.c:67</a></div></div>
-<div class="ttc" id="astatus_8h_html_a685506d2c432425b89581f85cf876f22"><div class="ttname"><a href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a></div><div class="ttdeci">void status(void)</div><div class="ttdoc">Displays last exit status value to user.</div><div class="ttdef"><b>Definition:</b> <a href="status_8c_source.html#l00043">status.c:43</a></div></div>
-<div class="ttc" id="areceiver_8h_html_a585953486d974aaf07388db57a5753d4"><div class="ttname"><a href="receiver_8h.html#a585953486d974aaf07388db57a5753d4">receiver_ctor</a></div><div class="ttdeci">int receiver_ctor(Receiver *self, size_t max_ch)</div><div class="ttdoc">Initializes self with provided data.</div><div class="ttdef"><b>Definition:</b> <a href="receiver_8c_source.html#l00050">receiver.c:50</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

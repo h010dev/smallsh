@@ -12,12 +12,8 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -42,36 +38,16 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="examples.html"><span>Examples</span></a></li>
-      <li>
-        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
-          </span>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
-    </ul>
-  </div>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -129,8 +105,6 @@ Functions</h2></td></tr>
 <div class="textblock"><p>For iterating over a collection of tokens. </p>
 <dl class="section author"><dt>Author</dt><dd>Mohamed Al-Hussein </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>28 Jan 2022 </dd></dl>
-
-<p class="definition">Definition in file <a class="el" href="token-iterator_8h_source.html">token-iterator.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="ab29cf18ebda2ad23745bf848ec16e7b4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab29cf18ebda2ad23745bf848ec16e7b4">&#9670;&nbsp;</a></span>token_iterator_ctor()</h2>
@@ -180,24 +154,9 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>No copy is made of <code>tokens</code>, so the caller must not free or modify the parameter until they are finished using the iterator. Likewise, the caller cannot guarantee that the tokens array is left unmodified at the end of the iterators lifespan. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="token-iterator_8c_source.html#l00145">145</a> of file <a class="el" href="token-iterator_8c_source.html">token-iterator.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;{</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <span class="keyword">static</span> <span class="keyword">struct </span><a class="code" href="structTokenIteratorVtbl.html">TokenIteratorVtbl</a> const vtbl = {</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                .<a class="code" href="structTokenIteratorVtbl.html#aa78d706cd29d320ff63051f1fb33eb10">has_next</a> = &amp;<a class="code" href="token-iterator_8c.html#a9b343dc1776bd60c9e6e5001c3204f5a">token_iterator_has_next_</a>,</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                .next = &amp;<a class="code" href="token-iterator_8c.html#a9af28cb1ddefac7cb9b03700b75714b3">token_iterator_next_</a>,</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                .peek = &amp;<a class="code" href="token-iterator_8c.html#a1658892624bfb2c5b4a160d5363f52a9">token_iterator_peek_</a>,</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        };</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        <span class="keyword">self</span>-&gt;<a class="code" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">vptr</a> = &amp;vtbl;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="keyword">self</span>-&gt;private = malloc(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> <a class="code" href="structTokenIteratorPrivate.html">TokenIteratorPrivate</a>));</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        <span class="keyword">self</span>-&gt;private-&gt;ti_len = len;</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        <span class="keyword">self</span>-&gt;private-&gt;ti_tok = tok;</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        <span class="keyword">self</span>-&gt;<a class="code" href="structToken.html#a353352ae77209b60b721c5a28f12c9ac">private</a>-&gt;ti_cur = 0;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="token-iterator_8h_source.html#l00048">TokenIteratorVtbl::has_next</a>, <a class="el" href="token-iterator_8c_source.html#l00054">token_iterator_has_next_()</a>, <a class="el" href="token-iterator_8c_source.html#l00075">token_iterator_next_()</a>, <a class="el" href="token-iterator_8c_source.html#l00086">token_iterator_peek_()</a>, and <a class="el" href="token_8h_source.html#l00022">Token::vptr</a>.</p>
+<p class="reference">References <a class="el" href="structTokenIteratorVtbl.html#aa78d706cd29d320ff63051f1fb33eb10">TokenIteratorVtbl::has_next</a>, <a class="el" href="token-iterator_8c.html#a9b343dc1776bd60c9e6e5001c3204f5a">token_iterator_has_next_()</a>, <a class="el" href="token-iterator_8c.html#a9af28cb1ddefac7cb9b03700b75714b3">token_iterator_next_()</a>, <a class="el" href="token-iterator_8c.html#a1658892624bfb2c5b4a160d5363f52a9">token_iterator_peek_()</a>, and <a class="el" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">Token::vptr</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="parser_8c_source.html#l00215">parser_parse_statements_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="parser_8c.html#ac8de4642e7b3f20e95a4b0ccc5c6db69">parser_parse_statements_()</a>.</p>
 
 </div>
 </div>
@@ -225,30 +184,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="token-iterator_8c_source.html#l00160">160</a> of file <a class="el" href="token-iterator_8c_source.html">token-iterator.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;{</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        <span class="keyword">self</span>-&gt;vptr = NULL;</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <span class="keyword">self</span>-&gt;private-&gt;ti_len = 0;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <span class="keyword">self</span>-&gt;private-&gt;ti_tok = NULL;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <span class="keyword">self</span>-&gt;private-&gt;ti_cur = 0;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        free(self-&gt;<a class="code" href="structTokenIterator.html#ad810e5f748df549c22be80c532d73e33">private</a>);</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        <span class="keyword">self</span>-&gt;private = NULL;</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="parser_8c_source.html#l00215">parser_parse_statements_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="parser_8c.html#ac8de4642e7b3f20e95a4b0ccc5c6db69">parser_parse_statements_()</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
-<div class="ttc" id="atoken-iterator_8c_html_a9b343dc1776bd60c9e6e5001c3204f5a"><div class="ttname"><a href="token-iterator_8c.html#a9b343dc1776bd60c9e6e5001c3204f5a">token_iterator_has_next_</a></div><div class="ttdeci">static bool token_iterator_has_next_(TokenIterator const *const self)</div><div class="ttdoc">Implementation of TokenIterator::has_next().</div><div class="ttdef"><b>Definition:</b> <a href="token-iterator_8c_source.html#l00054">token-iterator.c:54</a></div></div>
-<div class="ttc" id="astructTokenIteratorVtbl_html_aa78d706cd29d320ff63051f1fb33eb10"><div class="ttname"><a href="structTokenIteratorVtbl.html#aa78d706cd29d320ff63051f1fb33eb10">TokenIteratorVtbl::has_next</a></div><div class="ttdeci">bool(* has_next)(TokenIterator const *const self)</div><div class="ttdoc">Let's caller know if there are any more tokens left to parse from iterable.</div><div class="ttdef"><b>Definition:</b> <a href="token-iterator_8h_source.html#l00048">token-iterator.h:48</a></div></div>
-<div class="ttc" id="astructTokenIteratorPrivate_html"><div class="ttname"><a href="structTokenIteratorPrivate.html">TokenIteratorPrivate</a></div><div class="ttdoc">Hides TokenIterator members from client code.</div><div class="ttdef"><b>Definition:</b> <a href="token-iterator_8c_source.html#l00042">token-iterator.c:42</a></div></div>
-<div class="ttc" id="atoken-iterator_8c_html_a9af28cb1ddefac7cb9b03700b75714b3"><div class="ttname"><a href="token-iterator_8c.html#a9af28cb1ddefac7cb9b03700b75714b3">token_iterator_next_</a></div><div class="ttdeci">static Token * token_iterator_next_(TokenIterator const *const self)</div><div class="ttdoc">Implementation of TokenIterator::next().</div><div class="ttdef"><b>Definition:</b> <a href="token-iterator_8c_source.html#l00075">token-iterator.c:75</a></div></div>
-<div class="ttc" id="astructToken_html_a353352ae77209b60b721c5a28f12c9ac"><div class="ttname"><a href="structToken.html#a353352ae77209b60b721c5a28f12c9ac">Token::private</a></div><div class="ttdeci">struct TokenPrivate * private</div><div class="ttdef"><b>Definition:</b> <a href="token_8h_source.html#l00023">token.h:23</a></div></div>
-<div class="ttc" id="astructToken_html_a759b94ee460172f9ba2e9e8a6deeacd0"><div class="ttname"><a href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">Token::vptr</a></div><div class="ttdeci">struct TokenVtbl const  * vptr</div><div class="ttdef"><b>Definition:</b> <a href="token_8h_source.html#l00022">token.h:22</a></div></div>
-<div class="ttc" id="atoken-iterator_8c_html_a1658892624bfb2c5b4a160d5363f52a9"><div class="ttname"><a href="token-iterator_8c.html#a1658892624bfb2c5b4a160d5363f52a9">token_iterator_peek_</a></div><div class="ttdeci">static Token token_iterator_peek_(TokenIterator const *const self, unsigned int offset)</div><div class="ttdoc">Implementation of TokenIterator::peek().</div><div class="ttdef"><b>Definition:</b> <a href="token-iterator_8c_source.html#l00086">token-iterator.c:86</a></div></div>
-<div class="ttc" id="astructTokenIterator_html_ad810e5f748df549c22be80c532d73e33"><div class="ttname"><a href="structTokenIterator.html#ad810e5f748df549c22be80c532d73e33">TokenIterator::private</a></div><div class="ttdeci">struct TokenIteratorPrivate * private</div><div class="ttdef"><b>Definition:</b> <a href="token-iterator_8h_source.html#l00022">token-iterator.h:22</a></div></div>
-<div class="ttc" id="astructTokenIteratorVtbl_html"><div class="ttname"><a href="structTokenIteratorVtbl.html">TokenIteratorVtbl</a></div><div class="ttdoc">VTable for TokenIterator object.</div><div class="ttdef"><b>Definition:</b> <a href="token-iterator_8h_source.html#l00031">token-iterator.h:31</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

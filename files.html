@@ -12,12 +12,8 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -42,36 +38,16 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="examples.html"><span>Examples</span></a></li>
-      <li>
-        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
-          </span>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li class="current"><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
-    </ul>
-  </div>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
 </div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -128,34 +104,34 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr id="row_0_7_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><a href="globals_8h_source.html"><span class="icondoc"></span></a><a class="el" href="globals_8h.html" target="_self">globals.h</a></td><td class="desc"></td></tr>
 <tr id="row_1_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_1_" class="arrow" onclick="toggleFolder('1_')">&#9660;</span><span id="img_1_" class="iconfopen" onclick="toggleFolder('1_')">&#160;</span><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html" target="_self">src</a></td><td class="desc"></td></tr>
 <tr id="row_1_0_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_1_0_" class="arrow" onclick="toggleFolder('1_0_')">&#9660;</span><span id="img_1_0_" class="iconfopen" onclick="toggleFolder('1_0_')">&#160;</span><a class="el" href="dir_1909b13b6d0cbcc1d36d622424b54e1c.html" target="_self">builtins</a></td><td class="desc"></td></tr>
-<tr id="row_1_0_0_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a href="builtins_8c_source.html"><span class="icondoc"></span></a><a class="el" href="builtins_8c.html" target="_self">builtins.c</a></td><td class="desc">For identifying and invoking shell builtin commands </td></tr>
-<tr id="row_1_0_1_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a href="cd_8c_source.html"><span class="icondoc"></span></a><a class="el" href="cd_8c.html" target="_self">cd.c</a></td><td class="desc">Cd builtin command </td></tr>
-<tr id="row_1_0_2_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a href="exit_8c_source.html"><span class="icondoc"></span></a><a class="el" href="exit_8c.html" target="_self">exit.c</a></td><td class="desc"></td></tr>
-<tr id="row_1_0_3_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a href="status_8c_source.html"><span class="icondoc"></span></a><a class="el" href="status_8c.html" target="_self">status.c</a></td><td class="desc">Status builtin command </td></tr>
+<tr id="row_1_0_0_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="builtins_8c.html" target="_self">builtins.c</a></td><td class="desc">For identifying and invoking shell builtin commands </td></tr>
+<tr id="row_1_0_1_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="cd_8c.html" target="_self">cd.c</a></td><td class="desc">Cd builtin command </td></tr>
+<tr id="row_1_0_2_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="exit_8c.html" target="_self">exit.c</a></td><td class="desc"></td></tr>
+<tr id="row_1_0_3_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="status_8c.html" target="_self">status.c</a></td><td class="desc">Status builtin command </td></tr>
 <tr id="row_1_1_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_1_1_" class="arrow" onclick="toggleFolder('1_1_')">&#9660;</span><span id="img_1_1_" class="iconfopen" onclick="toggleFolder('1_1_')">&#160;</span><a class="el" href="dir_14e1e259e8275dc0c459acef3bbf05ae.html" target="_self">events</a></td><td class="desc"></td></tr>
-<tr id="row_1_1_0_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a href="channel_8c_source.html"><span class="icondoc"></span></a><a class="el" href="channel_8c.html" target="_self">channel.c</a></td><td class="desc">Provides means for sending and receiving signal-related information via a message channel </td></tr>
-<tr id="row_1_1_1_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a href="events_8c_source.html"><span class="icondoc"></span></a><a class="el" href="events_8c.html" target="_self">events.c</a></td><td class="desc">Contains functions for handling signal-generated events </td></tr>
-<tr id="row_1_1_2_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a href="receiver_8c_source.html"><span class="icondoc"></span></a><a class="el" href="receiver_8c.html" target="_self">receiver.c</a></td><td class="desc">Responsible for receiving and handling signal-generated messages sent via a dedicated <a class="el" href="structChannel.html" title="A Channel object consists of a read end and a write end, as well as a callback handler function that ...">Channel</a> </td></tr>
-<tr id="row_1_1_3_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a href="sender_8c_source.html"><span class="icondoc"></span></a><a class="el" href="sender_8c.html" target="_self">sender.c</a></td><td class="desc">Responsible for sending messages to subscribers via a dedicated <a class="el" href="structChannel.html" title="A Channel object consists of a read end and a write end, as well as a callback handler function that ...">Channel</a> </td></tr>
+<tr id="row_1_1_0_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="channel_8c.html" target="_self">channel.c</a></td><td class="desc">Provides means for sending and receiving signal-related information via a message channel </td></tr>
+<tr id="row_1_1_1_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="events_8c.html" target="_self">events.c</a></td><td class="desc">Contains functions for handling signal-generated events </td></tr>
+<tr id="row_1_1_2_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="receiver_8c.html" target="_self">receiver.c</a></td><td class="desc">Responsible for receiving and handling signal-generated messages sent via a dedicated <a class="el" href="structChannel.html" title="A Channel object consists of a read end and a write end, as well as a callback handler function that ...">Channel</a> </td></tr>
+<tr id="row_1_1_3_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="sender_8c.html" target="_self">sender.c</a></td><td class="desc">Responsible for sending messages to subscribers via a dedicated <a class="el" href="structChannel.html" title="A Channel object consists of a read end and a write end, as well as a callback handler function that ...">Channel</a> </td></tr>
 <tr id="row_1_2_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_1_2_" class="arrow" onclick="toggleFolder('1_2_')">&#9660;</span><span id="img_1_2_" class="iconfopen" onclick="toggleFolder('1_2_')">&#160;</span><a class="el" href="dir_4904b5727094acb85f1fb3ce4b540d24.html" target="_self">interpreter</a></td><td class="desc"></td></tr>
-<tr id="row_1_2_0_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a href="lexer_8c_source.html"><span class="icondoc"></span></a><a class="el" href="lexer_8c.html" target="_self">lexer.c</a></td><td class="desc">For tokenizing a shell input string </td></tr>
-<tr id="row_1_2_1_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a href="parser_8c_source.html"><span class="icondoc"></span></a><a class="el" href="parser_8c.html" target="_self">parser.c</a></td><td class="desc">For parsing a stream of tokens into nodes for later evaluation </td></tr>
-<tr id="row_1_2_2_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a href="shell-tokens_8c_source.html"><span class="icondoc"></span></a><a class="el" href="shell-tokens_8c.html" target="_self">shell-tokens.c</a></td><td class="desc">For parsing and storing the different types of tokens of the shell </td></tr>
-<tr id="row_1_2_3_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a href="statement_8c_source.html"><span class="icondoc"></span></a><a class="el" href="statement_8c.html" target="_self">statement.c</a></td><td class="desc">For creating command statements to later be executed </td></tr>
-<tr id="row_1_2_4_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a href="token-iterator_8c_source.html"><span class="icondoc"></span></a><a class="el" href="token-iterator_8c.html" target="_self">token-iterator.c</a></td><td class="desc">For iterating over a collection of tokens </td></tr>
-<tr id="row_1_2_5_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a href="token_8c_source.html"><span class="icondoc"></span></a><a class="el" href="token_8c.html" target="_self">token.c</a></td><td class="desc">For parsing and storing tokens </td></tr>
+<tr id="row_1_2_0_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="lexer_8c.html" target="_self">lexer.c</a></td><td class="desc">For tokenizing a shell input string </td></tr>
+<tr id="row_1_2_1_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="parser_8c.html" target="_self">parser.c</a></td><td class="desc">For parsing a stream of tokens into nodes for later evaluation </td></tr>
+<tr id="row_1_2_2_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="shell-tokens_8c.html" target="_self">shell-tokens.c</a></td><td class="desc">For parsing and storing the different types of tokens of the shell </td></tr>
+<tr id="row_1_2_3_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="statement_8c.html" target="_self">statement.c</a></td><td class="desc">For creating command statements to later be executed </td></tr>
+<tr id="row_1_2_4_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="token-iterator_8c.html" target="_self">token-iterator.c</a></td><td class="desc">For iterating over a collection of tokens </td></tr>
+<tr id="row_1_2_5_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="token_8c.html" target="_self">token.c</a></td><td class="desc">For parsing and storing tokens </td></tr>
 <tr id="row_1_3_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_1_3_" class="arrow" onclick="toggleFolder('1_3_')">&#9660;</span><span id="img_1_3_" class="iconfopen" onclick="toggleFolder('1_3_')">&#160;</span><a class="el" href="dir_a512c53f36df535e3dc82ed0ecfabf79.html" target="_self">job-control</a></td><td class="desc"></td></tr>
-<tr id="row_1_3_0_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a href="job-control_8c_source.html"><span class="icondoc"></span></a><a class="el" href="job-control_8c.html" target="_self">job-control.c</a></td><td class="desc">Functions for performing shell job control </td></tr>
-<tr id="row_1_3_1_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a href="job-table_8c_source.html"><span class="icondoc"></span></a><a class="el" href="job-table_8c.html" target="_self">job-table.c</a></td><td class="desc">Contain information about a collection of jobs </td></tr>
-<tr id="row_1_3_2_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a href="job_8c_source.html"><span class="icondoc"></span></a><a class="el" href="job_8c.html" target="_self">job.c</a></td><td class="desc">Contain information about a a single job </td></tr>
-<tr id="row_1_3_3_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a href="process_8c_source.html"><span class="icondoc"></span></a><a class="el" href="process_8c.html" target="_self">process.c</a></td><td class="desc">Contain information about a single child process </td></tr>
+<tr id="row_1_3_0_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="job-control_8c.html" target="_self">job-control.c</a></td><td class="desc">Functions for performing shell job control </td></tr>
+<tr id="row_1_3_1_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="job-table_8c.html" target="_self">job-table.c</a></td><td class="desc">Contain information about a collection of jobs </td></tr>
+<tr id="row_1_3_2_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="job_8c.html" target="_self">job.c</a></td><td class="desc">Contain information about a a single job </td></tr>
+<tr id="row_1_3_3_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="process_8c.html" target="_self">process.c</a></td><td class="desc">Contain information about a single child process </td></tr>
 <tr id="row_1_4_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_1_4_" class="arrow" onclick="toggleFolder('1_4_')">&#9660;</span><span id="img_1_4_" class="iconfopen" onclick="toggleFolder('1_4_')">&#160;</span><a class="el" href="dir_5784360009d1ef95205a0048ad26d28c.html" target="_self">signals</a></td><td class="desc"></td></tr>
-<tr id="row_1_4_0_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a href="handler_8c_source.html"><span class="icondoc"></span></a><a class="el" href="handler_8c.html" target="_self">handler.c</a></td><td class="desc">Contains functions for handling signals </td></tr>
-<tr id="row_1_4_1_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a href="installer_8c_source.html"><span class="icondoc"></span></a><a class="el" href="installer_8c.html" target="_self">installer.c</a></td><td class="desc">Contains functions for installing signals </td></tr>
+<tr id="row_1_4_0_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="handler_8c.html" target="_self">handler.c</a></td><td class="desc">Contains functions for handling signals </td></tr>
+<tr id="row_1_4_1_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="installer_8c.html" target="_self">installer.c</a></td><td class="desc">Contains functions for installing signals </td></tr>
 <tr id="row_1_5_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_1_5_" class="arrow" onclick="toggleFolder('1_5_')">&#9660;</span><span id="img_1_5_" class="iconfopen" onclick="toggleFolder('1_5_')">&#160;</span><a class="el" href="dir_313caf1132e152dd9b58bea13a4052ca.html" target="_self">utils</a></td><td class="desc"></td></tr>
-<tr id="row_1_5_0_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a href="string-iterator_8c_source.html"><span class="icondoc"></span></a><a class="el" href="string-iterator_8c.html" target="_self">string-iterator.c</a></td><td class="desc">For iterating over a single-line string </td></tr>
-<tr id="row_1_6_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><a href="error_8c_source.html"><span class="icondoc"></span></a><a class="el" href="error_8c.html" target="_self">error.c</a></td><td class="desc">For recording and responding to shell errors </td></tr>
-<tr id="row_1_7_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><a href="smallsh_8c_source.html"><span class="icondoc"></span></a><a class="el" href="smallsh_8c.html" target="_self">smallsh.c</a></td><td class="desc">Contains core shell functions </td></tr>
+<tr id="row_1_5_0_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="string-iterator_8c.html" target="_self">string-iterator.c</a></td><td class="desc">For iterating over a single-line string </td></tr>
+<tr id="row_1_6_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="error_8c.html" target="_self">error.c</a></td><td class="desc">For recording and responding to shell errors </td></tr>
+<tr id="row_1_7_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="smallsh_8c.html" target="_self">smallsh.c</a></td><td class="desc">Contains core shell functions </td></tr>
 </table>
 </div><!-- directory -->
 </div><!-- contents -->

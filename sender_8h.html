@@ -12,12 +12,8 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -42,36 +38,16 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="examples.html"><span>Examples</span></a></li>
-      <li>
-        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
-          </span>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
-    </ul>
-  </div>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -131,8 +107,6 @@ Functions</h2></td></tr>
 <div class="textblock"><p>Responsible for sending messages to subscribers via a dedicated <a class="el" href="structChannel.html" title="A Channel object consists of a read end and a write end, as well as a callback handler function that ...">Channel</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Mohamed Al-Hussein </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>09 Feb 2022 </dd></dl>
-
-<p class="definition">Definition in file <a class="el" href="sender_8h_source.html">sender.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="aab863276e1e12ef4b211877c91e11acb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aab863276e1e12ef4b211877c91e11acb">&#9670;&nbsp;</a></span>sender_add()</h2>
@@ -170,40 +144,9 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on failure </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sender_8c_source.html#l00088">88</a> of file <a class="el" href="sender_8c_source.html">sender.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;{</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordtype">int</span> flags, <a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a>;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="comment">/* Set write end to non-blocking. */</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        errno = 0;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        flags = fcntl(ch-&gt;<a class="code" href="structChannel.html#ad874d338cec1167c20e7e503f50a212d">ch_write</a>, F_GETFL);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keywordflow">if</span> (flags == -1) {</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                fprintf(stderr, <span class="stringliteral">&quot;Failed to add to Sender: %s\n&quot;</span>, strerror(errno));</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        }</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        flags |= O_NONBLOCK;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        errno = 0;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> = fcntl(ch-&gt;<a class="code" href="structChannel.html#ad874d338cec1167c20e7e503f50a212d">ch_write</a>, F_SETFL, flags);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> == -1) {</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                fprintf(stderr, <span class="stringliteral">&quot;Failed to add to Sender: %s\n&quot;</span>, strerror(errno));</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        }</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="comment">/* Add channel to channel list. */</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keywordflow">if</span> (self-&gt;<a class="code" href="structSender.html#ab060d64177bbbfd3aae6185c955b04a8">_snd_n_ch</a> &gt;= self-&gt;<a class="code" href="structSender.html#a5ff9371d6791fa752e1030ad16345405">_snd_max_ch</a>) {</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                fprintf(stderr, <span class="stringliteral">&quot;Failed to add to Sender: Sender is full\n&quot;</span>);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        }</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="keyword">self</span>-&gt;_ch[<span class="keyword">self</span>-&gt;_snd_n_ch++] = ch;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="channel_8h_source.html#l00017">Channel::ch_write</a>, and <a class="el" href="status_8c_source.html#l00043">status()</a>.</p>
+<p class="reference">References <a class="el" href="structChannel.html#ad874d338cec1167c20e7e503f50a212d">Channel::ch_write</a>, and <a class="el" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="events_8c_source.html#l00042">events_init()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="events_8c.html#a81ce7d6909034de9c012d78ae23c3f42">events_init()</a>.</p>
 
 </div>
 </div>
@@ -243,26 +186,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on failure </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sender_8c_source.html#l00048">48</a> of file <a class="el" href="sender_8c_source.html">sender.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keyword">self</span>-&gt;_snd_n_ch = 0;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keyword">self</span>-&gt;_snd_max_ch = max_ch;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="comment">/* Init Channel array. */</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keyword">self</span>-&gt;_ch = malloc(max_ch * <span class="keyword">sizeof</span>(<a class="code" href="structChannel.html">Channel</a>));</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordflow">if</span> (self-&gt;<a class="code" href="structSender.html#af77d61fad8e4c1c1b51894f3582c3c0f">_ch</a> == NULL) {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                fprintf(stderr, <span class="stringliteral">&quot;Failed to init Sender: malloc()\n&quot;</span>);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; max_ch; i++) {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                <span class="keyword">self</span>-&gt;_ch[i] = NULL;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        }</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="events_8c_source.html#l00042">events_init()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="events_8c.html#a81ce7d6909034de9c012d78ae23c3f42">events_init()</a>.</p>
 
 </div>
 </div>
@@ -291,18 +215,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>This does not clear the actual channels by calling their respective destructors. It is the caller's responsibility to do so afterwards. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sender_8c_source.html#l00067">67</a> of file <a class="el" href="sender_8c_source.html">sender.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;{</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; <span class="keyword">self</span>-&gt;_snd_n_ch; i++) {</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                <span class="keyword">self</span>-&gt;_ch[i] = NULL;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        }</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keyword">self</span>-&gt;_snd_n_ch = 0;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        free(self-&gt;<a class="code" href="structSender.html#af77d61fad8e4c1c1b51894f3582c3c0f">_ch</a>);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keyword">self</span>-&gt;_ch = NULL;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="events_8c_source.html#l00082">events_cleanup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="events_8c.html#a64bde057407debd7862302dda094b6ed">events_cleanup()</a>.</p>
 
 </div>
 </div>
@@ -333,53 +246,13 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on failure </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sender_8c_source.html#l00119">119</a> of file <a class="el" href="sender_8c_source.html">sender.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;{</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="keywordtype">int</span> <a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a>;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        pid_t child_pid;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <a class="code" href="structSigchldDTO.html">SigchldDTO</a> dto;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="comment">/*</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">         * Catch all incoming SIGCHLD signals and dispatch their status to</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">         * listening parties.</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">         *</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">         * Source: TLPI section 26.3</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">         */</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        errno = 0;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keywordflow">while</span> ((child_pid = waitpid(-1, &amp;<a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a>, WNOHANG)) &gt; 0) {</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                <span class="comment">/* Initialize DTO object to transfer PID and status through. */</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                dto.<a class="code" href="structSigchldDTO.html#a4a3b6d71f036c6b8f9cc0e07287307f7">chld_pid</a> = child_pid;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                dto.<a class="code" href="structSigchldDTO.html#a6a444cc7e2b4feea515de9823d2858ce">chld_status</a> = <a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a>;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                <span class="comment">/* Write DTO to pipe. */</span></div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;                errno = 0;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;                <span class="keywordflow">if</span> (write(ch.<a class="code" href="structChannel.html#ad874d338cec1167c20e7e503f50a212d">ch_write</a>, &amp;dto, <span class="keyword">sizeof</span>(dto)) == -1 &amp;&amp; errno != EAGAIN) {</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                }</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        }</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        <span class="keywordflow">if</span> (child_pid == -1 &amp;&amp; errno != ECHILD) {</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        }</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="channel_8h_source.html#l00017">Channel::ch_write</a>, <a class="el" href="dto_8h_source.html#l00018">SigchldDTO::chld_pid</a>, <a class="el" href="dto_8h_source.html#l00019">SigchldDTO::chld_status</a>, and <a class="el" href="status_8c_source.html#l00043">status()</a>.</p>
+<p class="reference">References <a class="el" href="structChannel.html#ad874d338cec1167c20e7e503f50a212d">Channel::ch_write</a>, <a class="el" href="structSigchldDTO.html#a4a3b6d71f036c6b8f9cc0e07287307f7">SigchldDTO::chld_pid</a>, <a class="el" href="structSigchldDTO.html#a6a444cc7e2b4feea515de9823d2858ce">SigchldDTO::chld_status</a>, and <a class="el" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="handler_8c_source.html#l00151">handler_handle_sigchld()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="handler_8c.html#a1afb82a207441052c002d287c4fc6a26">handler_handle_sigchld()</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
-<div class="ttc" id="astructChannel_html"><div class="ttname"><a href="structChannel.html">Channel</a></div><div class="ttdoc">A Channel object consists of a read end and a write end, as well as a callback handler function that ...</div><div class="ttdef"><b>Definition:</b> <a href="channel_8h_source.html#l00015">channel.h:15</a></div></div>
-<div class="ttc" id="astructSender_html_ab060d64177bbbfd3aae6185c955b04a8"><div class="ttname"><a href="structSender.html#ab060d64177bbbfd3aae6185c955b04a8">Sender::_snd_n_ch</a></div><div class="ttdeci">size_t _snd_n_ch</div><div class="ttdef"><b>Definition:</b> <a href="sender_8h_source.html#l00017">sender.h:17</a></div></div>
-<div class="ttc" id="astructSigchldDTO_html_a6a444cc7e2b4feea515de9823d2858ce"><div class="ttname"><a href="structSigchldDTO.html#a6a444cc7e2b4feea515de9823d2858ce">SigchldDTO::chld_status</a></div><div class="ttdeci">int chld_status</div><div class="ttdef"><b>Definition:</b> <a href="dto_8h_source.html#l00019">dto.h:19</a></div></div>
-<div class="ttc" id="astructSigchldDTO_html_a4a3b6d71f036c6b8f9cc0e07287307f7"><div class="ttname"><a href="structSigchldDTO.html#a4a3b6d71f036c6b8f9cc0e07287307f7">SigchldDTO::chld_pid</a></div><div class="ttdeci">pid_t chld_pid</div><div class="ttdef"><b>Definition:</b> <a href="dto_8h_source.html#l00018">dto.h:18</a></div></div>
-<div class="ttc" id="astructChannel_html_ad874d338cec1167c20e7e503f50a212d"><div class="ttname"><a href="structChannel.html#ad874d338cec1167c20e7e503f50a212d">Channel::ch_write</a></div><div class="ttdeci">int ch_write</div><div class="ttdef"><b>Definition:</b> <a href="channel_8h_source.html#l00017">channel.h:17</a></div></div>
-<div class="ttc" id="astructSender_html_af77d61fad8e4c1c1b51894f3582c3c0f"><div class="ttname"><a href="structSender.html#af77d61fad8e4c1c1b51894f3582c3c0f">Sender::_ch</a></div><div class="ttdeci">Channel ** _ch</div><div class="ttdef"><b>Definition:</b> <a href="sender_8h_source.html#l00019">sender.h:19</a></div></div>
-<div class="ttc" id="astructSender_html_a5ff9371d6791fa752e1030ad16345405"><div class="ttname"><a href="structSender.html#a5ff9371d6791fa752e1030ad16345405">Sender::_snd_max_ch</a></div><div class="ttdeci">size_t _snd_max_ch</div><div class="ttdef"><b>Definition:</b> <a href="sender_8h_source.html#l00018">sender.h:18</a></div></div>
-<div class="ttc" id="astructSigchldDTO_html"><div class="ttname"><a href="structSigchldDTO.html">SigchldDTO</a></div><div class="ttdoc">A SigchldDTO contains relevant data about a SIGCHLD event that the global job table will use to updat...</div><div class="ttdef"><b>Definition:</b> <a href="dto_8h_source.html#l00017">dto.h:17</a></div></div>
-<div class="ttc" id="astatus_8h_html_a685506d2c432425b89581f85cf876f22"><div class="ttname"><a href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a></div><div class="ttdeci">void status(void)</div><div class="ttdoc">Displays last exit status value to user.</div><div class="ttdef"><b>Definition:</b> <a href="status_8c_source.html#l00043">status.c:43</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

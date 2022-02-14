@@ -12,12 +12,8 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -42,37 +38,16 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li class="current"><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="examples.html"><span>Examples</span></a></li>
-      <li>
-        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
-          </span>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li><a href="classes.html"><span>Data&#160;Structure&#160;Index</span></a></li>
-      <li><a href="functions.html"><span>Data&#160;Fields</span></a></li>
-    </ul>
-  </div>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -124,8 +99,6 @@ Data Fields</h2></td></tr>
 <p><br  />
 </p>
 <p><code>take</code> method derived from this source: <a href="https://www.youtube.com/watch?v=ikw4V_x-CFI">https://www.youtube.com/watch?v=ikw4V_x-CFI</a> </p>
-
-<p class="definition">Definition at line <a class="el" href="token_8h_source.html#l00041">41</a> of file <a class="el" href="token_8h_source.html">token.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
 <a id="a9626717617c7e53cdb743d739e9a3518"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9626717617c7e53cdb743d739e9a3518">&#9670;&nbsp;</a></span>get_type</h2>
@@ -148,9 +121,7 @@ Data Fields</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the token's type identifier </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="token_8h_source.html#l00047">47</a> of file <a class="el" href="token_8h_source.html">token.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="shell-tokens_8c_source.html#l00269">bgctrl_token_ctor()</a>, <a class="el" href="shell-tokens_8c_source.html#l00287">comment_token_ctor()</a>, <a class="el" href="shell-tokens_8c_source.html#l00305">inputredir_token_ctor()</a>, <a class="el" href="shell-tokens_8c_source.html#l00323">newline_token_ctor()</a>, <a class="el" href="shell-tokens_8c_source.html#l00341">outputredir_token_ctor()</a>, <a class="el" href="token_8c_source.html#l00124">token_ctor()</a>, <a class="el" href="token-iterator_8c_source.html#l00054">token_iterator_has_next_()</a>, and <a class="el" href="shell-tokens_8c_source.html#l00359">word_token_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="shell-tokens_8c.html#a11769c7ce7a83626dcc5b201a8c1ea2a">bgctrl_token_ctor()</a>, <a class="el" href="shell-tokens_8c.html#af93aac1a9b767267240e6eac69c8aabf">comment_token_ctor()</a>, <a class="el" href="shell-tokens_8c.html#a23f681e35070e98e354feaea1a19a4be">inputredir_token_ctor()</a>, <a class="el" href="shell-tokens_8c.html#abad0f54f557f34ee546d1aaba60b3df1">newline_token_ctor()</a>, <a class="el" href="shell-tokens_8c.html#a0cc07110bc86215bdacb8ee2d6639f2c">outputredir_token_ctor()</a>, <a class="el" href="token_8c.html#a7a14e268eddc63363b0d81b9a23d511d">token_ctor()</a>, <a class="el" href="token-iterator_8c.html#a9b343dc1776bd60c9e6e5001c3204f5a">token_iterator_has_next_()</a>, and <a class="el" href="shell-tokens_8c.html#aacae5340c5b9e39e4bc80ace242b2d12">word_token_ctor()</a>.</p>
 
 </div>
 </div>
@@ -176,9 +147,7 @@ Data Fields</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>copy of string stored by <code>self</code> </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The caller is responsible for freeing the return value when they're done using it. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="token_8h_source.html#l00056">56</a> of file <a class="el" href="token_8h_source.html">token.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="shell-tokens_8c_source.html#l00048">bgctrl_token_print_()</a>, <a class="el" href="shell-tokens_8c_source.html#l00081">comment_token_print_()</a>, <a class="el" href="shell-tokens_8c_source.html#l00114">inputredir_token_print_()</a>, <a class="el" href="shell-tokens_8c_source.html#l00179">outputredir_token_print_()</a>, <a class="el" href="parser_8c_source.html#l00075">parser_parse_cmd_()</a>, <a class="el" href="parser_8c_source.html#l00142">parser_parse_ioredir_()</a>, and <a class="el" href="shell-tokens_8c_source.html#l00212">word_token_print_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="shell-tokens_8c.html#aaa8ce2d94666144d8cc1901c2b1cd595">bgctrl_token_print_()</a>, <a class="el" href="shell-tokens_8c.html#a9bd3f98472c79cd81bfe65b20fe26e76">comment_token_print_()</a>, <a class="el" href="shell-tokens_8c.html#a24030150fb53851d3051448202a1f417">inputredir_token_print_()</a>, <a class="el" href="shell-tokens_8c.html#a4a67db81b529659157738e314e636ddc">outputredir_token_print_()</a>, <a class="el" href="parser_8c.html#a469b943aa3b4faf5da202fc25725332e">parser_parse_cmd_()</a>, <a class="el" href="parser_8c.html#adef22e7be4f5cde84075864c6e6f72db">parser_parse_ioredir_()</a>, and <a class="el" href="shell-tokens_8c.html#a0274dc787ef174eee7039dd9ba20e654">word_token_print_()</a>.</p>
 
 </div>
 </div>
@@ -201,8 +170,6 @@ Data Fields</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-<p class="definition">Definition at line <a class="el" href="token_8h_source.html#l00062">62</a> of file <a class="el" href="token_8h_source.html">token.h</a>.</p>
 
 </div>
 </div>
@@ -227,9 +194,7 @@ Data Fields</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="token_8h_source.html#l00069">69</a> of file <a class="el" href="token_8h_source.html">token.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="shell-tokens_8c_source.html#l00064">bgctrl_token_take_()</a>, <a class="el" href="shell-tokens_8c_source.html#l00097">comment_token_take_()</a>, <a class="el" href="shell-tokens_8c_source.html#l00130">inputredir_token_take_()</a>, <a class="el" href="shell-tokens_8c_source.html#l00162">newline_token_take_()</a>, <a class="el" href="shell-tokens_8c_source.html#l00195">outputredir_token_take_()</a>, and <a class="el" href="shell-tokens_8c_source.html#l00228">word_token_take_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="shell-tokens_8c.html#a35ba75ba0e2f6f265c05aab9dc77f03f">bgctrl_token_take_()</a>, <a class="el" href="shell-tokens_8c.html#ae6fef5a0f5832ee7e2cd53d8cd35caf5">comment_token_take_()</a>, <a class="el" href="shell-tokens_8c.html#afaae02bf18fc51b886d6507fee177cf6">inputredir_token_take_()</a>, <a class="el" href="shell-tokens_8c.html#ae27a5333e0ed6f3e8153349c303870f7">newline_token_take_()</a>, <a class="el" href="shell-tokens_8c.html#aaa824102de0dd6f75b7706357e2b0920">outputredir_token_take_()</a>, and <a class="el" href="shell-tokens_8c.html#a7d8a3a8c408e582951e1bdae91167d8c">word_token_take_()</a>.</p>
 
 </div>
 </div>
@@ -255,8 +220,6 @@ Data Fields</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-<p class="definition">Definition at line <a class="el" href="token_8h_source.html#l00083">83</a> of file <a class="el" href="token_8h_source.html">token.h</a>.</p>
 
 </div>
 </div>

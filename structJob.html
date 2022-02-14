@@ -12,12 +12,8 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -42,37 +38,16 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li class="current"><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="examples.html"><span>Examples</span></a></li>
-      <li>
-        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
-          </span>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li><a href="classes.html"><span>Data&#160;Structure&#160;Index</span></a></li>
-      <li><a href="functions.html"><span>Data&#160;Fields</span></a></li>
-    </ul>
-  </div>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -122,8 +97,6 @@ Data Fields</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="structJob.html" title="Job object.">Job</a> object. </p>
-
-<p class="definition">Definition at line <a class="el" href="job_8h_source.html#l00020">20</a> of file <a class="el" href="job_8h_source.html">job.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
 <a id="a36c1be174036537075982364957f169e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a36c1be174036537075982364957f169e">&#9670;&nbsp;</a></span>job_bg</h2>
@@ -138,9 +111,7 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 <p>whether or not job is to run in background </p>
 
-<p class="definition">Definition at line <a class="el" href="job_8h_source.html#l00027">27</a> of file <a class="el" href="job_8h_source.html">job.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="job-table_8c_source.html#l00084">job_table_clean_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="job-table_8c.html#a66c44bcdd6f804d115968494c8b2b1e4">job_table_clean_()</a>.</p>
 
 </div>
 </div>
@@ -157,9 +128,7 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 <p>command typed by user for this job </p>
 
-<p class="definition">Definition at line <a class="el" href="job_8h_source.html#l00021">21</a> of file <a class="el" href="job_8h_source.html">job.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="job-table_8c_source.html#l00084">job_table_clean_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="job-table_8c.html#a66c44bcdd6f804d115968494c8b2b1e4">job_table_clean_()</a>.</p>
 
 </div>
 </div>
@@ -176,9 +145,7 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 <p>next job in table </p>
 
-<p class="definition">Definition at line <a class="el" href="job_8h_source.html#l00028">28</a> of file <a class="el" href="job_8h_source.html">job.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="job-table_8c_source.html#l00065">job_table_add_job_()</a>, <a class="el" href="job-table_8c_source.html#l00084">job_table_clean_()</a>, <a class="el" href="job-table_8c_source.html#l00290">job_table_dtor()</a>, <a class="el" href="job-table_8c_source.html#l00161">job_table_find_job_()</a>, <a class="el" href="job-table_8c_source.html#l00179">job_table_killall_()</a>, <a class="el" href="job-table_8c_source.html#l00194">job_table_list_jobs_()</a>, and <a class="el" href="job-table_8c_source.html#l00218">job_table_update_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="job-table_8c.html#a2a61959e8c13721807af596dc4560b9c">job_table_add_job_()</a>, <a class="el" href="job-table_8c.html#a66c44bcdd6f804d115968494c8b2b1e4">job_table_clean_()</a>, <a class="el" href="job-table_8c.html#a331ed0c3284851eecf36786439e227ec">job_table_dtor()</a>, <a class="el" href="job-table_8c.html#ab0ce98e45b01372350cbcacdc316da07">job_table_find_job_()</a>, <a class="el" href="job-table_8c.html#ae72b01b25b2580aefb99c52fb7d894d8">job_table_killall_()</a>, <a class="el" href="job-table_8c.html#ae06e64baa09cfc819c701670d52cae30">job_table_list_jobs_()</a>, and <a class="el" href="job-table_8c.html#a8df0fe0f169f40ddd3fffdd1a9b0cd01">job_table_update_()</a>.</p>
 
 </div>
 </div>
@@ -195,9 +162,7 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 <p>PGID </p>
 
-<p class="definition">Definition at line <a class="el" href="job_8h_source.html#l00023">23</a> of file <a class="el" href="job_8h_source.html">job.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="job-control_8c_source.html#l00138">job_control_foreground_job()</a>, <a class="el" href="job-control_8c_source.html#l00165">job_control_launch_job()</a>, <a class="el" href="job-table_8c_source.html#l00161">job_table_find_job_()</a>, and <a class="el" href="job-table_8c_source.html#l00194">job_table_list_jobs_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="job-control_8c.html#aad42031af147f314fc5e34225e5809e1">job_control_foreground_job()</a>, <a class="el" href="job-control_8c.html#a38f9ae8374c2f7dad8e6cfe2f8eb3720">job_control_launch_job()</a>, <a class="el" href="job-table_8c.html#ab0ce98e45b01372350cbcacdc316da07">job_table_find_job_()</a>, and <a class="el" href="job-table_8c.html#ae06e64baa09cfc819c701670d52cae30">job_table_list_jobs_()</a>.</p>
 
 </div>
 </div>
@@ -214,9 +179,7 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 <p>process object </p>
 
-<p class="definition">Definition at line <a class="el" href="job_8h_source.html#l00022">22</a> of file <a class="el" href="job_8h_source.html">job.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="job-control_8c_source.html#l00125">job_control_background_job()</a>, <a class="el" href="job-control_8c_source.html#l00165">job_control_launch_job()</a>, <a class="el" href="job-control_8c_source.html#l00029">job_control_wait_for_job()</a>, <a class="el" href="job-table_8c_source.html#l00084">job_table_clean_()</a>, <a class="el" href="job-table_8c_source.html#l00179">job_table_killall_()</a>, <a class="el" href="job-table_8c_source.html#l00194">job_table_list_jobs_()</a>, and <a class="el" href="job-table_8c_source.html#l00218">job_table_update_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="job-control_8c.html#a4c3bbb20f4b983732acdcf62e2a143f2">job_control_background_job()</a>, <a class="el" href="job-control_8c.html#a38f9ae8374c2f7dad8e6cfe2f8eb3720">job_control_launch_job()</a>, <a class="el" href="job-control_8c.html#aa938098eb32e74162ca87c629d3e86b9">job_control_wait_for_job()</a>, <a class="el" href="job-table_8c.html#a66c44bcdd6f804d115968494c8b2b1e4">job_table_clean_()</a>, <a class="el" href="job-table_8c.html#ae72b01b25b2580aefb99c52fb7d894d8">job_table_killall_()</a>, <a class="el" href="job-table_8c.html#ae06e64baa09cfc819c701670d52cae30">job_table_list_jobs_()</a>, and <a class="el" href="job-table_8c.html#a8df0fe0f169f40ddd3fffdd1a9b0cd01">job_table_update_()</a>.</p>
 
 </div>
 </div>
@@ -233,9 +196,7 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 <p>position within job table </p>
 
-<p class="definition">Definition at line <a class="el" href="job_8h_source.html#l00026">26</a> of file <a class="el" href="job_8h_source.html">job.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="job-control_8c_source.html#l00125">job_control_background_job()</a>, <a class="el" href="job-table_8c_source.html#l00065">job_table_add_job_()</a>, <a class="el" href="job-table_8c_source.html#l00084">job_table_clean_()</a>, and <a class="el" href="job-table_8c_source.html#l00194">job_table_list_jobs_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="job-control_8c.html#a4c3bbb20f4b983732acdcf62e2a143f2">job_control_background_job()</a>, <a class="el" href="job-table_8c.html#a2a61959e8c13721807af596dc4560b9c">job_table_add_job_()</a>, <a class="el" href="job-table_8c.html#a66c44bcdd6f804d115968494c8b2b1e4">job_table_clean_()</a>, and <a class="el" href="job-table_8c.html#ae06e64baa09cfc819c701670d52cae30">job_table_list_jobs_()</a>.</p>
 
 </div>
 </div>
@@ -252,9 +213,7 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 <p>STDIN filename </p>
 
-<p class="definition">Definition at line <a class="el" href="job_8h_source.html#l00024">24</a> of file <a class="el" href="job_8h_source.html">job.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="job-control_8c_source.html#l00165">job_control_launch_job()</a>, and <a class="el" href="job-table_8c_source.html#l00194">job_table_list_jobs_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="job-control_8c.html#a38f9ae8374c2f7dad8e6cfe2f8eb3720">job_control_launch_job()</a>, and <a class="el" href="job-table_8c.html#ae06e64baa09cfc819c701670d52cae30">job_table_list_jobs_()</a>.</p>
 
 </div>
 </div>
@@ -271,9 +230,7 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 <p>STDOUT filename </p>
 
-<p class="definition">Definition at line <a class="el" href="job_8h_source.html#l00025">25</a> of file <a class="el" href="job_8h_source.html">job.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="job-control_8c_source.html#l00165">job_control_launch_job()</a>, and <a class="el" href="job-table_8c_source.html#l00194">job_table_list_jobs_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="job-control_8c.html#a38f9ae8374c2f7dad8e6cfe2f8eb3720">job_control_launch_job()</a>, and <a class="el" href="job-table_8c.html#ae06e64baa09cfc819c701670d52cae30">job_table_list_jobs_()</a>.</p>
 
 </div>
 </div>

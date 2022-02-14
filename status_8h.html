@@ -12,12 +12,8 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -42,36 +38,16 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="examples.html"><span>Examples</span></a></li>
-      <li>
-        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
-          </span>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
-    </ul>
-  </div>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -114,8 +90,6 @@ Functions</h2></td></tr>
 <div class="textblock"><p>status builtin command. </p>
 <dl class="section author"><dt>Author</dt><dd>Mohamed Al-Hussein </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>03 Feb 2022 </dd></dl>
-
-<p class="definition">Definition in file <a class="el" href="status_8h_source.html">status.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a685506d2c432425b89581f85cf876f22"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a685506d2c432425b89581f85cf876f22">&#9670;&nbsp;</a></span>status()</h2>
@@ -135,26 +109,13 @@ Functions</h2></td></tr>
 
 <p>Displays last exit status value to user. </p>
 
-<p class="definition">Definition at line <a class="el" href="status_8c_source.html#l00043">43</a> of file <a class="el" href="status_8c_source.html">status.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordflow">if</span> (!<a class="code" href="globals_8h.html#a71c10c0a73d21042d5e8b7d0aa38c56d">smallsh_interactive_mode</a>) {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                fprintf(stdout, <span class="stringliteral">&quot;\nexit value %d\n&quot;</span>, <a class="code" href="error_8h.html#ae5640982a70be020c30cb8565b96a1d0">smallsh_errno</a>);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                fprintf(stdout, <span class="stringliteral">&quot;exit value %d\n&quot;</span>, <a class="code" href="error_8h.html#ae5640982a70be020c30cb8565b96a1d0">smallsh_errno</a>);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        }</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        fflush(stdout);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="error_8h_source.html#l00010">smallsh_errno</a>, and <a class="el" href="globals_8h_source.html#l00017">smallsh_interactive_mode</a>.</p>
+<p class="reference">References <a class="el" href="error_8h.html#ae5640982a70be020c30cb8565b96a1d0">smallsh_errno</a>, and <a class="el" href="globals_8h.html#a71c10c0a73d21042d5e8b7d0aa38c56d">smallsh_interactive_mode</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="cd_8c_source.html#l00045">cd()</a>, <a class="el" href="events_8c_source.html#l00042">events_init()</a>, <a class="el" href="events_8c_source.html#l00090">events_notify()</a>, <a class="el" href="exit_8c_source.html#l00045">exit_()</a>, <a class="el" href="handler_8c_source.html#l00151">handler_handle_sigchld()</a>, <a class="el" href="handler_8c_source.html#l00052">handler_switch_disable_fg_only_mode()</a>, <a class="el" href="handler_8c_source.html#l00169">handler_switch_enable_fg_only_mode()</a>, <a class="el" href="installer_8c_source.html#l00091">installer_install_job_control_signals()</a>, <a class="el" href="installer_8c_source.html#l00128">installer_install_sigchld_handler()</a>, <a class="el" href="job-control_8c_source.html#l00138">job_control_foreground_job()</a>, <a class="el" href="job-control_8c_source.html#l00165">job_control_launch_job()</a>, <a class="el" href="job-control_8c_source.html#l00029">job_control_wait_for_job()</a>, <a class="el" href="job-table_8c_source.html#l00218">job_table_update_()</a>, <a class="el" href="process_8c_source.html#l00225">process_ctor()</a>, <a class="el" href="process_8c_source.html#l00061">process_exec()</a>, <a class="el" href="process_8c_source.html#l00280">process_launch()</a>, <a class="el" href="process_8c_source.html#l00098">process_set_io_streams()</a>, <a class="el" href="receiver_8c_source.html#l00099">receiver_add()</a>, <a class="el" href="sender_8c_source.html#l00088">sender_add()</a>, <a class="el" href="sender_8c_source.html#l00119">sender_notify_sigchld()</a>, and <a class="el" href="smallsh_8c_source.html#l00061">smallsh_eval()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="cd_8c.html#a06f1df385b07f03d3cb4c4587ff892f0">cd()</a>, <a class="el" href="events_8c.html#a81ce7d6909034de9c012d78ae23c3f42">events_init()</a>, <a class="el" href="events_8c.html#a6b61e1b76a1b5f640817937bde6c2f53">events_notify()</a>, <a class="el" href="exit_8c.html#a06b48ef7aaf752e58a067f127259920c">exit_()</a>, <a class="el" href="handler_8c.html#a1afb82a207441052c002d287c4fc6a26">handler_handle_sigchld()</a>, <a class="el" href="handler_8c.html#a625d40d8abfd7a0ef02d913a43f71266">handler_switch_disable_fg_only_mode()</a>, <a class="el" href="handler_8c.html#a26dee8fd59b81d362f9bf4909572986a">handler_switch_enable_fg_only_mode()</a>, <a class="el" href="installer_8c.html#a7c1ed2760a22437c5de3c2b9b90478eb">installer_install_job_control_signals()</a>, <a class="el" href="installer_8c.html#a750bd792d342928d440d74517e7feb3d">installer_install_sigchld_handler()</a>, <a class="el" href="job-control_8c.html#aad42031af147f314fc5e34225e5809e1">job_control_foreground_job()</a>, <a class="el" href="job-control_8c.html#a38f9ae8374c2f7dad8e6cfe2f8eb3720">job_control_launch_job()</a>, <a class="el" href="job-control_8c.html#aa938098eb32e74162ca87c629d3e86b9">job_control_wait_for_job()</a>, <a class="el" href="job-table_8c.html#a8df0fe0f169f40ddd3fffdd1a9b0cd01">job_table_update_()</a>, <a class="el" href="process_8c.html#a5164bcc4363323c7db731ec59ed3582a">process_ctor()</a>, <a class="el" href="process_8c.html#aa030c5d58faea19c8137bc89cf7ef5f7">process_exec()</a>, <a class="el" href="process_8c.html#a628ed3c091c9c88d3ea3362ba97a47f7">process_launch()</a>, <a class="el" href="process_8c.html#a7d13512caf8af82bb89ef37d3b59c52e">process_set_io_streams()</a>, <a class="el" href="receiver_8c.html#ad32cfffb857b00b9674f9ccf5ac643df">receiver_add()</a>, <a class="el" href="sender_8c.html#aab863276e1e12ef4b211877c91e11acb">sender_add()</a>, <a class="el" href="sender_8c.html#a480b90bd37ac42bd758e2c7782183618">sender_notify_sigchld()</a>, and <a class="el" href="smallsh_8c.html#aab7ee4d34e98147392afb5d3b4a88276">smallsh_eval()</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
-<div class="ttc" id="aerror_8h_html_ae5640982a70be020c30cb8565b96a1d0"><div class="ttname"><a href="error_8h.html#ae5640982a70be020c30cb8565b96a1d0">smallsh_errno</a></div><div class="ttdeci">volatile int smallsh_errno</div><div class="ttdef"><b>Definition:</b> <a href="error_8h_source.html#l00010">error.h:10</a></div></div>
-<div class="ttc" id="aglobals_8h_html_a71c10c0a73d21042d5e8b7d0aa38c56d"><div class="ttname"><a href="globals_8h.html#a71c10c0a73d21042d5e8b7d0aa38c56d">smallsh_interactive_mode</a></div><div class="ttdeci">int smallsh_interactive_mode</div><div class="ttdef"><b>Definition:</b> <a href="globals_8h_source.html#l00017">globals.h:17</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

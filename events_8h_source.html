@@ -12,12 +12,8 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -42,36 +38,16 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="examples.html"><span>Examples</span></a></li>
-      <li>
-        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
-          </span>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
-    </ul>
-  </div>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -115,18 +91,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif //SMALLSH_EVENTS_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="astructChannel_html"><div class="ttname"><a href="structChannel.html">Channel</a></div><div class="ttdoc">A Channel object consists of a read end and a write end, as well as a callback handler function that ...</div><div class="ttdef"><b>Definition:</b> <a href="channel_8h_source.html#l00015">channel.h:15</a></div></div>
-<div class="ttc" id="aevents_8h_html_a4b4f17f8655cd7c89af3d73da19d3958"><div class="ttname"><a href="events_8h.html#a4b4f17f8655cd7c89af3d73da19d3958">snd</a></div><div class="ttdeci">Sender snd</div><div class="ttdef"><b>Definition:</b> <a href="events_8h_source.html#l00016">events.h:16</a></div></div>
+<div class="ttc" id="astructChannel_html"><div class="ttname"><a href="structChannel.html">Channel</a></div><div class="ttdoc">A Channel object consists of a read end and a write end, as well as a callback handler function that ...</div><div class="ttdef"><b>Definition:</b> channel.h:15</div></div>
+<div class="ttc" id="aevents_8h_html_a4b4f17f8655cd7c89af3d73da19d3958"><div class="ttname"><a href="events_8h.html#a4b4f17f8655cd7c89af3d73da19d3958">snd</a></div><div class="ttdeci">Sender snd</div><div class="ttdef"><b>Definition:</b> events.h:16</div></div>
 <div class="ttc" id="asender_8h_html"><div class="ttname"><a href="sender_8h.html">sender.h</a></div><div class="ttdoc">Responsible for sending messages to subscribers via a dedicated Channel.</div></div>
 <div class="ttc" id="achannel_8h_html"><div class="ttname"><a href="channel_8h.html">channel.h</a></div><div class="ttdoc">Provides means for sending and receiving signal-related information via a message channel.</div></div>
-<div class="ttc" id="aevents_8h_html_a38eee5bd80ad6127bd4121865947c0c9"><div class="ttname"><a href="events_8h.html#a38eee5bd80ad6127bd4121865947c0c9">ch_sigchld</a></div><div class="ttdeci">Channel ch_sigchld</div><div class="ttdef"><b>Definition:</b> <a href="events_8h_source.html#l00014">events.h:14</a></div></div>
-<div class="ttc" id="aevents_8h_html_a81ce7d6909034de9c012d78ae23c3f42"><div class="ttname"><a href="events_8h.html#a81ce7d6909034de9c012d78ae23c3f42">events_init</a></div><div class="ttdeci">int events_init(void)</div><div class="ttdoc">Initializes global event-related data structures.</div><div class="ttdef"><b>Definition:</b> <a href="events_8c_source.html#l00042">events.c:42</a></div></div>
-<div class="ttc" id="aevents_8h_html_a64bde057407debd7862302dda094b6ed"><div class="ttname"><a href="events_8h.html#a64bde057407debd7862302dda094b6ed">events_cleanup</a></div><div class="ttdeci">void events_cleanup(void)</div><div class="ttdoc">Cleans up the global event-related data structures.</div><div class="ttdef"><b>Definition:</b> <a href="events_8c_source.html#l00082">events.c:82</a></div></div>
-<div class="ttc" id="astructReceiver_html"><div class="ttname"><a href="structReceiver.html">Receiver</a></div><div class="ttdoc">A Receiver object consists of an array of Channels that it is responsible for monitor for and respond...</div><div class="ttdef"><b>Definition:</b> <a href="receiver_8h_source.html#l00019">receiver.h:19</a></div></div>
-<div class="ttc" id="astructSender_html"><div class="ttname"><a href="structSender.html">Sender</a></div><div class="ttdoc">A Sender object consists of an array of Channels that it is responsible for sending messages to on re...</div><div class="ttdef"><b>Definition:</b> <a href="sender_8h_source.html#l00016">sender.h:16</a></div></div>
+<div class="ttc" id="aevents_8h_html_a38eee5bd80ad6127bd4121865947c0c9"><div class="ttname"><a href="events_8h.html#a38eee5bd80ad6127bd4121865947c0c9">ch_sigchld</a></div><div class="ttdeci">Channel ch_sigchld</div><div class="ttdef"><b>Definition:</b> events.h:14</div></div>
+<div class="ttc" id="aevents_8h_html_a81ce7d6909034de9c012d78ae23c3f42"><div class="ttname"><a href="events_8h.html#a81ce7d6909034de9c012d78ae23c3f42">events_init</a></div><div class="ttdeci">int events_init(void)</div><div class="ttdoc">Initializes global event-related data structures.</div><div class="ttdef"><b>Definition:</b> events.c:42</div></div>
+<div class="ttc" id="aevents_8h_html_a64bde057407debd7862302dda094b6ed"><div class="ttname"><a href="events_8h.html#a64bde057407debd7862302dda094b6ed">events_cleanup</a></div><div class="ttdeci">void events_cleanup(void)</div><div class="ttdoc">Cleans up the global event-related data structures.</div><div class="ttdef"><b>Definition:</b> events.c:82</div></div>
+<div class="ttc" id="astructReceiver_html"><div class="ttname"><a href="structReceiver.html">Receiver</a></div><div class="ttdoc">A Receiver object consists of an array of Channels that it is responsible for monitor for and respond...</div><div class="ttdef"><b>Definition:</b> receiver.h:19</div></div>
+<div class="ttc" id="astructSender_html"><div class="ttname"><a href="structSender.html">Sender</a></div><div class="ttdoc">A Sender object consists of an array of Channels that it is responsible for sending messages to on re...</div><div class="ttdef"><b>Definition:</b> sender.h:16</div></div>
 <div class="ttc" id="areceiver_8h_html"><div class="ttname"><a href="receiver_8h.html">receiver.h</a></div></div>
-<div class="ttc" id="aevents_8h_html_ae7d874f76a5f3e533ae39b150b48b4f4"><div class="ttname"><a href="events_8h.html#ae7d874f76a5f3e533ae39b150b48b4f4">rcv</a></div><div class="ttdeci">Receiver rcv</div><div class="ttdef"><b>Definition:</b> <a href="events_8h_source.html#l00015">events.h:15</a></div></div>
-<div class="ttc" id="aevents_8h_html_a6b61e1b76a1b5f640817937bde6c2f53"><div class="ttname"><a href="events_8h.html#a6b61e1b76a1b5f640817937bde6c2f53">events_notify</a></div><div class="ttdeci">int events_notify(void)</div><div class="ttdoc">Consumes new events, notifies user of any them, and removes completed jobs from global job table.</div><div class="ttdef"><b>Definition:</b> <a href="events_8c_source.html#l00090">events.c:90</a></div></div>
+<div class="ttc" id="aevents_8h_html_ae7d874f76a5f3e533ae39b150b48b4f4"><div class="ttname"><a href="events_8h.html#ae7d874f76a5f3e533ae39b150b48b4f4">rcv</a></div><div class="ttdeci">Receiver rcv</div><div class="ttdef"><b>Definition:</b> events.h:15</div></div>
+<div class="ttc" id="aevents_8h_html_a6b61e1b76a1b5f640817937bde6c2f53"><div class="ttname"><a href="events_8h.html#a6b61e1b76a1b5f640817937bde6c2f53">events_notify</a></div><div class="ttdeci">int events_notify(void)</div><div class="ttdoc">Consumes new events, notifies user of any them, and removes completed jobs from global job table.</div><div class="ttdef"><b>Definition:</b> events.c:90</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

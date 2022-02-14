@@ -12,12 +12,8 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -42,36 +38,16 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="examples.html"><span>Examples</span></a></li>
-      <li>
-        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
-          </span>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
-    </ul>
-  </div>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -107,9 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="string-iterator_8h_source.html">utils/string-iterator.h</a>&quot;</code><br />
-</div>
-<p><a href="string-iterator_8c_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structStringIteratorPrivate.html">StringIteratorPrivate</a></td></tr>
@@ -151,8 +125,6 @@ Functions</h2></td></tr>
 <div class="textblock"><p>For iterating over a single-line string. </p>
 <dl class="section author"><dt>Author</dt><dd>Mohamed Al-Hussein </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>25 Jan 2022 This is a utility module for aiding in parsing strings into tokens. The functions defined here allow for iterating over a string character by character, until either a newline is reached or null terminator. </dd></dl>
-
-<p class="definition">Definition in file <a class="el" href="string-iterator_8c_source.html">string-iterator.c</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a369266c24eacffb87046522897a570d5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a369266c24eacffb87046522897a570d5">&#9670;&nbsp;</a></span>_GNU_SOURCE</h2>
@@ -165,8 +137,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="string-iterator_8c_source.html#l00011">11</a> of file <a class="el" href="string-iterator_8c_source.html">string-iterator.c</a>.</p>
 
 </div>
 </div>
@@ -211,26 +181,9 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>A copy is made of <code>string</code>, so the caller can free/overwrite the string safely after calling this constructor. Note this also means the caller must destroy the data via calling the <code>string_iterator_dtor</code> function. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="string-iterator_8c_source.html#l00210">210</a> of file <a class="el" href="string-iterator_8c_source.html">string-iterator.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;{</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        <span class="keyword">static</span> <span class="keyword">struct </span><a class="code" href="structStringIteratorVtbl.html">StringIteratorVtbl</a> const vtbl = {</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;                .<a class="code" href="structStringIteratorVtbl.html#a2860328cc15a55a5176b0ed15fcd2f01">has_next</a> = &amp;<a class="code" href="string-iterator_8c.html#afb22c4c74ed4f2924a20480150cc08e4">string_iterator_has_next_</a>,</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;                .munch_char = &amp;<a class="code" href="string-iterator_8c.html#a71c29d126f6139c3cae169e533592712">string_iterator_munch_char_</a>,</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;                .munch_word = &amp;<a class="code" href="string-iterator_8c.html#a1c9e3c84b66608a727ed079586a9a36b">string_iterator_munch_word_</a>,</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;                .next = &amp;<a class="code" href="string-iterator_8c.html#a3764dd0f15797b8075c9b4065fc6485d">string_iterator_next_</a>,</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;                .peek = &amp;<a class="code" href="string-iterator_8c.html#a08216d69610c426f337f4bd77ddee531">string_iterator_peek_</a>,</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;                .slice = &amp;<a class="code" href="string-iterator_8c.html#ad2fa880c3bd8bad9c075a495c6f78220">string_iterator_slice_</a>,</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        };</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        <span class="keyword">self</span>-&gt;vptr = &amp;vtbl;</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        <span class="keyword">self</span>-&gt;private = malloc(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> <a class="code" href="structStringIteratorPrivate.html">StringIteratorPrivate</a>));</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        <span class="keyword">self</span>-&gt;private-&gt;si_str = strdup(str);</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        <span class="keyword">self</span>-&gt;private-&gt;si_cur = &amp;<span class="keyword">self</span>-&gt;private-&gt;si_str[0];</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="string-iterator_8h_source.html#l00072">StringIteratorVtbl::has_next</a>, <a class="el" href="string-iterator_8c_source.html#l00066">string_iterator_has_next_()</a>, <a class="el" href="string-iterator_8c_source.html#l00077">string_iterator_munch_char_()</a>, <a class="el" href="string-iterator_8c_source.html#l00092">string_iterator_munch_word_()</a>, <a class="el" href="string-iterator_8c_source.html#l00123">string_iterator_next_()</a>, <a class="el" href="string-iterator_8c_source.html#l00151">string_iterator_peek_()</a>, and <a class="el" href="string-iterator_8c_source.html#l00129">string_iterator_slice_()</a>.</p>
+<p class="reference">References <a class="el" href="structStringIteratorVtbl.html#a2860328cc15a55a5176b0ed15fcd2f01">StringIteratorVtbl::has_next</a>, <a class="el" href="string-iterator_8c.html#afb22c4c74ed4f2924a20480150cc08e4">string_iterator_has_next_()</a>, <a class="el" href="string-iterator_8c.html#a71c29d126f6139c3cae169e533592712">string_iterator_munch_char_()</a>, <a class="el" href="string-iterator_8c.html#a1c9e3c84b66608a727ed079586a9a36b">string_iterator_munch_word_()</a>, <a class="el" href="string-iterator_8c.html#a3764dd0f15797b8075c9b4065fc6485d">string_iterator_next_()</a>, <a class="el" href="string-iterator_8c.html#a08216d69610c426f337f4bd77ddee531">string_iterator_peek_()</a>, and <a class="el" href="string-iterator_8c.html#ad2fa880c3bd8bad9c075a495c6f78220">string_iterator_slice_()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="lexer_8c_source.html#l00012">lexer_generate_tokens()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="lexer_8c.html#a9c5fcecec1d5cdecf516cb569f643c0e">lexer_generate_tokens()</a>.</p>
 
 </div>
 </div>
@@ -259,19 +212,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>The caller is responsible for freeing <code>self</code> afterwards if it was originally allocated on the heap. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="string-iterator_8c_source.html#l00227">227</a> of file <a class="el" href="string-iterator_8c_source.html">string-iterator.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;{</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        <span class="keyword">self</span>-&gt;vptr = NULL;</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; </div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        free((<span class="keywordtype">char</span> *) self-&gt;<a class="code" href="structStringIterator.html#ab1623548c248d263fe0d4c3c32c90914">private</a>-&gt;<a class="code" href="structStringIteratorPrivate.html#a395301820e3ee0b43db2b9fbe0d431e5">si_str</a>);</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        <span class="keyword">self</span>-&gt;private-&gt;si_str = NULL;</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        <span class="keyword">self</span>-&gt;private-&gt;si_cur = NULL;</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        free(self-&gt;<a class="code" href="structStringIterator.html#ab1623548c248d263fe0d4c3c32c90914">private</a>);</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        <span class="keyword">self</span>-&gt;private = NULL;</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="lexer_8c_source.html#l00012">lexer_generate_tokens()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="lexer_8c.html#a9c5fcecec1d5cdecf516cb569f643c0e">lexer_generate_tokens()</a>.</p>
 
 </div>
 </div>
@@ -308,13 +249,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if iterator is positioned at parseable character, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="string-iterator_8c_source.html#l00066">66</a> of file <a class="el" href="string-iterator_8c_source.html">string-iterator.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;{</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordtype">char</span> itr = *<span class="keyword">self</span>-&gt;private-&gt;si_cur;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordflow">return</span> itr != <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="string-iterator_8c_source.html#l00210">string_iterator_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="string-iterator_8c.html#a151b907665589d8f68fd6ecbec3c6af1">string_iterator_ctor()</a>.</p>
 
 </div>
 </div>
@@ -351,17 +286,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>string containing copied character </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="string-iterator_8c_source.html#l00077">77</a> of file <a class="el" href="string-iterator_8c_source.html">string-iterator.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="comment">// grab character</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span> *start = <span class="keyword">self</span>-&gt;vptr-&gt;next(<span class="keyword">self</span>);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="comment">// copy and return character</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordtype">char</span> *<a class="code" href="structStringIteratorVtbl.html#afbc2c7d44de4c23e294e03edbf8bc97e">slice</a> = <span class="keyword">self</span>-&gt;vptr-&gt;slice(<span class="keyword">self</span>, start);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="structStringIteratorVtbl.html#afbc2c7d44de4c23e294e03edbf8bc97e">slice</a>;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="string-iterator_8c_source.html#l00210">string_iterator_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="string-iterator_8c.html#a151b907665589d8f68fd6ecbec3c6af1">string_iterator_ctor()</a>.</p>
 
 </div>
 </div>
@@ -398,33 +323,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>string containing copied word </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="string-iterator_8c_source.html#l00092">92</a> of file <a class="el" href="string-iterator_8c_source.html">string-iterator.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;{</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="comment">// grab word</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span> *start = <span class="keyword">self</span>-&gt;vptr-&gt;next(<span class="keyword">self</span>);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordtype">char</span> *<a class="code" href="structStringIteratorVtbl.html#afbc2c7d44de4c23e294e03edbf8bc97e">slice</a>;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordtype">char</span> c;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordflow">while</span> (self-&gt;vptr-&gt;has_next(<span class="keyword">self</span>)) {</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                c = <span class="keyword">self</span>-&gt;vptr-&gt;peek(<span class="keyword">self</span>, 0);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                <span class="keywordflow">switch</span> (c) {</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                        <span class="comment">// stop at terminal character</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                        <span class="keywordflow">case</span> <span class="charliteral">&#39; &#39;</span>:</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                        <span class="keywordflow">case</span> <span class="charliteral">&#39;\t&#39;</span>:</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                        <span class="keywordflow">case</span> <span class="charliteral">&#39;\n&#39;</span>:</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                                <span class="keywordflow">goto</span> seek_fin;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                        <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                                <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                }</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                <span class="keyword">self</span>-&gt;vptr-&gt;next(<span class="keyword">self</span>);</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        }</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;seek_fin:</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <span class="comment">// copy and return word</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <a class="code" href="structStringIteratorVtbl.html#afbc2c7d44de4c23e294e03edbf8bc97e">slice</a> = <span class="keyword">self</span>-&gt;vptr-&gt;slice(<span class="keyword">self</span>, start);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="structStringIteratorVtbl.html#afbc2c7d44de4c23e294e03edbf8bc97e">slice</a>;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="string-iterator_8c_source.html#l00210">string_iterator_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="string-iterator_8c.html#a151b907665589d8f68fd6ecbec3c6af1">string_iterator_ctor()</a>.</p>
 
 </div>
 </div>
@@ -461,13 +360,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the character pointed to by the iterator </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="string-iterator_8c_source.html#l00123">123</a> of file <a class="el" href="string-iterator_8c_source.html">string-iterator.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;{</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="structStringIteratorVtbl.html#a8e32b2ab9bd358530b3b5203bd370982">next</a> = <span class="keyword">self</span>-&gt;private-&gt;si_cur++;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="structStringIteratorVtbl.html#a8e32b2ab9bd358530b3b5203bd370982">next</a>;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="string-iterator_8c_source.html#l00210">string_iterator_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="string-iterator_8c.html#a151b907665589d8f68fd6ecbec3c6af1">string_iterator_ctor()</a>.</p>
 
 </div>
 </div>
@@ -515,37 +408,9 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the character pointed to by the iterator </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="string-iterator_8c_source.html#l00151">151</a> of file <a class="el" href="string-iterator_8c_source.html">string-iterator.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;{</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span> *orig, *cur;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        <span class="keywordtype">char</span> result;</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> pos;</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        <span class="comment">// store pointer to originating character</span></div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        orig = <span class="keyword">self</span>-&gt;private-&gt;si_cur;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <span class="comment">// seek to offset or end of stream, whichever comes first</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        pos = 0;</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <span class="keywordflow">do</span> {</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                cur = <span class="keyword">self</span>-&gt;vptr-&gt;next(<span class="keyword">self</span>);</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                pos++;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        } <span class="keywordflow">while</span> (pos &lt;= offset &amp;&amp; self-&gt;vptr-&gt;has_next(<span class="keyword">self</span>));</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        <span class="comment">// check if iterator exhausted before reaching offset</span></div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        <span class="keywordflow">if</span> (pos &lt;= offset)</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                result = <a class="code" href="string-iterator_8h.html#a21f41f42b53d059cdd11fcb240fd3962">STRING_ITERATOR_EOL</a>;</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                result = *cur;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        <span class="comment">// reset pointer to originating character</span></div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="keyword">self</span>-&gt;private-&gt;si_cur = orig;</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="string-iterator_8h_source.html#l00016">STRING_ITERATOR_EOL</a>.</p>
+<p class="reference">References <a class="el" href="string-iterator_8h.html#a21f41f42b53d059cdd11fcb240fd3962">STRING_ITERATOR_EOL</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="string-iterator_8c_source.html#l00210">string_iterator_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="string-iterator_8c.html#a151b907665589d8f68fd6ecbec3c6af1">string_iterator_ctor()</a>.</p>
 
 </div>
 </div>
@@ -583,41 +448,11 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="string-iterator_8c_source.html#l00129">129</a> of file <a class="el" href="string-iterator_8c_source.html">string-iterator.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;{</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span> *l_bound = <span class="keyword">self</span>-&gt;private-&gt;si_str;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span> *r_bound = <span class="keyword">self</span>-&gt;private-&gt;si_cur;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <span class="keywordflow">if</span> (from &lt; l_bound || from &gt;= r_bound) {</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                <span class="comment">/* error out of bounds */</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        }</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        ptrdiff_t len = r_bound - from;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        <span class="keywordtype">char</span> *<a class="code" href="structStringIteratorVtbl.html#afbc2c7d44de4c23e294e03edbf8bc97e">slice</a> = strndup(from, len);</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="structStringIteratorVtbl.html#afbc2c7d44de4c23e294e03edbf8bc97e">slice</a>;</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="string-iterator_8c_source.html#l00210">string_iterator_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="string-iterator_8c.html#a151b907665589d8f68fd6ecbec3c6af1">string_iterator_ctor()</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
-<div class="ttc" id="astructStringIteratorVtbl_html_a2860328cc15a55a5176b0ed15fcd2f01"><div class="ttname"><a href="structStringIteratorVtbl.html#a2860328cc15a55a5176b0ed15fcd2f01">StringIteratorVtbl::has_next</a></div><div class="ttdeci">bool(* has_next)(StringIterator const *const self)</div><div class="ttdef"><b>Definition:</b> <a href="string-iterator_8h_source.html#l00072">string-iterator.h:72</a></div></div>
-<div class="ttc" id="astring-iterator_8h_html_a21f41f42b53d059cdd11fcb240fd3962"><div class="ttname"><a href="string-iterator_8h.html#a21f41f42b53d059cdd11fcb240fd3962">STRING_ITERATOR_EOL</a></div><div class="ttdeci">#define STRING_ITERATOR_EOL</div><div class="ttdef"><b>Definition:</b> <a href="string-iterator_8h_source.html#l00016">string-iterator.h:16</a></div></div>
-<div class="ttc" id="astring-iterator_8c_html_a08216d69610c426f337f4bd77ddee531"><div class="ttname"><a href="string-iterator_8c.html#a08216d69610c426f337f4bd77ddee531">string_iterator_peek_</a></div><div class="ttdeci">static char string_iterator_peek_(StringIterator const *const self, unsigned int offset)</div><div class="ttdoc">Implementation of StringIterator::peek().</div><div class="ttdef"><b>Definition:</b> <a href="string-iterator_8c_source.html#l00151">string-iterator.c:151</a></div></div>
-<div class="ttc" id="astructStringIteratorVtbl_html_a8e32b2ab9bd358530b3b5203bd370982"><div class="ttname"><a href="structStringIteratorVtbl.html#a8e32b2ab9bd358530b3b5203bd370982">StringIteratorVtbl::next</a></div><div class="ttdeci">const char *(* next)(StringIterator const *const self)</div><div class="ttdoc">Returns character that the iterator is pointing at, then advances to the next character.</div><div class="ttdef"><b>Definition:</b> <a href="string-iterator_8h_source.html#l00112">string-iterator.h:112</a></div></div>
-<div class="ttc" id="astring-iterator_8c_html_a71c29d126f6139c3cae169e533592712"><div class="ttname"><a href="string-iterator_8c.html#a71c29d126f6139c3cae169e533592712">string_iterator_munch_char_</a></div><div class="ttdeci">static char * string_iterator_munch_char_(StringIterator const *const self)</div><div class="ttdoc">Implementation of StringIterator::munchChar().</div><div class="ttdef"><b>Definition:</b> <a href="string-iterator_8c_source.html#l00077">string-iterator.c:77</a></div></div>
-<div class="ttc" id="astring-iterator_8c_html_afb22c4c74ed4f2924a20480150cc08e4"><div class="ttname"><a href="string-iterator_8c.html#afb22c4c74ed4f2924a20480150cc08e4">string_iterator_has_next_</a></div><div class="ttdeci">static bool string_iterator_has_next_(StringIterator const *const self)</div><div class="ttdoc">Implementation of StringIterator::has_next().</div><div class="ttdef"><b>Definition:</b> <a href="string-iterator_8c_source.html#l00066">string-iterator.c:66</a></div></div>
-<div class="ttc" id="astructStringIteratorVtbl_html_afbc2c7d44de4c23e294e03edbf8bc97e"><div class="ttname"><a href="structStringIteratorVtbl.html#afbc2c7d44de4c23e294e03edbf8bc97e">StringIteratorVtbl::slice</a></div><div class="ttdeci">char *(* slice)(StringIterator const *const self, const char *from)</div><div class="ttdoc">Returns a slice copied from the pointer starting at from and ending at the iterators current position...</div><div class="ttdef"><b>Definition:</b> <a href="string-iterator_8h_source.html#l00154">string-iterator.h:154</a></div></div>
-<div class="ttc" id="astructStringIterator_html_ab1623548c248d263fe0d4c3c32c90914"><div class="ttname"><a href="structStringIterator.html#ab1623548c248d263fe0d4c3c32c90914">StringIterator::private</a></div><div class="ttdeci">struct StringIteratorPrivate * private</div><div class="ttdef"><b>Definition:</b> <a href="string-iterator_8h_source.html#l00026">string-iterator.h:26</a></div></div>
-<div class="ttc" id="astructStringIteratorPrivate_html"><div class="ttname"><a href="structStringIteratorPrivate.html">StringIteratorPrivate</a></div><div class="ttdoc">Hides StringIterator members from client code.</div><div class="ttdef"><b>Definition:</b> <a href="string-iterator_8c_source.html#l00055">string-iterator.c:55</a></div></div>
-<div class="ttc" id="astring-iterator_8c_html_a1c9e3c84b66608a727ed079586a9a36b"><div class="ttname"><a href="string-iterator_8c.html#a1c9e3c84b66608a727ed079586a9a36b">string_iterator_munch_word_</a></div><div class="ttdeci">static char * string_iterator_munch_word_(StringIterator const *const self)</div><div class="ttdoc">Implementation of StringIterator::munchWord().</div><div class="ttdef"><b>Definition:</b> <a href="string-iterator_8c_source.html#l00092">string-iterator.c:92</a></div></div>
-<div class="ttc" id="astring-iterator_8c_html_ad2fa880c3bd8bad9c075a495c6f78220"><div class="ttname"><a href="string-iterator_8c.html#ad2fa880c3bd8bad9c075a495c6f78220">string_iterator_slice_</a></div><div class="ttdeci">static char * string_iterator_slice_(StringIterator const *const self, const char *from)</div><div class="ttdef"><b>Definition:</b> <a href="string-iterator_8c_source.html#l00129">string-iterator.c:129</a></div></div>
-<div class="ttc" id="astring-iterator_8c_html_a3764dd0f15797b8075c9b4065fc6485d"><div class="ttname"><a href="string-iterator_8c.html#a3764dd0f15797b8075c9b4065fc6485d">string_iterator_next_</a></div><div class="ttdeci">static const char * string_iterator_next_(StringIterator const *const self)</div><div class="ttdoc">Implementation of StringIterator::next().</div><div class="ttdef"><b>Definition:</b> <a href="string-iterator_8c_source.html#l00123">string-iterator.c:123</a></div></div>
-<div class="ttc" id="astructStringIteratorPrivate_html_a395301820e3ee0b43db2b9fbe0d431e5"><div class="ttname"><a href="structStringIteratorPrivate.html#a395301820e3ee0b43db2b9fbe0d431e5">StringIteratorPrivate::si_str</a></div><div class="ttdeci">const char * si_str</div><div class="ttdef"><b>Definition:</b> <a href="string-iterator_8c_source.html#l00056">string-iterator.c:56</a></div></div>
-<div class="ttc" id="astructStringIteratorVtbl_html"><div class="ttname"><a href="structStringIteratorVtbl.html">StringIteratorVtbl</a></div><div class="ttdoc">VTable for a StringIterator object.</div><div class="ttdef"><b>Definition:</b> <a href="string-iterator_8h_source.html#l00035">string-iterator.h:35</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

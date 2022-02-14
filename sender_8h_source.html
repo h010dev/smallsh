@@ -12,12 +12,8 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -42,36 +38,16 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="examples.html"><span>Examples</span></a></li>
-      <li>
-        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
-          </span>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
-    </ul>
-  </div>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -118,16 +94,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#endif //SMALLSH_SENDER_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="astructChannel_html"><div class="ttname"><a href="structChannel.html">Channel</a></div><div class="ttdoc">A Channel object consists of a read end and a write end, as well as a callback handler function that ...</div><div class="ttdef"><b>Definition:</b> <a href="channel_8h_source.html#l00015">channel.h:15</a></div></div>
-<div class="ttc" id="asender_8h_html_a0641c6a72fb9606c6e93200fb13098d1"><div class="ttname"><a href="sender_8h.html#a0641c6a72fb9606c6e93200fb13098d1">sender_ctor</a></div><div class="ttdeci">int sender_ctor(Sender *self, size_t max_ch)</div><div class="ttdoc">Initializes self with provided data.</div><div class="ttdef"><b>Definition:</b> <a href="sender_8c_source.html#l00048">sender.c:48</a></div></div>
+<div class="ttc" id="astructChannel_html"><div class="ttname"><a href="structChannel.html">Channel</a></div><div class="ttdoc">A Channel object consists of a read end and a write end, as well as a callback handler function that ...</div><div class="ttdef"><b>Definition:</b> channel.h:15</div></div>
+<div class="ttc" id="asender_8h_html_a0641c6a72fb9606c6e93200fb13098d1"><div class="ttname"><a href="sender_8h.html#a0641c6a72fb9606c6e93200fb13098d1">sender_ctor</a></div><div class="ttdeci">int sender_ctor(Sender *self, size_t max_ch)</div><div class="ttdoc">Initializes self with provided data.</div><div class="ttdef"><b>Definition:</b> sender.c:48</div></div>
 <div class="ttc" id="achannel_8h_html"><div class="ttname"><a href="channel_8h.html">channel.h</a></div><div class="ttdoc">Provides means for sending and receiving signal-related information via a message channel.</div></div>
-<div class="ttc" id="astructSender_html_ab060d64177bbbfd3aae6185c955b04a8"><div class="ttname"><a href="structSender.html#ab060d64177bbbfd3aae6185c955b04a8">Sender::_snd_n_ch</a></div><div class="ttdeci">size_t _snd_n_ch</div><div class="ttdef"><b>Definition:</b> <a href="sender_8h_source.html#l00017">sender.h:17</a></div></div>
-<div class="ttc" id="asender_8h_html_aab863276e1e12ef4b211877c91e11acb"><div class="ttname"><a href="sender_8h.html#aab863276e1e12ef4b211877c91e11acb">sender_add</a></div><div class="ttdeci">int sender_add(Sender *self, Channel *ch)</div><div class="ttdoc">Adds a new Channel to its channel list, and initializes its write end.</div><div class="ttdef"><b>Definition:</b> <a href="sender_8c_source.html#l00088">sender.c:88</a></div></div>
-<div class="ttc" id="astructSender_html_af77d61fad8e4c1c1b51894f3582c3c0f"><div class="ttname"><a href="structSender.html#af77d61fad8e4c1c1b51894f3582c3c0f">Sender::_ch</a></div><div class="ttdeci">Channel ** _ch</div><div class="ttdef"><b>Definition:</b> <a href="sender_8h_source.html#l00019">sender.h:19</a></div></div>
-<div class="ttc" id="asender_8h_html_a480b90bd37ac42bd758e2c7782183618"><div class="ttname"><a href="sender_8h.html#a480b90bd37ac42bd758e2c7782183618">sender_notify_sigchld</a></div><div class="ttdeci">int sender_notify_sigchld(struct Channel ch)</div><div class="ttdoc">Sends data received via a SIGCHLD signal to self.</div><div class="ttdef"><b>Definition:</b> <a href="sender_8c_source.html#l00119">sender.c:119</a></div></div>
-<div class="ttc" id="astructSender_html_a5ff9371d6791fa752e1030ad16345405"><div class="ttname"><a href="structSender.html#a5ff9371d6791fa752e1030ad16345405">Sender::_snd_max_ch</a></div><div class="ttdeci">size_t _snd_max_ch</div><div class="ttdef"><b>Definition:</b> <a href="sender_8h_source.html#l00018">sender.h:18</a></div></div>
-<div class="ttc" id="astructSender_html"><div class="ttname"><a href="structSender.html">Sender</a></div><div class="ttdoc">A Sender object consists of an array of Channels that it is responsible for sending messages to on re...</div><div class="ttdef"><b>Definition:</b> <a href="sender_8h_source.html#l00016">sender.h:16</a></div></div>
-<div class="ttc" id="asender_8h_html_a533a37ce0fc01b242ac7f143d4fb106a"><div class="ttname"><a href="sender_8h.html#a533a37ce0fc01b242ac7f143d4fb106a">sender_dtor</a></div><div class="ttdeci">void sender_dtor(Sender *self)</div><div class="ttdoc">Resets self's values.</div><div class="ttdef"><b>Definition:</b> <a href="sender_8c_source.html#l00067">sender.c:67</a></div></div>
+<div class="ttc" id="astructSender_html_ab060d64177bbbfd3aae6185c955b04a8"><div class="ttname"><a href="structSender.html#ab060d64177bbbfd3aae6185c955b04a8">Sender::_snd_n_ch</a></div><div class="ttdeci">size_t _snd_n_ch</div><div class="ttdef"><b>Definition:</b> sender.h:17</div></div>
+<div class="ttc" id="asender_8h_html_aab863276e1e12ef4b211877c91e11acb"><div class="ttname"><a href="sender_8h.html#aab863276e1e12ef4b211877c91e11acb">sender_add</a></div><div class="ttdeci">int sender_add(Sender *self, Channel *ch)</div><div class="ttdoc">Adds a new Channel to its channel list, and initializes its write end.</div><div class="ttdef"><b>Definition:</b> sender.c:88</div></div>
+<div class="ttc" id="astructSender_html_af77d61fad8e4c1c1b51894f3582c3c0f"><div class="ttname"><a href="structSender.html#af77d61fad8e4c1c1b51894f3582c3c0f">Sender::_ch</a></div><div class="ttdeci">Channel ** _ch</div><div class="ttdef"><b>Definition:</b> sender.h:19</div></div>
+<div class="ttc" id="asender_8h_html_a480b90bd37ac42bd758e2c7782183618"><div class="ttname"><a href="sender_8h.html#a480b90bd37ac42bd758e2c7782183618">sender_notify_sigchld</a></div><div class="ttdeci">int sender_notify_sigchld(struct Channel ch)</div><div class="ttdoc">Sends data received via a SIGCHLD signal to self.</div><div class="ttdef"><b>Definition:</b> sender.c:119</div></div>
+<div class="ttc" id="astructSender_html_a5ff9371d6791fa752e1030ad16345405"><div class="ttname"><a href="structSender.html#a5ff9371d6791fa752e1030ad16345405">Sender::_snd_max_ch</a></div><div class="ttdeci">size_t _snd_max_ch</div><div class="ttdef"><b>Definition:</b> sender.h:18</div></div>
+<div class="ttc" id="astructSender_html"><div class="ttname"><a href="structSender.html">Sender</a></div><div class="ttdoc">A Sender object consists of an array of Channels that it is responsible for sending messages to on re...</div><div class="ttdef"><b>Definition:</b> sender.h:16</div></div>
+<div class="ttc" id="asender_8h_html_a533a37ce0fc01b242ac7f143d4fb106a"><div class="ttname"><a href="sender_8h.html#a533a37ce0fc01b242ac7f143d4fb106a">sender_dtor</a></div><div class="ttdeci">void sender_dtor(Sender *self)</div><div class="ttdoc">Resets self's values.</div><div class="ttdef"><b>Definition:</b> sender.c:67</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

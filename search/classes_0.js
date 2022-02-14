@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['bgctrltoken_323',['BGCtrlToken',['../structBGCtrlToken.html',1,'']]]
+  ['bgctrltoken_325',['BGCtrlToken',['../structBGCtrlToken.html',1,'']]]
 ];

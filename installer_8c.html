@@ -12,12 +12,8 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -42,36 +38,16 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="examples.html"><span>Examples</span></a></li>
-      <li>
-        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
-          </span>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
-    </ul>
-  </div>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -110,9 +86,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &lt;unistd.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="installer_8h_source.html">signals/installer.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="handler_8h_source.html">signals/handler.h</a>&quot;</code><br />
-</div>
-<p><a href="installer_8c_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a369266c24eacffb87046522897a570d5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="installer_8c.html#a369266c24eacffb87046522897a570d5">_GNU_SOURCE</a></td></tr>
@@ -137,8 +111,6 @@ Functions</h2></td></tr>
 <div class="textblock"><p>Contains functions for installing signals. </p>
 <dl class="section author"><dt>Author</dt><dd>Mohamed Al-Hussein </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>05 Feb 2022 Ideas presented here were retrieved from the following sources: <a href="https://www.gnu.org/software/libc/manual/html_node/Initializing-the-Shell.html">https://www.gnu.org/software/libc/manual/html_node/Initializing-the-Shell.html</a> <a href="https://www.gnu.org/software/libc/manual/html_node/Launching-Jobs.html">https://www.gnu.org/software/libc/manual/html_node/Launching-Jobs.html</a> </dd></dl>
-
-<p class="definition">Definition in file <a class="el" href="installer_8c_source.html">installer.c</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a369266c24eacffb87046522897a570d5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a369266c24eacffb87046522897a570d5">&#9670;&nbsp;</a></span>_GNU_SOURCE</h2>
@@ -151,8 +123,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="installer_8c_source.html#l00011">11</a> of file <a class="el" href="installer_8c_source.html">installer.c</a>.</p>
 
 </div>
 </div>
@@ -181,46 +151,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="installer_8c_source.html#l00052">52</a> of file <a class="el" href="installer_8c_source.html">installer.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        sighandler_t sig_status;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="comment">/* Allow SIGINT to terminate this process. */</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        errno = 0;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        sig_status = signal(SIGINT, SIG_DFL);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordflow">if</span> (sig_status == SIG_ERR) {</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                perror(<span class="stringliteral">&quot;signal&quot;</span>);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                _exit(1);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        }</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="comment">/*</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">         * Background process groups should exhibit default behavior (i.e. stop)</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">         * when attempting to read/write to terminal.</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">         *</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">         * Since background process groups are by default redirected to</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">         * /dev/null by this shell if they do not explicitly specify input/output</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">         * redirections, SIGTTIN/SIGTTOU signals should not be emitted in</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">         * general. However, it helps to be explicit that this is the expected</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">         * behavior with the code segment below.</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">         */</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">if</span> (!foreground) {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                errno = 0;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                sig_status = signal(SIGTTIN, SIG_DFL);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                <span class="keywordflow">if</span> (sig_status == SIG_ERR) {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                        perror(<span class="stringliteral">&quot;signal&quot;</span>);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                        _exit(1);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                errno = 0;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                sig_status = signal(SIGTTOU, SIG_DFL);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                <span class="keywordflow">if</span> (sig_status == SIG_ERR) {</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                        perror(<span class="stringliteral">&quot;signal&quot;</span>);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                        _exit(1);</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                }</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        }</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="process_8c_source.html#l00280">process_launch()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="process_8c.html#a628ed3c091c9c88d3ea3362ba97a47f7">process_launch()</a>.</p>
 
 </div>
 </div>
@@ -242,46 +173,9 @@ Functions</h2></td></tr>
 
 <p>Installs job control signals for the shell. </p>
 
-<p class="definition">Definition at line <a class="el" href="installer_8c_source.html#l00091">91</a> of file <a class="el" href="installer_8c_source.html">installer.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;{</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        sighandler_t <a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a>;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="comment">/* Ignore SIGINT when shell is foreground process. */</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        errno = 0;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> = signal(SIGINT, SIG_IGN);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> == SIG_ERR) {</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                perror(<span class="stringliteral">&quot;signal&quot;</span>);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                _exit(1);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        }</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="comment">/*</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">         * Shell should ignore read/write signals since it is allowed to</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">         * perform IO.</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">         */</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        errno = 0;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> = signal(SIGTTIN, SIG_IGN);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> == SIG_ERR) {</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                perror(<span class="stringliteral">&quot;signal&quot;</span>);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                _exit(1);</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        }</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        errno = 0;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> = signal(SIGTTOU, SIG_IGN);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> == SIG_ERR) {</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                perror(<span class="stringliteral">&quot;signal&quot;</span>);</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                _exit(1);</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        }</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="comment">/* Shell should handle SIGCHLD events for later delivery. */</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <a class="code" href="installer_8c.html#a750bd792d342928d440d74517e7feb3d">installer_install_sigchld_handler</a>();</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="comment">/* Shell should handle SIGTSTP events to enable/disable fg-only mode. */</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <a class="code" href="installer_8c.html#a963d72a8e8a655acf2f907c84cf88d96">installer_install_sigtstp_handler</a>();</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="installer_8c_source.html#l00128">installer_install_sigchld_handler()</a>, <a class="el" href="installer_8c_source.html#l00163">installer_install_sigtstp_handler()</a>, and <a class="el" href="status_8c_source.html#l00043">status()</a>.</p>
+<p class="reference">References <a class="el" href="installer_8c.html#a750bd792d342928d440d74517e7feb3d">installer_install_sigchld_handler()</a>, <a class="el" href="installer_8c.html#a963d72a8e8a655acf2f907c84cf88d96">installer_install_sigtstp_handler()</a>, and <a class="el" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="smallsh_8c_source.html#l00205">smallsh_init()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="smallsh_8c.html#a142fdf9ba40211230997c69308bcab71">smallsh_init()</a>.</p>
 
 </div>
 </div>
@@ -303,44 +197,9 @@ Functions</h2></td></tr>
 
 <p>Installs a SIGCHLD handler for the shell. </p>
 
-<p class="definition">Definition at line <a class="el" href="installer_8c_source.html#l00128">128</a> of file <a class="el" href="installer_8c_source.html">installer.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;{</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="keyword">struct </span>sigaction sa;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        sigset_t block_set;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keywordtype">int</span> <a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a>;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <span class="comment">/* Ignore SIGTSTP signals within this handler. */</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        memset(&amp;sa, 0, <span class="keyword">sizeof</span>(sa));</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        errno = 0;</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        <a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> = sigemptyset(&amp;block_set);</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> == -1) {</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                perror(<span class="stringliteral">&quot;sigemptyset&quot;</span>);</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                _exit(1);</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        }</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        errno = 0;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        <a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> = sigaddset(&amp;block_set, SIGTSTP);</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> == -1) {</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                perror(<span class="stringliteral">&quot;sigaddset&quot;</span>);</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                _exit(1);</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        }</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        sa.sa_mask = block_set;</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        sa.sa_flags = SA_RESTART;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        sa.sa_handler = <a class="code" href="handler_8h.html#a1afb82a207441052c002d287c4fc6a26">handler_handle_sigchld</a>;</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        errno = 0;</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        <a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> = sigaction(SIGCHLD, &amp;sa, NULL);</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a> == -1) {</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                perror(<span class="stringliteral">&quot;sigaction&quot;</span>);</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                _exit(1);</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        }</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="handler_8c_source.html#l00151">handler_handle_sigchld()</a>, and <a class="el" href="status_8c_source.html#l00043">status()</a>.</p>
+<p class="reference">References <a class="el" href="handler_8h.html#a1afb82a207441052c002d287c4fc6a26">handler_handle_sigchld()</a>, and <a class="el" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="installer_8c_source.html#l00091">installer_install_job_control_signals()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="installer_8c.html#a7c1ed2760a22437c5de3c2b9b90478eb">installer_install_job_control_signals()</a>.</p>
 
 </div>
 </div>
@@ -362,23 +221,13 @@ Functions</h2></td></tr>
 
 <p>Installs a SIGTSTP handler for the shell. </p>
 
-<p class="definition">Definition at line <a class="el" href="installer_8c_source.html#l00163">163</a> of file <a class="el" href="installer_8c_source.html">installer.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;{</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <a class="code" href="handler_8h.html#a26dee8fd59b81d362f9bf4909572986a">handler_switch_enable_fg_only_mode</a>();</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="handler_8c_source.html#l00169">handler_switch_enable_fg_only_mode()</a>.</p>
+<p class="reference">References <a class="el" href="handler_8h.html#a26dee8fd59b81d362f9bf4909572986a">handler_switch_enable_fg_only_mode()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="installer_8c_source.html#l00091">installer_install_job_control_signals()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="installer_8c.html#a7c1ed2760a22437c5de3c2b9b90478eb">installer_install_job_control_signals()</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
-<div class="ttc" id="ainstaller_8c_html_a750bd792d342928d440d74517e7feb3d"><div class="ttname"><a href="installer_8c.html#a750bd792d342928d440d74517e7feb3d">installer_install_sigchld_handler</a></div><div class="ttdeci">void installer_install_sigchld_handler(void)</div><div class="ttdoc">Installs a SIGCHLD handler for the shell.</div><div class="ttdef"><b>Definition:</b> <a href="installer_8c_source.html#l00128">installer.c:128</a></div></div>
-<div class="ttc" id="ahandler_8h_html_a1afb82a207441052c002d287c4fc6a26"><div class="ttname"><a href="handler_8h.html#a1afb82a207441052c002d287c4fc6a26">handler_handle_sigchld</a></div><div class="ttdeci">void handler_handle_sigchld(int sig)</div><div class="ttdoc">Handles a SIGCHLD signal.</div><div class="ttdef"><b>Definition:</b> <a href="handler_8c_source.html#l00151">handler.c:151</a></div></div>
-<div class="ttc" id="ahandler_8h_html_a26dee8fd59b81d362f9bf4909572986a"><div class="ttname"><a href="handler_8h.html#a26dee8fd59b81d362f9bf4909572986a">handler_switch_enable_fg_only_mode</a></div><div class="ttdeci">void handler_switch_enable_fg_only_mode(void)</div><div class="ttdoc">Switches SIGTSTP mask to enable fg_only_mode on next receipt.</div><div class="ttdef"><b>Definition:</b> <a href="handler_8c_source.html#l00169">handler.c:169</a></div></div>
-<div class="ttc" id="ainstaller_8c_html_a963d72a8e8a655acf2f907c84cf88d96"><div class="ttname"><a href="installer_8c.html#a963d72a8e8a655acf2f907c84cf88d96">installer_install_sigtstp_handler</a></div><div class="ttdeci">void installer_install_sigtstp_handler(void)</div><div class="ttdoc">Installs a SIGTSTP handler for the shell.</div><div class="ttdef"><b>Definition:</b> <a href="installer_8c_source.html#l00163">installer.c:163</a></div></div>
-<div class="ttc" id="astatus_8h_html_a685506d2c432425b89581f85cf876f22"><div class="ttname"><a href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a></div><div class="ttdeci">void status(void)</div><div class="ttdoc">Displays last exit status value to user.</div><div class="ttdef"><b>Definition:</b> <a href="status_8c_source.html#l00043">status.c:43</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

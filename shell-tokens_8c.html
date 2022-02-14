@@ -12,12 +12,8 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -42,36 +38,16 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="examples.html"><span>Examples</span></a></li>
-      <li>
-        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
-          </span>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
-    </ul>
-  </div>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -104,9 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="shell-tokens_8h_source.html">interpreter/shell-tokens.h</a>&quot;</code><br />
-</div>
-<p><a href="shell-tokens_8c_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:aaa8ce2d94666144d8cc1901c2b1cd595"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell-tokens_8c.html#aaa8ce2d94666144d8cc1901c2b1cd595">bgctrl_token_print_</a> (<a class="el" href="structToken.html">Token</a> const *const self)</td></tr>
@@ -186,8 +160,6 @@ Functions</h2></td></tr>
 <div class="textblock"><p>For parsing and storing the different types of tokens of the shell. </p>
 <dl class="section author"><dt>Author</dt><dd>Mohamed Al-Hussein </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>26 Jan 2022 </dd></dl>
-
-<p class="definition">Definition in file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a11769c7ce7a83626dcc5b201a8c1ea2a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a11769c7ce7a83626dcc5b201a8c1ea2a">&#9670;&nbsp;</a></span>bgctrl_token_ctor()</h2>
@@ -217,22 +189,9 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00269">269</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;{</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="keyword">static</span> <span class="keyword">struct </span><a class="code" href="structTokenVtbl.html">TokenVtbl</a> const vtbl = {</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;                .<a class="code" href="structTokenVtbl.html#a9626717617c7e53cdb743d739e9a3518">get_type</a> = &amp;<a class="code" href="token_8h.html#a6ecf8ea322eb6cb96f828ce8c1d206e9">token_get_type_</a>,</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;                .get_value = &amp;<a class="code" href="token_8h.html#adda741d6f8daf9f8ec2174bba3d63266">token_get_value_</a>,</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                .print = &amp;<a class="code" href="shell-tokens_8c.html#aaa8ce2d94666144d8cc1901c2b1cd595">bgctrl_token_print_</a>,</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;                .set_value = &amp;<a class="code" href="token_8h.html#aa681498b28d49522864aea40ec8359ca">token_set_value_</a>,</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                .take = &amp;<a class="code" href="shell-tokens_8c.html#a35ba75ba0e2f6f265c05aab9dc77f03f">bgctrl_token_take_</a>,</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        };</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        <a class="code" href="token_8h.html#a7a14e268eddc63363b0d81b9a23d511d">token_ctor</a>(&amp;self-&gt;<a class="code" href="structBGCtrlToken.html#a68b261b4ce5daef8cfb9c367925d794c">super</a>, (<a class="code" href="token_8h.html#aa520fbf142ba1e7e659590c07da31921">TokenType</a>) <a class="code" href="shell-tokens_8h.html#a16a54cb1a781967b97660b0cb96e1a54a411f75d9c12d899a33a8993a3602da73">TOK_CTRL_BG</a>);</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        <span class="keyword">self</span>-&gt;super.vptr = &amp;vtbl;</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="shell-tokens_8c_source.html#l00048">bgctrl_token_print_()</a>, <a class="el" href="shell-tokens_8c_source.html#l00064">bgctrl_token_take_()</a>, <a class="el" href="token_8h_source.html#l00047">TokenVtbl::get_type</a>, <a class="el" href="shell-tokens_8h_source.html#l00017">TOK_CTRL_BG</a>, <a class="el" href="token_8c_source.html#l00124">token_ctor()</a>, <a class="el" href="token_8c_source.html#l00163">token_get_type_()</a>, <a class="el" href="token_8c_source.html#l00168">token_get_value_()</a>, and <a class="el" href="token_8c_source.html#l00177">token_set_value_()</a>.</p>
+<p class="reference">References <a class="el" href="shell-tokens_8c.html#aaa8ce2d94666144d8cc1901c2b1cd595">bgctrl_token_print_()</a>, <a class="el" href="shell-tokens_8c.html#a35ba75ba0e2f6f265c05aab9dc77f03f">bgctrl_token_take_()</a>, <a class="el" href="structTokenVtbl.html#a9626717617c7e53cdb743d739e9a3518">TokenVtbl::get_type</a>, <a class="el" href="shell-tokens_8h.html#a16a54cb1a781967b97660b0cb96e1a54a411f75d9c12d899a33a8993a3602da73">TOK_CTRL_BG</a>, <a class="el" href="token_8h.html#a7a14e268eddc63363b0d81b9a23d511d">token_ctor()</a>, <a class="el" href="token_8h.html#a6ecf8ea322eb6cb96f828ce8c1d206e9">token_get_type_()</a>, <a class="el" href="token_8h.html#adda741d6f8daf9f8ec2174bba3d63266">token_get_value_()</a>, and <a class="el" href="token_8h.html#aa681498b28d49522864aea40ec8359ca">token_set_value_()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="lexer_8c_source.html#l00012">lexer_generate_tokens()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="lexer_8c.html#a9c5fcecec1d5cdecf516cb569f643c0e">lexer_generate_tokens()</a>.</p>
 
 </div>
 </div>
@@ -261,12 +220,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>The caller is responsible for freeing <code>self</code> afterwards if it was originally allocated on the heap. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00282">282</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;{</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        <a class="code" href="token_8h.html#aefe387092a32c96e19a9c0710e272b48">token_dtor</a>(&amp;self-&gt;<a class="code" href="structBGCtrlToken.html#a68b261b4ce5daef8cfb9c367925d794c">super</a>);</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="token_8c_source.html#l00140">token_dtor()</a>.</p>
+<p class="reference">References <a class="el" href="token_8h.html#aefe387092a32c96e19a9c0710e272b48">token_dtor()</a>.</p>
 
 </div>
 </div>
@@ -302,16 +256,9 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00048">48</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <a class="code" href="structBGCtrlToken.html">BGCtrlToken</a> <span class="keyword">const</span> * <span class="keyword">const</span> self_ = (<a class="code" href="structBGCtrlToken.html">BGCtrlToken</a> <span class="keyword">const</span> *) <span class="keyword">self</span>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        printf(<span class="stringliteral">&quot;BG_CONTROL:%s&quot;</span>, self_-&gt;<a class="code" href="structBGCtrlToken.html#a68b261b4ce5daef8cfb9c367925d794c">super</a>.<a class="code" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">vptr</a>-&gt;<a class="code" href="structTokenVtbl.html#a0f7452fd123ca8edb3ba09ebb8882a1f">get_value</a>(<span class="keyword">self</span>));</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="token_8h_source.html#l00056">TokenVtbl::get_value</a>, <a class="el" href="shell-tokens_8h_source.html#l00045">BGCtrlToken::super</a>, and <a class="el" href="token_8h_source.html#l00022">Token::vptr</a>.</p>
+<p class="reference">References <a class="el" href="structTokenVtbl.html#a0f7452fd123ca8edb3ba09ebb8882a1f">TokenVtbl::get_value</a>, <a class="el" href="structBGCtrlToken.html#a68b261b4ce5daef8cfb9c367925d794c">BGCtrlToken::super</a>, and <a class="el" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">Token::vptr</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="shell-tokens_8c_source.html#l00269">bgctrl_token_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="shell-tokens_8c.html#a11769c7ce7a83626dcc5b201a8c1ea2a">bgctrl_token_ctor()</a>.</p>
 
 </div>
 </div>
@@ -359,19 +306,9 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00064">64</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <a class="code" href="structBGCtrlToken.html">BGCtrlToken</a> <span class="keyword">const</span> * <span class="keyword">const</span> self_ = (<a class="code" href="structBGCtrlToken.html">BGCtrlToken</a> <span class="keyword">const</span> *) <span class="keyword">self</span>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="comment">// copy background command symbol into token</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordtype">char</span> *slice = iter-&gt;vptr-&gt;munch_char(iter);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        self_-&gt;<a class="code" href="structBGCtrlToken.html#a68b261b4ce5daef8cfb9c367925d794c">super</a>.<a class="code" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">vptr</a>-&gt;<a class="code" href="structTokenVtbl.html#a83da377ce5992b31516de2b84037c755">set_value</a>(<span class="keyword">self</span>, slice);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        free(slice);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="string-iterator_8h_source.html#l00084">StringIteratorVtbl::munch_char</a>, <a class="el" href="token_8h_source.html#l00069">TokenVtbl::set_value</a>, <a class="el" href="shell-tokens_8h_source.html#l00045">BGCtrlToken::super</a>, <a class="el" href="token_8h_source.html#l00022">Token::vptr</a>, and <a class="el" href="string-iterator_8h_source.html#l00025">StringIterator::vptr</a>.</p>
+<p class="reference">References <a class="el" href="structStringIteratorVtbl.html#aadd4fa552e314933423447e928ffce1d">StringIteratorVtbl::munch_char</a>, <a class="el" href="structTokenVtbl.html#a83da377ce5992b31516de2b84037c755">TokenVtbl::set_value</a>, <a class="el" href="structBGCtrlToken.html#a68b261b4ce5daef8cfb9c367925d794c">BGCtrlToken::super</a>, <a class="el" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">Token::vptr</a>, and <a class="el" href="structStringIterator.html#ac2117e6d4ad50c241a62363c73d79e14">StringIterator::vptr</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="shell-tokens_8c_source.html#l00269">bgctrl_token_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="shell-tokens_8c.html#a11769c7ce7a83626dcc5b201a8c1ea2a">bgctrl_token_ctor()</a>.</p>
 
 </div>
 </div>
@@ -403,22 +340,9 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00287">287</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;{</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        <span class="keyword">static</span> <span class="keyword">struct </span><a class="code" href="structTokenVtbl.html">TokenVtbl</a> const vtbl = {</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                .<a class="code" href="structTokenVtbl.html#a9626717617c7e53cdb743d739e9a3518">get_type</a> = &amp;<a class="code" href="token_8h.html#a6ecf8ea322eb6cb96f828ce8c1d206e9">token_get_type_</a>,</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;                .get_value = &amp;<a class="code" href="token_8h.html#adda741d6f8daf9f8ec2174bba3d63266">token_get_value_</a>,</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                .print = &amp;<a class="code" href="shell-tokens_8c.html#a9bd3f98472c79cd81bfe65b20fe26e76">comment_token_print_</a>,</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                .set_value = &amp;<a class="code" href="token_8h.html#aa681498b28d49522864aea40ec8359ca">token_set_value_</a>,</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                .take = &amp;<a class="code" href="shell-tokens_8c.html#ae6fef5a0f5832ee7e2cd53d8cd35caf5">comment_token_take_</a>,</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        };</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        <a class="code" href="token_8h.html#a7a14e268eddc63363b0d81b9a23d511d">token_ctor</a>(&amp;self-&gt;<a class="code" href="structCommentToken.html#a782e9c51ee5e1ed78cb0ac435a87f751">super</a>, (<a class="code" href="token_8h.html#aa520fbf142ba1e7e659590c07da31921">TokenType</a>) <a class="code" href="shell-tokens_8h.html#a16a54cb1a781967b97660b0cb96e1a54aafc53fb53f7e61e0828c163490de7d54">TOK_CMT</a>);</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        <span class="keyword">self</span>-&gt;super.vptr = &amp;vtbl;</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="shell-tokens_8c_source.html#l00081">comment_token_print_()</a>, <a class="el" href="shell-tokens_8c_source.html#l00097">comment_token_take_()</a>, <a class="el" href="token_8h_source.html#l00047">TokenVtbl::get_type</a>, <a class="el" href="shell-tokens_8h_source.html#l00016">TOK_CMT</a>, <a class="el" href="token_8c_source.html#l00124">token_ctor()</a>, <a class="el" href="token_8c_source.html#l00163">token_get_type_()</a>, <a class="el" href="token_8c_source.html#l00168">token_get_value_()</a>, and <a class="el" href="token_8c_source.html#l00177">token_set_value_()</a>.</p>
+<p class="reference">References <a class="el" href="shell-tokens_8c.html#a9bd3f98472c79cd81bfe65b20fe26e76">comment_token_print_()</a>, <a class="el" href="shell-tokens_8c.html#ae6fef5a0f5832ee7e2cd53d8cd35caf5">comment_token_take_()</a>, <a class="el" href="structTokenVtbl.html#a9626717617c7e53cdb743d739e9a3518">TokenVtbl::get_type</a>, <a class="el" href="shell-tokens_8h.html#a16a54cb1a781967b97660b0cb96e1a54aafc53fb53f7e61e0828c163490de7d54">TOK_CMT</a>, <a class="el" href="token_8h.html#a7a14e268eddc63363b0d81b9a23d511d">token_ctor()</a>, <a class="el" href="token_8h.html#a6ecf8ea322eb6cb96f828ce8c1d206e9">token_get_type_()</a>, <a class="el" href="token_8h.html#adda741d6f8daf9f8ec2174bba3d63266">token_get_value_()</a>, and <a class="el" href="token_8h.html#aa681498b28d49522864aea40ec8359ca">token_set_value_()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="lexer_8c_source.html#l00012">lexer_generate_tokens()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="lexer_8c.html#a9c5fcecec1d5cdecf516cb569f643c0e">lexer_generate_tokens()</a>.</p>
 
 </div>
 </div>
@@ -447,12 +371,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>The caller is responsible for freeing <code>self</code> afterwards if it was originally allocated on the heap. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00300">300</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;{</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        <a class="code" href="token_8h.html#aefe387092a32c96e19a9c0710e272b48">token_dtor</a>(&amp;self-&gt;<a class="code" href="structCommentToken.html#a782e9c51ee5e1ed78cb0ac435a87f751">super</a>);</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="token_8c_source.html#l00140">token_dtor()</a>.</p>
+<p class="reference">References <a class="el" href="token_8h.html#aefe387092a32c96e19a9c0710e272b48">token_dtor()</a>.</p>
 
 </div>
 </div>
@@ -488,16 +407,9 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00081">81</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;{</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <a class="code" href="structCommentToken.html">CommentToken</a> <span class="keyword">const</span> * <span class="keyword">const</span> self_ = (<a class="code" href="structCommentToken.html">CommentToken</a> <span class="keyword">const</span> *) <span class="keyword">self</span>;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        printf(<span class="stringliteral">&quot;COMMENT:%s&quot;</span>, self_-&gt;<a class="code" href="structCommentToken.html#a782e9c51ee5e1ed78cb0ac435a87f751">super</a>.<a class="code" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">vptr</a>-&gt;<a class="code" href="structTokenVtbl.html#a0f7452fd123ca8edb3ba09ebb8882a1f">get_value</a>(<span class="keyword">self</span>));</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="token_8h_source.html#l00056">TokenVtbl::get_value</a>, <a class="el" href="shell-tokens_8h_source.html#l00089">CommentToken::super</a>, and <a class="el" href="token_8h_source.html#l00022">Token::vptr</a>.</p>
+<p class="reference">References <a class="el" href="structTokenVtbl.html#a0f7452fd123ca8edb3ba09ebb8882a1f">TokenVtbl::get_value</a>, <a class="el" href="structCommentToken.html#a782e9c51ee5e1ed78cb0ac435a87f751">CommentToken::super</a>, and <a class="el" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">Token::vptr</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="shell-tokens_8c_source.html#l00287">comment_token_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="shell-tokens_8c.html#af93aac1a9b767267240e6eac69c8aabf">comment_token_ctor()</a>.</p>
 
 </div>
 </div>
@@ -545,19 +457,9 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00097">97</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;{</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <a class="code" href="structCommentToken.html">CommentToken</a> <span class="keyword">const</span> * <span class="keyword">const</span> self_ = (<a class="code" href="structCommentToken.html">CommentToken</a> <span class="keyword">const</span> *) <span class="keyword">self</span>;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="comment">// copy comment symbol into token</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keywordtype">char</span> *slice = iter-&gt;vptr-&gt;munch_char(iter);</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        self_-&gt;<a class="code" href="structCommentToken.html#a782e9c51ee5e1ed78cb0ac435a87f751">super</a>.<a class="code" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">vptr</a>-&gt;<a class="code" href="structTokenVtbl.html#a83da377ce5992b31516de2b84037c755">set_value</a>(<span class="keyword">self</span>, slice);</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        free(slice);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="string-iterator_8h_source.html#l00084">StringIteratorVtbl::munch_char</a>, <a class="el" href="token_8h_source.html#l00069">TokenVtbl::set_value</a>, <a class="el" href="shell-tokens_8h_source.html#l00089">CommentToken::super</a>, <a class="el" href="token_8h_source.html#l00022">Token::vptr</a>, and <a class="el" href="string-iterator_8h_source.html#l00025">StringIterator::vptr</a>.</p>
+<p class="reference">References <a class="el" href="structStringIteratorVtbl.html#aadd4fa552e314933423447e928ffce1d">StringIteratorVtbl::munch_char</a>, <a class="el" href="structTokenVtbl.html#a83da377ce5992b31516de2b84037c755">TokenVtbl::set_value</a>, <a class="el" href="structCommentToken.html#a782e9c51ee5e1ed78cb0ac435a87f751">CommentToken::super</a>, <a class="el" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">Token::vptr</a>, and <a class="el" href="structStringIterator.html#ac2117e6d4ad50c241a62363c73d79e14">StringIterator::vptr</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="shell-tokens_8c_source.html#l00287">comment_token_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="shell-tokens_8c.html#af93aac1a9b767267240e6eac69c8aabf">comment_token_ctor()</a>.</p>
 
 </div>
 </div>
@@ -589,22 +491,9 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00305">305</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;{</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;        <span class="keyword">static</span> <span class="keyword">struct </span><a class="code" href="structTokenVtbl.html">TokenVtbl</a> const vtbl = {</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;                .<a class="code" href="structTokenVtbl.html#a9626717617c7e53cdb743d739e9a3518">get_type</a> = &amp;<a class="code" href="token_8h.html#a6ecf8ea322eb6cb96f828ce8c1d206e9">token_get_type_</a>,</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;                .get_value = &amp;<a class="code" href="token_8h.html#adda741d6f8daf9f8ec2174bba3d63266">token_get_value_</a>,</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;                .print = &amp;<a class="code" href="shell-tokens_8c.html#a24030150fb53851d3051448202a1f417">inputredir_token_print_</a>,</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;                .set_value = &amp;<a class="code" href="token_8h.html#aa681498b28d49522864aea40ec8359ca">token_set_value_</a>,</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;                .take = &amp;<a class="code" href="shell-tokens_8c.html#afaae02bf18fc51b886d6507fee177cf6">inputredir_token_take_</a>,</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        };</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        <a class="code" href="token_8h.html#a7a14e268eddc63363b0d81b9a23d511d">token_ctor</a>(&amp;self-&gt;<a class="code" href="structInputRedirToken.html#a2076e39a07d32c3e47795153cd9058da">super</a>, (<a class="code" href="token_8h.html#aa520fbf142ba1e7e659590c07da31921">TokenType</a>) <a class="code" href="shell-tokens_8h.html#a16a54cb1a781967b97660b0cb96e1a54adbf4671ed01b7cb484b13e02ea37541c">TOK_REDIR_INPUT</a>);</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        <span class="keyword">self</span>-&gt;super.vptr = &amp;vtbl;</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="token_8h_source.html#l00047">TokenVtbl::get_type</a>, <a class="el" href="shell-tokens_8c_source.html#l00114">inputredir_token_print_()</a>, <a class="el" href="shell-tokens_8c_source.html#l00130">inputredir_token_take_()</a>, <a class="el" href="shell-tokens_8h_source.html#l00019">TOK_REDIR_INPUT</a>, <a class="el" href="token_8c_source.html#l00124">token_ctor()</a>, <a class="el" href="token_8c_source.html#l00163">token_get_type_()</a>, <a class="el" href="token_8c_source.html#l00168">token_get_value_()</a>, and <a class="el" href="token_8c_source.html#l00177">token_set_value_()</a>.</p>
+<p class="reference">References <a class="el" href="structTokenVtbl.html#a9626717617c7e53cdb743d739e9a3518">TokenVtbl::get_type</a>, <a class="el" href="shell-tokens_8c.html#a24030150fb53851d3051448202a1f417">inputredir_token_print_()</a>, <a class="el" href="shell-tokens_8c.html#afaae02bf18fc51b886d6507fee177cf6">inputredir_token_take_()</a>, <a class="el" href="shell-tokens_8h.html#a16a54cb1a781967b97660b0cb96e1a54adbf4671ed01b7cb484b13e02ea37541c">TOK_REDIR_INPUT</a>, <a class="el" href="token_8h.html#a7a14e268eddc63363b0d81b9a23d511d">token_ctor()</a>, <a class="el" href="token_8h.html#a6ecf8ea322eb6cb96f828ce8c1d206e9">token_get_type_()</a>, <a class="el" href="token_8h.html#adda741d6f8daf9f8ec2174bba3d63266">token_get_value_()</a>, and <a class="el" href="token_8h.html#aa681498b28d49522864aea40ec8359ca">token_set_value_()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="lexer_8c_source.html#l00012">lexer_generate_tokens()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="lexer_8c.html#a9c5fcecec1d5cdecf516cb569f643c0e">lexer_generate_tokens()</a>.</p>
 
 </div>
 </div>
@@ -633,12 +522,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>The caller is responsible for freeing <code>self</code> afterwards if it was originally allocated on the heap. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00318">318</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;{</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        <a class="code" href="token_8h.html#aefe387092a32c96e19a9c0710e272b48">token_dtor</a>(&amp;self-&gt;<a class="code" href="structInputRedirToken.html#a2076e39a07d32c3e47795153cd9058da">super</a>);</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="token_8c_source.html#l00140">token_dtor()</a>.</p>
+<p class="reference">References <a class="el" href="token_8h.html#aefe387092a32c96e19a9c0710e272b48">token_dtor()</a>.</p>
 
 </div>
 </div>
@@ -674,16 +558,9 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00114">114</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;{</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <a class="code" href="structInputRedirToken.html">InputRedirToken</a> <span class="keyword">const</span> * <span class="keyword">const</span> self_ = (<a class="code" href="structInputRedirToken.html">InputRedirToken</a> <span class="keyword">const</span> *) <span class="keyword">self</span>;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        printf(<span class="stringliteral">&quot;INPUT_REDIR:%s&quot;</span>, self_-&gt;<a class="code" href="structInputRedirToken.html#a2076e39a07d32c3e47795153cd9058da">super</a>.<a class="code" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">vptr</a>-&gt;<a class="code" href="structTokenVtbl.html#a0f7452fd123ca8edb3ba09ebb8882a1f">get_value</a>(<span class="keyword">self</span>));</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="token_8h_source.html#l00056">TokenVtbl::get_value</a>, <a class="el" href="shell-tokens_8h_source.html#l00134">InputRedirToken::super</a>, and <a class="el" href="token_8h_source.html#l00022">Token::vptr</a>.</p>
+<p class="reference">References <a class="el" href="structTokenVtbl.html#a0f7452fd123ca8edb3ba09ebb8882a1f">TokenVtbl::get_value</a>, <a class="el" href="structInputRedirToken.html#a2076e39a07d32c3e47795153cd9058da">InputRedirToken::super</a>, and <a class="el" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">Token::vptr</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="shell-tokens_8c_source.html#l00305">inputredir_token_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="shell-tokens_8c.html#a23f681e35070e98e354feaea1a19a4be">inputredir_token_ctor()</a>.</p>
 
 </div>
 </div>
@@ -731,19 +608,9 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00130">130</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;{</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <a class="code" href="structInputRedirToken.html">InputRedirToken</a> <span class="keyword">const</span> * <span class="keyword">const</span> self_ = (<a class="code" href="structInputRedirToken.html">InputRedirToken</a> <span class="keyword">const</span> *) <span class="keyword">self</span>;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <span class="comment">// copy input redirection symbol into token</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        <span class="keywordtype">char</span> *slice = iter-&gt;vptr-&gt;munch_char(iter);</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        self_-&gt;<a class="code" href="structInputRedirToken.html#a2076e39a07d32c3e47795153cd9058da">super</a>.<a class="code" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">vptr</a>-&gt;<a class="code" href="structTokenVtbl.html#a83da377ce5992b31516de2b84037c755">set_value</a>(<span class="keyword">self</span>, slice);</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        free(slice);</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="string-iterator_8h_source.html#l00084">StringIteratorVtbl::munch_char</a>, <a class="el" href="token_8h_source.html#l00069">TokenVtbl::set_value</a>, <a class="el" href="shell-tokens_8h_source.html#l00134">InputRedirToken::super</a>, <a class="el" href="token_8h_source.html#l00022">Token::vptr</a>, and <a class="el" href="string-iterator_8h_source.html#l00025">StringIterator::vptr</a>.</p>
+<p class="reference">References <a class="el" href="structStringIteratorVtbl.html#aadd4fa552e314933423447e928ffce1d">StringIteratorVtbl::munch_char</a>, <a class="el" href="structTokenVtbl.html#a83da377ce5992b31516de2b84037c755">TokenVtbl::set_value</a>, <a class="el" href="structInputRedirToken.html#a2076e39a07d32c3e47795153cd9058da">InputRedirToken::super</a>, <a class="el" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">Token::vptr</a>, and <a class="el" href="structStringIterator.html#ac2117e6d4ad50c241a62363c73d79e14">StringIterator::vptr</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="shell-tokens_8c_source.html#l00305">inputredir_token_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="shell-tokens_8c.html#a23f681e35070e98e354feaea1a19a4be">inputredir_token_ctor()</a>.</p>
 
 </div>
 </div>
@@ -775,22 +642,9 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00323">323</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;{</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        <span class="keyword">static</span> <span class="keyword">struct </span><a class="code" href="structTokenVtbl.html">TokenVtbl</a> const vtbl = {</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;                .<a class="code" href="structTokenVtbl.html#a9626717617c7e53cdb743d739e9a3518">get_type</a> = &amp;<a class="code" href="token_8h.html#a6ecf8ea322eb6cb96f828ce8c1d206e9">token_get_type_</a>,</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;                .get_value = &amp;<a class="code" href="token_8h.html#adda741d6f8daf9f8ec2174bba3d63266">token_get_value_</a>,</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;                .print = &amp;<a class="code" href="shell-tokens_8c.html#a4d7015e08f3a5fa8a71556e22c78f667">newline_token_print_</a>,</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;                .set_value = &amp;<a class="code" href="token_8h.html#aa681498b28d49522864aea40ec8359ca">token_set_value_</a>,</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;                .take = &amp;<a class="code" href="shell-tokens_8c.html#ae27a5333e0ed6f3e8153349c303870f7">newline_token_take_</a>,</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        };</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        <a class="code" href="token_8h.html#a7a14e268eddc63363b0d81b9a23d511d">token_ctor</a>(&amp;self-&gt;<a class="code" href="structNewlineToken.html#a4540de2d7edd04e0981e2e2a049eb42e">super</a>, (<a class="code" href="token_8h.html#aa520fbf142ba1e7e659590c07da31921">TokenType</a>) <a class="code" href="shell-tokens_8h.html#a16a54cb1a781967b97660b0cb96e1a54a887cc6440dd799ceb7d66c4f1ca6bb2e">TOK_CTRL_NEWLINE</a>);</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        <span class="keyword">self</span>-&gt;super.vptr = &amp;vtbl;</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="token_8h_source.html#l00047">TokenVtbl::get_type</a>, <a class="el" href="shell-tokens_8c_source.html#l00147">newline_token_print_()</a>, <a class="el" href="shell-tokens_8c_source.html#l00162">newline_token_take_()</a>, <a class="el" href="shell-tokens_8h_source.html#l00018">TOK_CTRL_NEWLINE</a>, <a class="el" href="token_8c_source.html#l00124">token_ctor()</a>, <a class="el" href="token_8c_source.html#l00163">token_get_type_()</a>, <a class="el" href="token_8c_source.html#l00168">token_get_value_()</a>, and <a class="el" href="token_8c_source.html#l00177">token_set_value_()</a>.</p>
+<p class="reference">References <a class="el" href="structTokenVtbl.html#a9626717617c7e53cdb743d739e9a3518">TokenVtbl::get_type</a>, <a class="el" href="shell-tokens_8c.html#a4d7015e08f3a5fa8a71556e22c78f667">newline_token_print_()</a>, <a class="el" href="shell-tokens_8c.html#ae27a5333e0ed6f3e8153349c303870f7">newline_token_take_()</a>, <a class="el" href="shell-tokens_8h.html#a16a54cb1a781967b97660b0cb96e1a54a887cc6440dd799ceb7d66c4f1ca6bb2e">TOK_CTRL_NEWLINE</a>, <a class="el" href="token_8h.html#a7a14e268eddc63363b0d81b9a23d511d">token_ctor()</a>, <a class="el" href="token_8h.html#a6ecf8ea322eb6cb96f828ce8c1d206e9">token_get_type_()</a>, <a class="el" href="token_8h.html#adda741d6f8daf9f8ec2174bba3d63266">token_get_value_()</a>, and <a class="el" href="token_8h.html#aa681498b28d49522864aea40ec8359ca">token_set_value_()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="lexer_8c_source.html#l00012">lexer_generate_tokens()</a>, and <a class="el" href="token-iterator_8c_source.html#l00086">token_iterator_peek_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="lexer_8c.html#a9c5fcecec1d5cdecf516cb569f643c0e">lexer_generate_tokens()</a>, and <a class="el" href="token-iterator_8c.html#a1658892624bfb2c5b4a160d5363f52a9">token_iterator_peek_()</a>.</p>
 
 </div>
 </div>
@@ -819,12 +673,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>The caller is responsible for freeing <code>self</code> afterwards if it was originally allocated on the heap. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00336">336</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;{</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;        <a class="code" href="token_8h.html#aefe387092a32c96e19a9c0710e272b48">token_dtor</a>(&amp;self-&gt;<a class="code" href="structNewlineToken.html#a4540de2d7edd04e0981e2e2a049eb42e">super</a>);</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="token_8c_source.html#l00140">token_dtor()</a>.</p>
+<p class="reference">References <a class="el" href="token_8h.html#aefe387092a32c96e19a9c0710e272b48">token_dtor()</a>.</p>
 
 </div>
 </div>
@@ -860,13 +709,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00147">147</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;{</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        (void) <span class="keyword">self</span>;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        printf(<span class="stringliteral">&quot;NEWLINE:\\n&quot;</span>);</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="shell-tokens_8c_source.html#l00323">newline_token_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="shell-tokens_8c.html#abad0f54f557f34ee546d1aaba60b3df1">newline_token_ctor()</a>.</p>
 
 </div>
 </div>
@@ -914,19 +757,9 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00162">162</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;{</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <a class="code" href="structNewlineToken.html">NewlineToken</a> <span class="keyword">const</span> * <span class="keyword">const</span> self_ = (<a class="code" href="structNewlineToken.html">NewlineToken</a> <span class="keyword">const</span> *) <span class="keyword">self</span>;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        <span class="comment">// copy output redirection symbol into token</span></div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        <span class="keywordtype">char</span> *slice = iter-&gt;vptr-&gt;munch_char(iter);</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        self_-&gt;<a class="code" href="structNewlineToken.html#a4540de2d7edd04e0981e2e2a049eb42e">super</a>.<a class="code" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">vptr</a>-&gt;<a class="code" href="structTokenVtbl.html#a83da377ce5992b31516de2b84037c755">set_value</a>(<span class="keyword">self</span>, slice);</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        free(slice);</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="string-iterator_8h_source.html#l00084">StringIteratorVtbl::munch_char</a>, <a class="el" href="token_8h_source.html#l00069">TokenVtbl::set_value</a>, <a class="el" href="shell-tokens_8h_source.html#l00178">NewlineToken::super</a>, <a class="el" href="token_8h_source.html#l00022">Token::vptr</a>, and <a class="el" href="string-iterator_8h_source.html#l00025">StringIterator::vptr</a>.</p>
+<p class="reference">References <a class="el" href="structStringIteratorVtbl.html#aadd4fa552e314933423447e928ffce1d">StringIteratorVtbl::munch_char</a>, <a class="el" href="structTokenVtbl.html#a83da377ce5992b31516de2b84037c755">TokenVtbl::set_value</a>, <a class="el" href="structNewlineToken.html#a4540de2d7edd04e0981e2e2a049eb42e">NewlineToken::super</a>, <a class="el" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">Token::vptr</a>, and <a class="el" href="structStringIterator.html#ac2117e6d4ad50c241a62363c73d79e14">StringIterator::vptr</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="shell-tokens_8c_source.html#l00323">newline_token_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="shell-tokens_8c.html#abad0f54f557f34ee546d1aaba60b3df1">newline_token_ctor()</a>.</p>
 
 </div>
 </div>
@@ -958,22 +791,9 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00341">341</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;{</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        <span class="keyword">static</span> <span class="keyword">struct </span><a class="code" href="structTokenVtbl.html">TokenVtbl</a> const vtbl = {</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                .<a class="code" href="structTokenVtbl.html#a9626717617c7e53cdb743d739e9a3518">get_type</a> = &amp;<a class="code" href="token_8h.html#a6ecf8ea322eb6cb96f828ce8c1d206e9">token_get_type_</a>,</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                .get_value = &amp;<a class="code" href="token_8h.html#adda741d6f8daf9f8ec2174bba3d63266">token_get_value_</a>,</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                .print = &amp;<a class="code" href="shell-tokens_8c.html#a4a67db81b529659157738e314e636ddc">outputredir_token_print_</a>,</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                .set_value = &amp;<a class="code" href="token_8h.html#aa681498b28d49522864aea40ec8359ca">token_set_value_</a>,</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                .take = &amp;<a class="code" href="shell-tokens_8c.html#aaa824102de0dd6f75b7706357e2b0920">outputredir_token_take_</a>,</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        };</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        <a class="code" href="token_8h.html#a7a14e268eddc63363b0d81b9a23d511d">token_ctor</a>(&amp;self-&gt;<a class="code" href="structOutputRedirToken.html#a7d180c3c1f5a3ac8c18a35ceceb8fca3">super</a>, (<a class="code" href="token_8h.html#aa520fbf142ba1e7e659590c07da31921">TokenType</a>) <a class="code" href="shell-tokens_8h.html#a16a54cb1a781967b97660b0cb96e1a54ac1d6f2f8ac05b44b5b0dbf0970f1bc3b">TOK_REDIR_OUTPUT</a>);</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;        <span class="keyword">self</span>-&gt;super.vptr = &amp;vtbl;</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="token_8h_source.html#l00047">TokenVtbl::get_type</a>, <a class="el" href="shell-tokens_8c_source.html#l00179">outputredir_token_print_()</a>, <a class="el" href="shell-tokens_8c_source.html#l00195">outputredir_token_take_()</a>, <a class="el" href="shell-tokens_8h_source.html#l00020">TOK_REDIR_OUTPUT</a>, <a class="el" href="token_8c_source.html#l00124">token_ctor()</a>, <a class="el" href="token_8c_source.html#l00163">token_get_type_()</a>, <a class="el" href="token_8c_source.html#l00168">token_get_value_()</a>, and <a class="el" href="token_8c_source.html#l00177">token_set_value_()</a>.</p>
+<p class="reference">References <a class="el" href="structTokenVtbl.html#a9626717617c7e53cdb743d739e9a3518">TokenVtbl::get_type</a>, <a class="el" href="shell-tokens_8c.html#a4a67db81b529659157738e314e636ddc">outputredir_token_print_()</a>, <a class="el" href="shell-tokens_8c.html#aaa824102de0dd6f75b7706357e2b0920">outputredir_token_take_()</a>, <a class="el" href="shell-tokens_8h.html#a16a54cb1a781967b97660b0cb96e1a54ac1d6f2f8ac05b44b5b0dbf0970f1bc3b">TOK_REDIR_OUTPUT</a>, <a class="el" href="token_8h.html#a7a14e268eddc63363b0d81b9a23d511d">token_ctor()</a>, <a class="el" href="token_8h.html#a6ecf8ea322eb6cb96f828ce8c1d206e9">token_get_type_()</a>, <a class="el" href="token_8h.html#adda741d6f8daf9f8ec2174bba3d63266">token_get_value_()</a>, and <a class="el" href="token_8h.html#aa681498b28d49522864aea40ec8359ca">token_set_value_()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="lexer_8c_source.html#l00012">lexer_generate_tokens()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="lexer_8c.html#a9c5fcecec1d5cdecf516cb569f643c0e">lexer_generate_tokens()</a>.</p>
 
 </div>
 </div>
@@ -1002,12 +822,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>The caller is responsible for freeing <code>self</code> afterwards if it was originally allocated on the heap. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00354">354</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;{</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        <a class="code" href="token_8h.html#aefe387092a32c96e19a9c0710e272b48">token_dtor</a>(&amp;self-&gt;<a class="code" href="structOutputRedirToken.html#a7d180c3c1f5a3ac8c18a35ceceb8fca3">super</a>);</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="token_8c_source.html#l00140">token_dtor()</a>.</p>
+<p class="reference">References <a class="el" href="token_8h.html#aefe387092a32c96e19a9c0710e272b48">token_dtor()</a>.</p>
 
 </div>
 </div>
@@ -1043,16 +858,9 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00179">179</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;{</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        <a class="code" href="structOutputRedirToken.html">OutputRedirToken</a> <span class="keyword">const</span> * <span class="keyword">const</span> self_ = (<a class="code" href="structOutputRedirToken.html">OutputRedirToken</a> <span class="keyword">const</span> *) <span class="keyword">self</span>;</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        printf(<span class="stringliteral">&quot;OUTPUT_REDIR:%s&quot;</span>, self_-&gt;<a class="code" href="structOutputRedirToken.html#a7d180c3c1f5a3ac8c18a35ceceb8fca3">super</a>.<a class="code" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">vptr</a>-&gt;<a class="code" href="structTokenVtbl.html#a0f7452fd123ca8edb3ba09ebb8882a1f">get_value</a>(<span class="keyword">self</span>));</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="token_8h_source.html#l00056">TokenVtbl::get_value</a>, <a class="el" href="shell-tokens_8h_source.html#l00223">OutputRedirToken::super</a>, and <a class="el" href="token_8h_source.html#l00022">Token::vptr</a>.</p>
+<p class="reference">References <a class="el" href="structTokenVtbl.html#a0f7452fd123ca8edb3ba09ebb8882a1f">TokenVtbl::get_value</a>, <a class="el" href="structOutputRedirToken.html#a7d180c3c1f5a3ac8c18a35ceceb8fca3">OutputRedirToken::super</a>, and <a class="el" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">Token::vptr</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="shell-tokens_8c_source.html#l00341">outputredir_token_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="shell-tokens_8c.html#a0cc07110bc86215bdacb8ee2d6639f2c">outputredir_token_ctor()</a>.</p>
 
 </div>
 </div>
@@ -1100,19 +908,9 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00195">195</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;{</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        <a class="code" href="structOutputRedirToken.html">OutputRedirToken</a> <span class="keyword">const</span> * <span class="keyword">const</span> self_ = (<a class="code" href="structOutputRedirToken.html">OutputRedirToken</a> <span class="keyword">const</span> *) <span class="keyword">self</span>;</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        <span class="comment">// copy output redirection symbol into token</span></div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        <span class="keywordtype">char</span> *slice = iter-&gt;vptr-&gt;munch_char(iter);</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        self_-&gt;<a class="code" href="structOutputRedirToken.html#a7d180c3c1f5a3ac8c18a35ceceb8fca3">super</a>.<a class="code" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">vptr</a>-&gt;<a class="code" href="structTokenVtbl.html#a83da377ce5992b31516de2b84037c755">set_value</a>(<span class="keyword">self</span>, slice);</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        free(slice);</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="string-iterator_8h_source.html#l00084">StringIteratorVtbl::munch_char</a>, <a class="el" href="token_8h_source.html#l00069">TokenVtbl::set_value</a>, <a class="el" href="shell-tokens_8h_source.html#l00223">OutputRedirToken::super</a>, <a class="el" href="token_8h_source.html#l00022">Token::vptr</a>, and <a class="el" href="string-iterator_8h_source.html#l00025">StringIterator::vptr</a>.</p>
+<p class="reference">References <a class="el" href="structStringIteratorVtbl.html#aadd4fa552e314933423447e928ffce1d">StringIteratorVtbl::munch_char</a>, <a class="el" href="structTokenVtbl.html#a83da377ce5992b31516de2b84037c755">TokenVtbl::set_value</a>, <a class="el" href="structOutputRedirToken.html#a7d180c3c1f5a3ac8c18a35ceceb8fca3">OutputRedirToken::super</a>, <a class="el" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">Token::vptr</a>, and <a class="el" href="structStringIterator.html#ac2117e6d4ad50c241a62363c73d79e14">StringIterator::vptr</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="shell-tokens_8c_source.html#l00341">outputredir_token_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="shell-tokens_8c.html#a0cc07110bc86215bdacb8ee2d6639f2c">outputredir_token_ctor()</a>.</p>
 
 </div>
 </div>
@@ -1144,22 +942,9 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00359">359</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;{</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        <span class="keyword">static</span> <span class="keyword">struct </span><a class="code" href="structTokenVtbl.html">TokenVtbl</a> const vtbl = {</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;                .<a class="code" href="structTokenVtbl.html#a9626717617c7e53cdb743d739e9a3518">get_type</a> = &amp;<a class="code" href="token_8h.html#a6ecf8ea322eb6cb96f828ce8c1d206e9">token_get_type_</a>,</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;                .get_value = &amp;<a class="code" href="token_8h.html#adda741d6f8daf9f8ec2174bba3d63266">token_get_value_</a>,</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;                .print = &amp;<a class="code" href="shell-tokens_8c.html#a0274dc787ef174eee7039dd9ba20e654">word_token_print_</a>,</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;                .set_value = &amp;<a class="code" href="token_8h.html#aa681498b28d49522864aea40ec8359ca">token_set_value_</a>,</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;                .take = &amp;<a class="code" href="shell-tokens_8c.html#a7d8a3a8c408e582951e1bdae91167d8c">word_token_take_</a>,</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;        };</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;        <a class="code" href="token_8h.html#a7a14e268eddc63363b0d81b9a23d511d">token_ctor</a>(&amp;self-&gt;<a class="code" href="structWordToken.html#a85c685fec26bf342508fba83a7a73db5">super</a>, (<a class="code" href="token_8h.html#aa520fbf142ba1e7e659590c07da31921">TokenType</a>) <a class="code" href="shell-tokens_8h.html#a16a54cb1a781967b97660b0cb96e1a54ae7dfa366936528afaf5c79581179e712">TOK_WORD</a>);</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        <span class="keyword">self</span>-&gt;super.vptr = &amp;vtbl;</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="token_8h_source.html#l00047">TokenVtbl::get_type</a>, <a class="el" href="shell-tokens_8h_source.html#l00021">TOK_WORD</a>, <a class="el" href="token_8c_source.html#l00124">token_ctor()</a>, <a class="el" href="token_8c_source.html#l00163">token_get_type_()</a>, <a class="el" href="token_8c_source.html#l00168">token_get_value_()</a>, <a class="el" href="token_8c_source.html#l00177">token_set_value_()</a>, <a class="el" href="shell-tokens_8c_source.html#l00212">word_token_print_()</a>, and <a class="el" href="shell-tokens_8c_source.html#l00228">word_token_take_()</a>.</p>
+<p class="reference">References <a class="el" href="structTokenVtbl.html#a9626717617c7e53cdb743d739e9a3518">TokenVtbl::get_type</a>, <a class="el" href="shell-tokens_8h.html#a16a54cb1a781967b97660b0cb96e1a54ae7dfa366936528afaf5c79581179e712">TOK_WORD</a>, <a class="el" href="token_8h.html#a7a14e268eddc63363b0d81b9a23d511d">token_ctor()</a>, <a class="el" href="token_8h.html#a6ecf8ea322eb6cb96f828ce8c1d206e9">token_get_type_()</a>, <a class="el" href="token_8h.html#adda741d6f8daf9f8ec2174bba3d63266">token_get_value_()</a>, <a class="el" href="token_8h.html#aa681498b28d49522864aea40ec8359ca">token_set_value_()</a>, <a class="el" href="shell-tokens_8c.html#a0274dc787ef174eee7039dd9ba20e654">word_token_print_()</a>, and <a class="el" href="shell-tokens_8c.html#a7d8a3a8c408e582951e1bdae91167d8c">word_token_take_()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="lexer_8c_source.html#l00012">lexer_generate_tokens()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="lexer_8c.html#a9c5fcecec1d5cdecf516cb569f643c0e">lexer_generate_tokens()</a>.</p>
 
 </div>
 </div>
@@ -1188,12 +973,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>The caller is responsible for freeing <code>self</code> afterwards if it was originally allocated on the heap. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00372">372</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;{</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;        <a class="code" href="token_8h.html#aefe387092a32c96e19a9c0710e272b48">token_dtor</a>(&amp;self-&gt;<a class="code" href="structWordToken.html#a85c685fec26bf342508fba83a7a73db5">super</a>);</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="token_8c_source.html#l00140">token_dtor()</a>.</p>
+<p class="reference">References <a class="el" href="token_8h.html#aefe387092a32c96e19a9c0710e272b48">token_dtor()</a>.</p>
 
 </div>
 </div>
@@ -1229,16 +1009,9 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00212">212</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;{</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        <a class="code" href="structWordToken.html">WordToken</a> <span class="keyword">const</span> * <span class="keyword">const</span> self_ = (<a class="code" href="structWordToken.html">WordToken</a> <span class="keyword">const</span> *) <span class="keyword">self</span>;</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        printf(<span class="stringliteral">&quot;WORD:%s&quot;</span>, self_-&gt;<a class="code" href="structWordToken.html#a85c685fec26bf342508fba83a7a73db5">super</a>.<a class="code" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">vptr</a>-&gt;<a class="code" href="structTokenVtbl.html#a0f7452fd123ca8edb3ba09ebb8882a1f">get_value</a>(<span class="keyword">self</span>));</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="token_8h_source.html#l00056">TokenVtbl::get_value</a>, <a class="el" href="shell-tokens_8h_source.html#l00267">WordToken::super</a>, and <a class="el" href="token_8h_source.html#l00022">Token::vptr</a>.</p>
+<p class="reference">References <a class="el" href="structTokenVtbl.html#a0f7452fd123ca8edb3ba09ebb8882a1f">TokenVtbl::get_value</a>, <a class="el" href="structWordToken.html#a85c685fec26bf342508fba83a7a73db5">WordToken::super</a>, and <a class="el" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">Token::vptr</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="shell-tokens_8c_source.html#l00359">word_token_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="shell-tokens_8c.html#aacae5340c5b9e39e4bc80ace242b2d12">word_token_ctor()</a>.</p>
 
 </div>
 </div>
@@ -1286,64 +1059,13 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="shell-tokens_8c_source.html#l00228">228</a> of file <a class="el" href="shell-tokens_8c_source.html">shell-tokens.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;{</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        <a class="code" href="structWordToken.html">WordToken</a> <span class="keyword">const</span> * <span class="keyword">const</span> self_ = (<a class="code" href="structWordToken.html">WordToken</a> <span class="keyword">const</span> *) <span class="keyword">self</span>;</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        <span class="comment">// copy word into token</span></div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        <span class="keywordtype">char</span> *slice = iter-&gt;vptr-&gt;munch_word(iter);</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        self_-&gt;<a class="code" href="structWordToken.html#a85c685fec26bf342508fba83a7a73db5">super</a>.<a class="code" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">vptr</a>-&gt;<a class="code" href="structTokenVtbl.html#a83da377ce5992b31516de2b84037c755">set_value</a>(<span class="keyword">self</span>, slice);</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        free(slice);</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="string-iterator_8h_source.html#l00102">StringIteratorVtbl::munch_word</a>, <a class="el" href="token_8h_source.html#l00069">TokenVtbl::set_value</a>, <a class="el" href="shell-tokens_8h_source.html#l00267">WordToken::super</a>, <a class="el" href="token_8h_source.html#l00022">Token::vptr</a>, and <a class="el" href="string-iterator_8h_source.html#l00025">StringIterator::vptr</a>.</p>
+<p class="reference">References <a class="el" href="structStringIteratorVtbl.html#aec7bc944d2bd423ed95effaf31c212df">StringIteratorVtbl::munch_word</a>, <a class="el" href="structTokenVtbl.html#a83da377ce5992b31516de2b84037c755">TokenVtbl::set_value</a>, <a class="el" href="structWordToken.html#a85c685fec26bf342508fba83a7a73db5">WordToken::super</a>, <a class="el" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">Token::vptr</a>, and <a class="el" href="structStringIterator.html#ac2117e6d4ad50c241a62363c73d79e14">StringIterator::vptr</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="shell-tokens_8c_source.html#l00359">word_token_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="shell-tokens_8c.html#aacae5340c5b9e39e4bc80ace242b2d12">word_token_ctor()</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
-<div class="ttc" id="ashell-tokens_8c_html_ae27a5333e0ed6f3e8153349c303870f7"><div class="ttname"><a href="shell-tokens_8c.html#ae27a5333e0ed6f3e8153349c303870f7">newline_token_take_</a></div><div class="ttdeci">static void newline_token_take_(Token const *const self, StringIterator const *const iter)</div><div class="ttdoc">Implementation of NewlineToken::Token::take().</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8c_source.html#l00162">shell-tokens.c:162</a></div></div>
-<div class="ttc" id="ashell-tokens_8h_html_a16a54cb1a781967b97660b0cb96e1a54ac1d6f2f8ac05b44b5b0dbf0970f1bc3b"><div class="ttname"><a href="shell-tokens_8h.html#a16a54cb1a781967b97660b0cb96e1a54ac1d6f2f8ac05b44b5b0dbf0970f1bc3b">TOK_REDIR_OUTPUT</a></div><div class="ttdeci">@ TOK_REDIR_OUTPUT</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8h_source.html#l00020">shell-tokens.h:20</a></div></div>
-<div class="ttc" id="astructTokenVtbl_html_a83da377ce5992b31516de2b84037c755"><div class="ttname"><a href="structTokenVtbl.html#a83da377ce5992b31516de2b84037c755">TokenVtbl::set_value</a></div><div class="ttdeci">void(* set_value)(Token const *const self, const char *const value)</div><div class="ttdoc">Copies value into self's value field.</div><div class="ttdef"><b>Definition:</b> <a href="token_8h_source.html#l00069">token.h:69</a></div></div>
-<div class="ttc" id="ashell-tokens_8c_html_afaae02bf18fc51b886d6507fee177cf6"><div class="ttname"><a href="shell-tokens_8c.html#afaae02bf18fc51b886d6507fee177cf6">inputredir_token_take_</a></div><div class="ttdeci">static void inputredir_token_take_(Token const *const self, StringIterator const *const iter)</div><div class="ttdoc">Implementation of InputRedirToken::Token::take().</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8c_source.html#l00130">shell-tokens.c:130</a></div></div>
-<div class="ttc" id="ashell-tokens_8c_html_a24030150fb53851d3051448202a1f417"><div class="ttname"><a href="shell-tokens_8c.html#a24030150fb53851d3051448202a1f417">inputredir_token_print_</a></div><div class="ttdeci">static void inputredir_token_print_(Token const *const self)</div><div class="ttdoc">Implementation of InputRedirToken::Token::print().</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8c_source.html#l00114">shell-tokens.c:114</a></div></div>
-<div class="ttc" id="ashell-tokens_8c_html_a7d8a3a8c408e582951e1bdae91167d8c"><div class="ttname"><a href="shell-tokens_8c.html#a7d8a3a8c408e582951e1bdae91167d8c">word_token_take_</a></div><div class="ttdeci">static void word_token_take_(Token const *const self, StringIterator const *const iter)</div><div class="ttdoc">Implementation of WordToken::Token::take().</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8c_source.html#l00228">shell-tokens.c:228</a></div></div>
-<div class="ttc" id="astructBGCtrlToken_html_a68b261b4ce5daef8cfb9c367925d794c"><div class="ttname"><a href="structBGCtrlToken.html#a68b261b4ce5daef8cfb9c367925d794c">BGCtrlToken::super</a></div><div class="ttdeci">Token super</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8h_source.html#l00045">shell-tokens.h:45</a></div></div>
-<div class="ttc" id="ashell-tokens_8c_html_a4d7015e08f3a5fa8a71556e22c78f667"><div class="ttname"><a href="shell-tokens_8c.html#a4d7015e08f3a5fa8a71556e22c78f667">newline_token_print_</a></div><div class="ttdeci">static void newline_token_print_(Token const *const self)</div><div class="ttdoc">Implementation of NewlineToken::Token::print().</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8c_source.html#l00147">shell-tokens.c:147</a></div></div>
-<div class="ttc" id="atoken_8h_html_aa681498b28d49522864aea40ec8359ca"><div class="ttname"><a href="token_8h.html#aa681498b28d49522864aea40ec8359ca">token_set_value_</a></div><div class="ttdeci">void token_set_value_(Token const *self, const char *value)</div><div class="ttdoc">Implementation of Token::setValue().</div><div class="ttdef"><b>Definition:</b> <a href="token_8c_source.html#l00177">token.c:177</a></div></div>
-<div class="ttc" id="ashell-tokens_8h_html_a16a54cb1a781967b97660b0cb96e1a54adbf4671ed01b7cb484b13e02ea37541c"><div class="ttname"><a href="shell-tokens_8h.html#a16a54cb1a781967b97660b0cb96e1a54adbf4671ed01b7cb484b13e02ea37541c">TOK_REDIR_INPUT</a></div><div class="ttdeci">@ TOK_REDIR_INPUT</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8h_source.html#l00019">shell-tokens.h:19</a></div></div>
-<div class="ttc" id="astructTokenVtbl_html_a0f7452fd123ca8edb3ba09ebb8882a1f"><div class="ttname"><a href="structTokenVtbl.html#a0f7452fd123ca8edb3ba09ebb8882a1f">TokenVtbl::get_value</a></div><div class="ttdeci">char *(* get_value)(Token const *const self)</div><div class="ttdoc">Returns copy of the string stored by the token.</div><div class="ttdef"><b>Definition:</b> <a href="token_8h_source.html#l00056">token.h:56</a></div></div>
-<div class="ttc" id="ashell-tokens_8h_html_a16a54cb1a781967b97660b0cb96e1a54a411f75d9c12d899a33a8993a3602da73"><div class="ttname"><a href="shell-tokens_8h.html#a16a54cb1a781967b97660b0cb96e1a54a411f75d9c12d899a33a8993a3602da73">TOK_CTRL_BG</a></div><div class="ttdeci">@ TOK_CTRL_BG</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8h_source.html#l00017">shell-tokens.h:17</a></div></div>
-<div class="ttc" id="ashell-tokens_8h_html_a16a54cb1a781967b97660b0cb96e1a54ae7dfa366936528afaf5c79581179e712"><div class="ttname"><a href="shell-tokens_8h.html#a16a54cb1a781967b97660b0cb96e1a54ae7dfa366936528afaf5c79581179e712">TOK_WORD</a></div><div class="ttdeci">@ TOK_WORD</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8h_source.html#l00021">shell-tokens.h:21</a></div></div>
-<div class="ttc" id="ashell-tokens_8c_html_a9bd3f98472c79cd81bfe65b20fe26e76"><div class="ttname"><a href="shell-tokens_8c.html#a9bd3f98472c79cd81bfe65b20fe26e76">comment_token_print_</a></div><div class="ttdeci">static void comment_token_print_(Token const *const self)</div><div class="ttdoc">Implementation of CommentToken::Token::print().</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8c_source.html#l00081">shell-tokens.c:81</a></div></div>
-<div class="ttc" id="ashell-tokens_8c_html_aaa824102de0dd6f75b7706357e2b0920"><div class="ttname"><a href="shell-tokens_8c.html#aaa824102de0dd6f75b7706357e2b0920">outputredir_token_take_</a></div><div class="ttdeci">static void outputredir_token_take_(Token const *const self, StringIterator const *const iter)</div><div class="ttdoc">Implementation of OutputRedirToken::Token::take().</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8c_source.html#l00195">shell-tokens.c:195</a></div></div>
-<div class="ttc" id="astructWordToken_html_a85c685fec26bf342508fba83a7a73db5"><div class="ttname"><a href="structWordToken.html#a85c685fec26bf342508fba83a7a73db5">WordToken::super</a></div><div class="ttdeci">Token super</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8h_source.html#l00267">shell-tokens.h:267</a></div></div>
-<div class="ttc" id="ashell-tokens_8c_html_a0274dc787ef174eee7039dd9ba20e654"><div class="ttname"><a href="shell-tokens_8c.html#a0274dc787ef174eee7039dd9ba20e654">word_token_print_</a></div><div class="ttdeci">static void word_token_print_(Token const *const self)</div><div class="ttdoc">Implementation of WordToken::Token::print().</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8c_source.html#l00212">shell-tokens.c:212</a></div></div>
-<div class="ttc" id="astructOutputRedirToken_html"><div class="ttname"><a href="structOutputRedirToken.html">OutputRedirToken</a></div><div class="ttdoc">Defines a token object that parses and stores an output redirection symbol.</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8h_source.html#l00222">shell-tokens.h:222</a></div></div>
-<div class="ttc" id="ashell-tokens_8c_html_a4a67db81b529659157738e314e636ddc"><div class="ttname"><a href="shell-tokens_8c.html#a4a67db81b529659157738e314e636ddc">outputredir_token_print_</a></div><div class="ttdeci">static void outputredir_token_print_(Token const *const self)</div><div class="ttdoc">Implementation of OutputRedirToken::Token::print().</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8c_source.html#l00179">shell-tokens.c:179</a></div></div>
-<div class="ttc" id="astructCommentToken_html_a782e9c51ee5e1ed78cb0ac435a87f751"><div class="ttname"><a href="structCommentToken.html#a782e9c51ee5e1ed78cb0ac435a87f751">CommentToken::super</a></div><div class="ttdeci">Token super</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8h_source.html#l00089">shell-tokens.h:89</a></div></div>
-<div class="ttc" id="atoken_8h_html_a7a14e268eddc63363b0d81b9a23d511d"><div class="ttname"><a href="token_8h.html#a7a14e268eddc63363b0d81b9a23d511d">token_ctor</a></div><div class="ttdeci">void token_ctor(Token *self, TokenType type)</div><div class="ttdoc">Constructs a new Token object.</div><div class="ttdef"><b>Definition:</b> <a href="token_8c_source.html#l00124">token.c:124</a></div></div>
-<div class="ttc" id="atoken_8h_html_adda741d6f8daf9f8ec2174bba3d63266"><div class="ttname"><a href="token_8h.html#adda741d6f8daf9f8ec2174bba3d63266">token_get_value_</a></div><div class="ttdeci">char * token_get_value_(Token const *self)</div><div class="ttdoc">Implementation of Token::getValue().</div><div class="ttdef"><b>Definition:</b> <a href="token_8c_source.html#l00168">token.c:168</a></div></div>
-<div class="ttc" id="astructToken_html_a759b94ee460172f9ba2e9e8a6deeacd0"><div class="ttname"><a href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">Token::vptr</a></div><div class="ttdeci">struct TokenVtbl const  * vptr</div><div class="ttdef"><b>Definition:</b> <a href="token_8h_source.html#l00022">token.h:22</a></div></div>
-<div class="ttc" id="atoken_8h_html_aa520fbf142ba1e7e659590c07da31921"><div class="ttname"><a href="token_8h.html#aa520fbf142ba1e7e659590c07da31921">TokenType</a></div><div class="ttdeci">TokenType</div><div class="ttdoc">Defines the base token type (class).</div><div class="ttdef"><b>Definition:</b> <a href="token_8h_source.html#l00029">token.h:29</a></div></div>
-<div class="ttc" id="ashell-tokens_8h_html_a16a54cb1a781967b97660b0cb96e1a54a887cc6440dd799ceb7d66c4f1ca6bb2e"><div class="ttname"><a href="shell-tokens_8h.html#a16a54cb1a781967b97660b0cb96e1a54a887cc6440dd799ceb7d66c4f1ca6bb2e">TOK_CTRL_NEWLINE</a></div><div class="ttdeci">@ TOK_CTRL_NEWLINE</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8h_source.html#l00018">shell-tokens.h:18</a></div></div>
-<div class="ttc" id="ashell-tokens_8c_html_a35ba75ba0e2f6f265c05aab9dc77f03f"><div class="ttname"><a href="shell-tokens_8c.html#a35ba75ba0e2f6f265c05aab9dc77f03f">bgctrl_token_take_</a></div><div class="ttdeci">static void bgctrl_token_take_(Token const *const self, StringIterator const *const iter)</div><div class="ttdoc">Implementation of BGControlToken::Token::take().</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8c_source.html#l00064">shell-tokens.c:64</a></div></div>
-<div class="ttc" id="astructTokenVtbl_html"><div class="ttname"><a href="structTokenVtbl.html">TokenVtbl</a></div><div class="ttdoc">VTable for a Token object.</div><div class="ttdef"><b>Definition:</b> <a href="token_8h_source.html#l00041">token.h:41</a></div></div>
-<div class="ttc" id="astructInputRedirToken_html"><div class="ttname"><a href="structInputRedirToken.html">InputRedirToken</a></div><div class="ttdoc">Defines a token object that parses and stores an input redirection symbol.</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8h_source.html#l00133">shell-tokens.h:133</a></div></div>
-<div class="ttc" id="atoken_8h_html_a6ecf8ea322eb6cb96f828ce8c1d206e9"><div class="ttname"><a href="token_8h.html#a6ecf8ea322eb6cb96f828ce8c1d206e9">token_get_type_</a></div><div class="ttdeci">TokenType token_get_type_(Token const *self)</div><div class="ttdoc">Implementation of Token::getType().</div><div class="ttdef"><b>Definition:</b> <a href="token_8c_source.html#l00163">token.c:163</a></div></div>
-<div class="ttc" id="atoken_8h_html_aefe387092a32c96e19a9c0710e272b48"><div class="ttname"><a href="token_8h.html#aefe387092a32c96e19a9c0710e272b48">token_dtor</a></div><div class="ttdeci">void token_dtor(Token *self)</div><div class="ttdoc">Destroys a Token object, freeing its members and re-initializing them to NULL in the process.</div><div class="ttdef"><b>Definition:</b> <a href="token_8c_source.html#l00140">token.c:140</a></div></div>
-<div class="ttc" id="astructWordToken_html"><div class="ttname"><a href="structWordToken.html">WordToken</a></div><div class="ttdoc">Defines a token object that parses and stores a command literal.</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8h_source.html#l00266">shell-tokens.h:266</a></div></div>
-<div class="ttc" id="astructNewlineToken_html"><div class="ttname"><a href="structNewlineToken.html">NewlineToken</a></div><div class="ttdoc">Defines a token object that parses and stores a newline character.</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8h_source.html#l00177">shell-tokens.h:177</a></div></div>
-<div class="ttc" id="astructNewlineToken_html_a4540de2d7edd04e0981e2e2a049eb42e"><div class="ttname"><a href="structNewlineToken.html#a4540de2d7edd04e0981e2e2a049eb42e">NewlineToken::super</a></div><div class="ttdeci">Token super</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8h_source.html#l00178">shell-tokens.h:178</a></div></div>
-<div class="ttc" id="astructTokenVtbl_html_a9626717617c7e53cdb743d739e9a3518"><div class="ttname"><a href="structTokenVtbl.html#a9626717617c7e53cdb743d739e9a3518">TokenVtbl::get_type</a></div><div class="ttdeci">TokenType(* get_type)(Token const *const self)</div><div class="ttdoc">Returns the token's type identifier.</div><div class="ttdef"><b>Definition:</b> <a href="token_8h_source.html#l00047">token.h:47</a></div></div>
-<div class="ttc" id="astructInputRedirToken_html_a2076e39a07d32c3e47795153cd9058da"><div class="ttname"><a href="structInputRedirToken.html#a2076e39a07d32c3e47795153cd9058da">InputRedirToken::super</a></div><div class="ttdeci">Token super</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8h_source.html#l00134">shell-tokens.h:134</a></div></div>
-<div class="ttc" id="ashell-tokens_8c_html_ae6fef5a0f5832ee7e2cd53d8cd35caf5"><div class="ttname"><a href="shell-tokens_8c.html#ae6fef5a0f5832ee7e2cd53d8cd35caf5">comment_token_take_</a></div><div class="ttdeci">static void comment_token_take_(Token const *const self, StringIterator const *const iter)</div><div class="ttdoc">Implementation of CommentToken::Token::take().</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8c_source.html#l00097">shell-tokens.c:97</a></div></div>
-<div class="ttc" id="astructOutputRedirToken_html_a7d180c3c1f5a3ac8c18a35ceceb8fca3"><div class="ttname"><a href="structOutputRedirToken.html#a7d180c3c1f5a3ac8c18a35ceceb8fca3">OutputRedirToken::super</a></div><div class="ttdeci">Token super</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8h_source.html#l00223">shell-tokens.h:223</a></div></div>
-<div class="ttc" id="ashell-tokens_8c_html_aaa8ce2d94666144d8cc1901c2b1cd595"><div class="ttname"><a href="shell-tokens_8c.html#aaa8ce2d94666144d8cc1901c2b1cd595">bgctrl_token_print_</a></div><div class="ttdeci">static void bgctrl_token_print_(Token const *const self)</div><div class="ttdoc">Implementation of BGControlToken::Token::print().</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8c_source.html#l00048">shell-tokens.c:48</a></div></div>
-<div class="ttc" id="astructBGCtrlToken_html"><div class="ttname"><a href="structBGCtrlToken.html">BGCtrlToken</a></div><div class="ttdoc">Defines a token object that parses and stores background command symbol.</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8h_source.html#l00044">shell-tokens.h:44</a></div></div>
-<div class="ttc" id="ashell-tokens_8h_html_a16a54cb1a781967b97660b0cb96e1a54aafc53fb53f7e61e0828c163490de7d54"><div class="ttname"><a href="shell-tokens_8h.html#a16a54cb1a781967b97660b0cb96e1a54aafc53fb53f7e61e0828c163490de7d54">TOK_CMT</a></div><div class="ttdeci">@ TOK_CMT</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8h_source.html#l00016">shell-tokens.h:16</a></div></div>
-<div class="ttc" id="astructCommentToken_html"><div class="ttname"><a href="structCommentToken.html">CommentToken</a></div><div class="ttdoc">Defines a token object that parses and stores a comment symbol.</div><div class="ttdef"><b>Definition:</b> <a href="shell-tokens_8h_source.html#l00088">shell-tokens.h:88</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

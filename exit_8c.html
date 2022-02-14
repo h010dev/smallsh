@@ -12,12 +12,8 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -42,36 +38,16 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="examples.html"><span>Examples</span></a></li>
-      <li>
-        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
-          </span>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
-    </ul>
-  </div>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -104,9 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &quot;<a class="el" href="events_8h_source.html">events/events.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="globals_8h_source.html">globals.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="job-control_8h_source.html">job-control/job-control.h</a>&quot;</code><br />
-</div>
-<p><a href="exit_8c_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a06b48ef7aaf752e58a067f127259920c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exit_8c.html#a06b48ef7aaf752e58a067f127259920c">exit_</a> (int <a class="el" href="status_8c.html#a23939106a6e2cda8545e50fc0635d0eb">status</a>)</td></tr>
@@ -138,37 +112,13 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="exit_8c_source.html#l00045">45</a> of file <a class="el" href="exit_8c_source.html">exit.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="comment">/* Clean up job table and kill any child processes. */</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <a class="code" href="job-control_8h.html#a769af495eaeafe093339399f540b00eb">job_table</a>.<a class="code" href="structJobTable.html#a4ab6d5447a04560ba2bad7fdfcddcca5">killall</a>(&amp;<a class="code" href="job-control_8h.html#a769af495eaeafe093339399f540b00eb">job_table</a>);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="job-table_8h.html#a331ed0c3284851eecf36786439e227ec">job_table_dtor</a>(&amp;<a class="code" href="job-control_8h.html#a769af495eaeafe093339399f540b00eb">job_table</a>);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="comment">/* Teardown event handling channels. */</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <a class="code" href="events_8h.html#a64bde057407debd7862302dda094b6ed">events_cleanup</a>();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="comment">/* Make exit output pretty in case we are operating inside another shell. */</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordflow">if</span> (!<a class="code" href="globals_8h.html#a71c10c0a73d21042d5e8b7d0aa38c56d">smallsh_interactive_mode</a>) {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                write(STDOUT_FILENO, <span class="stringliteral">&quot;\n&quot;</span>, 1);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        write(STDOUT_FILENO, <span class="stringliteral">&quot;exit\n&quot;</span>, 5);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        exit(<a class="code" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a>);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="events_8c_source.html#l00082">events_cleanup()</a>, <a class="el" href="job-control_8h_source.html#l00018">job_table</a>, <a class="el" href="job-table_8c_source.html#l00290">job_table_dtor()</a>, <a class="el" href="job-table_8h_source.html#l00051">JobTable::killall</a>, <a class="el" href="globals_8h_source.html#l00017">smallsh_interactive_mode</a>, and <a class="el" href="status_8c_source.html#l00043">status()</a>.</p>
+<p class="reference">References <a class="el" href="events_8h.html#a64bde057407debd7862302dda094b6ed">events_cleanup()</a>, <a class="el" href="job-control_8h.html#a769af495eaeafe093339399f540b00eb">job_table</a>, <a class="el" href="job-table_8h.html#a331ed0c3284851eecf36786439e227ec">job_table_dtor()</a>, <a class="el" href="structJobTable.html#a4ab6d5447a04560ba2bad7fdfcddcca5">JobTable::killall</a>, <a class="el" href="globals_8h.html#a71c10c0a73d21042d5e8b7d0aa38c56d">smallsh_interactive_mode</a>, and <a class="el" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="smallsh_8c_source.html#l00331">main()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="smallsh_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main()</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
-<div class="ttc" id="ajob-control_8h_html_a769af495eaeafe093339399f540b00eb"><div class="ttname"><a href="job-control_8h.html#a769af495eaeafe093339399f540b00eb">job_table</a></div><div class="ttdeci">JobTable job_table</div><div class="ttdef"><b>Definition:</b> <a href="job-control_8h_source.html#l00018">job-control.h:18</a></div></div>
-<div class="ttc" id="ajob-table_8h_html_a331ed0c3284851eecf36786439e227ec"><div class="ttname"><a href="job-table_8h.html#a331ed0c3284851eecf36786439e227ec">job_table_dtor</a></div><div class="ttdeci">void job_table_dtor(JobTable *self)</div><div class="ttdoc">De-initializes self and frees up its resources.</div><div class="ttdef"><b>Definition:</b> <a href="job-table_8c_source.html#l00290">job-table.c:290</a></div></div>
-<div class="ttc" id="aevents_8h_html_a64bde057407debd7862302dda094b6ed"><div class="ttname"><a href="events_8h.html#a64bde057407debd7862302dda094b6ed">events_cleanup</a></div><div class="ttdeci">void events_cleanup(void)</div><div class="ttdoc">Cleans up the global event-related data structures.</div><div class="ttdef"><b>Definition:</b> <a href="events_8c_source.html#l00082">events.c:82</a></div></div>
-<div class="ttc" id="aglobals_8h_html_a71c10c0a73d21042d5e8b7d0aa38c56d"><div class="ttname"><a href="globals_8h.html#a71c10c0a73d21042d5e8b7d0aa38c56d">smallsh_interactive_mode</a></div><div class="ttdeci">int smallsh_interactive_mode</div><div class="ttdef"><b>Definition:</b> <a href="globals_8h_source.html#l00017">globals.h:17</a></div></div>
-<div class="ttc" id="astructJobTable_html_a4ab6d5447a04560ba2bad7fdfcddcca5"><div class="ttname"><a href="structJobTable.html#a4ab6d5447a04560ba2bad7fdfcddcca5">JobTable::killall</a></div><div class="ttdeci">void(* killall)(struct JobTable const *const self)</div><div class="ttdoc">Kills all children in table.</div><div class="ttdef"><b>Definition:</b> <a href="job-table_8h_source.html#l00051">job-table.h:51</a></div></div>
-<div class="ttc" id="astatus_8h_html_a685506d2c432425b89581f85cf876f22"><div class="ttname"><a href="status_8h.html#a685506d2c432425b89581f85cf876f22">status</a></div><div class="ttdeci">void status(void)</div><div class="ttdoc">Displays last exit status value to user.</div><div class="ttdef"><b>Definition:</b> <a href="status_8c_source.html#l00043">status.c:43</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

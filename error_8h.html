@@ -12,12 +12,8 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -42,36 +38,16 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="examples.html"><span>Examples</span></a></li>
-      <li>
-        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
-          </span>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
-    </ul>
-  </div>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -120,8 +96,6 @@ Variables</h2></td></tr>
 <div class="textblock"><p>For recording and responding to shell errors. </p>
 <dl class="section author"><dt>Author</dt><dd>Mohamed Al-Hussein </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>04 Feb 2022 </dd></dl>
-
-<p class="definition">Definition in file <a class="el" href="error_8h_source.html">error.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a725450636b667738da72231c77084186"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a725450636b667738da72231c77084186">&#9670;&nbsp;</a></span>print_error_msg()</h2>
@@ -147,17 +121,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="error_8c_source.html#l00043">43</a> of file <a class="el" href="error_8c_source.html">error.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        (void) msg;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#ifdef DEBUG</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot;%s\n&quot;</span>, msg);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        fflush(stderr);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="smallsh_8c_source.html#l00331">main()</a>, <a class="el" href="smallsh_8c_source.html#l00205">smallsh_init()</a>, and <a class="el" href="smallsh_8c_source.html#l00259">smallsh_read_input()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="smallsh_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main()</a>, <a class="el" href="smallsh_8c.html#a142fdf9ba40211230997c69308bcab71">smallsh_init()</a>, and <a class="el" href="smallsh_8c.html#a9f2b1b75a9b61c4b1b4333108a00e805">smallsh_read_input()</a>.</p>
 
 </div>
 </div>
@@ -175,9 +139,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <p>shell error status code </p>
 
-<p class="definition">Definition at line <a class="el" href="error_8h_source.html#l00010">10</a> of file <a class="el" href="error_8h_source.html">error.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="job-control_8c_source.html#l00029">job_control_wait_for_job()</a>, <a class="el" href="process_8c_source.html#l00280">process_launch()</a>, <a class="el" href="process_8c_source.html#l00098">process_set_io_streams()</a>, and <a class="el" href="status_8c_source.html#l00043">status()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="job-control_8c.html#aa938098eb32e74162ca87c629d3e86b9">job_control_wait_for_job()</a>, <a class="el" href="process_8c.html#a628ed3c091c9c88d3ea3362ba97a47f7">process_launch()</a>, <a class="el" href="process_8c.html#a7d13512caf8af82bb89ef37d3b59c52e">process_set_io_streams()</a>, and <a class="el" href="status_8c.html#a23939106a6e2cda8545e50fc0635d0eb">status()</a>.</p>
 
 </div>
 </div>

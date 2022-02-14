@@ -12,12 +12,8 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -42,36 +38,16 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="examples.html"><span>Examples</span></a></li>
-      <li>
-        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
-          </span>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
-    </ul>
-  </div>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -138,22 +114,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="preprocessor">#endif //SMALLSH_TOKEN_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="astructTokenVtbl_html_a83da377ce5992b31516de2b84037c755"><div class="ttname"><a href="structTokenVtbl.html#a83da377ce5992b31516de2b84037c755">TokenVtbl::set_value</a></div><div class="ttdeci">void(* set_value)(Token const *const self, const char *const value)</div><div class="ttdoc">Copies value into self's value field.</div><div class="ttdef"><b>Definition:</b> <a href="token_8h_source.html#l00069">token.h:69</a></div></div>
-<div class="ttc" id="atoken_8h_html_aa681498b28d49522864aea40ec8359ca"><div class="ttname"><a href="token_8h.html#aa681498b28d49522864aea40ec8359ca">token_set_value_</a></div><div class="ttdeci">void token_set_value_(Token const *self, const char *value)</div><div class="ttdoc">Implementation of Token::setValue().</div><div class="ttdef"><b>Definition:</b> <a href="token_8c_source.html#l00177">token.c:177</a></div></div>
-<div class="ttc" id="astructToken_html"><div class="ttname"><a href="structToken.html">Token</a></div><div class="ttdoc">Defines a basic token object that has a type and value.</div><div class="ttdef"><b>Definition:</b> <a href="token_8h_source.html#l00021">token.h:21</a></div></div>
-<div class="ttc" id="astructTokenVtbl_html_a3167e7620390469d5db33c97ca8805d7"><div class="ttname"><a href="structTokenVtbl.html#a3167e7620390469d5db33c97ca8805d7">TokenVtbl::take</a></div><div class="ttdeci">void(* take)(Token const *const self, StringIterator const *const iter)</div><div class="ttdoc">Virtual method definition for 'taking', or storing a string as part of the token's value.</div><div class="ttdef"><b>Definition:</b> <a href="token_8h_source.html#l00083">token.h:83</a></div></div>
-<div class="ttc" id="atoken_8h_html_a7a14e268eddc63363b0d81b9a23d511d"><div class="ttname"><a href="token_8h.html#a7a14e268eddc63363b0d81b9a23d511d">token_ctor</a></div><div class="ttdeci">void token_ctor(Token *self, TokenType type)</div><div class="ttdoc">Constructs a new Token object.</div><div class="ttdef"><b>Definition:</b> <a href="token_8c_source.html#l00124">token.c:124</a></div></div>
-<div class="ttc" id="atoken_8h_html_adda741d6f8daf9f8ec2174bba3d63266"><div class="ttname"><a href="token_8h.html#adda741d6f8daf9f8ec2174bba3d63266">token_get_value_</a></div><div class="ttdeci">char * token_get_value_(Token const *self)</div><div class="ttdoc">Implementation of Token::getValue().</div><div class="ttdef"><b>Definition:</b> <a href="token_8c_source.html#l00168">token.c:168</a></div></div>
-<div class="ttc" id="astructToken_html_a759b94ee460172f9ba2e9e8a6deeacd0"><div class="ttname"><a href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">Token::vptr</a></div><div class="ttdeci">struct TokenVtbl const  * vptr</div><div class="ttdef"><b>Definition:</b> <a href="token_8h_source.html#l00022">token.h:22</a></div></div>
-<div class="ttc" id="atoken_8h_html_aa520fbf142ba1e7e659590c07da31921ab8382dd53e5a46010b91deb01b84bbb1"><div class="ttname"><a href="token_8h.html#aa520fbf142ba1e7e659590c07da31921ab8382dd53e5a46010b91deb01b84bbb1">TOK_0</a></div><div class="ttdeci">@ TOK_0</div><div class="ttdef"><b>Definition:</b> <a href="token_8h_source.html#l00030">token.h:30</a></div></div>
-<div class="ttc" id="atoken_8h_html_aa520fbf142ba1e7e659590c07da31921"><div class="ttname"><a href="token_8h.html#aa520fbf142ba1e7e659590c07da31921">TokenType</a></div><div class="ttdeci">TokenType</div><div class="ttdoc">Defines the base token type (class).</div><div class="ttdef"><b>Definition:</b> <a href="token_8h_source.html#l00029">token.h:29</a></div></div>
-<div class="ttc" id="astructTokenPrivate_html"><div class="ttname"><a href="structTokenPrivate.html">TokenPrivate</a></div><div class="ttdoc">Hides Token members from sub-classes and client code.</div><div class="ttdef"><b>Definition:</b> <a href="token_8c_source.html#l00051">token.c:51</a></div></div>
-<div class="ttc" id="astructTokenVtbl_html"><div class="ttname"><a href="structTokenVtbl.html">TokenVtbl</a></div><div class="ttdoc">VTable for a Token object.</div><div class="ttdef"><b>Definition:</b> <a href="token_8h_source.html#l00041">token.h:41</a></div></div>
-<div class="ttc" id="atoken_8h_html_a6ecf8ea322eb6cb96f828ce8c1d206e9"><div class="ttname"><a href="token_8h.html#a6ecf8ea322eb6cb96f828ce8c1d206e9">token_get_type_</a></div><div class="ttdeci">TokenType token_get_type_(Token const *self)</div><div class="ttdoc">Implementation of Token::getType().</div><div class="ttdef"><b>Definition:</b> <a href="token_8c_source.html#l00163">token.c:163</a></div></div>
-<div class="ttc" id="atoken_8h_html_aefe387092a32c96e19a9c0710e272b48"><div class="ttname"><a href="token_8h.html#aefe387092a32c96e19a9c0710e272b48">token_dtor</a></div><div class="ttdeci">void token_dtor(Token *self)</div><div class="ttdoc">Destroys a Token object, freeing its members and re-initializing them to NULL in the process.</div><div class="ttdef"><b>Definition:</b> <a href="token_8c_source.html#l00140">token.c:140</a></div></div>
-<div class="ttc" id="astructStringIterator_html"><div class="ttname"><a href="structStringIterator.html">StringIterator</a></div><div class="ttdoc">StringIterator object definition.</div><div class="ttdef"><b>Definition:</b> <a href="string-iterator_8h_source.html#l00024">string-iterator.h:24</a></div></div>
-<div class="ttc" id="astructTokenVtbl_html_a9626717617c7e53cdb743d739e9a3518"><div class="ttname"><a href="structTokenVtbl.html#a9626717617c7e53cdb743d739e9a3518">TokenVtbl::get_type</a></div><div class="ttdeci">TokenType(* get_type)(Token const *const self)</div><div class="ttdoc">Returns the token's type identifier.</div><div class="ttdef"><b>Definition:</b> <a href="token_8h_source.html#l00047">token.h:47</a></div></div>
-<div class="ttc" id="astructTokenVtbl_html_a2e4aa85b9119ab52a0fadcd7835203d7"><div class="ttname"><a href="structTokenVtbl.html#a2e4aa85b9119ab52a0fadcd7835203d7">TokenVtbl::print</a></div><div class="ttdeci">void(* print)(Token const *const self)</div><div class="ttdoc">Prints a pretty-formatted version of self.</div><div class="ttdef"><b>Definition:</b> <a href="token_8h_source.html#l00062">token.h:62</a></div></div>
+<div class="ttc" id="astructTokenVtbl_html_a83da377ce5992b31516de2b84037c755"><div class="ttname"><a href="structTokenVtbl.html#a83da377ce5992b31516de2b84037c755">TokenVtbl::set_value</a></div><div class="ttdeci">void(* set_value)(Token const *const self, const char *const value)</div><div class="ttdoc">Copies value into self's value field.</div><div class="ttdef"><b>Definition:</b> token.h:69</div></div>
+<div class="ttc" id="atoken_8h_html_aa681498b28d49522864aea40ec8359ca"><div class="ttname"><a href="token_8h.html#aa681498b28d49522864aea40ec8359ca">token_set_value_</a></div><div class="ttdeci">void token_set_value_(Token const *self, const char *value)</div><div class="ttdoc">Implementation of Token::setValue().</div><div class="ttdef"><b>Definition:</b> token.c:177</div></div>
+<div class="ttc" id="astructToken_html"><div class="ttname"><a href="structToken.html">Token</a></div><div class="ttdoc">Defines a basic token object that has a type and value.</div><div class="ttdef"><b>Definition:</b> token.h:21</div></div>
+<div class="ttc" id="astructTokenVtbl_html_a3167e7620390469d5db33c97ca8805d7"><div class="ttname"><a href="structTokenVtbl.html#a3167e7620390469d5db33c97ca8805d7">TokenVtbl::take</a></div><div class="ttdeci">void(* take)(Token const *const self, StringIterator const *const iter)</div><div class="ttdoc">Virtual method definition for 'taking', or storing a string as part of the token's value.</div><div class="ttdef"><b>Definition:</b> token.h:83</div></div>
+<div class="ttc" id="atoken_8h_html_a7a14e268eddc63363b0d81b9a23d511d"><div class="ttname"><a href="token_8h.html#a7a14e268eddc63363b0d81b9a23d511d">token_ctor</a></div><div class="ttdeci">void token_ctor(Token *self, TokenType type)</div><div class="ttdoc">Constructs a new Token object.</div><div class="ttdef"><b>Definition:</b> token.c:124</div></div>
+<div class="ttc" id="atoken_8h_html_adda741d6f8daf9f8ec2174bba3d63266"><div class="ttname"><a href="token_8h.html#adda741d6f8daf9f8ec2174bba3d63266">token_get_value_</a></div><div class="ttdeci">char * token_get_value_(Token const *self)</div><div class="ttdoc">Implementation of Token::getValue().</div><div class="ttdef"><b>Definition:</b> token.c:168</div></div>
+<div class="ttc" id="astructToken_html_a759b94ee460172f9ba2e9e8a6deeacd0"><div class="ttname"><a href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">Token::vptr</a></div><div class="ttdeci">struct TokenVtbl const  * vptr</div><div class="ttdef"><b>Definition:</b> token.h:22</div></div>
+<div class="ttc" id="atoken_8h_html_aa520fbf142ba1e7e659590c07da31921ab8382dd53e5a46010b91deb01b84bbb1"><div class="ttname"><a href="token_8h.html#aa520fbf142ba1e7e659590c07da31921ab8382dd53e5a46010b91deb01b84bbb1">TOK_0</a></div><div class="ttdeci">@ TOK_0</div><div class="ttdef"><b>Definition:</b> token.h:30</div></div>
+<div class="ttc" id="atoken_8h_html_aa520fbf142ba1e7e659590c07da31921"><div class="ttname"><a href="token_8h.html#aa520fbf142ba1e7e659590c07da31921">TokenType</a></div><div class="ttdeci">TokenType</div><div class="ttdoc">Defines the base token type (class).</div><div class="ttdef"><b>Definition:</b> token.h:29</div></div>
+<div class="ttc" id="astructTokenPrivate_html"><div class="ttname"><a href="structTokenPrivate.html">TokenPrivate</a></div><div class="ttdoc">Hides Token members from sub-classes and client code.</div><div class="ttdef"><b>Definition:</b> token.c:51</div></div>
+<div class="ttc" id="astructTokenVtbl_html"><div class="ttname"><a href="structTokenVtbl.html">TokenVtbl</a></div><div class="ttdoc">VTable for a Token object.</div><div class="ttdef"><b>Definition:</b> token.h:41</div></div>
+<div class="ttc" id="atoken_8h_html_a6ecf8ea322eb6cb96f828ce8c1d206e9"><div class="ttname"><a href="token_8h.html#a6ecf8ea322eb6cb96f828ce8c1d206e9">token_get_type_</a></div><div class="ttdeci">TokenType token_get_type_(Token const *self)</div><div class="ttdoc">Implementation of Token::getType().</div><div class="ttdef"><b>Definition:</b> token.c:163</div></div>
+<div class="ttc" id="atoken_8h_html_aefe387092a32c96e19a9c0710e272b48"><div class="ttname"><a href="token_8h.html#aefe387092a32c96e19a9c0710e272b48">token_dtor</a></div><div class="ttdeci">void token_dtor(Token *self)</div><div class="ttdoc">Destroys a Token object, freeing its members and re-initializing them to NULL in the process.</div><div class="ttdef"><b>Definition:</b> token.c:140</div></div>
+<div class="ttc" id="astructStringIterator_html"><div class="ttname"><a href="structStringIterator.html">StringIterator</a></div><div class="ttdoc">StringIterator object definition.</div><div class="ttdef"><b>Definition:</b> string-iterator.h:24</div></div>
+<div class="ttc" id="astructTokenVtbl_html_a9626717617c7e53cdb743d739e9a3518"><div class="ttname"><a href="structTokenVtbl.html#a9626717617c7e53cdb743d739e9a3518">TokenVtbl::get_type</a></div><div class="ttdeci">TokenType(* get_type)(Token const *const self)</div><div class="ttdoc">Returns the token's type identifier.</div><div class="ttdef"><b>Definition:</b> token.h:47</div></div>
+<div class="ttc" id="astructTokenVtbl_html_a2e4aa85b9119ab52a0fadcd7835203d7"><div class="ttname"><a href="structTokenVtbl.html#a2e4aa85b9119ab52a0fadcd7835203d7">TokenVtbl::print</a></div><div class="ttdeci">void(* print)(Token const *const self)</div><div class="ttdoc">Prints a pretty-formatted version of self.</div><div class="ttdef"><b>Definition:</b> token.h:62</div></div>
 <div class="ttc" id="astring-iterator_8h_html"><div class="ttname"><a href="string-iterator_8h.html">string-iterator.h</a></div><div class="ttdoc">For iterating over a single-line string.</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
