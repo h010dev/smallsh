@@ -12,39 +12,38 @@
 
 #include "process.h"
 
-typedef struct Job Job;
+typedef struct SH_Job SH_Job;
 
 /**
  * @brief Job object.
  */
-struct Job {
-        char *job_cmd; /**< command typed by user for this job */
-        Process *job_proc; /**< process object */
-        pid_t job_pgid; /**< PGID */
-        char *job_stdin; /**< STDIN filename */
-        char *job_stdout; /**< STDOUT filename */
-        unsigned job_spec; /**< position within job table */
-        bool job_bg; /**< whether or not job is to run in background */
-        Job *job_next; /**< next job in table */
+struct SH_Job {
+        char *command; /**< command typed by user for this job */
+        SH_Process *proc; /**< process object */
+        pid_t pgid; /**< PGID */
+        char *infile; /**< STDIN filename */
+        char *outfile; /**< STDOUT filename */
+        unsigned spec; /**< position within job table */
+        bool run_bg; /**< whether or not job is to run in background */
+        SH_Job *next; /**< next job in table */
 };
 
 /**
- * @brief Initializes values for a @c Job object.
- * @param self job object to initialize
- * @param cmd job command entered by user
+ * @brief Initializes new Job object.
+ * @param command job command entered by user
  * @param proc job's process object
- * @param pgid job's PGID
  * @param infile job's STDIN filename
  * @param outfile job's STDOUT filename
- * @param bg whether or not job is to be run in background
+ * @param run_bg whether or not job is to be run in background
+ * @return new Job object
  */
-void job_ctor(Job *self, char *cmd, Process *proc, pid_t pgid, char *infile,
-              char *outfile, bool bg);
+SH_Job *SH_CreateJob(char *command, SH_Process *proc, char *infile,
+                     char *outfile, bool run_bg);
 
 /**
  * @brief Cleans up and frees job resources.
- * @param self job to clean up
+ * @param job job to clean up
  */
-void job_dtor(Job *self);
+void SH_DestroyJob(SH_Job *job);
 
 #endif //SMALLSH_JOB_H

@@ -26,7 +26,79 @@
 
 #include "job-control/job-control.h"
 
-static void job_control_wait_for_job(Job *job)
+/* *****************************************************************************
+ * PUBLIC DEFINITIONS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
+/* *****************************************************************************
+ * FUNCTIONS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
+static void SH_JobControlWaitForJob(SH_Job *job);
+
+static void SH_JobControl_BGJob(SH_Job *job)
+{
+        fprintf(stdout, "[%d]\t%d\n", job->spec, job->proc->pid);
+        fflush(stdout);
+}
+
+/**
+ * @brief Run @p job in the foreground.
+ *
+ * Puts @p job into the foreground, waits for it to complete, then puts
+ * shell back into foreground.
+ * @param job job to run
+ */
+static void SH_JobControlFGJob(SH_Job *job)
+{
+        int status;
+
+        /* Put the job into the foreground. */
+        errno = 0;
+        status = tcsetpgrp(smallsh_shell_terminal, job->pgid);
+        if (status == -1) {
+                perror("tcsetpgrp");
+                _exit(1);
+        }
+
+        /* Wait for it to report. */
+        SH_JobControlWaitForJob(job);
+
+        /* Put the shell back in the foreground. */
+        errno = 0;
+        status = tcsetpgrp(smallsh_shell_terminal, smallsh_shell_pgid);
+        if (status == -1) {
+                perror("tcsetpgrp");
+                _exit(1);
+        }
+
+        /* Clear terminal buffers. */
+        tcflush(smallsh_shell_terminal, TCIOFLUSH);
+}
+
+static void SH_JobControlWaitForJob(SH_Job *job)
 {
         int exit_status;
         pid_t child;
@@ -48,7 +120,7 @@ static void job_control_wait_for_job(Job *job)
          */
         for (;;) {
                 errno = 0;
-                child = waitid(P_PID, job->job_proc->proc_pid, &info, opt);
+                child = waitid(P_PID, job->proc->pid, &info, opt);
                 if (child == -1 && errno != ECHILD) {
                         perror("waitid");
                         _exit(1);
@@ -117,63 +189,54 @@ static void job_control_wait_for_job(Job *job)
          * Mark job as completed and update its status so that it can be later
          * removed from the job table and relayed to user.
          */
-        job->job_proc->proc_completed = true;
-        job->job_proc->proc_status = exit_status;
+        job->proc->has_completed = true;
+        job->proc->status = exit_status;
         smallsh_errno = exit_status;
 }
 
-static void job_control_background_job(Job *job)
-{
-        fprintf(stdout, "[%d]\t%d\n", job->job_spec, job->job_proc->proc_pid);
-        fflush(stdout);
-}
-
-/**
- * @brief Run @p job in the foreground.
+/* *****************************************************************************
+ * PUBLIC DEFINITIONS
  *
- * Puts @p job into the foreground, waits for it to complete, then puts
- * shell back into foreground.
- * @param job job to run
- */
-static void job_control_foreground_job(Job *job)
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
+/* *****************************************************************************
+ * FUNCTIONS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
+int SH_JobControlLaunchJob(SH_Job **job, bool run_fg)
 {
         int status;
-
-        /* Put the job into the foreground. */
-        errno = 0;
-        status = tcsetpgrp(smallsh_shell_terminal, job->job_pgid);
-        if (status == -1) {
-                perror("tcsetpgrp");
-                _exit(1);
-        }
-
-        /* Wait for it to report. */
-        job_control_wait_for_job(job);
-
-        /* Put the shell back in the foreground. */
-        errno = 0;
-        status = tcsetpgrp(smallsh_shell_terminal, smallsh_shell_pgid);
-        if (status == -1) {
-                perror("tcsetpgrp");
-                _exit(1);
-        }
-
-        /* Clear terminal buffers. */
-        tcflush(smallsh_shell_terminal, TCIOFLUSH);
-}
-
-int job_control_launch_job(Job **job, bool foreground)
-{
-        int status;
-        Job *job_;
+        SH_Job *job_;
         pid_t spawn_pid;
 
         job_ = *job;
 
         spawn_pid = fork();
         if (spawn_pid == 0) {
-                process_launch(job_->job_proc, job_->job_pgid, job_->job_stdin,
-                               job_->job_stdout, foreground);
+                SH_LaunchProcess(job_->proc, job_->pgid,
+                                 job_->infile,
+                                 job_->outfile, run_fg);
 
                 /* If we reach this point, an error occurred. */
                 _exit(1);
@@ -182,13 +245,13 @@ int job_control_launch_job(Job **job, bool foreground)
                 _exit(1);
         } else {
                 /* Put job into its own group and make it the process leader. */
-                job_->job_proc->proc_pid = spawn_pid;
-                if (job_->job_pgid == 0) {
-                        job_->job_pgid = spawn_pid;
+                job_->proc->pid = spawn_pid;
+                if (job_->pgid == 0) {
+                        job_->pgid = spawn_pid;
                 }
 
                 errno = 0;
-                status = setpgid(spawn_pid, job_->job_pgid);
+                status = setpgid(spawn_pid, job_->pgid);
                 if (status == -1 && errno != EACCES) {
                         perror("setpgid");
                         _exit(1);
@@ -196,21 +259,21 @@ int job_control_launch_job(Job **job, bool foreground)
         }
 
         /* Foreground job. */
-        if (foreground) {
+        if (run_fg) {
                 if (smallsh_interactive_mode) {
                         /*
                          * Give job control over foreground if we are in
                          * interactive mode.
                          */
-                        job_control_foreground_job(job_);
+                        SH_JobControlFGJob(job_);
                 } else {
                         /* Otherwise, just wait for job to complete. */
-                        job_control_wait_for_job(job_);
+                        SH_JobControlWaitForJob(job_);
                 }
         }
         /* Background job. */
         else {
-               job_control_background_job(job_);
+                SH_JobControl_BGJob(job_);
         }
 
         return 0;

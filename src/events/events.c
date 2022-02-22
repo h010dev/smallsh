@@ -97,7 +97,7 @@ int events_notify(void)
                 return -1;
         }
 
-        job_table.clean(&job_table);
+        SH_JobTableCleanJobs(job_table);
 
         return 0;
 }

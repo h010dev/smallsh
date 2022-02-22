@@ -45,8 +45,9 @@
 void exit_(int status)
 {
         /* Clean up job table and kill any child processes. */
-        job_table.killall(&job_table);
-        job_table_dtor(&job_table);
+        SH_JobTableKillAllJobs(job_table);
+        SH_DestroyJobTable(job_table);
+        job_table = NULL;
 
         /* Teardown event handling channels. */
         events_cleanup();

@@ -15,14 +15,14 @@
 #include "job.h"
 #include "job-table.h"
 
-JobTable job_table; /**< shell global job-control table */
+SH_JobTable *job_table; /**< shell global job-control table */
 
 /**
  * @brief Creates new child process and runs @p job within child.
  * @param job job to run
- * @param foreground whether or not the job should run in the foreground
+ * @param run_fg whether or not the job should run in the foreground
  * @return 0 on success, -1 on failure
  */
-int job_control_launch_job(Job **job, bool foreground);
+int SH_JobControlLaunchJob(SH_Job **job, bool run_fg);
 
 #endif //SMALLSH_JOB_CONTROL_H

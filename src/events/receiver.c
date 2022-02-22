@@ -152,7 +152,7 @@ int receiver_cb_sigchld(struct Channel ch)
                 }
 
                 /* Update relevant job in job table. */
-                job_table.update(&job_table, dto.chld_pid, dto.chld_status);
+                SH_JobTableUpdateJob(job_table, dto.chld_pid, dto.chld_status);
         }
 
         return 0;

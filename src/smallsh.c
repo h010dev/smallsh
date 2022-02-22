@@ -64,13 +64,13 @@ static int smallsh_eval(char *cmd)
         Parser parser;
         ssize_t n_stmts;
         Statement *stmt;
-        Process *job_proc;
+        SH_Process *proc;
         StmtStdin *st_in;
         StmtStdout *st_out;
         char *infile, *outfile, *cmd_name;
         size_t n_in, n_out;
         bool foreground;
-        Job *job;
+        SH_Job *job;
 
         /* Parse command into statements for evaluation. */
         parser_ctor(&parser);
@@ -91,9 +91,7 @@ static int smallsh_eval(char *cmd)
         /* Statement is not a builtin. */
         if ((stmt->stmt_flags & FLAGS_BUILTIN) == 0) {
                 /* Create process object. */
-                job_proc = malloc(sizeof(Process));
-                process_ctor(job_proc, stmt->stmt_cmd->cmd_argc,
-                             stmt->stmt_cmd->cmd_argv, 0, false, 0);
+                proc = SH_CreateProcess(stmt->stmt_cmd->cmd_argc, stmt->stmt_cmd->cmd_argv);
 
                 st_in = stmt->stmt_stdin;
                 st_out = stmt->stmt_stdout;
@@ -138,14 +136,13 @@ static int smallsh_eval(char *cmd)
 #endif
                 }
                 /* Create job object. */
-                job = malloc(sizeof(Job));
-                job_ctor(job, cmd, job_proc, 0, infile, outfile, !foreground);
+                job = SH_CreateJob(cmd, proc, infile, outfile, !foreground);
 
                 /* Add job to job table. */
-                job_table.add_job(&job_table, job);
+                SH_JobTableAddJob(job_table, job);
 
                 /* Run job. */
-                status_ = job_control_launch_job(&job, foreground);
+                status_ = SH_JobControlLaunchJob(&job, foreground);
         }
         /* Statement is a builtin. */
         else {
@@ -343,7 +340,7 @@ int main(void)
 
         smallsh_init();
 
-        job_table_ctor(&job_table);
+        job_table = SH_CreateJobTable();
 
         /* Run event loop forever until shell termination. */
         do {

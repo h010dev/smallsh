@@ -15,233 +15,6 @@
 #include "job-control/job-table.h"
 
 /* *****************************************************************************
- * PRIVATE DEFINITIONS
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- ******************************************************************************/
-/* *****************************************************************************
- * OBJECTS
- *
- *
- *
- *
- *
- *
- *
- ******************************************************************************/
-/**
- * @brief Contains internal data for @c JobTable.
- */
-struct JobTablePrivate {
-        size_t jt_job_count; /**< number of jobs in table */
-        Job *jt_head; /**< pointer to linked list head */
-};
-
-/* *****************************************************************************
- * FUNCTIONS
- *
- *
- *
- *
- *
- *
- *
- ******************************************************************************/
-static void job_table_add_job_(struct JobTable const * const self, Job *job)
-{
-        struct JobTablePrivate *priv = self->private;
-
-        /* Case 1: Table is empty. */
-        if (priv->jt_head == NULL) {
-                priv->jt_head = job;
-                job->job_spec = 1;
-        }
-        /* Case 2: Table contains at least one job. */
-        else {
-                Job *head = priv->jt_head;
-                job->job_next = head;
-                job->job_spec = head->job_spec + 1;
-                priv->jt_head = job;
-        }
-        priv->jt_job_count++;
-}
-
-static void job_table_clean_(struct JobTable const * const self)
-{
-        struct JobTablePrivate *priv = self->private;
-
-        /* Track last and second last jobs for display options. */
-        unsigned last_spec_01 = 0;
-        unsigned last_spec_02 = 0;
-
-        Job *pre = NULL;
-        Job *cur = priv->jt_head;
-        while (cur != NULL) {
-                /* Mark last and second last jobs for print display. */
-                if (last_spec_01 == 0) {
-                        last_spec_01 = cur->job_spec;
-                } else if (last_spec_02 == 0) {
-                        last_spec_02 = cur->job_spec;
-                }
-
-                /* Remove completed job and print info. */
-                if (cur->job_proc->proc_completed) {
-                        /* Background job completed; notify user. */
-                        if (cur->job_bg) {
-                                /* Print job info. */
-                                fprintf(stdout, "[%d]", cur->job_spec);
-                                if (cur->job_spec == last_spec_01) {
-                                        fprintf(stdout, "+");
-                                } else if (cur->job_spec == last_spec_02) {
-                                        fprintf(stdout, "-");
-                                }
-
-                                fprintf(stdout, "\t%d", cur->job_proc->proc_pid);
-
-                                fprintf(stdout, "\tDone");
-
-                                if (cur->job_proc->proc_status == 0) {
-                                        fprintf(stdout, "\t\texit value 0");
-                                } else {
-                                        fprintf(stdout, "\t\tterminated by signal %d",
-                                               cur->job_proc->proc_status);
-                                }
-
-                                fprintf(stdout, "\t\t%s\n", cur->job_cmd);
-                                fflush(stdout);
-                        }
-
-                        /* Remove job and free its memory. */
-                        /* Case 1: Job was at list head. */
-                        if (cur == priv->jt_head) {
-                                Job *head = priv->jt_head;
-                                priv->jt_head = head->job_next;
-
-                                job_dtor(head);
-                                free(head);
-                                head = NULL;
-
-                                cur = priv->jt_head;
-                        }
-                        /* Case 2: Job was n positions after list head. */
-                        else {
-                                Job *old = cur;
-                                pre->job_next = cur->job_next;
-                                cur = pre->job_next;
-
-                                job_dtor(old);
-                                free(old);
-                                old = NULL;
-                        }
-                        priv->jt_job_count--;
-                }
-                /* Job is not yet completed. */
-                else {
-                        pre = cur;
-                        cur = cur->job_next;
-                }
-        }
-}
-
-static Job *job_table_find_job_(struct JobTable const * const self,
-        pid_t job_pgid)
-{
-        struct JobTablePrivate *priv = self->private;
-
-        /* Search all entries for job with matching PGID. */
-        Job *job = priv->jt_head;
-        while (job != NULL) {
-                if (job->job_pgid == job_pgid) {
-                        return job;
-                }
-                job = job->job_next;
-        }
-
-        /* Job not found. */
-        return NULL;
-}
-
-static void job_table_killall_(struct JobTable const * const self)
-{
-        struct JobTablePrivate *priv = self->private;
-
-        Job *job = priv->jt_head;
-
-        while (job != NULL) {
-                pid_t pid = job->job_proc->proc_pid;
-                kill(pid, SIGTERM);
-                job = job->job_next;
-        }
-
-        self->clean(self);
-}
-
-static void job_table_list_jobs_(struct JobTable const * const self)
-{
-        struct JobTablePrivate *priv = self->private;
-
-        Job *job = priv->jt_head;
-        while (job != NULL) {
-                printf("JOB:\n"
-                       "\tpgid=%d\n"
-                       "\tstdin=%s\n"
-                       "\tstdout=%s\n"
-                       "\tspec=%d\n"
-                       "\tPROC:\n"
-                       "\t\targv[0]=%s\n"
-                       "\t\tpid=%d\n"
-                       "\t\tcompleted=%d\n"
-                       "\t\tstatus=%d\n",
-                       job->job_pgid, job->job_stdin,
-                       job->job_stdout, job->job_spec, job->job_proc->argv[0],
-                       job->job_proc->proc_pid, job->job_proc->proc_completed,
-                       job->job_proc->proc_status);
-                job = job->job_next;
-        }
-}
-
-static int job_table_update_(struct JobTable const * const self, pid_t pid,
-        int status)
-{
-        struct JobTablePrivate *priv = self->private;
-
-        /* Find job with matching PID. */
-        Job *job = priv->jt_head;
-        while (job != NULL) {
-                if (job->job_proc->proc_pid == pid) {
-                        break;
-                }
-                job = job->job_next;
-        }
-
-        /* Error! Job not found. */
-        if (job == NULL) {
-                return -1;
-        }
-
-        /* Update job status. */
-        job->job_proc->proc_status = status;
-        job->job_proc->proc_completed = true;
-
-        return 0;
-}
-
-/* *****************************************************************************
  * PUBLIC DEFINITIONS
  *
  *
@@ -271,45 +44,206 @@ static int job_table_update_(struct JobTable const * const self, pid_t pid,
  *
  *
  ******************************************************************************/
-void job_table_ctor(JobTable *self)
+SH_JobTable *SH_CreateJobTable(void)
 {
-        /* Init table functions. */
-        self->add_job = &job_table_add_job_;
-        self->clean = &job_table_clean_;
-        self->find_job = &job_table_find_job_;
-        self->killall = &job_table_killall_;
-        self->list_jobs = &job_table_list_jobs_;
-        self->update = &job_table_update_;
+        SH_JobTable *table;
+
+        table = malloc(sizeof *table);
+        if (table == NULL) {
+                fprintf(stderr, "malloc\n");
+                exit(1);
+        }
 
         /* Init table data. */
-        self->private = malloc(sizeof(struct JobTablePrivate));
-        self->private->jt_job_count = 0;
-        self->private->jt_head = NULL;
+        table->n_jobs = 0;
+        table->head = NULL;
+
+        return table;
 }
 
-void job_table_dtor(JobTable *self)
+void SH_DestroyJobTable(SH_JobTable *table)
 {
-        struct JobTablePrivate *priv = self->private;
-
         /* Free all jobs. */
-        while (priv->jt_head != NULL) {
-                Job *head = priv->jt_head;
-                priv->jt_head = head->job_next;
-                job_dtor(head);
-                free(head);
+        while (table->head != NULL) {
+                SH_Job *head = table->head;
+                table->head = head->next;
+                SH_DestroyJob(head);
                 head = NULL;
         }
-        self->private->jt_job_count = 0;
+        table->n_jobs = 0;
 
-        /* Reset function pointers. */
-        self->add_job = NULL;
-        self->clean = NULL;
-        self->find_job = NULL;
-        self->killall = NULL;
-        self->list_jobs = NULL;
-        self->update = NULL;
+        free(table);
+}
 
-        /* Free table data. */
-        free(self->private);
-        self->private = NULL;
+/* *****************************************************************************
+ * FUNCTIONS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
+void SH_JobTableAddJob(SH_JobTable *table, SH_Job *job)
+{
+        /* Case 1: Table is empty. */
+        if (table->head == NULL) {
+                table->head = job;
+                job->spec = 1;
+        }
+                /* Case 2: Table contains at least one job. */
+        else {
+                SH_Job *head = table->head;
+                job->next = head;
+                job->spec = head->spec + 1;
+                table->head = job;
+        }
+        table->n_jobs++;
+}
+
+void SH_JobTableCleanJobs(SH_JobTable *table)
+{
+        /* Track last and second last jobs for display options. */
+        unsigned last_spec_01 = 0;
+        unsigned last_spec_02 = 0;
+
+        SH_Job *pre = NULL;
+        SH_Job *cur = table->head;
+        while (cur != NULL) {
+                /* Mark last and second last jobs for print display. */
+                if (last_spec_01 == 0) {
+                        last_spec_01 = cur->spec;
+                } else if (last_spec_02 == 0) {
+                        last_spec_02 = cur->spec;
+                }
+
+                /* Remove completed job and print info. */
+                if (cur->proc->has_completed) {
+                        /* Background job completed; notify user. */
+                        if (cur->run_bg) {
+                                /* Print job info. */
+                                fprintf(stdout, "[%d]", cur->spec);
+                                if (cur->spec == last_spec_01) {
+                                        fprintf(stdout, "+");
+                                } else if (cur->spec == last_spec_02) {
+                                        fprintf(stdout, "-");
+                                }
+
+                                fprintf(stdout, "\t%d", cur->proc->pid);
+
+                                fprintf(stdout, "\tDone");
+
+                                if (cur->proc->status == 0) {
+                                        fprintf(stdout, "\t\texit value 0");
+                                } else {
+                                        fprintf(stdout, "\t\tterminated by signal %d",
+                                                cur->proc->status);
+                                }
+
+                                fprintf(stdout, "\t\t%s\n", cur->command);
+                                fflush(stdout);
+                        }
+
+                        /* Remove job and free its memory. */
+                        /* Case 1: Job was at list head. */
+                        if (cur == table->head) {
+                                SH_Job *head = table->head;
+                                table->head = head->next;
+
+                                SH_DestroyJob(head);
+                                head = NULL;
+
+                                cur = table->head;
+                        }
+                                /* Case 2: Job was n positions after list head. */
+                        else {
+                                SH_Job *old = cur;
+                                pre->next = cur->next;
+                                cur = pre->next;
+
+                                SH_DestroyJob(old);
+                                old = NULL;
+                        }
+                        table->n_jobs--;
+                }
+                        /* Job is not yet completed. */
+                else {
+                        pre = cur;
+                        cur = cur->next;
+                }
+        }
+}
+
+SH_Job *SH_JobTableFindJob(const SH_JobTable *table, pid_t job_pgid)
+{
+        /* Search all entries for job with matching PGID. */
+        SH_Job *job = table->head;
+        while (job != NULL) {
+                if (job->pgid == job_pgid) {
+                        return job;
+                }
+                job = job->next;
+        }
+
+        /* Job not found. */
+        return NULL;
+}
+
+void SH_JobTableKillAllJobs(SH_JobTable *table)
+{
+        SH_Job *job = table->head;
+
+        while (job != NULL) {
+                pid_t pid = job->proc->pid;
+                kill(pid, SIGTERM);
+                job = job->next;
+        }
+
+        SH_JobTableCleanJobs(table);
+}
+
+void SH_JobTablePrintJobs(const SH_JobTable *table)
+{
+        SH_Job *job = table->head;
+        while (job != NULL) {
+                printf("JOB:\n"
+                       "\tpgid=%d\n"
+                       "\tstdin=%s\n"
+                       "\tstdout=%s\n"
+                       "\tspec=%d\n"
+                       "\tPROC:\n"
+                       "\t\targv[0]=%s\n"
+                       "\t\tpid=%d\n"
+                       "\t\tcompleted=%d\n"
+                       "\t\tstatus=%d\n",
+                       job->pgid, job->infile,
+                       job->outfile, job->spec, job->proc->args[0],
+                       job->proc->pid, job->proc->has_completed,
+                       job->proc->status);
+                job = job->next;
+        }
+}
+
+int SH_JobTableUpdateJob(const SH_JobTable *table, pid_t pid, int status)
+{
+        /* Find job with matching PID. */
+        SH_Job *job = table->head;
+        while (job != NULL) {
+                if (job->proc->pid == pid) {
+                        break;
+                }
+                job = job->next;
+        }
+
+        /* Error! Job not found. */
+        if (job == NULL) {
+                return -1;
+        }
+
+        /* Update job status. */
+        job->proc->status = status;
+        job->proc->has_completed = true;
+
+        return 0;
 }
