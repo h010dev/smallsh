@@ -14,9 +14,9 @@
  * responsible for sending messages to on receipt of signal-generated events.
  */
 typedef struct {
-        size_t _n_channels; /**< number of channels in notify list */
-        size_t _max_channels; /**< maximum number of channels possible */
-        SH_Channel **_channels; /**< list of channels no notify */
+        size_t size; /**< number of channels in notify list */
+        size_t capacity; /**< maximum number of channels possible */
+        SH_Channel **channels; /**< list of channels no notify */
 } SH_Sender;
 
 /**
@@ -34,10 +34,10 @@ int SH_SenderAddChannel(SH_Sender *sender, SH_Channel *channel);
 /**
  * @brief Initializes new @c Sender object.
  * @param sender @c Sender to initialize
- * @param max_channels maximum number of channels sender will support
+ * @param capacity maximum number of channels sender will support
  * @return new @c Sender object on success, @c NULL on failure
  */
-SH_Sender *SH_CreateSender(size_t max_channels);
+SH_Sender *SH_CreateSender(size_t capacity);
 
 /**
  * @brief Resets @p self's values.
@@ -45,7 +45,7 @@ SH_Sender *SH_CreateSender(size_t max_channels);
  * @note This does not clear the actual channels by calling their respective
  * destructors. It is the caller's responsibility to do so afterwards.
  */
-void SH_DestroySender(SH_Sender *sender);
+void SH_DestroySender(SH_Sender **sender);
 
 /**
  * @brief Sends data received via a SIGCHLD signal to @p self.

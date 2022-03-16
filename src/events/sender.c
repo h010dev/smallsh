@@ -14,7 +14,6 @@
 
 #include "events/sender.h"
 #include "events/dto.h"
-
 /* *****************************************************************************
  * PUBLIC DEFINITIONS
  *
@@ -45,7 +44,7 @@
  *
  *
  ******************************************************************************/
-SH_Sender *SH_CreateSender(size_t max_channels)
+SH_Sender *SH_CreateSender(size_t const capacity)
 {
         SH_Sender *sender;
 
@@ -55,36 +54,37 @@ SH_Sender *SH_CreateSender(size_t max_channels)
                 return NULL;
         }
 
-        sender->_n_channels = 0;
-        sender->_max_channels = max_channels;
+        sender->size = 0;
+        sender->capacity = capacity;
 
         /* Init Channel array. */
-        sender->_channels = malloc(max_channels * sizeof(SH_Channel));
-        if (sender->_channels == NULL) {
+        sender->channels = malloc(capacity * sizeof(SH_Channel));
+        if (sender->channels == NULL) {
                 fprintf(stderr, "Failed to init Sender: malloc()\n");
+                free(sender);
                 return NULL;
         }
 
-        for (size_t i = 0; i < max_channels; i++) {
-                sender->_channels[i] = NULL;
+        for (size_t i = 0; i < capacity; i++) {
+                sender->channels[i] = NULL;
         }
 
         return sender;
 }
 
-void SH_DestroySender(SH_Sender *sender)
+void SH_DestroySender(SH_Sender **sender)
 {
-        for (size_t i = 0; i < sender->_n_channels; i++) {
-                sender->_channels[i] = NULL;
+        for (size_t i = 0; i < (*sender)->size; i++) {
+                (*sender)->channels[i] = NULL;
         }
-        sender->_n_channels = 0;
+        (*sender)->size = 0;
 
-        free(sender->_channels);
-        sender->_channels = NULL;
+        free((*sender)->channels);
+        (*sender)->channels = NULL;
 
-        free(sender);
+        free(*sender);
+        *sender = NULL;
 }
-
 /* *****************************************************************************
  * FUNCTIONS
  *
@@ -95,7 +95,7 @@ void SH_DestroySender(SH_Sender *sender)
  *
  *
  ******************************************************************************/
-int SH_SenderAddChannel(SH_Sender *sender, SH_Channel *channel)
+int SH_SenderAddChannel(SH_Sender * const sender, SH_Channel * const channel)
 {
         int flags, status;
 
@@ -103,7 +103,8 @@ int SH_SenderAddChannel(SH_Sender *sender, SH_Channel *channel)
         errno = 0;
         flags = fcntl(channel->write_fd, F_GETFL);
         if (flags == -1) {
-                fprintf(stderr, "Failed to add to Sender: %s\n", strerror(errno));
+                fprintf(stderr, "Failed to add to Sender: %s\n",
+                        strerror(errno));
                 return -1;
         }
         flags |= O_NONBLOCK;
@@ -111,22 +112,23 @@ int SH_SenderAddChannel(SH_Sender *sender, SH_Channel *channel)
         errno = 0;
         status = fcntl(channel->write_fd, F_SETFL, flags);
         if (status == -1) {
-                fprintf(stderr, "Failed to add to Sender: %s\n", strerror(errno));
+                fprintf(stderr, "Failed to add to Sender: %s\n",
+                        strerror(errno));
                 return -1;
         }
 
         /* Add channel to channel list. */
-        if (sender->_n_channels >= sender->_max_channels) {
+        if (sender->size >= sender->capacity) {
                 fprintf(stderr, "Failed to add to Sender: Sender is full\n");
                 return -1;
         }
 
-        sender->_channels[sender->_n_channels++] = channel;
+        sender->channels[sender->size++] = channel;
 
         return 0;
 }
 
-int SH_SenderNotifySigchldEvent(SH_Channel *channel)
+int SH_SenderNotifySigchldEvent(SH_Channel * const channel)
 {
         int status;
         pid_t child_pid;
@@ -146,7 +148,8 @@ int SH_SenderNotifySigchldEvent(SH_Channel *channel)
 
                 /* Write DTO to pipe. */
                 errno = 0;
-                if (write(channel->write_fd, &dto, sizeof(dto)) == -1 && errno != EAGAIN) {
+                if (write(channel->write_fd, &dto, sizeof(dto)) == -1
+                        && errno != EAGAIN) {
                         return -1;
                 }
         }

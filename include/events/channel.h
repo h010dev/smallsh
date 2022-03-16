@@ -17,7 +17,7 @@ typedef struct SH_Channel SH_Channel;
 struct SH_Channel {
         int read_fd; /**< read file descriptor */
         int write_fd; /**< write file descriptor */
-        int (*callback_handler) (SH_Channel self); /**< callback handler */
+        int (*callback_handler) (SH_Channel channel); /**< callback handler */
 };
 
 /**
@@ -34,6 +34,6 @@ SH_Channel *SH_CreateChannel(int (*cb_handler) (SH_Channel));
  * @brief Resets @p self's values.
  * @param channel @c Channel to reset
  */
-void SH_DestroyChannel(SH_Channel *channel);
+void SH_DestroyChannel(SH_Channel **channel);
 
 #endif //SMALLSH_CHANNEL_H

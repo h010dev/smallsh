@@ -12,7 +12,6 @@
 #include <unistd.h>
 
 #include "events/channel.h"
-
 /* *****************************************************************************
  * PUBLIC DEFINITIONS
  *
@@ -46,7 +45,7 @@
 SH_Channel *SH_CreateChannel(int (*cb_handler) (SH_Channel))
 {
         SH_Channel *channel;
-        int pipe_[2];
+        int fds[2];
 
         channel = malloc(sizeof *channel);
         if (channel == NULL) {
@@ -57,22 +56,28 @@ SH_Channel *SH_CreateChannel(int (*cb_handler) (SH_Channel))
         channel->callback_handler = cb_handler;
 
         errno = 0;
-        if (pipe(pipe_) == -1) {
+        if (pipe(fds) == -1) {
                 fprintf(stderr, "Failed to init Channel: %s\n", strerror(errno));
+                free(channel);
                 return NULL;
         }
 
-        channel->read_fd = pipe_[0];
-        channel->write_fd = pipe_[1];
+        channel->read_fd = fds[0];
+        channel->write_fd = fds[1];
 
         return channel;
 }
 
-void SH_DestroyChannel(SH_Channel *channel)
+void SH_DestroyChannel(SH_Channel **channel)
 {
-        channel->read_fd = 0;
-        channel->write_fd = 0;
-        channel->callback_handler = NULL;
+        if (*channel == NULL) {
+                return;
+        }
 
-        free(channel);
+        (*channel)->read_fd = 0;
+        (*channel)->write_fd = 0;
+        (*channel)->callback_handler = NULL;
+
+        free(*channel);
+        *channel = NULL;
 }

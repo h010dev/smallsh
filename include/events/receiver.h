@@ -17,11 +17,11 @@
  * responsible for monitor for and respond to new signal-generated events.
  */
 typedef struct {
-        int _n_fds; /**< maximum file descriptor value for usage with select */
-        fd_set _fds; /**< set of read file descriptors for usage with select */
-        size_t _n_channels; /**< number of channels that receiver will monitor */
-        size_t _max_channels; /**< maximum number of channels possible */
-        SH_Channel **_channels; /**< list of channels to monitor */
+        int n; /**< maximum file descriptor value for usage with select */
+        fd_set fds; /**< set of read file descriptors for usage with select */
+        size_t size; /**< number of channels that receiver will monitor */
+        size_t capacity; /**< maximum number of channels possible */
+        SH_Channel **channels; /**< list of channels to monitor */
 } SH_Receiver;
 
 /**
@@ -64,10 +64,10 @@ int SH_ReceiverConsumeEvents(SH_Receiver *receiver);
 
 /**
  * @brief Initializes a new @c Receiver object.
- * @param max_channels maximum number of channels receiver will support
+ * @param capacity maximum number of channels receiver will support
  * @return new @c Receiver object on success, @c NULL on failure
  */
-SH_Receiver *SH_CreateReceiver(size_t max_channels);
+SH_Receiver *SH_CreateReceiver(size_t capacity);
 
 /**
  * @brief Resets @p self's values.
@@ -75,6 +75,6 @@ SH_Receiver *SH_CreateReceiver(size_t max_channels);
  * @note This does not clear the actual channels by calling their respective
  * destructors. It is the caller's responsibility to do so afterwards.
  */
-void SH_DestroyReceiver(SH_Receiver *receiver);
+void SH_DestroyReceiver(SH_Receiver **receiver);
 
 #endif //SMALLSH_RECEIVER_H

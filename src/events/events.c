@@ -8,9 +8,37 @@
 
 #include "events/events.h"
 #include "job-control/job-control.h"
-
+/* *****************************************************************************
+ * PRIVATE DEFINITIONS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
+/* *****************************************************************************
+ * MACROS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
 #define SH_MAX_EVENTS 1
-
 /* *****************************************************************************
  * PUBLIC DEFINITIONS
  *
@@ -83,14 +111,9 @@ int SH_InitEvents(void)
 
 void SH_CleanupEvents(void)
 {
-        SH_DestroyReceiver(receiver);
-        receiver = NULL;
-
-        SH_DestroySender(sender);
-        sender = NULL;
-
-        SH_DestroyChannel(sigchld_channel);
-        sigchld_channel = NULL;
+        SH_DestroyReceiver(&receiver);
+        SH_DestroySender(&sender);
+        SH_DestroyChannel(&sigchld_channel);
 }
 
 int SH_NotifyEvents(void)
