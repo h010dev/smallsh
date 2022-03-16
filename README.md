@@ -51,3 +51,7 @@ build/bin/smallsh
 ```asm
 rm -rf build
 ```
+
+### Docs
+
+[Documentation](https://h010dev.github.io/smallsh/index.html)
