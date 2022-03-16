@@ -50,7 +50,7 @@ void exit_(int status)
         job_table = NULL;
 
         /* Teardown event handling channels. */
-        events_cleanup();
+        SH_CleanupEvents();
 
         /* Make exit output pretty in case we are operating inside another shell. */
         if (!smallsh_interactive_mode) {

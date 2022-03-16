@@ -156,9 +156,9 @@ void handler_handle_sigchld(int sig)
 
         saved_errno = errno;
 
-        status = sender_notify_sigchld(ch_sigchld);
+        status = SH_SenderNotifySigchldEvent(sigchld_channel);
         if (status == -1) {
-                fprintf(stderr, "sender_notify_sigchld()");
+                fprintf(stderr, "SH_SenderNotifySigchldEvent()");
                 fflush(stderr);
                 _exit(1);
         }

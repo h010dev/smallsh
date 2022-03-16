@@ -58,7 +58,7 @@
  ******************************************************************************/
 static void SH_JobControlWaitForJob(SH_Job *job);
 
-static void SH_JobControl_BGJob(SH_Job *job)
+static void SH_JobControlBGJob(SH_Job *job)
 {
         fprintf(stdout, "[%d]\t%d\n", job->spec, job->proc->pid);
         fflush(stdout);
@@ -273,7 +273,7 @@ int SH_JobControlLaunchJob(SH_Job **job, bool run_fg)
         }
         /* Background job. */
         else {
-                SH_JobControl_BGJob(job_);
+                SH_JobControlBGJob(job_);
         }
 
         return 0;

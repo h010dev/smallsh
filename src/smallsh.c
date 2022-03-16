@@ -332,9 +332,9 @@ int main(void)
         int status_;
 
         /* Setup event listener to catch signal events and related data. */
-        status_ = events_init();
+        status_ = SH_InitEvents();
         if (status_ == -1) {
-                print_error_msg("events_init()");
+                print_error_msg("SH_InitEvents()");
                 _exit(1);
         }
 
@@ -345,9 +345,9 @@ int main(void)
         /* Run event loop forever until shell termination. */
         do {
                 /* Notify user about new job-control events. */
-                status_ = events_notify();
+                status_ = SH_NotifyEvents();
                 if (status_ == -1) {
-                        print_error_msg("events_notify()");
+                        print_error_msg("SH_NotifyEvents()");
                         status_ = EXIT_FAILURE;
                         break;
                 }

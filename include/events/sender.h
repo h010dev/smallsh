@@ -14,10 +14,10 @@
  * responsible for sending messages to on receipt of signal-generated events.
  */
 typedef struct {
-        size_t _snd_n_ch; /**< number of channels in notify list */
-        size_t _snd_max_ch; /**< maximum number of channels possible */
-        Channel **_ch; /**< list of channels no notify */
-} Sender;
+        size_t _n_channels; /**< number of channels in notify list */
+        size_t _max_channels; /**< maximum number of channels possible */
+        SH_Channel **_channels; /**< list of channels no notify */
+} SH_Sender;
 
 /**
  * @brief Adds a new @c Channel to its channel list, and initializes its write
@@ -25,27 +25,27 @@ typedef struct {
  *
  * Behind the scenes, this function initializes the channel pipe's write end
  * and sets it to be non-blocking as per the self-pipe trick requirements.
- * @param self @c Sender to add channel to
- * @param ch @c Channel to add to sender
+ * @param sender @c Sender to add channel to
+ * @param channel @c Channel to add to sender
  * @return 0 on success, -1 on failure
  */
-int sender_add(Sender *self, Channel *ch);
+int SH_SenderAddChannel(SH_Sender *sender, SH_Channel *channel);
 
 /**
- * @brief Initializes @p self with provided data.
- * @param self @c Sender to initialize
- * @param max_ch maximum number of channels sender will support
- * @return 0 on success, -1 on failure
+ * @brief Initializes new @c Sender object.
+ * @param sender @c Sender to initialize
+ * @param max_channels maximum number of channels sender will support
+ * @return new @c Sender object on success, @c NULL on failure
  */
-int sender_ctor(Sender *self, size_t max_ch);
+SH_Sender *SH_CreateSender(size_t max_channels);
 
 /**
  * @brief Resets @p self's values.
- * @param self @c Sender to reset
+ * @param sender @c Sender to reset
  * @note This does not clear the actual channels by calling their respective
  * destructors. It is the caller's responsibility to do so afterwards.
  */
-void sender_dtor(Sender *self);
+void SH_DestroySender(SH_Sender *sender);
 
 /**
  * @brief Sends data received via a SIGCHLD signal to @p self.
@@ -63,9 +63,9 @@ void sender_dtor(Sender *self);
  * The data sent is used for updating the shell's global job table, as it
  * requires information on both which child completed and what their exit
  * status was.
- * @param ch @c Channel to send data to
+ * @param channel @c Channel to send data to
  * @return 0 on success, -1 on failure
  */
-int sender_notify_sigchld(struct Channel ch);
+int SH_SenderNotifySigchldEvent(SH_Channel *channel);
 
 #endif //SMALLSH_SENDER_H

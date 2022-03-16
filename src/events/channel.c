@@ -7,6 +7,7 @@
  */
 #include <errno.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 
@@ -42,27 +43,36 @@
  *
  *
  ******************************************************************************/
-int channel_ctor(Channel *self, int (*cb_handler) (struct Channel))
+SH_Channel *SH_CreateChannel(int (*cb_handler) (SH_Channel))
 {
+        SH_Channel *channel;
         int pipe_[2];
 
-        self->ch_callback = cb_handler;
+        channel = malloc(sizeof *channel);
+        if (channel == NULL) {
+                fprintf(stderr, "malloc\n");
+                return NULL;
+        }
+
+        channel->callback_handler = cb_handler;
 
         errno = 0;
         if (pipe(pipe_) == -1) {
                 fprintf(stderr, "Failed to init Channel: %s\n", strerror(errno));
-                return -1;
+                return NULL;
         }
 
-        self->ch_read = pipe_[0];
-        self->ch_write = pipe_[1];
+        channel->read_fd = pipe_[0];
+        channel->write_fd = pipe_[1];
 
-        return 0;
+        return channel;
 }
 
-void channel_dtor(Channel *self)
+void SH_DestroyChannel(SH_Channel *channel)
 {
-        self->ch_read = 0;
-        self->ch_write = 0;
-        self->ch_callback = NULL;
+        channel->read_fd = 0;
+        channel->write_fd = 0;
+        channel->callback_handler = NULL;
+
+        free(channel);
 }
