@@ -11,7 +11,6 @@
 #include <unistd.h>
 
 #include "builtins/cd.h"
-
 /* *****************************************************************************
  * PUBLIC DEFINITIONS
  *
@@ -42,14 +41,16 @@
  *
  *
  ******************************************************************************/
-void SH_cd(char *dirname)
+void SH_cd(char const * const dirname)
 {
         int status;
+        char const *dir;
 
         /* Default to $HOME directory if dirname not supplied. */
-        if (dirname == NULL) {
-                dirname = getenv("HOME");
-                if (dirname == NULL) {
+        dir = dirname;
+        if (dir == NULL) {
+                dir = getenv("HOME");
+                if (dir == NULL) {
                         /* $HOME env var not defined. */
                         fprintf(stderr, "$HOME: %s\n", strerror(errno));
                         fflush(stderr);
@@ -58,10 +59,10 @@ void SH_cd(char *dirname)
         }
 
         errno = 0;
-        status = chdir(dirname);
+        status = chdir(dir);
         if (status == -1) {
                 /* Couldn't cd into directory. */
-                fprintf(stderr, "-smallsh: cd: %s: %s\n", dirname, strerror(errno));
+                fprintf(stderr, "-smallsh: cd: %s: %s\n", dir, strerror(errno));
                 fflush(stderr);
         }
 }

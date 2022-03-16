@@ -9,7 +9,6 @@
 #include "builtins/status.h"
 #include "error.h"
 #include "globals.h"
-
 /* *****************************************************************************
  * PUBLIC DEFINITIONS
  *
@@ -40,13 +39,12 @@
  *
  *
  ******************************************************************************/
-void SH_status()
+void SH_status(void)
 {
         if (!smallsh_interactive_mode) {
                 fprintf(stdout, "\nexit value %d\n", smallsh_errno);
         } else {
                 fprintf(stdout, "exit value %d\n", smallsh_errno);
         }
-
         fflush(stdout);
 }

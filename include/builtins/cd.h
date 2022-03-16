@@ -13,6 +13,6 @@
  * @pre $HOME env variable is set before call when @p dirname is @c NULL.
  * @param dirname directory name to SH_cd into
  */
-void SH_cd(char *dirname);
+void SH_cd(char const *dirname);
 
 #endif //SMALLSH_CD_H

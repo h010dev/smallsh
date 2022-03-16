@@ -11,7 +11,6 @@
 #include "events/events.h"
 #include "globals.h"
 #include "job-control/job-control.h"
-
 /* *****************************************************************************
  * PUBLIC DEFINITIONS
  *
@@ -42,7 +41,7 @@
  *
  *
  ******************************************************************************/
-void SH_exit(int status)
+void SH_exit(int const status)
 {
         /* Clean up job table and kill any child processes. */
         SH_JobTableKillAllJobs(job_table);
