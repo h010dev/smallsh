@@ -18,9 +18,9 @@ mkdir -p build/bin && \
         src/smallsh.c \
         src/error.c \
         src/builtins/builtins.c \
-        src/builtins/cd.c \
+        src/builtins/SH_cd.c \
         src/builtins/exit.c \
-        src/builtins/status.c \
+        src/builtins/SH_status.c \
         src/events/channel.c \
         src/events/events.c \
         src/events/receiver.c \

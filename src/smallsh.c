@@ -153,11 +153,11 @@ static int smallsh_eval(char *cmd)
                         smallsh_line_buffer = true;
                 } else if (strcmp("cd", cmd_name) == 0) {
                         char *dirname = stmt->stmt_cmd->cmd_argv[1];
-                        cd(dirname);
+                        SH_cd(dirname);
                         status_ = 0;
                         smallsh_line_buffer = true;
                 } else if (strcmp("status", cmd_name) == 0) {
-                        status();
+                        SH_status();
                         status_ = 0;
                 } else {
                         /* Error */
@@ -314,13 +314,12 @@ volatile int smallsh_errno = 0;
 bool smallsh_line_buffer = false;
 int smallsh_interactive_mode = 0;
 int smallsh_fg_only_mode = 0;
-JobTable job_table;
+SH_JobTable *job_table = NULL;
 int smallsh_shell_terminal = 0;
 int smallsh_shell_pgid = 0;
-Channel ch_sigchld;
-Receiver rcv;
-Sender snd;
-
+SH_Channel *sigchld_channel = NULL;
+SH_Receiver *receiver = NULL;
+SH_Sender *sender = NULL;
 /* *****************************************************************************
  * FUNCTIONS
  *
@@ -401,5 +400,5 @@ int main(void)
                 free(cmd);
         } while (1);
 
-        exit_(status_);
+        SH_exit(status_);
 }

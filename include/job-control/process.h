@@ -20,8 +20,8 @@
 typedef struct {
         char **args; /**< process arguments */
         pid_t pid; /**< process PID */
-        bool has_completed; /**< process completion status */
-        int status; /**< process exit status */
+        bool has_completed; /**< process completion SH_status */
+        int status; /**< process exit SH_status */
 } SH_Process;
 
 /**

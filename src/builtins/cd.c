@@ -1,8 +1,8 @@
 /**
- * @file cd.c
+ * @file SH_cd.c
  * @author Mohamed Al-Hussein
  * @date 04 Feb 2022
- * @brief cd builtin command.
+ * @brief SH_cd builtin command.
  */
 #include <errno.h>
 #include <stdio.h>
@@ -42,7 +42,7 @@
  *
  *
  ******************************************************************************/
-void cd(char *dirname)
+void SH_cd(char *dirname)
 {
         int status;
 

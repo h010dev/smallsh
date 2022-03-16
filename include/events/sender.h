@@ -62,7 +62,7 @@ void SH_DestroySender(SH_Sender *sender);
  *
  * The data sent is used for updating the shell's global job table, as it
  * requires information on both which child completed and what their exit
- * status was.
+ * SH_status was.
  * @param channel @c Channel to send data to
  * @return 0 on success, -1 on failure
  */

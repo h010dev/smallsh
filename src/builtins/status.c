@@ -1,8 +1,8 @@
 /**
- * @file status.c
+ * @file SH_status.c
  * @author Mohamed Al-Hussein
  * @date 03 Feb 2022
- * @brief status builtin command.
+ * @brief SH_status builtin command.
  */
 #include <stdio.h>
 
@@ -40,7 +40,7 @@
  *
  *
  ******************************************************************************/
-void status()
+void SH_status()
 {
         if (!smallsh_interactive_mode) {
                 fprintf(stdout, "\nexit value %d\n", smallsh_errno);

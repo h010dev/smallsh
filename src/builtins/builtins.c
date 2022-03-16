@@ -43,9 +43,9 @@
  * @brief Constants for defining supported builtins.
  */
 enum {
-        BUILTINS_CD, /**< cd command */
+        BUILTINS_CD, /**< SH_cd command */
         BUILTINS_EXIT, /**< exit command */
-        BUILTINS_STATUS, /**< status command */
+        BUILTINS_STATUS, /**< SH_status command */
         BUILTINS_COUNT, /**< number of supported builtins */
 };
 
@@ -88,7 +88,7 @@ static const char * const builtins[] = {
  *
  *
  ******************************************************************************/
-bool builtins_is_supported(char *cmd)
+bool SH_IsBuiltin(char *cmd)
 {
         /* Iterate over supported builtins looking for an exact match. */
         for (size_t i = 0; i < BUILTINS_COUNT; i++) {

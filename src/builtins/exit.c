@@ -42,7 +42,7 @@
  *
  *
  ******************************************************************************/
-void exit_(int status)
+void SH_exit(int status)
 {
         /* Clean up job table and kill any child processes. */
         SH_JobTableKillAllJobs(job_table);

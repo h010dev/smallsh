@@ -70,10 +70,10 @@ void SH_JobTableKillAllJobs(SH_JobTable *table);
 void SH_JobTablePrintJobs(SH_JobTable const *table);
 
 /**
- * @brief Update a Job's status within the JobTable.
+ * @brief Update a Job's SH_status within the JobTable.
  * @param table JobTable object
  * @param pid Job PID
- * @param status status to give Job
+ * @param status SH_status to give Job
  * @return 0 if Job was found and updated, -1 otherwise
  */
 int SH_JobTableUpdateJob(SH_JobTable const *table, pid_t pid, int status);

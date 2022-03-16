@@ -125,7 +125,7 @@ static int parser_parse_cmd_(Statement *stmt, TokenIterator *iter)
         stmt->stmt_cmd->cmd_argv[stmt->stmt_cmd->cmd_argc] = NULL;
 
         /* Check if command is a supported builtin. */
-        if (builtins_is_supported(stmt->stmt_cmd->cmd_argv[0])) {
+        if (SH_IsBuiltin(stmt->stmt_cmd->cmd_argv[0])) {
                 stmt->stmt_flags |= FLAGS_BUILTIN;
         }
 
