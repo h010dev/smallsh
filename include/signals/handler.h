@@ -16,18 +16,18 @@
  * Source: https://edstem.org/us/courses/16718/discussion/1067170
  * @param sig signal number
  */
-void handler_disable_fg_only_mode(int sig);
+void SH_HandlerDisableFgOnlyMode(int sig);
 
 /**
  * @brief Handles a SIGTSTP signal when fg_only_mode is disabled.
  *
- * Responds to a SIGTSTP event then calls @c handler_switch_enable_fg_only_mode()
+ * Responds to a SIGTSTP event then calls @c SH_HandlerSwitchEnableFgOnlyMode()
  * so that the next SIGTSTP event undoes its action.
  *
  * Source: https://edstem.org/us/courses/16718/discussion/1067170
  * @param sig signal number
  */
-void handler_enable_fg_only_mode(int sig);
+void SH_HandlerEnableFgOnlyMode(int sig);
 
 /**
  * @brief Handles a SIGCHLD signal.
@@ -38,13 +38,13 @@ void handler_enable_fg_only_mode(int sig);
  *
  * @param sig signal number
  */
-void handler_handle_sigchld(int sig);
+void SH_HandlerHandleSigchld(int sig);
 
 /**
  * @brief Switches SIGTSTP mask to enable fg_only_mode on next receipt.
  *
  * Source: https://edstem.org/us/courses/16718/discussion/1067170
  */
-void handler_switch_enable_fg_only_mode(void);
+void SH_HandlerSwitchEnableFgOnlyMode(void);
 
 #endif //SMALLSH_HANDLER_H

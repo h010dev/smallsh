@@ -310,7 +310,7 @@ void SH_LaunchProcess(SH_Process *proc, pid_t pgid, char *infile, char *outfile,
                 }
         }
 
-        installer_install_child_process_signals(foreground);
+        SH_InstallerInstallChildProcessSignals(foreground);
 
         smallsh_errno = 0;
         status = SH_SetProcessIOStreams(infile, outfile, foreground);

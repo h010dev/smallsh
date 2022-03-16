@@ -222,7 +222,7 @@ static void smallsh_init(void)
         }
 
         /* Ignore interactive and job-control signals. */
-        installer_install_job_control_signals();
+        SH_InstallerInstallJobControlSignals();
 
         /* Put ourselves in our own process group. */
         smallsh_shell_pgid = getpid();
