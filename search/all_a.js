@@ -21,7 +21,7 @@ var searchData=
   ['job_5fspec_127',['job_spec',['../structJob.html#ac67363527f5083ceb9e54cc137809461',1,'Job']]],
   ['job_5fstdin_128',['job_stdin',['../structJob.html#a032db2e0cefb8cdafa56bf28589592ca',1,'Job']]],
   ['job_5fstdout_129',['job_stdout',['../structJob.html#a55dccb6e47cd2d29ca2e9f71cd258ab8',1,'Job']]],
-  ['job_5ftable_130',['job_table',['../job-control_8h.html#a769af495eaeafe093339399f540b00eb',1,'job-control.h']]],
+  ['job_5ftable_130',['job_table',['../job-control_8h.html#a769af495eaeafe093339399f540b00eb',1,'job_table():&#160;smallsh.c'],['../smallsh_8c.html#a769af495eaeafe093339399f540b00eb',1,'job_table():&#160;smallsh.c']]],
   ['job_5ftable_5fadd_5fjob_5f_131',['job_table_add_job_',['../job-table_8c.html#a2a61959e8c13721807af596dc4560b9c',1,'job-table.c']]],
   ['job_5ftable_5fclean_5f_132',['job_table_clean_',['../job-table_8c.html#a66c44bcdd6f804d115968494c8b2b1e4',1,'job-table.c']]],
   ['job_5ftable_5fctor_133',['job_table_ctor',['../job-table_8h.html#ad95a2b37be040b183308482bc67b24dd',1,'job_table_ctor(JobTable *self):&#160;job-table.c'],['../job-table_8c.html#ad95a2b37be040b183308482bc67b24dd',1,'job_table_ctor(JobTable *self):&#160;job-table.c']]],

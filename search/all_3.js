@@ -5,7 +5,7 @@ var searchData=
   ['cd_2eh_26',['cd.h',['../cd_8h.html',1,'']]],
   ['ch_5fcallback_27',['ch_callback',['../structChannel.html#a9deb3022236892ce6362d187f31cbed4',1,'Channel']]],
   ['ch_5fread_28',['ch_read',['../structChannel.html#ae579397aa7ed56cf35fbbfdf29088c48',1,'Channel']]],
-  ['ch_5fsigchld_29',['ch_sigchld',['../events_8h.html#a38eee5bd80ad6127bd4121865947c0c9',1,'events.h']]],
+  ['ch_5fsigchld_29',['ch_sigchld',['../events_8h.html#a38eee5bd80ad6127bd4121865947c0c9',1,'ch_sigchld():&#160;smallsh.c'],['../smallsh_8c.html#a38eee5bd80ad6127bd4121865947c0c9',1,'ch_sigchld():&#160;smallsh.c']]],
   ['ch_5fwrite_30',['ch_write',['../structChannel.html#ad874d338cec1167c20e7e503f50a212d',1,'Channel']]],
   ['channel_31',['Channel',['../structChannel.html',1,'Channel'],['../channel_8h.html#afba562878a3535479ef88914e89ee38b',1,'Channel():&#160;channel.h']]],
   ['channel_2ec_32',['channel.c',['../channel_8c.html',1,'']]],

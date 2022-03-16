@@ -120,6 +120,24 @@ Functions</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:ae5640982a70be020c30cb8565b96a1d0"><td class="memItemLeft" align="right" valign="top">volatile int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="smallsh_8c.html#ae5640982a70be020c30cb8565b96a1d0">smallsh_errno</a> = 0</td></tr>
 <tr class="separator:ae5640982a70be020c30cb8565b96a1d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c9ecfcc9e26042af04b190a0119a85c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="smallsh_8c.html#a8c9ecfcc9e26042af04b190a0119a85c">smallsh_line_buffer</a> = false</td></tr>
+<tr class="separator:a8c9ecfcc9e26042af04b190a0119a85c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71c10c0a73d21042d5e8b7d0aa38c56d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="smallsh_8c.html#a71c10c0a73d21042d5e8b7d0aa38c56d">smallsh_interactive_mode</a> = 0</td></tr>
+<tr class="separator:a71c10c0a73d21042d5e8b7d0aa38c56d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f076f783f64e412c1dea80ae7e13006"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="smallsh_8c.html#a9f076f783f64e412c1dea80ae7e13006">smallsh_fg_only_mode</a> = 0</td></tr>
+<tr class="separator:a9f076f783f64e412c1dea80ae7e13006"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a769af495eaeafe093339399f540b00eb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structJobTable.html">JobTable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="smallsh_8c.html#a769af495eaeafe093339399f540b00eb">job_table</a></td></tr>
+<tr class="separator:a769af495eaeafe093339399f540b00eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2df9e142e04ff4f3a90d18b385258ff"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="smallsh_8c.html#ae2df9e142e04ff4f3a90d18b385258ff">smallsh_shell_terminal</a> = 0</td></tr>
+<tr class="separator:ae2df9e142e04ff4f3a90d18b385258ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c11f6fc907b7b4e2215bafeab41f8ec"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="smallsh_8c.html#a4c11f6fc907b7b4e2215bafeab41f8ec">smallsh_shell_pgid</a> = 0</td></tr>
+<tr class="separator:a4c11f6fc907b7b4e2215bafeab41f8ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38eee5bd80ad6127bd4121865947c0c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structChannel.html">Channel</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="smallsh_8c.html#a38eee5bd80ad6127bd4121865947c0c9">ch_sigchld</a></td></tr>
+<tr class="separator:a38eee5bd80ad6127bd4121865947c0c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7d874f76a5f3e533ae39b150b48b4f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structReceiver.html">Receiver</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="smallsh_8c.html#ae7d874f76a5f3e533ae39b150b48b4f4">rcv</a></td></tr>
+<tr class="separator:ae7d874f76a5f3e533ae39b150b48b4f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b4f17f8655cd7c89af3d73da19d3958"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structSender.html">Sender</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="smallsh_8c.html#a4b4f17f8655cd7c89af3d73da19d3958">snd</a></td></tr>
+<tr class="separator:a4b4f17f8655cd7c89af3d73da19d3958"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains core shell functions. </p>
@@ -159,7 +177,7 @@ Variables</h2></td></tr>
 
 <p>Run shell's main event loop until terminated. </p>
 
-<p class="reference">References <a class="el" href="events_8h.html#a81ce7d6909034de9c012d78ae23c3f42">events_init()</a>, <a class="el" href="events_8h.html#a6b61e1b76a1b5f640817937bde6c2f53">events_notify()</a>, <a class="el" href="exit_8h.html#a06b48ef7aaf752e58a067f127259920c">exit_()</a>, <a class="el" href="job-control_8h.html#a769af495eaeafe093339399f540b00eb">job_table</a>, <a class="el" href="job-table_8h.html#ad95a2b37be040b183308482bc67b24dd">job_table_ctor()</a>, <a class="el" href="error_8h.html#a725450636b667738da72231c77084186">print_error_msg()</a>, <a class="el" href="smallsh_8c.html#aab7ee4d34e98147392afb5d3b4a88276">smallsh_eval()</a>, <a class="el" href="smallsh_8c.html#a142fdf9ba40211230997c69308bcab71">smallsh_init()</a>, <a class="el" href="smallsh_8c.html#a554d343a98197fe5de7cae8d74213222">smallsh_inspect_fg_only_mode_flag()</a>, <a class="el" href="globals_8h.html#a71c10c0a73d21042d5e8b7d0aa38c56d">smallsh_interactive_mode</a>, <a class="el" href="globals_8h.html#a8c9ecfcc9e26042af04b190a0119a85c">smallsh_line_buffer</a>, and <a class="el" href="smallsh_8c.html#a9f2b1b75a9b61c4b1b4333108a00e805">smallsh_read_input()</a>.</p>
+<p class="reference">References <a class="el" href="events_8h.html#a81ce7d6909034de9c012d78ae23c3f42">events_init()</a>, <a class="el" href="events_8h.html#a6b61e1b76a1b5f640817937bde6c2f53">events_notify()</a>, <a class="el" href="exit_8h.html#a06b48ef7aaf752e58a067f127259920c">exit_()</a>, <a class="el" href="smallsh_8c.html#a769af495eaeafe093339399f540b00eb">job_table</a>, <a class="el" href="job-table_8h.html#ad95a2b37be040b183308482bc67b24dd">job_table_ctor()</a>, <a class="el" href="error_8h.html#a725450636b667738da72231c77084186">print_error_msg()</a>, <a class="el" href="smallsh_8c.html#aab7ee4d34e98147392afb5d3b4a88276">smallsh_eval()</a>, <a class="el" href="smallsh_8c.html#a142fdf9ba40211230997c69308bcab71">smallsh_init()</a>, <a class="el" href="smallsh_8c.html#a554d343a98197fe5de7cae8d74213222">smallsh_inspect_fg_only_mode_flag()</a>, <a class="el" href="smallsh_8c.html#a71c10c0a73d21042d5e8b7d0aa38c56d">smallsh_interactive_mode</a>, <a class="el" href="smallsh_8c.html#a8c9ecfcc9e26042af04b190a0119a85c">smallsh_line_buffer</a>, and <a class="el" href="smallsh_8c.html#a9f2b1b75a9b61c4b1b4333108a00e805">smallsh_read_input()</a>.</p>
 
 </div>
 </div>
@@ -196,7 +214,7 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 or 1 on success, -1 on failure </dd></dl>
 
-<p class="reference">References <a class="el" href="structJobTable.html#af651358a411e27f1eed150325359c298">JobTable::add_job</a>, <a class="el" href="cd_8h.html#a06f1df385b07f03d3cb4c4587ff892f0">cd()</a>, <a class="el" href="structStmtCmd.html#a8bb9a6c1a54b1e0f0aecc810fae91271">StmtCmd::cmd_argc</a>, <a class="el" href="structStmtCmd.html#a8c4d2948dd5a290f373a4760967423bd">StmtCmd::cmd_argv</a>, <a class="el" href="statement_8h.html#a77d50711e0d2daf004d857d496f7bc14a4896254d97976e29991cffcadd292a31">FLAGS_BGCTRL</a>, <a class="el" href="statement_8h.html#a77d50711e0d2daf004d857d496f7bc14a4764b6bd26928ec58a7c3b412c15055d">FLAGS_BUILTIN</a>, <a class="el" href="structParser.html#a617acf84fdeb55ca5ef630f4eb5c26a0">Parser::get_statements</a>, <a class="el" href="job-control_8h.html#a38f9ae8374c2f7dad8e6cfe2f8eb3720">job_control_launch_job()</a>, <a class="el" href="job_8h.html#ae6da664e847549992adf52d196e88207">job_ctor()</a>, <a class="el" href="job-control_8h.html#a769af495eaeafe093339399f540b00eb">job_table</a>, <a class="el" href="structParser.html#aa8336e9c9fa3033d55762ca116bb3946">Parser::parse</a>, <a class="el" href="parser_8h.html#a4a5bcf9c158d9bf51e1781bedbea2ed2">parser_ctor()</a>, <a class="el" href="parser_8h.html#a6667455d4a6e5c24feaf783b5a782465">parser_dtor()</a>, <a class="el" href="process_8h.html#a5164bcc4363323c7db731ec59ed3582a">process_ctor()</a>, <a class="el" href="globals_8h.html#a9f076f783f64e412c1dea80ae7e13006">smallsh_fg_only_mode</a>, <a class="el" href="globals_8h.html#a71c10c0a73d21042d5e8b7d0aa38c56d">smallsh_interactive_mode</a>, <a class="el" href="globals_8h.html#a8c9ecfcc9e26042af04b190a0119a85c">smallsh_line_buffer</a>, <a class="el" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status()</a>, <a class="el" href="structStmtStdin.html#a767e0534cb7a64478640bd43d05e6362">StmtStdin::stdin_num_streams</a>, <a class="el" href="structStmtStdin.html#ad142b2d0806df255706ebc6b2219a947">StmtStdin::stdin_streams</a>, <a class="el" href="structStmtStdout.html#a7693efc180ae1dde8e5620f805c0fe2b">StmtStdout::stdout_num_streams</a>, <a class="el" href="structStmtStdout.html#ac7699d4ee2232fd88c531b82f06eefac">StmtStdout::stdout_streams</a>, <a class="el" href="structStatement.html#afe7313615634efa2ca70a96ea3b273a6">Statement::stmt_cmd</a>, <a class="el" href="structStatement.html#aba385eac4473bf5d28ca500a08507239">Statement::stmt_flags</a>, <a class="el" href="structStatement.html#aa103cb6b33b85f15b7fe870cbda06faa">Statement::stmt_stdin</a>, and <a class="el" href="structStatement.html#ac53610f2afa5a2356d515771d197365f">Statement::stmt_stdout</a>.</p>
+<p class="reference">References <a class="el" href="structJobTable.html#af651358a411e27f1eed150325359c298">JobTable::add_job</a>, <a class="el" href="cd_8h.html#a06f1df385b07f03d3cb4c4587ff892f0">cd()</a>, <a class="el" href="structStmtCmd.html#a8bb9a6c1a54b1e0f0aecc810fae91271">StmtCmd::cmd_argc</a>, <a class="el" href="structStmtCmd.html#a8c4d2948dd5a290f373a4760967423bd">StmtCmd::cmd_argv</a>, <a class="el" href="statement_8h.html#a77d50711e0d2daf004d857d496f7bc14a4896254d97976e29991cffcadd292a31">FLAGS_BGCTRL</a>, <a class="el" href="statement_8h.html#a77d50711e0d2daf004d857d496f7bc14a4764b6bd26928ec58a7c3b412c15055d">FLAGS_BUILTIN</a>, <a class="el" href="structParser.html#a617acf84fdeb55ca5ef630f4eb5c26a0">Parser::get_statements</a>, <a class="el" href="job-control_8h.html#a38f9ae8374c2f7dad8e6cfe2f8eb3720">job_control_launch_job()</a>, <a class="el" href="job_8h.html#ae6da664e847549992adf52d196e88207">job_ctor()</a>, <a class="el" href="smallsh_8c.html#a769af495eaeafe093339399f540b00eb">job_table</a>, <a class="el" href="structParser.html#aa8336e9c9fa3033d55762ca116bb3946">Parser::parse</a>, <a class="el" href="parser_8h.html#a4a5bcf9c158d9bf51e1781bedbea2ed2">parser_ctor()</a>, <a class="el" href="parser_8h.html#a6667455d4a6e5c24feaf783b5a782465">parser_dtor()</a>, <a class="el" href="process_8h.html#a5164bcc4363323c7db731ec59ed3582a">process_ctor()</a>, <a class="el" href="smallsh_8c.html#a9f076f783f64e412c1dea80ae7e13006">smallsh_fg_only_mode</a>, <a class="el" href="smallsh_8c.html#a71c10c0a73d21042d5e8b7d0aa38c56d">smallsh_interactive_mode</a>, <a class="el" href="smallsh_8c.html#a8c9ecfcc9e26042af04b190a0119a85c">smallsh_line_buffer</a>, <a class="el" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status()</a>, <a class="el" href="structStmtStdin.html#a767e0534cb7a64478640bd43d05e6362">StmtStdin::stdin_num_streams</a>, <a class="el" href="structStmtStdin.html#ad142b2d0806df255706ebc6b2219a947">StmtStdin::stdin_streams</a>, <a class="el" href="structStmtStdout.html#a7693efc180ae1dde8e5620f805c0fe2b">StmtStdout::stdout_num_streams</a>, <a class="el" href="structStmtStdout.html#ac7699d4ee2232fd88c531b82f06eefac">StmtStdout::stdout_streams</a>, <a class="el" href="structStatement.html#afe7313615634efa2ca70a96ea3b273a6">Statement::stmt_cmd</a>, <a class="el" href="structStatement.html#aba385eac4473bf5d28ca500a08507239">Statement::stmt_flags</a>, <a class="el" href="structStatement.html#aa103cb6b33b85f15b7fe870cbda06faa">Statement::stmt_stdin</a>, and <a class="el" href="structStatement.html#ac53610f2afa5a2356d515771d197365f">Statement::stmt_stdout</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="smallsh_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main()</a>.</p>
 
@@ -229,7 +247,7 @@ Variables</h2></td></tr>
 <p>Initialize shell and bring it to the foreground process group. </p>
 <p>Do not proceed until this is the case (but make an exception for the test script in this case). </p>
 
-<p class="reference">References <a class="el" href="installer_8h.html#a7c1ed2760a22437c5de3c2b9b90478eb">installer_install_job_control_signals()</a>, <a class="el" href="error_8h.html#a725450636b667738da72231c77084186">print_error_msg()</a>, <a class="el" href="globals_8h.html#a71c10c0a73d21042d5e8b7d0aa38c56d">smallsh_interactive_mode</a>, <a class="el" href="globals_8h.html#a196b0b1139e0f719f6c4d7fbc8f84b73">smallsh_shell_pgid</a>, and <a class="el" href="globals_8h.html#ae2df9e142e04ff4f3a90d18b385258ff">smallsh_shell_terminal</a>.</p>
+<p class="reference">References <a class="el" href="installer_8h.html#a7c1ed2760a22437c5de3c2b9b90478eb">installer_install_job_control_signals()</a>, <a class="el" href="error_8h.html#a725450636b667738da72231c77084186">print_error_msg()</a>, <a class="el" href="smallsh_8c.html#a71c10c0a73d21042d5e8b7d0aa38c56d">smallsh_interactive_mode</a>, <a class="el" href="smallsh_8c.html#a4c11f6fc907b7b4e2215bafeab41f8ec">smallsh_shell_pgid</a>, and <a class="el" href="smallsh_8c.html#ae2df9e142e04ff4f3a90d18b385258ff">smallsh_shell_terminal</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="smallsh_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main()</a>.</p>
 
@@ -263,7 +281,7 @@ Variables</h2></td></tr>
 <p>Sets global variable <code>smallsh_fg_only_mode</code> accordingly.</p>
 <p>Source: <a href="https://edstem.org/us/courses/16718/discussion/1067170">https://edstem.org/us/courses/16718/discussion/1067170</a> </p>
 
-<p class="reference">References <a class="el" href="globals_8h.html#a9f076f783f64e412c1dea80ae7e13006">smallsh_fg_only_mode</a>, and <a class="el" href="globals_8h.html#a32a1dbe287f0f5cd5695660daaf373c9">smallsh_fg_only_mode_flag</a>.</p>
+<p class="reference">References <a class="el" href="smallsh_8c.html#a9f076f783f64e412c1dea80ae7e13006">smallsh_fg_only_mode</a>, and <a class="el" href="globals_8h.html#a32a1dbe287f0f5cd5695660daaf373c9">smallsh_fg_only_mode_flag</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="smallsh_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main()</a>.</p>
 
@@ -309,6 +327,57 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a id="a38eee5bd80ad6127bd4121865947c0c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38eee5bd80ad6127bd4121865947c0c9">&#9670;&nbsp;</a></span>ch_sigchld</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structChannel.html">Channel</a> ch_sigchld</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>communication channel for SIGCHLD events </p>
+
+<p class="reference">Referenced by <a class="el" href="events_8c.html#a64bde057407debd7862302dda094b6ed">events_cleanup()</a>, <a class="el" href="events_8c.html#a81ce7d6909034de9c012d78ae23c3f42">events_init()</a>, and <a class="el" href="handler_8c.html#a1afb82a207441052c002d287c4fc6a26">handler_handle_sigchld()</a>.</p>
+
+</div>
+</div>
+<a id="a769af495eaeafe093339399f540b00eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a769af495eaeafe093339399f540b00eb">&#9670;&nbsp;</a></span>job_table</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structJobTable.html">JobTable</a> job_table</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>shell global job-control table </p>
+
+<p class="reference">Referenced by <a class="el" href="events_8c.html#a6b61e1b76a1b5f640817937bde6c2f53">events_notify()</a>, <a class="el" href="exit_8c.html#a06b48ef7aaf752e58a067f127259920c">exit_()</a>, <a class="el" href="smallsh_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main()</a>, <a class="el" href="receiver_8c.html#ac01622024f911484d5fa0dc8f5cf2b67">receiver_cb_sigchld()</a>, and <a class="el" href="smallsh_8c.html#aab7ee4d34e98147392afb5d3b4a88276">smallsh_eval()</a>.</p>
+
+</div>
+</div>
+<a id="ae7d874f76a5f3e533ae39b150b48b4f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7d874f76a5f3e533ae39b150b48b4f4">&#9670;&nbsp;</a></span>rcv</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structReceiver.html">Receiver</a> rcv</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>list of channels waiting on new events </p>
+
+<p class="reference">Referenced by <a class="el" href="events_8c.html#a64bde057407debd7862302dda094b6ed">events_cleanup()</a>, <a class="el" href="events_8c.html#a81ce7d6909034de9c012d78ae23c3f42">events_init()</a>, and <a class="el" href="events_8c.html#a6b61e1b76a1b5f640817937bde6c2f53">events_notify()</a>.</p>
+
+</div>
+</div>
 <a id="ae5640982a70be020c30cb8565b96a1d0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae5640982a70be020c30cb8565b96a1d0">&#9670;&nbsp;</a></span>smallsh_errno</h2>
 
@@ -320,6 +389,111 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>shell error status code </p>
+
+<p class="reference">Referenced by <a class="el" href="job-control_8c.html#aa938098eb32e74162ca87c629d3e86b9">job_control_wait_for_job()</a>, <a class="el" href="process_8c.html#a628ed3c091c9c88d3ea3362ba97a47f7">process_launch()</a>, <a class="el" href="process_8c.html#a7d13512caf8af82bb89ef37d3b59c52e">process_set_io_streams()</a>, and <a class="el" href="status_8c.html#a23939106a6e2cda8545e50fc0635d0eb">status()</a>.</p>
+
+</div>
+</div>
+<a id="a9f076f783f64e412c1dea80ae7e13006"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f076f783f64e412c1dea80ae7e13006">&#9670;&nbsp;</a></span>smallsh_fg_only_mode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int smallsh_fg_only_mode = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>foreground-only mode </p>
+
+<p class="reference">Referenced by <a class="el" href="smallsh_8c.html#aab7ee4d34e98147392afb5d3b4a88276">smallsh_eval()</a>, and <a class="el" href="smallsh_8c.html#a554d343a98197fe5de7cae8d74213222">smallsh_inspect_fg_only_mode_flag()</a>.</p>
+
+</div>
+</div>
+<a id="a71c10c0a73d21042d5e8b7d0aa38c56d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71c10c0a73d21042d5e8b7d0aa38c56d">&#9670;&nbsp;</a></span>smallsh_interactive_mode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int smallsh_interactive_mode = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>whether or not shell is in interactive mode </p>
+
+<p class="reference">Referenced by <a class="el" href="exit_8c.html#a06b48ef7aaf752e58a067f127259920c">exit_()</a>, <a class="el" href="job-control_8c.html#a38f9ae8374c2f7dad8e6cfe2f8eb3720">job_control_launch_job()</a>, <a class="el" href="smallsh_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main()</a>, <a class="el" href="process_8c.html#a628ed3c091c9c88d3ea3362ba97a47f7">process_launch()</a>, <a class="el" href="smallsh_8c.html#aab7ee4d34e98147392afb5d3b4a88276">smallsh_eval()</a>, <a class="el" href="smallsh_8c.html#a142fdf9ba40211230997c69308bcab71">smallsh_init()</a>, and <a class="el" href="status_8c.html#a23939106a6e2cda8545e50fc0635d0eb">status()</a>.</p>
+
+</div>
+</div>
+<a id="a8c9ecfcc9e26042af04b190a0119a85c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c9ecfcc9e26042af04b190a0119a85c">&#9670;&nbsp;</a></span>smallsh_line_buffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool smallsh_line_buffer = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>whether or not to add newlines to shell commands </p>
+
+<p class="reference">Referenced by <a class="el" href="smallsh_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main()</a>, and <a class="el" href="smallsh_8c.html#aab7ee4d34e98147392afb5d3b4a88276">smallsh_eval()</a>.</p>
+
+</div>
+</div>
+<a id="a4c11f6fc907b7b4e2215bafeab41f8ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c11f6fc907b7b4e2215bafeab41f8ec">&#9670;&nbsp;</a></span>smallsh_shell_pgid</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int smallsh_shell_pgid = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>shell's PGID </p>
+
+<p class="reference">Referenced by <a class="el" href="job-control_8c.html#aad42031af147f314fc5e34225e5809e1">job_control_foreground_job()</a>, and <a class="el" href="smallsh_8c.html#a142fdf9ba40211230997c69308bcab71">smallsh_init()</a>.</p>
+
+</div>
+</div>
+<a id="ae2df9e142e04ff4f3a90d18b385258ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2df9e142e04ff4f3a90d18b385258ff">&#9670;&nbsp;</a></span>smallsh_shell_terminal</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int smallsh_shell_terminal = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>shell's terminal file </p>
+
+<p class="reference">Referenced by <a class="el" href="job-control_8c.html#aad42031af147f314fc5e34225e5809e1">job_control_foreground_job()</a>, <a class="el" href="process_8c.html#a628ed3c091c9c88d3ea3362ba97a47f7">process_launch()</a>, and <a class="el" href="smallsh_8c.html#a142fdf9ba40211230997c69308bcab71">smallsh_init()</a>.</p>
+
+</div>
+</div>
+<a id="a4b4f17f8655cd7c89af3d73da19d3958"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b4f17f8655cd7c89af3d73da19d3958">&#9670;&nbsp;</a></span>snd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structSender.html">Sender</a> snd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>list of channels to notify on new events </p>
+
+<p class="reference">Referenced by <a class="el" href="events_8c.html#a64bde057407debd7862302dda094b6ed">events_cleanup()</a>, and <a class="el" href="events_8c.html#a81ce7d6909034de9c012d78ae23c3f42">events_init()</a>.</p>
 
 </div>
 </div>
