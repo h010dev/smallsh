@@ -11,9 +11,9 @@
 #include "receiver.h"
 #include "sender.h"
 
-Channel ch_sigchld; /**< communication channel for SIGCHLD events */
-Receiver rcv; /**< list of channels waiting on new events */
-Sender snd; /**< list of channels to notify on new events */
+extern Channel ch_sigchld; /**< communication channel for SIGCHLD events */
+extern Receiver rcv; /**< list of channels waiting on new events */
+extern Sender snd; /**< list of channels to notify on new events */
 
 /**
  * @brief Cleans up the global event-related data structures.

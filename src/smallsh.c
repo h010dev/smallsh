@@ -314,6 +314,15 @@ static ssize_t smallsh_read_input(char **cmd)
  *
  ******************************************************************************/
 volatile int smallsh_errno = 0;
+bool smallsh_line_buffer = false;
+int smallsh_interactive_mode = 0;
+int smallsh_fg_only_mode = 0;
+JobTable job_table;
+int smallsh_shell_terminal = 0;
+int smallsh_shell_pgid = 0;
+Channel ch_sigchld;
+Receiver rcv;
+Sender snd;
 
 /* *****************************************************************************
  * FUNCTIONS

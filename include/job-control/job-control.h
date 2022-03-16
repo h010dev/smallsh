@@ -15,7 +15,7 @@
 #include "job.h"
 #include "job-table.h"
 
-JobTable job_table; /**< shell global job-control table */
+extern JobTable job_table; /**< shell global job-control table */
 
 /**
  * @brief Creates new child process and runs @p job within child.

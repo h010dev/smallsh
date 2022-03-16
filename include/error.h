@@ -7,7 +7,7 @@
 #ifndef SMALLSH_ERROR_H
 #define SMALLSH_ERROR_H
 
-volatile int smallsh_errno; /**< shell error status code */
+extern volatile int smallsh_errno; /**< shell error status code */
 
 /**
  * @brief Prints an error message to STDOUT.
