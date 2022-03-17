@@ -17,12 +17,12 @@
  * responsible for monitor for and respond to new signal-generated events.
  */
 typedef struct {
-        int _rcv_n_fds; /**< maximum file descriptor value for usage with select */
-        fd_set _rcv_fds; /**< set of read file descriptors for usage with select */
-        size_t _rcv_n_ch; /**< number of channels that receiver will monitor */
-        size_t _rcv_max_ch; /**< maximum number of channels possible */
-        Channel **_ch; /**< list of channels to monitor */
-} Receiver;
+        int n; /**< maximum file descriptor value for usage with select */
+        fd_set fds; /**< set of read file descriptors for usage with select */
+        size_t size; /**< number of channels that receiver will monitor */
+        size_t capacity; /**< maximum number of channels possible */
+        SH_Channel **channels; /**< list of channels to monitor */
+} SH_Receiver;
 
 /**
  * @brief Adds a new @c Channel to its channel list, and initializes its read
@@ -32,11 +32,11 @@ typedef struct {
  * sets it to be non-blocking as per the self-pipe trick requirements. It also
  * updates the necessary data structures use in the select call for consuming
  * new events.
- * @param self @c Receiver to add channel to
- * @param ch @c Channel to add to receiver
+ * @param receiver @c Receiver to add channel to
+ * @param channel @c Channel to add to receiver
  * @return 0 on success, -1 on failure
  */
-int receiver_add(Receiver *self, Channel *ch);
+int SH_ReceiverAddChannel(SH_Receiver *receiver, SH_Channel *channel);
 
 /**
  * @brief Callback handler responsible for consuming and responding to SIGCHLD
@@ -44,10 +44,10 @@ int receiver_add(Receiver *self, Channel *ch);
  *
  * This function will read all events from channel pipe, then update the global
  * job table with information received on newly completed child processes.
- * @param ch @c Channel to update
+ * @param channel @c Channel to update
  * @return 0 on success, -1 on failure
  */
-int receiver_cb_sigchld(struct Channel ch);
+int SH_ReceiverSigchldCallbackHandler(SH_Channel channel);
 
 /**
  * @brief Consumes events for all of the channels in its notification list,
@@ -57,25 +57,24 @@ int receiver_cb_sigchld(struct Channel ch);
  * changes made to @p self's file descriptor read list. After responding
  * to the events, it clears out and resets its file descriptor read set.
  * This step is necessary in implementing the self-pipe trick.
- * @param self @c Receiver object
+ * @param receiver @c Receiver object
  * @return 0 on success, -1 on failure
  */
-int receiver_consume_events(Receiver *self);
+int SH_ReceiverConsumeEvents(SH_Receiver *receiver);
 
 /**
- * @brief Initializes @p self with provided data.
- * @param self @c receiver to initialize
- * @param max_ch maximum number of channels receiver will support
- * @return 0 on success, -1 on failure
+ * @brief Initializes a new @c Receiver object.
+ * @param capacity maximum number of channels receiver will support
+ * @return new @c Receiver object on success, @c NULL on failure
  */
-int receiver_ctor(Receiver *self, size_t max_ch);
+SH_Receiver *SH_CreateReceiver(size_t capacity);
 
 /**
  * @brief Resets @p self's values.
- * @param self @c Receiver to reset
+ * @param receiver @c Receiver to reset
  * @note This does not clear the actual channels by calling their respective
  * destructors. It is the caller's responsibility to do so afterwards.
  */
-void receiver_dtor(Receiver *self);
+void SH_DestroyReceiver(SH_Receiver **receiver);
 
 #endif //SMALLSH_RECEIVER_H

@@ -8,7 +8,37 @@
 
 #include "events/events.h"
 #include "job-control/job-control.h"
-
+/* *****************************************************************************
+ * PRIVATE DEFINITIONS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
+/* *****************************************************************************
+ * MACROS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
+#define SH_MAX_EVENTS 1
 /* *****************************************************************************
  * PUBLIC DEFINITIONS
  *
@@ -39,65 +69,64 @@
  *
  *
  ******************************************************************************/
-int events_init(void)
+int SH_InitEvents(void)
 {
         int status;
 
         /* Initialize event channels */
-        status = channel_ctor(&ch_sigchld, receiver_cb_sigchld);
-        if (status == -1) {
-                fprintf(stderr, "channel_ctor()");
+        sigchld_channel = SH_CreateChannel(SH_ReceiverSigchldCallbackHandler);
+        if (sigchld_channel == NULL) {
+                fprintf(stderr, "SH_CreateChannel()");
                 return -1;
         }
 
         /* Initialize event handler */
-        status = receiver_ctor(&rcv, 2);
-        if (status == -1) {
-                fprintf(stderr, "receiver_ctor()");
+        receiver = SH_CreateReceiver(SH_MAX_EVENTS);
+        if (receiver == NULL) {
+                fprintf(stderr, "SH_CreateReceiver()");
                 return -1;
         }
 
-        status = receiver_add(&rcv, &ch_sigchld);
+        status = SH_ReceiverAddChannel(receiver, sigchld_channel);
         if (status == -1) {
-                fprintf(stderr, "receiver_add()");
+                fprintf(stderr, "SH_ReceiverAddChannel()");
                 return -1;
         }
 
         /* Initialize event notifier */
-        status = sender_ctor(&snd, 2);
-        if (status == -1) {
-                fprintf(stderr, "sender_ctor()");
+        sender = SH_CreateSender(SH_MAX_EVENTS);
+        if (sender == NULL) {
+                fprintf(stderr, "SH_CreateSender()");
                 return -1;
         }
 
-        status = sender_add(&snd, &ch_sigchld);
+        status = SH_SenderAddChannel(sender, sigchld_channel);
         if (status == -1) {
-                fprintf(stderr, "sender_add()");
+                fprintf(stderr, "SH_SenderAddChannel()");
                 return -1;
         }
 
         return 0;
 }
 
-void events_cleanup(void)
+void SH_CleanupEvents(void)
 {
-        receiver_dtor(&rcv);
-        sender_dtor(&snd);
-
-        channel_dtor(&ch_sigchld);
+        SH_DestroyReceiver(&receiver);
+        SH_DestroySender(&sender);
+        SH_DestroyChannel(&sigchld_channel);
 }
 
-int events_notify(void)
+int SH_NotifyEvents(void)
 {
         int status;
 
-        status = receiver_consume_events(&rcv);
+        status = SH_ReceiverConsumeEvents(receiver);
         if (status == -1) {
-                fprintf(stderr, "receiver_consume_events()\n");
+                fprintf(stderr, "SH_ReceiverConsumeEvents()\n");
                 return -1;
         }
 
-        job_table.clean(&job_table);
+        SH_JobTableCleanJobs(job_table);
 
         return 0;
 }

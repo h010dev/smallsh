@@ -14,96 +14,26 @@
 #include "statement.h"
 
 /**
- * @brief Determines if a token is a comment token.
- */
-#define is_tok_cmt(tok) ((ShellTokenType) tok.vptr->get_type(&tok) == TOK_CMT)
-
-/**
- * @brief Determines if a token is a background control token.
- */
-#define is_tok_ctrl_bg(tok) ((ShellTokenType) tok.vptr->get_type(&tok) == TOK_CTRL_BG)
-
-/**
- * @brief Determines if a token is an input redirection token.
- */
-#define is_tok_redir_input(tok) ((ShellTokenType) tok.vptr->get_type(&tok) == TOK_REDIR_INPUT)
-
-/**
- * @brief Determines if a token is an output redirection token.
- */
-#define is_tok_redir_output(tok) ((ShellTokenType) tok.vptr->get_type(&tok) == TOK_REDIR_OUTPUT)
-
-/**
- * @brief Determines if a token is a word token.
- */
-#define is_tok_word(tok) ((ShellTokenType) tok.vptr->get_type(&tok) == TOK_WORD)
-
-#define is_tok_ctrl_newline(tok) ((ShellTokenType) tok.vptr->get_type(&tok) == TOK_CTRL_NEWLINE)
-
-struct ParserPrivate;
-
-/**
  * @brief Defines parser namespace.
  */
-typedef struct Parser {
-        /**
-         * @brief Parses a character stream, creates tokens, and generates command
-         * statements.
-         *
-         * <br>
-         *
-         * This step performs grouping of tokens based on the following production
-         * rules:
-         *
-         * <br><br>
-         *
-         * node: comment | command | io_redir | bg_ctrl\n
-         * comment: ^((whitespace)* '#' whitespace)\n
-         * command: ^(word)+ [excluding '<', '>', '&', '#', whitespace, newline]\n
-         * bg_ctrl: (whitespace '&' (whitespace | newline))$\n
-         * io_redir: whitespace ('<' | '>') whitespace word\n
-         * word: any consecutive characters, excluding whitespace and newline\n
-         * whitespace: (' ' | '\\t')+\n
-         * newline: '\\n'\n
-         *
-         * @param self @c Parser object
-         * @param buf character stream to parse
-         * @return number of statements created on success, -1 on failure
-         * @note Caller is responsible for freeing parsed statements via @c
-         * statement_del.
-         */
-        ssize_t (*parse) (struct Parser * const self, char *buf);
-
-        /**
-         * @brief Returns parsed statements to caller.
-         * @param self @c Parser object
-         * @return array of @c Statement objects parsed from character stream
-         */
-        Statement **(*get_statements) (struct Parser * const self);
-
-        /**
-         * @brief Prints statement in a pretty-printed format to stdout.
-         * @param stmt @c Statement object to print
-         */
-        void (*print_statement) (Statement const *stmt);
-
-        /**
-         * @brief @c Parser private data.
-         */
-        struct ParserPrivate *private;
-} Parser;
+typedef struct SH_Parser {
+        size_t n_toks; /**< number of tokens parsed */
+        SH_Token **toks; /**< parsed tokens */
+        ssize_t n_stmts; /**< number of statements created */
+        SH_Statement **stmts; /**< statements created */
+} SH_Parser;
 
 /**
  * @brief Initializes @p self @c Parser object.
  * @param self @c Parser object to initialize
  */
-void parser_ctor(Parser *self);
+SH_Parser *SH_CreateParser(void);
 
 /**
- * @brief Destroys @p self @c Parser object.
- * @param self @c Parser object to destroy
+ * @brief Destroys @p parser @c Parser object.
+ * @param parser @c Parser object to destroy
  */
-void parser_dtor(Parser *self);
+void SH_DestroyParser(SH_Parser **parser);
 
 /**
  * @brief Substitutes all variables in a word string with their literal value,
@@ -114,7 +44,7 @@ void parser_dtor(Parser *self);
  * @param word word string to expand variables
  * @return new word string containing literal substitutions for all variables
  */
-char *parser_expand_word(char *word);
+char *SH_ParserExpandWord(char *word);
 
 /**
  * @brief Extends @p string with the process's current PID.
@@ -130,7 +60,41 @@ char *parser_expand_word(char *word);
  * @param len input/output param for final string length
  * @return new string with PID at end, or @c NULL on error
  */
-char *parser_insert_pid(char *str, char **ptr, size_t *len);
+char *SH_ParserInsertPid(char *str, char **ptr, size_t *len);
+
+/**
+ * @brief Parses a character stream, creates tokens, and generates command
+ * statements.
+ *
+ * <br>
+ *
+ * This step performs grouping of tokens based on the following production
+ * rules:
+ *
+ * <br><br>
+ *
+ * node: comment | command | io_redir | bg_ctrl\n
+ * comment: ^((whitespace)* '#' whitespace)\n
+ * command: ^(word)+ [excluding '<', '>', '&', '#', whitespace, newline]\n
+ * bg_ctrl: (whitespace '&' (whitespace | newline))$\n
+ * io_redir: whitespace ('<' | '>') whitespace word\n
+ * word: any consecutive characters, excluding whitespace and newline\n
+ * whitespace: (' ' | '\\t')+\n
+ * newline: '\\n'\n
+ *
+ * @param parser @c Parser object
+ * @param buf character stream to parse
+ * @return number of statements created on success, -1 on failure
+ * @note Caller is responsible for freeing parsed statements via @c
+ * SH_DestroyStatement.
+ */
+ssize_t SH_ParserParse(SH_Parser *parser, char *buf);
+
+/**
+ * @brief Prints statement in a pretty-printed format to stdout.
+ * @param stmt @c Statement object to print
+ */
+void *SH_ParserPrintStmt(SH_Statement const *stmt);
 
 /**
  * @brief Substitutes variable followed by '$' into word and returns result. If
@@ -150,6 +114,7 @@ char *parser_insert_pid(char *str, char **ptr, size_t *len);
  * @return new string with variable substituted at end, or just the '$' if no
  * valid variables present
  */
-char *parser_substitute_variable(char *word, char **old_ptr, char **new_ptr, size_t *len);
+char *SH_ParserSubstituteVariable(char *word, char **old_ptr, char **new_ptr,
+                                  size_t *len);
 
 #endif //SMALLSH_PARSER_H

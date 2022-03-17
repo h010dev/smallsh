@@ -14,8 +14,8 @@
  * argument is the command name; and an argument count.
  */
 typedef struct {
-        size_t cmd_argc; /**< argument count */
-        char **cmd_argv; /**< argument list */
+        size_t count; /**< argument count */
+        char **args; /**< argument list */
 } StmtCmd;
 
 /**
@@ -25,8 +25,8 @@ typedef struct {
  * number of filenames. These streams will be later opened for stdin.
  */
 typedef struct {
-        size_t stdin_num_streams; /**< number of file streams */
-        char **stdin_streams; /**< stream list */
+        size_t n; /**< number of file streams */
+        char **streams; /**< stream list */
 } StmtStdin;
 
 /**
@@ -36,8 +36,8 @@ typedef struct {
  * number of filenames. These streams will be later opened for stdout.
  */
 typedef struct {
-        size_t stdout_num_streams; /**< number of file streams */
-        char **stdout_streams; /**< stream list */
+        size_t n; /**< number of file streams */
+        char **streams; /**< stream list */
 } StmtStdout;
 
 /**
@@ -57,11 +57,11 @@ typedef enum {
  * This object is later passed on to the execution step of the shell.
  */
 typedef struct {
-        StmtCmd *stmt_cmd; /**< command */
-        StmtStdin *stmt_stdin; /**< stdin file streams */
-        StmtStdout *stmt_stdout; /**< stdout file streams */
-        StmtFlags stmt_flags; /**< special properties */
-} Statement;
+        StmtCmd *cmd; /**< command */
+        StmtStdin *infile; /**< stdin file streams */
+        StmtStdout *outfile; /**< stdout file streams */
+        StmtFlags flags; /**< special properties */
+} SH_Statement;
 
 /**
  * @brief IO Redirection types are used for determining which default
@@ -75,20 +75,20 @@ typedef enum {
 /**
  * @brief Create and initialize a new @c Statement object.
  * @return new @c Statement object
- * @note Caller is responsible for freeing structure via @c statement_del.
+ * @note Caller is responsible for freeing structure via @c SH_DestroyStatement.
  */
-Statement *statement_new(void);
+SH_Statement *SH_CreateStatement(void);
 
 /**
  * @brief Deletes @p stmt and frees its associated data.
  * @param stmt @c Statement object to delete
  */
-void statement_del(Statement **stmt);
+void SH_DestroyStatement(SH_Statement **stmt);
 
 /**
  * @brief Pretty-prints a @c Statement object to stdout.
- * @param self @c Statement object to print
+ * @param stmt @c Statement object to print
  */
-void statement_print(Statement const *self);
+void SH_PrintStatement(SH_Statement const *stmt);
 
 #endif //SMALLSH_STATEMENT_H

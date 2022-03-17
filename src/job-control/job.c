@@ -44,72 +44,82 @@
  *
  *
  ******************************************************************************/
-void job_ctor(Job *self, char *cmd, Process *proc, pid_t pgid, char *infile,
-              char *outfile, bool bg)
+SH_Job *SH_CreateJob(char *command, SH_Process *proc, char *infile,
+                     char *outfile, bool run_bg)
 {
+        SH_Job *job;
+
+        job = malloc(sizeof *job);
+        if (job == NULL) {
+                fprintf(stderr, "malloc\n");
+                exit(1);
+        }
+
         /* Copy job command. */
-        self->job_cmd = strdup(cmd);
-        if (self->job_cmd == NULL) {
+        job->command = strdup(command);
+        if (job->command == NULL) {
                 fprintf(stderr, "strdup\n");
                 exit(1);
         }
 
         /* Initialize job variables */
-        self->job_proc = proc;
-        self->job_pgid = pgid;
-        self->job_bg = bg;
+        job->proc = proc;
+        job->pgid = 0;
+        job->run_bg = run_bg;
 
         /* Next job is null (for use with job table). */
-        self->job_next = NULL;
+        job->next = NULL;
 
         /* Copy input/output file names. */
         /* Case 1: Filename is a string. */
         if (infile != NULL) {
-                self->job_stdin = strdup(infile);
-                if (self->job_stdin == NULL) {
+                job->infile = strdup(infile);
+                if (job->infile == NULL) {
                         fprintf(stderr, "strdup\n");
                         exit(1);
                 }
         }
         /* Case 2: Filename is null. */
         else {
-                self->job_stdin = NULL;
+                job->infile = NULL;
         }
 
         /* Case 1: Filename is a string. */
         if (outfile != NULL) {
-                self->job_stdout = strdup(outfile);
-                if (self->job_stdout == NULL) {
+                job->outfile = strdup(outfile);
+                if (job->outfile == NULL) {
                         fprintf(stderr, "strdup\n");
                         exit(1);
                 }
         }
         /* Case 2: Filename is null. */
         else {
-                self->job_stdout = NULL;
+                job->outfile = NULL;
         }
 
+        return job;
 }
 
-void job_dtor(Job *self)
+void SH_DestroyJob(SH_Job *job)
 {
         /* Free job command. */
-        free(self->job_cmd);
+        free(job->command);
 
         /* Free process object. */
-        process_dtor(self->job_proc);
-        free(self->job_proc);
-        self->job_proc = NULL;
+        SH_DestroyProcess(job->proc);
+        job->proc = NULL;
 
         /* Clear variables. */
-        self->job_pgid = 0;
-        self->job_bg = false;
-        self->job_next = NULL;
+        job->pgid = 0;
+        job->run_bg = false;
+        job->next = NULL;
 
         /* Free input/output file names. */
-        free(self->job_stdin);
-        self->job_stdin = NULL;
+        free(job->infile);
+        job->infile = NULL;
 
-        free(self->job_stdout);
-        self->job_stdout = NULL;
+        free(job->outfile);
+        job->outfile = NULL;
+
+        free(job);
 }

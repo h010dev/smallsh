@@ -15,8 +15,8 @@
  * the global job table will use to update its state.
  */
 typedef struct {
-        pid_t chld_pid; /**< PID of child that sent the signal */
-        int chld_status; /**< exit status of child */
-} SigchldDTO;
+        pid_t pid; /**< PID of child that sent the signal */
+        int status; /**< exit SH_status of child */
+} SH_SigchldDTO;
 
 #endif //SMALLSH_DTO_H

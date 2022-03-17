@@ -49,7 +49,7 @@
  *
  *
  ******************************************************************************/
-void installer_install_child_process_signals(bool foreground)
+void SH_InstallerInstallChildProcessSignals(bool foreground)
 {
         sighandler_t sig_status;
 
@@ -88,7 +88,7 @@ void installer_install_child_process_signals(bool foreground)
         }
 }
 
-void installer_install_job_control_signals(void)
+void SH_InstallerInstallJobControlSignals(void)
 {
         sighandler_t status;
 
@@ -119,13 +119,13 @@ void installer_install_job_control_signals(void)
         }
 
         /* Shell should handle SIGCHLD events for later delivery. */
-        installer_install_sigchld_handler();
+        SH_InstallerInstallSigchldHandler();
 
         /* Shell should handle SIGTSTP events to enable/disable fg-only mode. */
-        installer_install_sigtstp_handler();
+        SH_InstallerInstallSigtstpHandler();
 }
 
-void installer_install_sigchld_handler(void)
+void SH_InstallerInstallSigchldHandler(void)
 {
         struct sigaction sa;
         sigset_t block_set;
@@ -150,7 +150,7 @@ void installer_install_sigchld_handler(void)
 
         sa.sa_mask = block_set;
         sa.sa_flags = SA_RESTART;
-        sa.sa_handler = handler_handle_sigchld;
+        sa.sa_handler = SH_HandlerHandleSigchld;
 
         errno = 0;
         status = sigaction(SIGCHLD, &sa, NULL);
@@ -160,7 +160,7 @@ void installer_install_sigchld_handler(void)
         }
 }
 
-void installer_install_sigtstp_handler(void)
+void SH_InstallerInstallSigtstpHandler(void)
 {
-        handler_switch_enable_fg_only_mode();
+        SH_HandlerSwitchEnableFgOnlyMode();
 }

@@ -8,31 +8,32 @@
 #ifndef SMALLSH_CHANNEL_H
 #define SMALLSH_CHANNEL_H
 
+typedef struct SH_Channel SH_Channel;
+
 /**
  * @brief A @c Channel object consists of a read end and a write end, as well
  * as a callback handler function that is invoked when new data is received.
  */
-typedef struct Channel {
-        int ch_read; /**< read file descriptor */
-        int ch_write; /**< write file descriptor */
-        int (*ch_callback) (struct Channel self); /**< callback handler */
-} Channel;
+struct SH_Channel {
+        int read_fd; /**< read file descriptor */
+        int write_fd; /**< write file descriptor */
+        int (*callback_handler) (SH_Channel channel); /**< callback handler */
+};
 
 /**
- * @brief Initializes a @p self with provided data.
+ * @brief Initializes a new Channel object.
  *
  * Behind the scenes, this function creates a pipe and hooks into its read and
  * write ends.
- * @param self @c Channel to initialize
  * @param cb_handler callback method for this channel
- * @return 0 on success, -1 on failure
+ * @return new @c Channel object on success, @c NULL on failure
  */
-int channel_ctor(Channel *self, int (*cb_handler) (struct Channel));
+SH_Channel *SH_CreateChannel(int (*cb_handler) (SH_Channel));
 
 /**
  * @brief Resets @p self's values.
- * @param self @c Channel to reset
+ * @param channel @c Channel to reset
  */
-void channel_dtor(Channel *self);
+void SH_DestroyChannel(SH_Channel **channel);
 
 #endif //SMALLSH_CHANNEL_H

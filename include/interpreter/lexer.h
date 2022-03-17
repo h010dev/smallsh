@@ -7,7 +7,7 @@
 #ifndef SMALLSH_LEXER_H
 #define SMALLSH_LEXER_H
 
-#include "shell-tokens.h"
+#include "interpreter/token.h"
 
 #define MAX_TOKENS 513 /* 512 max args plus newline */
 
@@ -42,12 +42,12 @@
  * objects to store in @p tokens.
  * @param buf text stream to scan
  * @param max_tok size of @p tokens array
- * @param tok array of pointers to @c Token objects to store token data
+ * @param toks array of pointers to @c Token objects to store token data
  * @return number of tokens parsed from stream
  * @note Caller should verify that the number of tokens parsed is less than
  * @p n_tokens. If this is not the case, then input stream was not fully
  * tokenized.
  */
-size_t lexer_generate_tokens(char *buf, size_t max_tok, Token *tok[max_tok]);
+size_t SH_LexerGenerateTokens(char *buf, size_t max_tok, SH_Token *toks[max_tok]);
 
 #endif //SMALLSH_LEXER_H

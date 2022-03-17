@@ -18,6 +18,6 @@
  * @param cmd command string to check
  * @return true if @p cmd is a supported builtin, false otherwise
  */
-bool builtins_is_supported(char *cmd);
+bool SH_IsBuiltin(char const *cmd);
 
 #endif //SMALLSH_BUILTINS_H

@@ -11,11 +11,10 @@
 #include <unistd.h>
 #include <stdint.h>
 
+#include "builtins/builtins.h"
+#include "interpreter/lexer.h"
 #include "interpreter/parser.h"
 #include "interpreter/token-iterator.h"
-#include "interpreter/lexer.h"
-#include "builtins/builtins.h"
-
 /* *****************************************************************************
  * PRIVATE DEFINITIONS
  *
@@ -37,26 +36,6 @@
  *
  ******************************************************************************/
 /* *****************************************************************************
- * OBJECTS
- *
- *
- *
- *
- *
- *
- *
- ******************************************************************************/
-/**
- * @brief Hides @c Parser members from client code.
- */
-struct ParserPrivate {
-        size_t parser_num_tok; /**< number of tokens parsed */
-        Token **parser_tok; /**< parsed tokens */
-        ssize_t parser_num_stmt; /**< number of statements created */
-        Statement **parser_stmt; /**< statements created */
-};
-
-/* *****************************************************************************
  * FUNCTIONS
  *
  *
@@ -72,61 +51,58 @@ struct ParserPrivate {
  * @param iter iterator to extract command tokens from
  * @return 0 on success, -1 on failure
  */
-static int parser_parse_cmd_(Statement *stmt, TokenIterator *iter)
+static int SH_ParserParseCmd(SH_Statement *stmt, SH_TokenIterator * const iter)
 {
         // parse words into statement command
         size_t buf_size = 1;
 
-        while (iter->vptr->has_next(iter)) {
-                Token tok1, tok2;
+        while (SH_TokenIteratorHasNext(iter)) {
+                SH_Token *tok1, *tok2;
                 char **tmp;
 
                 // check if any words left to take
-                tok1 = iter->vptr->peek(iter, 0);
-                tok2 = iter->vptr->peek(iter, 1);
-                if (!is_tok_word(tok1)) {
-                        if (is_tok_ctrl_bg(tok1)) {
-                                if (is_tok_ctrl_newline(tok2)) {
+                tok1 = SH_TokenIteratorPeek(iter, 0);
+                tok2 = SH_TokenIteratorPeek(iter, 1);
+                if (tok1->type != TOK_WORD) {
+                        if (tok1->type == TOK_CTRL_BG) {
+                                if (tok2->type == TOK_CTRL_NEWLINE) {
                                         break; // done
                                 }
-                        } else if (!is_tok_word(tok1)) {
+                        } else {
                                 break; // done
                         }
                 }
 
                 // resize buf if full
-                if (stmt->stmt_cmd->cmd_argc >= buf_size) {
+                if (stmt->cmd->count >= buf_size) {
                         buf_size *= 2;
-                        tmp = realloc(stmt->stmt_cmd->cmd_argv,
+                        tmp = realloc(stmt->cmd->args,
                                       buf_size * sizeof(char *));
                         if (tmp == NULL) {
                                 return -1; // error
                         }
-                        stmt->stmt_cmd->cmd_argv = tmp;
+                        stmt->cmd->args = tmp;
                 }
 
                 // take word
-                WordToken *wt = (WordToken *) iter->vptr->next(iter);
-                char *wt_str = wt->super.vptr->get_value((Token *) wt);
-                stmt->stmt_cmd->cmd_argv[stmt->stmt_cmd->cmd_argc++] =
-                        parser_expand_word(wt_str);
-                free(wt_str);
+                stmt->cmd->args[stmt->cmd->count++] =
+                        SH_ParserExpandWord(SH_TokenIteratorNext(iter)->value);
         }
 
         // resize array to fit exactly argc + 1 elements for later use with exec
-        char **tmp = realloc(stmt->stmt_cmd->cmd_argv,
-                             (stmt->stmt_cmd->cmd_argc + 1) * sizeof(char *));
+        char **tmp = realloc(stmt->cmd->args,
+                             (stmt->cmd->count + 1) * sizeof(char *));
         if (tmp == NULL) {
                 return -1; // error
         }
-        stmt->stmt_cmd->cmd_argv = tmp;
+        stmt->cmd->args = tmp;
 
         // null terminate argv for exec
-        stmt->stmt_cmd->cmd_argv[stmt->stmt_cmd->cmd_argc] = NULL;
+        stmt->cmd->args[stmt->cmd->count] = NULL;
 
         /* Check if command is a supported builtin. */
-        if (builtins_is_supported(stmt->stmt_cmd->cmd_argv[0])) {
-                stmt->stmt_flags |= FLAGS_BUILTIN;
+        if (SH_IsBuiltin(stmt->cmd->args[0])) {
+                stmt->flags |= FLAGS_BUILTIN;
         }
 
         return 0;
@@ -139,66 +115,54 @@ static int parser_parse_cmd_(Statement *stmt, TokenIterator *iter)
  * @param type type of io redirection to store
  * @return 0 on success, -1 on failure
  */
-static int parser_parse_ioredir_(Statement *stmt, TokenIterator *iter,
-                                 IORedirType type)
+static int SH_ParserParseIoRedir(SH_Statement *stmt,
+                                 SH_TokenIterator *const iter,
+                                 IORedirType const type)
 {
         // filename should be a word token
-        Token tok = iter->vptr->peek(iter, 1);
-        if (!is_tok_word(tok)) {
+        SH_Token *tok = SH_TokenIteratorPeek(iter, 1);
+        if (tok->type != TOK_WORD) {
                 return -1; // error
         }
 
         // skip past redirection operator
-        (void) iter->vptr->next(iter);
+        (void) SH_TokenIteratorNext(iter);
 
         // take next word
-        WordToken *wt = (WordToken *) iter->vptr->next(iter);
+        SH_Token *wt = SH_TokenIteratorNext(iter);
 
         // switch to type stream
-        char *wt_str;
         char **tmp;
         switch (type) {
                 case IOREDIR_STDIN:
-                        // take next word
-                        wt_str = wt->super.vptr->get_value((Token *) wt);
-
-                        // extract word string into statement stdin
-                        stmt->stmt_stdin->stdin_streams[
-                                stmt->stmt_stdin->stdin_num_streams++] =
-                                parser_expand_word(wt_str);
-                        free(wt_str);
+                        // take next word; extract word string into statement stdin
+                        stmt->infile->streams[stmt->infile->n++] =
+                                SH_ParserExpandWord(wt->value);
 
                         // resize strings buf
-                        tmp = realloc(stmt->stmt_stdin->stdin_streams,
-                                      (stmt->stmt_stdin->stdin_num_streams + 1)
-                                      * sizeof(char *));
+                        tmp = realloc(stmt->infile->streams,
+                                      (stmt->infile->n + 1) * sizeof(char *));
                         if (tmp == NULL) {
                                 return -1; // error
                         }
-                        stmt->stmt_stdin->stdin_streams = tmp;
-                        stmt->stmt_stdin->stdin_streams[
-                                stmt->stmt_stdin->stdin_num_streams] = NULL;
+                        stmt->infile->streams = tmp;
+                        stmt->infile->streams[
+                                stmt->infile->n] = NULL;
                         break;
                 case IOREDIR_STDOUT:
-                        // take next word
-                        wt_str = wt->super.vptr->get_value((Token *) wt);
-
-                        // extract word string into statement stdout
-                        stmt->stmt_stdout->stdout_streams[
-                                stmt->stmt_stdout->stdout_num_streams++] =
-                                parser_expand_word(wt_str);
-                        free(wt_str);
+                        // take next work; extract word string into statement stdout
+                        stmt->outfile->streams[stmt->outfile->n++] =
+                                SH_ParserExpandWord(wt->value);
 
                         // resize strings buf
-                        tmp = realloc(stmt->stmt_stdout->stdout_streams,
-                                      (stmt->stmt_stdout->stdout_num_streams + 1)
-                                      * sizeof(char *));
+                        tmp = realloc(stmt->outfile->streams,
+                                      (stmt->outfile->n + 1) * sizeof(char *));
                         if (tmp == NULL) {
                                 return -1; // error
                         }
-                        stmt->stmt_stdout->stdout_streams = tmp;
-                        stmt->stmt_stdout->stdout_streams[
-                                stmt->stmt_stdout->stdout_num_streams] = NULL;
+                        stmt->outfile->streams = tmp;
+                        stmt->outfile->streams[
+                                stmt->outfile->n] = NULL;
                         break;
                 default:
                         return -1;
@@ -209,132 +173,111 @@ static int parser_parse_ioredir_(Statement *stmt, TokenIterator *iter,
 
 /**
  * @brief Parses tokens into statements.
- * @param self @c Parser object
+ * @param parser @c Parser object
  * @return number of statements created on success, -1 on failure
  */
-static ssize_t parser_parse_statements_(struct Parser * const self)
+static ssize_t SH_ParserParseStmts(SH_Parser *const parser)
 {
         // initialize iterator with token stream
-        TokenIterator iter;
-        token_iterator_ctor(&iter, self->private->parser_num_tok,
-                            self->private->parser_tok);
+        SH_TokenIterator *iter __attribute__((cleanup(SH_DestroyTokenIterator)));
+
+        iter = SH_CreateTokenIterator(parser->n_toks, parser->toks);
 
         // initialize statements array
         size_t buf_size = 1;
-        Statement **stmts = malloc(buf_size * sizeof(Statement));
+        SH_Statement **stmts = malloc(buf_size * sizeof(SH_Statement));
 
         // evaluate tokens from iterator stream
         ssize_t cur = 1;
         ssize_t count = 0; // number of statements consumed
-        while (iter.vptr->has_next(&iter)) {
+        while (SH_TokenIteratorHasNext(iter)) {
                 if ((size_t) count >= buf_size) {
                         buf_size *= 2;
-                        Statement **tmp = realloc(stmts, buf_size * sizeof(Statement));
+                        SH_Statement **tmp =
+                                realloc(stmts, buf_size * sizeof(SH_Statement));
                         if (tmp == NULL) {
                                 return -1; // error
                         }
                         stmts = tmp;
                 }
 
-                Token tok1 = iter.vptr->peek(&iter, 0);
+                SH_Token *tok1 = SH_TokenIteratorPeek(iter, 0);
 #ifdef DEMO
-                Token tok2 = iter.vptr->peek(&iter, 1);
+                SH_Token *tok2 = SH_TokenIteratorPeek(iter, 1);
 #endif
+                switch (tok1->type) {
+                        case TOK_CMT:
+                                break; // done
+                        case TOK_CTRL_BG:
+                        {
+#ifdef DEMO
+                                if (tok2->type == TOK_CTRL_NEWLINE) {
+                                        (void) SH_TokenIteratorNext(iter);
+                                        stmts[count - 1]->flags |= FLAGS_BGCTRL;
+                                        break;
+                                }
+#endif
+                                if (count == 0) {
+                                        // syntax error
+                                }
+                                (void) SH_TokenIteratorNext(iter);
+                                stmts[count - 1]->flags |= FLAGS_BGCTRL;
+                                cur++;
+                                break;
+                        }
+                        case TOK_CTRL_NEWLINE:
+                        {
+                                if (count == 0) {
+                                        // empty line
+                                        break;
+                                }
+                                (void) SH_TokenIteratorNext(iter);
+                                cur++;
+                                break;
+                        }
+                        case TOK_REDIR_INPUT:
+                        {
+                                if (stmts[count] == NULL) {
+                                        // syntax error
+                                }
+                                SH_ParserParseIoRedir(stmts[count - 1], iter,
+                                                      IOREDIR_STDIN);
 
-                if (is_tok_cmt(tok1)) {
-                        break; // done
-                } else if (is_tok_ctrl_bg(tok1)) {
-#ifdef DEMO
-                        if (is_tok_ctrl_newline(tok2)) {
-                                (void) iter.vptr->next(&iter);
-                                stmts[count - 1]->stmt_flags |= FLAGS_BGCTRL;
                                 break;
                         }
-#endif
-                        if (count == 0) {
-                                // syntax error
-                        }
-                        (void) iter.vptr->next(&iter);
-                        stmts[count - 1]->stmt_flags |= FLAGS_BGCTRL;
-                        cur++;
-                } else if (is_tok_ctrl_newline(tok1)) {
-                        if (count == 0) {
-                                // empty line
+                        case TOK_REDIR_OUTPUT:
+                        {
+                                if (stmts[count] == NULL) {
+                                        // syntax error
+                                }
+                                SH_ParserParseIoRedir(stmts[count - 1], iter,
+                                                      IOREDIR_STDOUT);
+
                                 break;
                         }
-                        (void) iter.vptr->next(&iter);
-                        cur++;
-                } else if (is_tok_redir_input(tok1)) {
-                        if (stmts[count] == NULL) {
-                                // syntax error
-                        }
-                        parser_parse_ioredir_(stmts[count - 1], &iter,
-                                              IOREDIR_STDIN);
-                } else if (is_tok_redir_output(tok1)) {
-                        if (stmts[count] == NULL) {
-                                // syntax error
-                        }
-                        parser_parse_ioredir_(stmts[count - 1], &iter,
-                                              IOREDIR_STDOUT);
-                } else if (is_tok_word(tok1)) {
-                        if (count < cur) {
-                                stmts[count++] = statement_new();
-                        } else if (stmts[count]->stmt_stdin->stdin_num_streams > 0 ||
-                        stmts[count]->stmt_stdout->stdout_num_streams > 0) {
-                                // syntax error
+                        case TOK_WORD:
+                        {
+                                if (count < cur) {
+                                        stmts[count++] = SH_CreateStatement();
+                                } else if (stmts[count]->infile->n > 0 ||
+                                           stmts[count]->outfile->n > 0) {
+                                        // syntax error
+                                        break;
+                                }
+                                SH_ParserParseCmd(stmts[count - 1], iter);
                                 break;
                         }
-                        parser_parse_cmd_(stmts[count - 1], &iter);
-                } else {
-                        // do cleanup
-                        count = -1;
-                        break;
+                        default:
+                                // do cleanup
+                                count = -1;
+                                break;
                 }
         }
 
-        token_iterator_dtor(&iter);
-
-        self->private->parser_stmt = stmts;
-        self->private->parser_num_stmt = count;
+        parser->stmts = stmts;
+        parser->n_stmts = count;
         return count;
 }
-
-/**
- * @brief Parses a character stream, creates tokens, and generates command
- * statements.
- *
- * Implementation of @c Parser::parse().
- *
- * @param self @c Parser object
- * @param buf character stream to parse
- * @return number of statements created on success, -1 on failure
- * @note Caller is responsible for freeing parsed statements via @c
- * statement_del.
- */
-static ssize_t parser_parse_(Parser * const self, char *buf)
-{
-        // parse stream into tokens
-        self->private->parser_tok = malloc(MAX_TOKENS * sizeof(Token));
-        self->private->parser_num_tok = lexer_generate_tokens(buf, MAX_TOKENS,
-                                                              self->private->parser_tok);
-
-        // parse tokens into statements
-        return parser_parse_statements_(self);
-}
-
-/**
- * @brief Returns parsed statements to caller.
- *
- * Implementation of @c Parser::get_statements().
- *
- * @param self @c Parser object
- * @return array of @c Statement objects parsed from character stream
- */
-static inline Statement **parser_get_statements_(struct Parser * const self)
-{
-        return self->private->parser_stmt;
-}
-
 /* *****************************************************************************
  * PUBLIC DEFINITIONS
  *
@@ -365,40 +308,37 @@ static inline Statement **parser_get_statements_(struct Parser * const self)
  *
  *
  ******************************************************************************/
-void parser_ctor(Parser *self)
+SH_Parser *SH_CreateParser(void)
 {
-        self->parse = &parser_parse_;
-        self->get_statements = &parser_get_statements_;
-        self->print_statement = &statement_print;
-        self->private = malloc(sizeof(struct ParserPrivate));
+        SH_Parser *parser;
+
+        parser = malloc(sizeof *parser);
+        if (parser == NULL) {
+                return NULL;
+        }
+
+        return parser;
 }
 
-void parser_dtor(Parser *self)
+void SH_DestroyParser(SH_Parser **parser)
 {
-        for (size_t i = 0; i < self->private->parser_num_tok; i++) {
-                token_dtor(self->private->parser_tok[i]);
-                free(self->private->parser_tok[i]);
-                self->private->parser_tok[i] = NULL;
+        for (size_t i = 0; i < (*parser)->n_toks; i++) {
+                SH_DestroyToken(&(*parser)->toks[i]);
         }
-        free(self->private->parser_tok);
-        self->private->parser_num_tok = 0;
-        self->private->parser_tok = NULL;
+        free((*parser)->toks);
+        (*parser)->n_toks = 0;
+        (*parser)->toks = NULL;
 
-        for (ssize_t i = 0; i < self->private->parser_num_stmt; i++) {
-                statement_del(&self->private->parser_stmt[i]);
+        for (ssize_t i = 0; i < (*parser)->n_stmts; i++) {
+                SH_DestroyStatement(&(*parser)->stmts[i]);
         }
-        free(self->private->parser_stmt);
-        self->private->parser_num_stmt = 0;
-        self->private->parser_stmt = NULL;
+        free((*parser)->stmts);
+        (*parser)->n_stmts = 0;
+        (*parser)->stmts = NULL;
 
-        free(self->private);
-        self->private = NULL;
-
-        self->parse = NULL;
-        self->get_statements = NULL;
-        self->print_statement = NULL;
+        free(*parser);
+        *parser = NULL;
 }
-
 /* *****************************************************************************
  * FUNCTIONS
  *
@@ -409,7 +349,44 @@ void parser_dtor(Parser *self)
  *
  *
  ******************************************************************************/
-char *parser_insert_pid(char *str, char **ptr, size_t *len)
+char *SH_ParserExpandWord(char * const word)
+{
+        char *new_word, *old_ptr, *new_ptr;
+        size_t len;
+
+        /*
+         * Allocate space for new word string. At a minimum it will be same
+         * length as original word.
+         */
+        len = strlen(word) + 1;
+        new_word = calloc(len, sizeof(char));
+
+        // track copy and insert positions in respective strings
+        old_ptr = &word[0];
+        new_ptr = &new_word[0];
+
+        /*
+         * Copy over every byte from original word to new word, expanding
+         * variables when required.
+         */
+        for (; *old_ptr != '\0'; old_ptr++) {
+                if (*old_ptr == '$') {
+                        // attempt to perform variable expansion
+                        new_word = SH_ParserSubstituteVariable(new_word,
+                                                               &old_ptr,
+                                                               &new_ptr,
+                                                               &len);
+                } else {
+                        // no expansion needed, so just copy over byte
+                        *new_ptr = *old_ptr;
+                        new_ptr++;
+                }
+        }
+
+        return new_word;
+}
+
+char *SH_ParserInsertPid(char * const str, char **ptr, size_t * const len)
 {
         char *result;
 
@@ -466,8 +443,18 @@ char *parser_insert_pid(char *str, char **ptr, size_t *len)
         return result;
 }
 
-char *parser_substitute_variable(char *word, char **old_ptr, char **new_ptr,
-                                 size_t *len)
+ssize_t SH_ParserParse(SH_Parser *const parser, char *buf)
+{
+        // parse stream into tokens
+        parser->toks = malloc(MAX_TOKENS * sizeof(SH_Token));
+        parser->n_toks = SH_LexerGenerateTokens(buf, MAX_TOKENS, parser->toks);
+
+        // parse tokens into statements
+        return SH_ParserParseStmts(parser);
+}
+
+char *SH_ParserSubstituteVariable(char * const word, char **old_ptr,
+                                  char **new_ptr, size_t * const len)
 {
         char *sub;
         char nxt;
@@ -478,7 +465,7 @@ char *parser_substitute_variable(char *word, char **old_ptr, char **new_ptr,
                 case '$':
                 {
                         // replace var with pid
-                        sub = parser_insert_pid(word, new_ptr, len);
+                        sub = SH_ParserInsertPid(word, new_ptr, len);
                         if (sub == NULL) {
                                 return NULL;
                         }
@@ -501,41 +488,4 @@ char *parser_substitute_variable(char *word, char **old_ptr, char **new_ptr,
         }
 
         return sub;
-}
-
-char *parser_expand_word(char *word)
-{
-        char *new_word, *old_ptr, *new_ptr;
-        size_t len;
-
-        /*
-         * Allocate space for new word string. At a minimum it will be same
-         * length as original word.
-         */
-        len = strlen(word) + 1;
-        new_word = calloc(len, sizeof(char));
-
-        // track copy and insert positions in respective strings
-        old_ptr = &word[0];
-        new_ptr = &new_word[0];
-
-        /*
-         * Copy over every byte from original word to new word, expanding
-         * variables when required.
-         */
-        for (; *old_ptr != '\0'; old_ptr++) {
-                if (*old_ptr == '$') {
-                        // attempt to perform variable expansion
-                        new_word = parser_substitute_variable(new_word,
-                                                              &old_ptr,
-                                                              &new_ptr,
-                                                              &len);
-                } else {
-                        // no expansion needed, so just copy over byte
-                        *new_ptr = *old_ptr;
-                        new_ptr++;
-                }
-        }
-
-        return new_word;
 }

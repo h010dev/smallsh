@@ -18,29 +18,25 @@
  * @brief A Process object holds information related to running a program.
  */
 typedef struct {
-        char **argv; /**< process arguments */
-        pid_t proc_pid; /**< process PID */
-        bool proc_completed; /**< process completion status */
-        int proc_status; /**< process exit status */
-} Process;
+        char **args; /**< process arguments */
+        pid_t pid; /**< process PID */
+        bool has_completed; /**< process completion SH_status */
+        int status; /**< process exit SH_status */
+} SH_Process;
 
 /**
- * @brief Initialize a @c Process object.
- * @param self object to initialize
- * @param argc argument count for @p argv
- * @param argv array of arguments for process command
- * @param pid process PID
- * @param completed whether or not the process has completed
- * @param status process exit status
+ * @brief Initialize new Process object.
+ * @param n_args argument count for @p argv
+ * @param args array of arguments for process command
+ * @return new Process object
  */
-void process_ctor(Process *self, size_t argc, char **argv, pid_t pid,
-                  bool completed, int status);
+SH_Process *SH_CreateProcess(size_t n_args, char **args);
 
 /**
  * @brief Reset @p self to default values and free any associated memory.
- * @param self object to free
+ * @param proc object to free
  */
-void process_dtor(Process *self);
+void SH_DestroyProcess(SH_Process *proc);
 
 /**
  * @brief Launches a new process.
@@ -50,7 +46,7 @@ void process_dtor(Process *self);
  * @param outfile STDOUT file stream
  * @param foreground whether or not the process is to run in the foreground
  */
-void process_launch(Process *proc, pid_t pgid, char *infile, char *outfile,
-                    bool foreground);
+void SH_LaunchProcess(SH_Process *proc, pid_t pgid, char *infile, char *outfile,
+                      bool foreground);
 
 #endif //SMALLSH_PROCESS_H

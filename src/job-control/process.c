@@ -58,7 +58,7 @@
  * as its arguments, and displays error on failure.
  * @param argv arguments to pass to exec* function
  */
-static void process_exec(char **argv)
+static void SH_ExecProcess(char **argv)
 {
         int status;
 
@@ -75,7 +75,7 @@ static void process_exec(char **argv)
  * @brief Creates new process group and assigns current process as the leader.
  * @param pgid new process group
  */
-static void process_set_group(pid_t *pgid)
+static void SH_SetProcessGroup(pid_t *pgid)
 {
         pid_t pid;
 
@@ -95,7 +95,7 @@ static void process_set_group(pid_t *pgid)
  * @param outfile filename to redirect STDOUT to
  * @param foreground whether or not the process will run in foreground
  */
-static int process_set_io_streams(char *infile, char *outfile, bool foreground)
+static int SH_SetProcessIOStreams(char *infile, char *outfile, bool foreground)
 {
         int status, stdin_flags, stdout_flags, mode;
         char *default_io;
@@ -222,49 +222,60 @@ static int process_set_io_streams(char *infile, char *outfile, bool foreground)
  *
  *
  ******************************************************************************/
-void process_ctor(Process *self, size_t argc, char **argv, pid_t pid,
-                  bool completed, int status)
+SH_Process *SH_CreateProcess(size_t n_args, char **args)
 {
+        SH_Process *proc;
+
+        proc = malloc(sizeof *proc);
+        if (proc == NULL) {
+                fprintf(stderr, "malloc\n");
+                _exit(1);
+        }
+
         /* Copy over argv array. */
-        char **tmp = malloc((argc + 1) * sizeof(char *));
+        char **tmp = malloc((n_args + 1) * sizeof(char *));
         if (tmp == NULL) {
                 fprintf(stderr, "malloc\n");
                 _exit(1);
         }
-        self->argv = tmp;
+        proc->args = tmp;
 
-        for (size_t i = 0; i < argc; i++) {
+        for (size_t i = 0; i < n_args; i++) {
                 errno = 0;
-                self->argv[i] = strdup(argv[i]);
-                if (self->argv[i] == NULL) {
+                proc->args[i] = strdup(args[i]);
+                if (proc->args[i] == NULL) {
                         perror("strdup");
                         _exit(1);
                 }
         }
 
         /* Null-terminate list. */
-        self->argv[argc] = NULL;
+        proc->args[n_args] = NULL;
 
         /* Initialize remaining variables. */
-        self->proc_pid = pid;
-        self->proc_completed = completed;
-        self->proc_status = status;
+        proc->pid = 0;
+        proc->has_completed = false;
+        proc->status = 0;
+
+        return proc;
 }
 
-void process_dtor(Process *self)
+void SH_DestroyProcess(SH_Process *proc)
 {
         /* Free argv array. */
-        for (size_t i = 0; self->argv[i] != NULL; i++) {
-                free(self->argv[i]);
-                self->argv[i] = NULL;
+        for (size_t i = 0; proc->args[i] != NULL; i++) {
+                free(proc->args[i]);
+                proc->args[i] = NULL;
         }
-        free(self->argv);
-        self->argv = NULL;
+        free(proc->args);
+        proc->args = NULL;
 
         /* Reset remaining variables. */
-        self->proc_pid = 0;
-        self->proc_completed = false;
-        self->proc_status = 0;
+        proc->pid = 0;
+        proc->has_completed = false;
+        proc->status = 0;
+
+        free(proc);
 }
 
 /* *****************************************************************************
@@ -277,12 +288,12 @@ void process_dtor(Process *self)
  *
  *
  ******************************************************************************/
-void process_launch(Process *proc, pid_t pgid, char *infile, char *outfile,
-                    bool foreground)
+void SH_LaunchProcess(SH_Process *proc, pid_t pgid, char *infile, char *outfile,
+                      bool foreground)
 {
         int status;
 
-        process_set_group(&pgid);
+        SH_SetProcessGroup(&pgid);
 
         if (smallsh_interactive_mode) {
                 /*
@@ -299,13 +310,13 @@ void process_launch(Process *proc, pid_t pgid, char *infile, char *outfile,
                 }
         }
 
-        installer_install_child_process_signals(foreground);
+        SH_InstallerInstallChildProcessSignals(foreground);
 
         smallsh_errno = 0;
-        status = process_set_io_streams(infile, outfile, foreground);
+        status = SH_SetProcessIOStreams(infile, outfile, foreground);
         if (status == -1) {
                 return;
         }
 
-        process_exec(proc->argv);
+        SH_ExecProcess(proc->args);
 }

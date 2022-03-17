@@ -9,8 +9,8 @@
 
 /**
  * @brief Clean-up all child processes and exit shell.
- * @param status exit status
+ * @param status exit SH_status
  */
-void exit_(int status);
+void SH_exit(int status);
 
 #endif //SMALLSH_EXIT_H

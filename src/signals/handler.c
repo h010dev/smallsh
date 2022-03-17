@@ -74,7 +74,7 @@ static void handler_switch_disable_fg_only_mode(void)
 
         sa.sa_mask = block_set;
         sa.sa_flags = SA_RESTART;
-        sa.sa_handler = handler_disable_fg_only_mode;
+        sa.sa_handler = SH_HandlerDisableFgOnlyMode;
 
         errno = 0;
         status = sigaction(SIGTSTP, &sa, NULL);
@@ -126,7 +126,7 @@ sig_atomic_t smallsh_fg_only_mode_flag = 0;
  *
  *
  ******************************************************************************/
-void handler_disable_fg_only_mode(int sig)
+void SH_HandlerDisableFgOnlyMode(int sig)
 {
         (void) sig;
 
@@ -134,10 +134,10 @@ void handler_disable_fg_only_mode(int sig)
 
         smallsh_fg_only_mode_flag = 0;
         write(STDOUT_FILENO, fg_off, sizeof(fg_off) - 1);
-        handler_switch_enable_fg_only_mode();
+        SH_HandlerSwitchEnableFgOnlyMode();
 }
 
-void handler_enable_fg_only_mode(int sig)
+void SH_HandlerEnableFgOnlyMode(int sig)
 {
         (void) sig;
 
@@ -148,7 +148,7 @@ void handler_enable_fg_only_mode(int sig)
         handler_switch_disable_fg_only_mode();
 }
 
-void handler_handle_sigchld(int sig)
+void SH_HandlerHandleSigchld(int sig)
 {
         (void) sig;
 
@@ -156,9 +156,9 @@ void handler_handle_sigchld(int sig)
 
         saved_errno = errno;
 
-        status = sender_notify_sigchld(ch_sigchld);
+        status = SH_SenderNotifySigchldEvent(sigchld_channel);
         if (status == -1) {
-                fprintf(stderr, "sender_notify_sigchld()");
+                fprintf(stderr, "SH_SenderNotifySigchldEvent()");
                 fflush(stderr);
                 _exit(1);
         }
@@ -166,7 +166,7 @@ void handler_handle_sigchld(int sig)
         errno = saved_errno;
 }
 
-void handler_switch_enable_fg_only_mode(void)
+void SH_HandlerSwitchEnableFgOnlyMode(void)
 {
         struct sigaction sa;
         sigset_t block_set;
@@ -191,7 +191,7 @@ void handler_switch_enable_fg_only_mode(void)
 
         sa.sa_mask = block_set;
         sa.sa_flags = SA_RESTART;
-        sa.sa_handler = handler_enable_fg_only_mode;
+        sa.sa_handler = SH_HandlerEnableFgOnlyMode;
 
         errno = 0;
         status = sigaction(SIGTSTP, &sa, NULL);

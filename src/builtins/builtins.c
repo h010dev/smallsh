@@ -8,7 +8,6 @@
 #include <string.h>
 
 #include "builtins/builtins.h"
-
 /* *****************************************************************************
  * PRIVATE DEFINITIONS
  *
@@ -52,12 +51,11 @@ enum {
 /**
  * @brief Translates builtin constants into their string representations.
  */
-static const char * const builtins[] = {
+static const char * const BUILTINS[] = {
         [BUILTINS_CD] = "cd",
         [BUILTINS_EXIT] = "exit",
         [BUILTINS_STATUS] = "status",
 };
-
 /* *****************************************************************************
  * PUBLIC DEFINITIONS
  *
@@ -88,11 +86,11 @@ static const char * const builtins[] = {
  *
  *
  ******************************************************************************/
-bool builtins_is_supported(char *cmd)
+bool SH_IsBuiltin(char const * const cmd)
 {
         /* Iterate over supported builtins looking for an exact match. */
         for (size_t i = 0; i < BUILTINS_COUNT; i++) {
-                if (strcmp(builtins[i], cmd) == 0) {
+                if (strcmp(BUILTINS[i], cmd) == 0) {
                         return true;
                 }
         }

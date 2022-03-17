@@ -12,75 +12,70 @@
 
 #include "job.h"
 
-struct JobTablePrivate;
-typedef struct JobTable JobTable;
-
 /**
  * @brief JobTable object.
  */
-struct JobTable {
-        /**
-         * @brief Add a job to the table.
-         * @param self table to add job to
-         * @param job job to add to table
-         */
-        void (*add_job) (struct JobTable const * const self, Job *job);
-
-        /**
-         * @brief Clean the job table, displaying completed job statuses along
-         * the way.
-         * @param self table to clean
-         */
-        void (*clean) (struct JobTable const * const self);
-
-        /**
-         * @brief Find a job within the table that has a matching @p job_pgid.
-         * @param self table to search for job in
-         * @param job_pgid job PGID to search for
-         * @return @c Job object if found, @c NULL if not
-         */
-        Job *(*find_job) (struct JobTable const * const self, pid_t job_pgid);
-
-        /**
-         * @brief Kills all children in table.
-         *
-         * Called on program exit to clean up any unterminated children
-         * the shell created.
-         * @param self table containing child processes
-         */
-        void (*killall) (struct JobTable const * const self);
-
-        /**
-         * @brief List all jobs in a pretty-printed format.
-         * @param self table to print
-         */
-        void (*list_jobs) (struct JobTable const * const self);
-
-        /**
-         * @brief Update a job's status within the table.
-         * @param self table where job resides
-         * @param pid job's PID
-         * @param status status to give job
-         * @return 0 if job was found and updated, -1 otherwise
-         */
-        int (*update) (struct JobTable const * const self, pid_t pid, int status);
-
-        /**
-         * @brief Contains internal data for table.
-         */
-        struct JobTablePrivate *private;
-};
+typedef struct {
+        size_t n_jobs; /**< number of jobs in table */
+        SH_Job *head; /**< pointer to linked list head */
+} SH_JobTable;
 
 /**
- * @brief Initializes @p self.
- * @param self @c JobTable object to initialize
+ * @brief Initializes new JobTable object.
+ * @return new JobTable object
  */
-void job_table_ctor(JobTable *self);
+SH_JobTable *SH_CreateJobTable(void);
 
 /**
  * @brief De-initializes self and frees up its resources.
- * @param self @c JobTable object to de-initialize
+ * @param table @c JobTable object to de-initialize
  */
-void job_table_dtor(JobTable *self);
+void SH_DestroyJobTable(SH_JobTable *table);
+
+/**
+ * @brief Add a Job to the JobTable.
+ * @param table JobTable object
+ * @param job Job object
+ */
+void SH_JobTableAddJob(SH_JobTable *table, SH_Job *job);
+
+/**
+ * @brief Clean the JobTable, displaying completed job statuses along
+ * the way.
+ * @param table JobTable object
+ */
+void SH_JobTableCleanJobs(SH_JobTable *table);
+
+/**
+ * @brief Find a Job within the JobTable that has a matching @p job_pgid.
+ * @param table JobTable object
+ * @param job_pgid Job PGID
+ * @return @c Job object if found, @c NULL if not
+ */
+SH_Job *SH_JobTableFindJob(SH_JobTable const *table, pid_t job_pgid);
+
+/**
+ * @brief Kills all children in JobTable.
+ *
+ * Called on program exit to clean up any unterminated children
+ * the shell created.
+ * @param table JobTable object
+ */
+void SH_JobTableKillAllJobs(SH_JobTable *table);
+
+/**
+ * @brief List all Jobs in a pretty-printed format.
+ * @param table JobTable object
+ */
+void SH_JobTablePrintJobs(SH_JobTable const *table);
+
+/**
+ * @brief Update a Job's SH_status within the JobTable.
+ * @param table JobTable object
+ * @param pid Job PID
+ * @param status SH_status to give Job
+ * @return 0 if Job was found and updated, -1 otherwise
+ */
+int SH_JobTableUpdateJob(SH_JobTable const *table, pid_t pid, int status);
 
 #endif //SMALLSH_JOB_TABLE_H

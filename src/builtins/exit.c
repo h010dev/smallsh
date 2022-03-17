@@ -11,7 +11,6 @@
 #include "events/events.h"
 #include "globals.h"
 #include "job-control/job-control.h"
-
 /* *****************************************************************************
  * PUBLIC DEFINITIONS
  *
@@ -42,14 +41,15 @@
  *
  *
  ******************************************************************************/
-void exit_(int status)
+void SH_exit(int const status)
 {
         /* Clean up job table and kill any child processes. */
-        job_table.killall(&job_table);
-        job_table_dtor(&job_table);
+        SH_JobTableKillAllJobs(job_table);
+        SH_DestroyJobTable(job_table);
+        job_table = NULL;
 
         /* Teardown event handling channels. */
-        events_cleanup();
+        SH_CleanupEvents();
 
         /* Make exit output pretty in case we are operating inside another shell. */
         if (!smallsh_interactive_mode) {

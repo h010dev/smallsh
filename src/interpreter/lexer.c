@@ -7,70 +7,91 @@
 #include <stdlib.h>
 
 #include "interpreter/lexer.h"
-#include "interpreter/shell-tokens.h"
-
-size_t lexer_generate_tokens(char *buf, size_t max_tok, Token *tok[max_tok])
+/* *****************************************************************************
+ * PUBLIC DEFINITIONS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
+/* *****************************************************************************
+ * FUNCTIONS
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ ******************************************************************************/
+size_t SH_LexerGenerateTokens(char * const buf, size_t const max_tok,
+                              SH_Token *toks[max_tok])
 {
-        StringIterator iter;
-        string_iterator_ctor(&iter, buf);
+        SH_StringIterator *iter
+        __attribute__((cleanup(SH_DestroyStringIterator)));
 
+        iter = SH_CreateStringIterator(buf);
         size_t count = 0; // number of tokens consumed
         char c1, c2;
 
-        while (iter.vptr->has_next(&iter)) {
+        while (SH_StringIteratorHasNext(iter)) {
                 if (count > max_tok) {
                         // no more space for tokens
                         break;
                 }
 
                 // peek ahead to next two characters
-                c1 = iter.vptr->peek(&iter, 0);
-                c2 = iter.vptr->peek(&iter, 1);
+                c1 = SH_StringIteratorPeek(iter, 0);
+                c2 = SH_StringIteratorPeek(iter, 1);
 
                 // tokenize value
                 if (IS_WHITESPACE(c1)) {
                         // ignore whitespace
-                        iter.vptr->next(&iter);
+                        SH_StringIteratorNext(iter);
                         continue;
                 } else if (IS_CMT_SYM(c1)) {
                         if (count == 0) {
                                 // token is a comment
-                                tok[count] = malloc(sizeof(Token));
-                                comment_token_ctor((CommentToken *) tok[count]);
+                                toks[count] = SH_CreateToken(TOK_CMT);
                         } else {
                                 /* Comment symbol is part of a word token. */
                                 goto consume_word;
                         }
                 } else if (IS_INPUT_REDIR_OP(c1, c2)) {
                         // token is an input redirection operator
-                        tok[count] = malloc(sizeof(Token));
-                        inputredir_token_ctor((InputRedirToken *) tok[count]);
+                        toks[count] = SH_CreateToken(TOK_REDIR_INPUT);
                 } else if (IS_OUTPUT_REDIR_OP(c1, c2)) {
                         // token is an output redirection operator
-                        tok[count] = malloc(sizeof(Token));
-                        outputredir_token_ctor((OutputRedirToken *) tok[count]);
+                        toks[count] = SH_CreateToken(TOK_REDIR_OUTPUT);
                 } else if (IS_BG_CTRL_OP(c1, c2)) {
                         // token is a background control operator
-                        tok[count] = malloc(sizeof(Token));
-                        bgctrl_token_ctor((BGCtrlToken *) tok[count]);
+                        toks[count] = SH_CreateToken(TOK_CTRL_BG);
                 } else if (IS_NEWLINE(c1)) {
                         // token is a newline
-                        tok[count] = malloc(sizeof(Token));
-                        newline_token_ctor((NewlineToken *) tok[count]);
+                        toks[count] = SH_CreateToken(TOK_CTRL_NEWLINE);
                 } else {
 consume_word:
                         // otherwise, token is a word
-                        tok[count] = malloc(sizeof(Token));
-                        word_token_ctor((WordToken *) tok[count]);
+                        toks[count] = SH_CreateToken(TOK_WORD);
                 }
 
                 // consume token
-                ((Token *) tok[count])->vptr->take((Token *) tok[count], &iter);
-
+                SH_TakeToken(toks[count], iter);
                 count++;
         }
-
-        string_iterator_dtor(&iter);
 
         return count;
 }
