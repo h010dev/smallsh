@@ -45,11 +45,7 @@ SH_Sender *SH_CreateSender(size_t capacity);
  * @note This does not clear the actual channels by calling their respective
  * destructors. It is the caller's responsibility to do so afterwards.
  */
-<<<<<<< HEAD
 void SH_DestroySender(SH_Sender **sender);
-=======
-void SH_DestroySender(SH_Sender *sender);
->>>>>>> 1a40864 (Refactor Events modules)
 
 /**
  * @brief Sends data received via a SIGCHLD signal to @p self.
