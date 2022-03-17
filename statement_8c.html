@@ -83,31 +83,57 @@ $(function() {
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a1bd0b4e586c2e85d8b71baac013bb8b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structStatement.html">Statement</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="statement_8c.html#a1bd0b4e586c2e85d8b71baac013bb8b8">statement_new</a> (void)</td></tr>
-<tr class="memdesc:a1bd0b4e586c2e85d8b71baac013bb8b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create and initialize a new <code><a class="el" href="structStatement.html" title="A statement object is composed of the sub-statement objects required to execute a command.">Statement</a></code> object.  <a href="statement_8c.html#a1bd0b4e586c2e85d8b71baac013bb8b8">More...</a><br /></td></tr>
-<tr class="separator:a1bd0b4e586c2e85d8b71baac013bb8b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acbba0216fc6c87684bc9f9e80ce3a578"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="statement_8c.html#acbba0216fc6c87684bc9f9e80ce3a578">statement_del</a> (<a class="el" href="structStatement.html">Statement</a> **stmt)</td></tr>
-<tr class="memdesc:acbba0216fc6c87684bc9f9e80ce3a578"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes <code>stmt</code> and frees its associated data.  <a href="statement_8c.html#acbba0216fc6c87684bc9f9e80ce3a578">More...</a><br /></td></tr>
-<tr class="separator:acbba0216fc6c87684bc9f9e80ce3a578"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf430da1c73bf7971381415d6e198dae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="statement_8c.html#aaf430da1c73bf7971381415d6e198dae">statement_print</a> (const <a class="el" href="structStatement.html">Statement</a> *self)</td></tr>
-<tr class="memdesc:aaf430da1c73bf7971381415d6e198dae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pretty-prints a <code><a class="el" href="structStatement.html" title="A statement object is composed of the sub-statement objects required to execute a command.">Statement</a></code> object to stdout.  <a href="statement_8c.html#aaf430da1c73bf7971381415d6e198dae">More...</a><br /></td></tr>
-<tr class="separator:aaf430da1c73bf7971381415d6e198dae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50191ab1d106af0c866003e82709d4c2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structSH__Statement.html">SH_Statement</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="statement_8c.html#a50191ab1d106af0c866003e82709d4c2">SH_CreateStatement</a> (void)</td></tr>
+<tr class="memdesc:a50191ab1d106af0c866003e82709d4c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create and initialize a new <code>Statement</code> object.  <a href="statement_8c.html#a50191ab1d106af0c866003e82709d4c2">More...</a><br /></td></tr>
+<tr class="separator:a50191ab1d106af0c866003e82709d4c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42f84a84950e171dbd82376b9872f413"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="statement_8c.html#a42f84a84950e171dbd82376b9872f413">SH_DestroyStatement</a> (<a class="el" href="structSH__Statement.html">SH_Statement</a> **stmt)</td></tr>
+<tr class="memdesc:a42f84a84950e171dbd82376b9872f413"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes <code>stmt</code> and frees its associated data.  <a href="statement_8c.html#a42f84a84950e171dbd82376b9872f413">More...</a><br /></td></tr>
+<tr class="separator:a42f84a84950e171dbd82376b9872f413"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6411ac03ca83cb3a8dafabd8c7577215"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="statement_8c.html#a6411ac03ca83cb3a8dafabd8c7577215">SH_PrintStatement</a> (<a class="el" href="structSH__Statement.html">SH_Statement</a> const *stmt)</td></tr>
+<tr class="memdesc:a6411ac03ca83cb3a8dafabd8c7577215"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pretty-prints a <code>Statement</code> object to stdout.  <a href="statement_8c.html#a6411ac03ca83cb3a8dafabd8c7577215">More...</a><br /></td></tr>
+<tr class="separator:a6411ac03ca83cb3a8dafabd8c7577215"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>For creating command statements to later be executed. </p>
 <dl class="section author"><dt>Author</dt><dd>Mohamed Al-Hussein </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>02 Feb 2022 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="acbba0216fc6c87684bc9f9e80ce3a578"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acbba0216fc6c87684bc9f9e80ce3a578">&#9670;&nbsp;</a></span>statement_del()</h2>
+<a id="a50191ab1d106af0c866003e82709d4c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50191ab1d106af0c866003e82709d4c2">&#9670;&nbsp;</a></span>SH_CreateStatement()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void statement_del </td>
+          <td class="memname"><a class="el" href="structSH__Statement.html">SH_Statement</a>* SH_CreateStatement </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structStatement.html">Statement</a> **&#160;</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create and initialize a new <code>Statement</code> object. </p>
+<dl class="section return"><dt>Returns</dt><dd>new <code>Statement</code> object </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Caller is responsible for freeing structure via <code>SH_DestroyStatement</code>. </dd></dl>
+
+<p class="reference">References <a class="el" href="structStmtCmd.html#a3f77d4604cb2280fc1e33462b8f7a500">StmtCmd::args</a>, <a class="el" href="structSH__Statement.html#aba54a025efaa4948938932ed3aa834cc">SH_Statement::cmd</a>, <a class="el" href="structStmtCmd.html#ae38fec001f29dee9facf432adb751f4a">StmtCmd::count</a>, <a class="el" href="structSH__Statement.html#a9ec46ae8cb46176ca2fcbbd385e12dcd">SH_Statement::flags</a>, <a class="el" href="structSH__Statement.html#ab8aeca53eddb6c4a704c5946d19f37d0">SH_Statement::infile</a>, <a class="el" href="structStmtStdin.html#a416f3c1f45c412d0488a45d82b13e426">StmtStdin::n</a>, <a class="el" href="structStmtStdout.html#a09869ece83e956e8c2a9edf9af67323e">StmtStdout::n</a>, <a class="el" href="structSH__Statement.html#a1ef107e813115ff0e0b3167636601446">SH_Statement::outfile</a>, <a class="el" href="structStmtStdin.html#a8837a85df6c7e10b284e6037316c42cb">StmtStdin::streams</a>, and <a class="el" href="structStmtStdout.html#ad9138cf6e15c931d05cb727b6ff3202f">StmtStdout::streams</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="parser_8c.html#a446e328d965e77f7e712625bdfab3a36">SH_ParserParseStmts()</a>.</p>
+
+</div>
+</div>
+<a id="a42f84a84950e171dbd82376b9872f413"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42f84a84950e171dbd82376b9872f413">&#9670;&nbsp;</a></span>SH_DestroyStatement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SH_DestroyStatement </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structSH__Statement.html">SH_Statement</a> **&#160;</td>
           <td class="paramname"><em>stmt</em></td><td>)</td>
           <td></td>
         </tr>
@@ -117,70 +143,42 @@ Functions</h2></td></tr>
 <p>Deletes <code>stmt</code> and frees its associated data. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">stmt</td><td><code><a class="el" href="structStatement.html" title="A statement object is composed of the sub-statement objects required to execute a command.">Statement</a></code> object to delete </td></tr>
+    <tr><td class="paramname">stmt</td><td><code>Statement</code> object to delete </td></tr>
   </table>
   </dd>
 </dl>
 
 <p class="reference">References <a class="el" href="statement_8h.html#a77d50711e0d2daf004d857d496f7bc14ace0ae54ee84b05acad25351a2bff916f">FLAGS_NONE</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="parser_8c.html#a6667455d4a6e5c24feaf783b5a782465">parser_dtor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="parser_8c.html#abf622694734b7e7c896aac3e49cc4334">SH_DestroyParser()</a>.</p>
 
 </div>
 </div>
-<a id="a1bd0b4e586c2e85d8b71baac013bb8b8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1bd0b4e586c2e85d8b71baac013bb8b8">&#9670;&nbsp;</a></span>statement_new()</h2>
+<a id="a6411ac03ca83cb3a8dafabd8c7577215"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6411ac03ca83cb3a8dafabd8c7577215">&#9670;&nbsp;</a></span>SH_PrintStatement()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structStatement.html">Statement</a>* statement_new </td>
+          <td class="memname">void SH_PrintStatement </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structSH__Statement.html">SH_Statement</a> const *&#160;</td>
+          <td class="paramname"><em>stmt</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Create and initialize a new <code><a class="el" href="structStatement.html" title="A statement object is composed of the sub-statement objects required to execute a command.">Statement</a></code> object. </p>
-<dl class="section return"><dt>Returns</dt><dd>new <code><a class="el" href="structStatement.html" title="A statement object is composed of the sub-statement objects required to execute a command.">Statement</a></code> object </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>Caller is responsible for freeing structure via <code>statement_del</code>. </dd></dl>
-
-<p class="reference">References <a class="el" href="structStmtCmd.html#a8bb9a6c1a54b1e0f0aecc810fae91271">StmtCmd::cmd_argc</a>, <a class="el" href="structStmtCmd.html#a8c4d2948dd5a290f373a4760967423bd">StmtCmd::cmd_argv</a>, <a class="el" href="structStmtStdin.html#a767e0534cb7a64478640bd43d05e6362">StmtStdin::stdin_num_streams</a>, <a class="el" href="structStmtStdin.html#ad142b2d0806df255706ebc6b2219a947">StmtStdin::stdin_streams</a>, <a class="el" href="structStmtStdout.html#a7693efc180ae1dde8e5620f805c0fe2b">StmtStdout::stdout_num_streams</a>, <a class="el" href="structStmtStdout.html#ac7699d4ee2232fd88c531b82f06eefac">StmtStdout::stdout_streams</a>, <a class="el" href="structStatement.html#afe7313615634efa2ca70a96ea3b273a6">Statement::stmt_cmd</a>, <a class="el" href="structStatement.html#aba385eac4473bf5d28ca500a08507239">Statement::stmt_flags</a>, <a class="el" href="structStatement.html#aa103cb6b33b85f15b7fe870cbda06faa">Statement::stmt_stdin</a>, and <a class="el" href="structStatement.html#ac53610f2afa5a2356d515771d197365f">Statement::stmt_stdout</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="parser_8c.html#ac8de4642e7b3f20e95a4b0ccc5c6db69">parser_parse_statements_()</a>.</p>
-
-</div>
-</div>
-<a id="aaf430da1c73bf7971381415d6e198dae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf430da1c73bf7971381415d6e198dae">&#9670;&nbsp;</a></span>statement_print()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void statement_print </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structStatement.html">Statement</a> const *&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Pretty-prints a <code><a class="el" href="structStatement.html" title="A statement object is composed of the sub-statement objects required to execute a command.">Statement</a></code> object to stdout. </p>
+<p>Pretty-prints a <code>Statement</code> object to stdout. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td><code><a class="el" href="structStatement.html" title="A statement object is composed of the sub-statement objects required to execute a command.">Statement</a></code> object to print </td></tr>
+    <tr><td class="paramname">stmt</td><td><code>Statement</code> object to print </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="statement_8h.html#a77d50711e0d2daf004d857d496f7bc14a4896254d97976e29991cffcadd292a31">FLAGS_BGCTRL</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="parser_8c.html#a4a5bcf9c158d9bf51e1781bedbea2ed2">parser_ctor()</a>.</p>
+<p class="reference">References <a class="el" href="structStmtCmd.html#a3f77d4604cb2280fc1e33462b8f7a500">StmtCmd::args</a>, <a class="el" href="structSH__Statement.html#aba54a025efaa4948938932ed3aa834cc">SH_Statement::cmd</a>, <a class="el" href="structStmtCmd.html#ae38fec001f29dee9facf432adb751f4a">StmtCmd::count</a>, <a class="el" href="structSH__Statement.html#a9ec46ae8cb46176ca2fcbbd385e12dcd">SH_Statement::flags</a>, <a class="el" href="statement_8h.html#a77d50711e0d2daf004d857d496f7bc14a4896254d97976e29991cffcadd292a31">FLAGS_BGCTRL</a>, <a class="el" href="structSH__Statement.html#ab8aeca53eddb6c4a704c5946d19f37d0">SH_Statement::infile</a>, <a class="el" href="structStmtStdin.html#a416f3c1f45c412d0488a45d82b13e426">StmtStdin::n</a>, <a class="el" href="structStmtStdout.html#a09869ece83e956e8c2a9edf9af67323e">StmtStdout::n</a>, <a class="el" href="structSH__Statement.html#a1ef107e813115ff0e0b3167636601446">SH_Statement::outfile</a>, <a class="el" href="structStmtStdin.html#a8837a85df6c7e10b284e6037316c42cb">StmtStdin::streams</a>, and <a class="el" href="structStmtStdout.html#ad9138cf6e15c931d05cb727b6ff3202f">StmtStdout::streams</a>.</p>
 
 </div>
 </div>

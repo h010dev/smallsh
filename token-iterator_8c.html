@@ -69,7 +69,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Data Structures</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">token-iterator.c File Reference</div>  </div>
@@ -79,59 +78,48 @@ $(function() {
 <p>For iterating over a collection of tokens.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="token-iterator_8h_source.html">interpreter/token-iterator.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="token_8h_source.html">interpreter/token.h</a>&quot;</code><br />
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTokenIteratorPrivate.html">TokenIteratorPrivate</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hides <code><a class="el" href="structTokenIterator.html" title="TokenIterator object definition.">TokenIterator</a></code> members from client code.  <a href="structTokenIteratorPrivate.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a9b343dc1776bd60c9e6e5001c3204f5a"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="token-iterator_8c.html#a9b343dc1776bd60c9e6e5001c3204f5a">token_iterator_has_next_</a> (<a class="el" href="structTokenIterator.html">TokenIterator</a> const *const self)</td></tr>
-<tr class="memdesc:a9b343dc1776bd60c9e6e5001c3204f5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of <code>TokenIterator::has_next()</code>.  <a href="token-iterator_8c.html#a9b343dc1776bd60c9e6e5001c3204f5a">More...</a><br /></td></tr>
-<tr class="separator:a9b343dc1776bd60c9e6e5001c3204f5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9af28cb1ddefac7cb9b03700b75714b3"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structToken.html">Token</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="token-iterator_8c.html#a9af28cb1ddefac7cb9b03700b75714b3">token_iterator_next_</a> (<a class="el" href="structTokenIterator.html">TokenIterator</a> const *const self)</td></tr>
-<tr class="memdesc:a9af28cb1ddefac7cb9b03700b75714b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of <code>TokenIterator::next()</code>.  <a href="token-iterator_8c.html#a9af28cb1ddefac7cb9b03700b75714b3">More...</a><br /></td></tr>
-<tr class="separator:a9af28cb1ddefac7cb9b03700b75714b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1658892624bfb2c5b4a160d5363f52a9"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structToken.html">Token</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="token-iterator_8c.html#a1658892624bfb2c5b4a160d5363f52a9">token_iterator_peek_</a> (<a class="el" href="structTokenIterator.html">TokenIterator</a> const *const self, unsigned int offset)</td></tr>
-<tr class="memdesc:a1658892624bfb2c5b4a160d5363f52a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of <code>TokenIterator::peek()</code>.  <a href="token-iterator_8c.html#a1658892624bfb2c5b4a160d5363f52a9">More...</a><br /></td></tr>
-<tr class="separator:a1658892624bfb2c5b4a160d5363f52a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab29cf18ebda2ad23745bf848ec16e7b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="token-iterator_8c.html#ab29cf18ebda2ad23745bf848ec16e7b4">token_iterator_ctor</a> (<a class="el" href="structTokenIterator.html">TokenIterator</a> *self, size_t len, <a class="el" href="structToken.html">Token</a> *tok[len])</td></tr>
-<tr class="memdesc:ab29cf18ebda2ad23745bf848ec16e7b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <code><a class="el" href="structTokenIterator.html" title="TokenIterator object definition.">TokenIterator</a></code> object.  <a href="token-iterator_8c.html#ab29cf18ebda2ad23745bf848ec16e7b4">More...</a><br /></td></tr>
-<tr class="separator:ab29cf18ebda2ad23745bf848ec16e7b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a863f1ed6d07259bf0f8c148cff4bd637"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="token-iterator_8c.html#a863f1ed6d07259bf0f8c148cff4bd637">token_iterator_dtor</a> (<a class="el" href="structTokenIterator.html">TokenIterator</a> *self)</td></tr>
-<tr class="memdesc:a863f1ed6d07259bf0f8c148cff4bd637"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys a <code><a class="el" href="structTokenIterator.html" title="TokenIterator object definition.">TokenIterator</a></code> object, freeing its members and re-initializing them to <code>NULL</code> in the process.  <a href="token-iterator_8c.html#a863f1ed6d07259bf0f8c148cff4bd637">More...</a><br /></td></tr>
-<tr class="separator:a863f1ed6d07259bf0f8c148cff4bd637"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab999dd22fab5ecb7fad7da6d6f2907c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structSH__TokenIterator.html">SH_TokenIterator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="token-iterator_8c.html#ab999dd22fab5ecb7fad7da6d6f2907c7">SH_CreateTokenIterator</a> (size_t const len, <a class="el" href="structSH__Token.html">SH_Token</a> *toks[len])</td></tr>
+<tr class="memdesc:ab999dd22fab5ecb7fad7da6d6f2907c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <code>TokenIterator</code> object.  <a href="token-iterator_8c.html#ab999dd22fab5ecb7fad7da6d6f2907c7">More...</a><br /></td></tr>
+<tr class="separator:ab999dd22fab5ecb7fad7da6d6f2907c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a712be812bd40f54d245284cc2e2ee420"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="token-iterator_8c.html#a712be812bd40f54d245284cc2e2ee420">SH_DestroyTokenIterator</a> (<a class="el" href="structSH__TokenIterator.html">SH_TokenIterator</a> **iter)</td></tr>
+<tr class="memdesc:a712be812bd40f54d245284cc2e2ee420"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys a <code>TokenIterator</code> object, freeing its members and re-initializing them to <code>NULL</code> in the process.  <a href="token-iterator_8c.html#a712be812bd40f54d245284cc2e2ee420">More...</a><br /></td></tr>
+<tr class="separator:a712be812bd40f54d245284cc2e2ee420"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9020c9d909299b56cbaaf75bc6a4d58"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="token-iterator_8c.html#ab9020c9d909299b56cbaaf75bc6a4d58">SH_TokenIteratorHasNext</a> (<a class="el" href="structSH__TokenIterator.html">SH_TokenIterator</a> const *const iter)</td></tr>
+<tr class="memdesc:ab9020c9d909299b56cbaaf75bc6a4d58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Let's caller know if there are any more tokens left to parse from iterable.  <a href="token-iterator_8c.html#ab9020c9d909299b56cbaaf75bc6a4d58">More...</a><br /></td></tr>
+<tr class="separator:ab9020c9d909299b56cbaaf75bc6a4d58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cbc1b7bea8402415ebae55496f82f18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structSH__Token.html">SH_Token</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="token-iterator_8c.html#a9cbc1b7bea8402415ebae55496f82f18">SH_TokenIteratorNext</a> (<a class="el" href="structSH__TokenIterator.html">SH_TokenIterator</a> *const iter)</td></tr>
+<tr class="memdesc:a9cbc1b7bea8402415ebae55496f82f18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the token the iterator is pointing at, then advances to the next token.  <a href="token-iterator_8c.html#a9cbc1b7bea8402415ebae55496f82f18">More...</a><br /></td></tr>
+<tr class="separator:a9cbc1b7bea8402415ebae55496f82f18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82aaa7ae62903d1240da5508f7a60cde"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structSH__Token.html">SH_Token</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="token-iterator_8c.html#a82aaa7ae62903d1240da5508f7a60cde">SH_TokenIteratorPeek</a> (<a class="el" href="structSH__TokenIterator.html">SH_TokenIterator</a> *const iter, unsigned int const offset)</td></tr>
+<tr class="memdesc:a82aaa7ae62903d1240da5508f7a60cde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the nth token from the iterators cursor, without advancing to it.  <a href="token-iterator_8c.html#a82aaa7ae62903d1240da5508f7a60cde">More...</a><br /></td></tr>
+<tr class="separator:a82aaa7ae62903d1240da5508f7a60cde"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>For iterating over a collection of tokens. </p>
 <dl class="section author"><dt>Author</dt><dd>Mohamed Al-Hussein </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>28 Jan 2022 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="ab29cf18ebda2ad23745bf848ec16e7b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab29cf18ebda2ad23745bf848ec16e7b4">&#9670;&nbsp;</a></span>token_iterator_ctor()</h2>
+<a id="ab999dd22fab5ecb7fad7da6d6f2907c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab999dd22fab5ecb7fad7da6d6f2907c7">&#9670;&nbsp;</a></span>SH_CreateTokenIterator()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void token_iterator_ctor </td>
+          <td class="memname"><a class="el" href="structSH__TokenIterator.html">SH_TokenIterator</a>* SH_CreateTokenIterator </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structTokenIterator.html">TokenIterator</a> *&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>len</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structToken.html">Token</a> *&#160;</td>
-          <td class="paramname"><em>tok</em>[len]&#160;</td>
+          <td class="paramtype"><a class="el" href="structSH__Token.html">SH_Token</a> *&#160;</td>
+          <td class="paramname"><em>toks</em>[len]&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -141,7 +129,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Constructs a new <code><a class="el" href="structTokenIterator.html" title="TokenIterator object definition.">TokenIterator</a></code> object. </p>
+<p>Constructs a new <code>TokenIterator</code> object. </p>
 <p>The general implementation of a vtable, usage of const for the main object, and other OOP concepts were derived from this publication.</p>
 <p><br  />
 <br  />
@@ -149,140 +137,131 @@ Functions</h2></td></tr>
 <p>Source: <a href="https://www.state-machine.com/doc/AN_OOP_in_C.pdf">https://www.state-machine.com/doc/AN_OOP_in_C.pdf</a>* </p><dl class="section pre"><dt>Precondition</dt><dd>if <code>tokens</code> does not contain exactly <code>len</code> tokens ,then <code>tokens</code> must be terminated by a newline token to signify the end of the stream. Behavior is undefined if this is not the case. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td><code><a class="el" href="structTokenIterator.html" title="TokenIterator object definition.">TokenIterator</a></code> object to initialize </td></tr>
+    <tr><td class="paramname">self</td><td><code>TokenIterator</code> object to initialize </td></tr>
     <tr><td class="paramname">len</td><td>length of the token array </td></tr>
-    <tr><td class="paramname">tok</td><td>the token array to iterate over </td></tr>
+    <tr><td class="paramname">toks</td><td>the token array to iterate over </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>No copy is made of <code>tokens</code>, so the caller must not free or modify the parameter until they are finished using the iterator. Likewise, the caller cannot guarantee that the tokens array is left unmodified at the end of the iterators lifespan. </dd></dl>
 
-<p class="reference">References <a class="el" href="structTokenIteratorVtbl.html#aa78d706cd29d320ff63051f1fb33eb10">TokenIteratorVtbl::has_next</a>, <a class="el" href="token-iterator_8c.html#a9b343dc1776bd60c9e6e5001c3204f5a">token_iterator_has_next_()</a>, <a class="el" href="token-iterator_8c.html#a9af28cb1ddefac7cb9b03700b75714b3">token_iterator_next_()</a>, <a class="el" href="token-iterator_8c.html#a1658892624bfb2c5b4a160d5363f52a9">token_iterator_peek_()</a>, and <a class="el" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">Token::vptr</a>.</p>
+<p class="reference">References <a class="el" href="structSH__TokenIterator.html#aa112047f52fec0bb621cc2f24290a62b">SH_TokenIterator::cur</a>, <a class="el" href="structSH__TokenIterator.html#a37627ce8f6c6253205a6863f7e013c6b">SH_TokenIterator::len</a>, and <a class="el" href="structSH__TokenIterator.html#a7a6697b0f7b88e0be063a7e65a89b754">SH_TokenIterator::toks</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="parser_8c.html#ac8de4642e7b3f20e95a4b0ccc5c6db69">parser_parse_statements_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="parser_8c.html#a446e328d965e77f7e712625bdfab3a36">SH_ParserParseStmts()</a>.</p>
 
 </div>
 </div>
-<a id="a863f1ed6d07259bf0f8c148cff4bd637"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a863f1ed6d07259bf0f8c148cff4bd637">&#9670;&nbsp;</a></span>token_iterator_dtor()</h2>
+<a id="a712be812bd40f54d245284cc2e2ee420"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a712be812bd40f54d245284cc2e2ee420">&#9670;&nbsp;</a></span>SH_DestroyTokenIterator()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void token_iterator_dtor </td>
+          <td class="memname">void SH_DestroyTokenIterator </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structTokenIterator.html">TokenIterator</a> *&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structSH__TokenIterator.html">SH_TokenIterator</a> **&#160;</td>
+          <td class="paramname"><em>iter</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Destroys a <code><a class="el" href="structTokenIterator.html" title="TokenIterator object definition.">TokenIterator</a></code> object, freeing its members and re-initializing them to <code>NULL</code> in the process. </p>
+<p>Destroys a <code>TokenIterator</code> object, freeing its members and re-initializing them to <code>NULL</code> in the process. </p>
 <p>The exception to this is that the <code>tokens</code> array is not freed, as that is up to the caller to perform. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td>The caller is responsible for freeing <code>self</code> afterwards if it was originally allocated on the heap. </td></tr>
+    <tr><td class="paramname">iter</td><td>The caller is responsible for freeing <code>self</code> afterwards if it was originally allocated on the heap. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="reference">Referenced by <a class="el" href="parser_8c.html#ac8de4642e7b3f20e95a4b0ccc5c6db69">parser_parse_statements_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="parser_8c.html#a446e328d965e77f7e712625bdfab3a36">SH_ParserParseStmts()</a>.</p>
 
 </div>
 </div>
-<a id="a9b343dc1776bd60c9e6e5001c3204f5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9b343dc1776bd60c9e6e5001c3204f5a">&#9670;&nbsp;</a></span>token_iterator_has_next_()</h2>
+<a id="ab9020c9d909299b56cbaaf75bc6a4d58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9020c9d909299b56cbaaf75bc6a4d58">&#9670;&nbsp;</a></span>SH_TokenIteratorHasNext()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static bool token_iterator_has_next_ </td>
+          <td class="memname">bool SH_TokenIteratorHasNext </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structTokenIterator.html">TokenIterator</a> const *const&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structSH__TokenIterator.html">SH_TokenIterator</a> const *&#160;</td>
+          <td class="paramname"><em>iter</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Implementation of <code>TokenIterator::has_next()</code>. </p>
+<p>Let's caller know if there are any more tokens left to parse from iterable. </p>
+<p><br  />
+</p>
+<p>The iterable is deemed exhausted under two conditions:</p>
+<ol>
+<li>
+The iterator is pointing at the last token in the iterable. </li>
+<li>
+The next token in the iterable is a newline token. </li>
+</ol>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td>pointer to iterator object </td></tr>
+    <tr><td class="paramname">iter</td><td>pointer to iterator object </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if iterator is positioned at a parseable token, false otherwise </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if iterator is positioned at a valid token, false otherwise </dd></dl>
 
-<p class="reference">References <a class="el" href="structTokenVtbl.html#a9626717617c7e53cdb743d739e9a3518">TokenVtbl::get_type</a>, <a class="el" href="structToken.html#a353352ae77209b60b721c5a28f12c9ac">Token::private</a>, <a class="el" href="shell-tokens_8h.html#a16a54cb1a781967b97660b0cb96e1a54a887cc6440dd799ceb7d66c4f1ca6bb2e">TOK_CTRL_NEWLINE</a>, and <a class="el" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">Token::vptr</a>.</p>
+<p class="reference">References <a class="el" href="structSH__TokenIterator.html#aa112047f52fec0bb621cc2f24290a62b">SH_TokenIterator::cur</a>, <a class="el" href="structSH__TokenIterator.html#a37627ce8f6c6253205a6863f7e013c6b">SH_TokenIterator::len</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164ca887cc6440dd799ceb7d66c4f1ca6bb2e">TOK_CTRL_NEWLINE</a>, <a class="el" href="structSH__TokenIterator.html#a7a6697b0f7b88e0be063a7e65a89b754">SH_TokenIterator::toks</a>, and <a class="el" href="structSH__Token.html#a6c87c0d6575424e3a8a385bfc86e20b7">SH_Token::type</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="token-iterator_8c.html#ab29cf18ebda2ad23745bf848ec16e7b4">token_iterator_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="parser_8c.html#af5324336ab64fa7295c3d8ad79ec92a4">SH_ParserParseCmd()</a>, <a class="el" href="parser_8c.html#a446e328d965e77f7e712625bdfab3a36">SH_ParserParseStmts()</a>, and <a class="el" href="token-iterator_8c.html#a82aaa7ae62903d1240da5508f7a60cde">SH_TokenIteratorPeek()</a>.</p>
 
 </div>
 </div>
-<a id="a9af28cb1ddefac7cb9b03700b75714b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9af28cb1ddefac7cb9b03700b75714b3">&#9670;&nbsp;</a></span>token_iterator_next_()</h2>
+<a id="a9cbc1b7bea8402415ebae55496f82f18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cbc1b7bea8402415ebae55496f82f18">&#9670;&nbsp;</a></span>SH_TokenIteratorNext()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="structToken.html">Token</a>* token_iterator_next_ </td>
+          <td class="memname"><a class="el" href="structSH__Token.html">SH_Token</a>* SH_TokenIteratorNext </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structTokenIterator.html">TokenIterator</a> const *const&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structSH__TokenIterator.html">SH_TokenIterator</a> *&#160;</td>
+          <td class="paramname"><em>iter</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Implementation of <code>TokenIterator::next()</code>. </p>
+<p>Returns the token the iterator is pointing at, then advances to the next token. </p>
+<dl class="section pre"><dt>Precondition</dt><dd>It is assumed that the iterator can retrieve the next token. Behavior is undefined if this is not the case. Caller should use <code>TokenIterator::has_next()</code> to verify before calling this method. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td>pointer to iterator object </td></tr>
+    <tr><td class="paramname">iter</td><td>pointer to iterator object </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>pointer to next token in iterable </dd></dl>
 
-<p class="reference">References <a class="el" href="structToken.html#a353352ae77209b60b721c5a28f12c9ac">Token::private</a>.</p>
+<p class="reference">References <a class="el" href="structSH__TokenIterator.html#aa112047f52fec0bb621cc2f24290a62b">SH_TokenIterator::cur</a>, and <a class="el" href="structSH__TokenIterator.html#a7a6697b0f7b88e0be063a7e65a89b754">SH_TokenIterator::toks</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="token-iterator_8c.html#ab29cf18ebda2ad23745bf848ec16e7b4">token_iterator_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="parser_8c.html#af5324336ab64fa7295c3d8ad79ec92a4">SH_ParserParseCmd()</a>, <a class="el" href="parser_8c.html#a034b9041655b29badeca722b6b9e6b58">SH_ParserParseIoRedir()</a>, <a class="el" href="parser_8c.html#a446e328d965e77f7e712625bdfab3a36">SH_ParserParseStmts()</a>, and <a class="el" href="token-iterator_8c.html#a82aaa7ae62903d1240da5508f7a60cde">SH_TokenIteratorPeek()</a>.</p>
 
 </div>
 </div>
-<a id="a1658892624bfb2c5b4a160d5363f52a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1658892624bfb2c5b4a160d5363f52a9">&#9670;&nbsp;</a></span>token_iterator_peek_()</h2>
+<a id="a82aaa7ae62903d1240da5508f7a60cde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82aaa7ae62903d1240da5508f7a60cde">&#9670;&nbsp;</a></span>SH_TokenIteratorPeek()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="structToken.html">Token</a> token_iterator_peek_ </td>
+          <td class="memname"><a class="el" href="structSH__Token.html">SH_Token</a>* SH_TokenIteratorPeek </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structTokenIterator.html">TokenIterator</a> const *const&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
+          <td class="paramtype"><a class="el" href="structSH__TokenIterator.html">SH_TokenIterator</a> *&#160;</td>
+          <td class="paramname"><em>iter</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -296,26 +275,27 @@ Functions</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Implementation of <code>TokenIterator::peek()</code>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Returns the nth token from the iterators cursor, without advancing to it. </p>
+<p><br  />
+</p>
+<p>If <code>offset</code> is equal to 0, then the token at the current position of the iterator is retrieved.</p>
+<p><br  />
+</p>
+<p>If <code>offset</code> is positive, then the iterator will return the token that is @offset elements ahead of the current cursor.</p>
+<p>This function is provided to allow for look-ahead parsing by peeking at the next token in the iterator. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td>pointer to iterator object </td></tr>
+    <tr><td class="paramname">iter</td><td>pointer to iterator object </td></tr>
     <tr><td class="paramname">offset</td><td>how far ahead to peek </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>token pointed to by iterator at given offset </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>the nth character past the iterators cursor, or an empty <code>NewlineToken</code> object if no more tokens to seek past </dd></dl>
 
-<p class="reference">References <a class="el" href="shell-tokens_8h.html#abad0f54f557f34ee546d1aaba60b3df1">newline_token_ctor()</a>, <a class="el" href="structToken.html#a353352ae77209b60b721c5a28f12c9ac">Token::private</a>, and <a class="el" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">Token::vptr</a>.</p>
+<p class="reference">References <a class="el" href="structSH__TokenIterator.html#aa112047f52fec0bb621cc2f24290a62b">SH_TokenIterator::cur</a>, <a class="el" href="token_8h.html#a9e0e32677efb459b6421c8401456c9e7">SH_CreateToken()</a>, <a class="el" href="token-iterator_8c.html#ab9020c9d909299b56cbaaf75bc6a4d58">SH_TokenIteratorHasNext()</a>, <a class="el" href="token-iterator_8c.html#a9cbc1b7bea8402415ebae55496f82f18">SH_TokenIteratorNext()</a>, and <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164ca887cc6440dd799ceb7d66c4f1ca6bb2e">TOK_CTRL_NEWLINE</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="token-iterator_8c.html#ab29cf18ebda2ad23745bf848ec16e7b4">token_iterator_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="parser_8c.html#af5324336ab64fa7295c3d8ad79ec92a4">SH_ParserParseCmd()</a>, <a class="el" href="parser_8c.html#a034b9041655b29badeca722b6b9e6b58">SH_ParserParseIoRedir()</a>, and <a class="el" href="parser_8c.html#a446e328d965e77f7e712625bdfab3a36">SH_ParserParseStmts()</a>.</p>
 
 </div>
 </div>

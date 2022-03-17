@@ -75,32 +75,25 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>cd builtin command.  
-<a href="#details">More...</a></p>
-
 <p><a href="cd_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a06f1df385b07f03d3cb4c4587ff892f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cd_8h.html#a06f1df385b07f03d3cb4c4587ff892f0">cd</a> (char *dirname)</td></tr>
-<tr class="memdesc:a06f1df385b07f03d3cb4c4587ff892f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes directories into specified dirname, or $HOME if <code>dirname</code> is <code>NULL</code>.  <a href="cd_8h.html#a06f1df385b07f03d3cb4c4587ff892f0">More...</a><br /></td></tr>
-<tr class="separator:a06f1df385b07f03d3cb4c4587ff892f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6327167f7ef6c9ab23e3f3303aa45b42"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cd_8h.html#a6327167f7ef6c9ab23e3f3303aa45b42">SH_cd</a> (char const *dirname)</td></tr>
+<tr class="memdesc:a6327167f7ef6c9ab23e3f3303aa45b42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes directories into specified dirname, or $HOME if <code>dirname</code> is <code>NULL</code>.  <a href="cd_8h.html#a6327167f7ef6c9ab23e3f3303aa45b42">More...</a><br /></td></tr>
+<tr class="separator:a6327167f7ef6c9ab23e3f3303aa45b42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>cd builtin command. </p>
-<dl class="section author"><dt>Author</dt><dd>Mohamed Al-Hussein </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>04 Feb 2022 </dd></dl>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a id="a06f1df385b07f03d3cb4c4587ff892f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06f1df385b07f03d3cb4c4587ff892f0">&#9670;&nbsp;</a></span>cd()</h2>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a6327167f7ef6c9ab23e3f3303aa45b42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6327167f7ef6c9ab23e3f3303aa45b42">&#9670;&nbsp;</a></span>SH_cd()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void cd </td>
+          <td class="memname">void SH_cd </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
+          <td class="paramtype">char const *&#160;</td>
           <td class="paramname"><em>dirname</em></td><td>)</td>
           <td></td>
         </tr>
@@ -111,12 +104,10 @@ Functions</h2></td></tr>
 <dl class="section pre"><dt>Precondition</dt><dd>$HOME env variable is set before call when <code>dirname</code> is <code>NULL</code>. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">dirname</td><td>directory name to cd into </td></tr>
+    <tr><td class="paramname">dirname</td><td>directory name to SH_cd into </td></tr>
   </table>
   </dd>
 </dl>
-
-<p class="reference">References <a class="el" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="smallsh_8c.html#aab7ee4d34e98147392afb5d3b4a88276">smallsh_eval()</a>.</p>
 

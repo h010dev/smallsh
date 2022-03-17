@@ -78,46 +78,46 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a8bb9a6c1a54b1e0f0aecc810fae91271"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structStmtCmd.html#a8bb9a6c1a54b1e0f0aecc810fae91271">cmd_argc</a></td></tr>
-<tr class="separator:a8bb9a6c1a54b1e0f0aecc810fae91271"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c4d2948dd5a290f373a4760967423bd"><td class="memItemLeft" align="right" valign="top">char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structStmtCmd.html#a8c4d2948dd5a290f373a4760967423bd">cmd_argv</a></td></tr>
-<tr class="separator:a8c4d2948dd5a290f373a4760967423bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae38fec001f29dee9facf432adb751f4a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structStmtCmd.html#ae38fec001f29dee9facf432adb751f4a">count</a></td></tr>
+<tr class="separator:ae38fec001f29dee9facf432adb751f4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f77d4604cb2280fc1e33462b8f7a500"><td class="memItemLeft" align="right" valign="top">char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structStmtCmd.html#a3f77d4604cb2280fc1e33462b8f7a500">args</a></td></tr>
+<tr class="separator:a3f77d4604cb2280fc1e33462b8f7a500"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Command object. </p>
 <p>A command struct is composed of a list of arguments, where the first argument is the command name; and an argument count. </p>
 </div><h2 class="groupheader">Field Documentation</h2>
-<a id="a8bb9a6c1a54b1e0f0aecc810fae91271"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8bb9a6c1a54b1e0f0aecc810fae91271">&#9670;&nbsp;</a></span>cmd_argc</h2>
+<a id="a3f77d4604cb2280fc1e33462b8f7a500"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f77d4604cb2280fc1e33462b8f7a500">&#9670;&nbsp;</a></span>args</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t StmtCmd::cmd_argc</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>argument count </p>
-
-<p class="reference">Referenced by <a class="el" href="parser_8c.html#a469b943aa3b4faf5da202fc25725332e">parser_parse_cmd_()</a>, <a class="el" href="smallsh_8c.html#aab7ee4d34e98147392afb5d3b4a88276">smallsh_eval()</a>, and <a class="el" href="statement_8c.html#a1bd0b4e586c2e85d8b71baac013bb8b8">statement_new()</a>.</p>
-
-</div>
-</div>
-<a id="a8c4d2948dd5a290f373a4760967423bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c4d2948dd5a290f373a4760967423bd">&#9670;&nbsp;</a></span>cmd_argv</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">char** StmtCmd::cmd_argv</td>
+          <td class="memname">char** StmtCmd::args</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <p>argument list </p>
 
-<p class="reference">Referenced by <a class="el" href="parser_8c.html#a469b943aa3b4faf5da202fc25725332e">parser_parse_cmd_()</a>, <a class="el" href="smallsh_8c.html#aab7ee4d34e98147392afb5d3b4a88276">smallsh_eval()</a>, and <a class="el" href="statement_8c.html#a1bd0b4e586c2e85d8b71baac013bb8b8">statement_new()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="statement_8c.html#a50191ab1d106af0c866003e82709d4c2">SH_CreateStatement()</a>, <a class="el" href="parser_8c.html#af5324336ab64fa7295c3d8ad79ec92a4">SH_ParserParseCmd()</a>, <a class="el" href="statement_8c.html#a6411ac03ca83cb3a8dafabd8c7577215">SH_PrintStatement()</a>, and <a class="el" href="smallsh_8c.html#aab7ee4d34e98147392afb5d3b4a88276">smallsh_eval()</a>.</p>
+
+</div>
+</div>
+<a id="ae38fec001f29dee9facf432adb751f4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae38fec001f29dee9facf432adb751f4a">&#9670;&nbsp;</a></span>count</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t StmtCmd::count</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>argument count </p>
+
+<p class="reference">Referenced by <a class="el" href="statement_8c.html#a50191ab1d106af0c866003e82709d4c2">SH_CreateStatement()</a>, <a class="el" href="parser_8c.html#af5324336ab64fa7295c3d8ad79ec92a4">SH_ParserParseCmd()</a>, <a class="el" href="statement_8c.html#a6411ac03ca83cb3a8dafabd8c7577215">SH_PrintStatement()</a>, and <a class="el" href="smallsh_8c.html#aab7ee4d34e98147392afb5d3b4a88276">smallsh_eval()</a>.</p>
 
 </div>
 </div>

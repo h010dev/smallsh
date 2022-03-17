@@ -84,98 +84,86 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structChannel.html">Channel</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A <code><a class="el" href="structChannel.html" title="A Channel object consists of a read end and a write end, as well as a callback handler function that ...">Channel</a></code> object consists of a read end and a write end, as well as a callback handler function that is invoked when new data is received.  <a href="structChannel.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSH__Channel.html">SH_Channel</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A <code>Channel</code> object consists of a read end and a write end, as well as a callback handler function that is invoked when new data is received.  <a href="structSH__Channel.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:afba562878a3535479ef88914e89ee38b"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structChannel.html">Channel</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel_8h.html#afba562878a3535479ef88914e89ee38b">Channel</a></td></tr>
-<tr class="memdesc:afba562878a3535479ef88914e89ee38b"><td class="mdescLeft">&#160;</td><td class="mdescRight">A <code><a class="el" href="structChannel.html" title="A Channel object consists of a read end and a write end, as well as a callback handler function that ...">Channel</a></code> object consists of a read end and a write end, as well as a callback handler function that is invoked when new data is received.  <a href="channel_8h.html#afba562878a3535479ef88914e89ee38b">More...</a><br /></td></tr>
-<tr class="separator:afba562878a3535479ef88914e89ee38b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab726ede4eac20790ac6ad5e73505d14d"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structSH__Channel.html">SH_Channel</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel_8h.html#ab726ede4eac20790ac6ad5e73505d14d">SH_Channel</a></td></tr>
+<tr class="separator:ab726ede4eac20790ac6ad5e73505d14d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3f79b80493f8beb9d16f302076cfe6aa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel_8h.html#a3f79b80493f8beb9d16f302076cfe6aa">channel_ctor</a> (<a class="el" href="structChannel.html">Channel</a> *self, int(*cb_handler)(struct <a class="el" href="structChannel.html">Channel</a>))</td></tr>
-<tr class="memdesc:a3f79b80493f8beb9d16f302076cfe6aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a <code>self</code> with provided data.  <a href="channel_8h.html#a3f79b80493f8beb9d16f302076cfe6aa">More...</a><br /></td></tr>
-<tr class="separator:a3f79b80493f8beb9d16f302076cfe6aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7dbfb1df8d67151a8910925f6f08068"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel_8h.html#ad7dbfb1df8d67151a8910925f6f08068">channel_dtor</a> (<a class="el" href="structChannel.html">Channel</a> *self)</td></tr>
-<tr class="memdesc:ad7dbfb1df8d67151a8910925f6f08068"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets <code>self's</code> values.  <a href="channel_8h.html#ad7dbfb1df8d67151a8910925f6f08068">More...</a><br /></td></tr>
-<tr class="separator:ad7dbfb1df8d67151a8910925f6f08068"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a096397c90cec2a5e6f51e4648fd67962"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structSH__Channel.html">SH_Channel</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel_8h.html#a096397c90cec2a5e6f51e4648fd67962">SH_CreateChannel</a> (int(*cb_handler)(<a class="el" href="structSH__Channel.html">SH_Channel</a>))</td></tr>
+<tr class="memdesc:a096397c90cec2a5e6f51e4648fd67962"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new Channel object.  <a href="channel_8h.html#a096397c90cec2a5e6f51e4648fd67962">More...</a><br /></td></tr>
+<tr class="separator:a096397c90cec2a5e6f51e4648fd67962"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae489b895f32d941b5143adcd5d7a6eae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel_8h.html#ae489b895f32d941b5143adcd5d7a6eae">SH_DestroyChannel</a> (<a class="el" href="structSH__Channel.html">SH_Channel</a> **channel)</td></tr>
+<tr class="memdesc:ae489b895f32d941b5143adcd5d7a6eae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets <code>self's</code> values.  <a href="channel_8h.html#ae489b895f32d941b5143adcd5d7a6eae">More...</a><br /></td></tr>
+<tr class="separator:ae489b895f32d941b5143adcd5d7a6eae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Provides means for sending and receiving signal-related information via a message channel. </p>
 <dl class="section author"><dt>Author</dt><dd>Mohamed Al-Hussein </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>09 Feb 2022 </dd></dl>
 </div><h2 class="groupheader">Typedef Documentation</h2>
-<a id="afba562878a3535479ef88914e89ee38b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afba562878a3535479ef88914e89ee38b">&#9670;&nbsp;</a></span>Channel</h2>
+<a id="ab726ede4eac20790ac6ad5e73505d14d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab726ede4eac20790ac6ad5e73505d14d">&#9670;&nbsp;</a></span>SH_Channel</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef struct <a class="el" href="structChannel.html">Channel</a> <a class="el" href="structChannel.html">Channel</a></td>
+          <td class="memname">typedef struct <a class="el" href="structSH__Channel.html">SH_Channel</a> <a class="el" href="structSH__Channel.html">SH_Channel</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>A <code><a class="el" href="structChannel.html" title="A Channel object consists of a read end and a write end, as well as a callback handler function that ...">Channel</a></code> object consists of a read end and a write end, as well as a callback handler function that is invoked when new data is received. </p>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a3f79b80493f8beb9d16f302076cfe6aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f79b80493f8beb9d16f302076cfe6aa">&#9670;&nbsp;</a></span>channel_ctor()</h2>
+<a id="a096397c90cec2a5e6f51e4648fd67962"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a096397c90cec2a5e6f51e4648fd67962">&#9670;&nbsp;</a></span>SH_CreateChannel()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int channel_ctor </td>
+          <td class="memname"><a class="el" href="structSH__Channel.html">SH_Channel</a>* SH_CreateChannel </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structChannel.html">Channel</a> *&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">int(*)(<a class="el" href="structSH__Channel.html">SH_Channel</a>)&#160;</td>
+          <td class="paramname"><em>cb_handler</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">int(*)(struct <a class="el" href="structChannel.html">Channel</a>)&#160;</td>
-          <td class="paramname"><em>cb_handler</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initializes a <code>self</code> with provided data. </p>
+<p>Initializes a new Channel object. </p>
 <p>Behind the scenes, this function creates a pipe and hooks into its read and write ends. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td><code><a class="el" href="structChannel.html" title="A Channel object consists of a read end and a write end, as well as a callback handler function that ...">Channel</a></code> to initialize </td></tr>
     <tr><td class="paramname">cb_handler</td><td>callback method for this channel </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on failure </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>new <code>Channel</code> object on success, <code>NULL</code> on failure </dd></dl>
 
-<p class="reference">Referenced by <a class="el" href="events_8c.html#a81ce7d6909034de9c012d78ae23c3f42">events_init()</a>.</p>
+<p class="reference">References <a class="el" href="structSH__Channel.html#a1201933089798ccc3a4f36237b02c408">SH_Channel::callback_handler</a>, <a class="el" href="structSH__Channel.html#af2bde8bfd388a9f6cd2de6125c44a677">SH_Channel::read_fd</a>, and <a class="el" href="structSH__Channel.html#a70035aec57d4e0a739c4a30f6f923764">SH_Channel::write_fd</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="events_8c.html#aa8e2e0f6415a6ff5388a0a0929a7ab53">SH_InitEvents()</a>.</p>
 
 </div>
 </div>
-<a id="ad7dbfb1df8d67151a8910925f6f08068"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad7dbfb1df8d67151a8910925f6f08068">&#9670;&nbsp;</a></span>channel_dtor()</h2>
+<a id="ae489b895f32d941b5143adcd5d7a6eae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae489b895f32d941b5143adcd5d7a6eae">&#9670;&nbsp;</a></span>SH_DestroyChannel()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void channel_dtor </td>
+          <td class="memname">void SH_DestroyChannel </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structChannel.html">Channel</a> *&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structSH__Channel.html">SH_Channel</a> **&#160;</td>
+          <td class="paramname"><em>channel</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -184,12 +172,12 @@ Functions</h2></td></tr>
 <p>Resets <code>self's</code> values. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td><code><a class="el" href="structChannel.html" title="A Channel object consists of a read end and a write end, as well as a callback handler function that ...">Channel</a></code> to reset </td></tr>
+    <tr><td class="paramname">channel</td><td><code>Channel</code> to reset </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="reference">Referenced by <a class="el" href="events_8c.html#a64bde057407debd7862302dda094b6ed">events_cleanup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="events_8c.html#a0b64ae509893b5bde52df4b26b0d4896">SH_CleanupEvents()</a>.</p>
 
 </div>
 </div>

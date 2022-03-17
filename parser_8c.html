@@ -69,7 +69,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Data Structures</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">parser.c File Reference</div>  </div>
@@ -84,123 +83,112 @@ $(function() {
 <code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
 <code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="builtins_8h_source.html">builtins/builtins.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="lexer_8h_source.html">interpreter/lexer.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="parser_8h_source.html">interpreter/parser.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="token-iterator_8h_source.html">interpreter/token-iterator.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="lexer_8h_source.html">interpreter/lexer.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="builtins_8h_source.html">builtins/builtins.h</a>&quot;</code><br />
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structParserPrivate.html">ParserPrivate</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hides <code><a class="el" href="structParser.html" title="Defines parser namespace.">Parser</a></code> members from client code.  <a href="structParserPrivate.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a469b943aa3b4faf5da202fc25725332e"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a469b943aa3b4faf5da202fc25725332e">parser_parse_cmd_</a> (<a class="el" href="structStatement.html">Statement</a> *stmt, <a class="el" href="structTokenIterator.html">TokenIterator</a> *iter)</td></tr>
-<tr class="memdesc:a469b943aa3b4faf5da202fc25725332e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses a command into <code>stmt</code> command statement.  <a href="parser_8c.html#a469b943aa3b4faf5da202fc25725332e">More...</a><br /></td></tr>
-<tr class="separator:a469b943aa3b4faf5da202fc25725332e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adef22e7be4f5cde84075864c6e6f72db"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#adef22e7be4f5cde84075864c6e6f72db">parser_parse_ioredir_</a> (<a class="el" href="structStatement.html">Statement</a> *stmt, <a class="el" href="structTokenIterator.html">TokenIterator</a> *iter, <a class="el" href="statement_8h.html#adcd481cc0d75251752b928fa6f6496a3">IORedirType</a> type)</td></tr>
-<tr class="memdesc:adef22e7be4f5cde84075864c6e6f72db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses an io redirection command into <code>stmt</code> command statement.  <a href="parser_8c.html#adef22e7be4f5cde84075864c6e6f72db">More...</a><br /></td></tr>
-<tr class="separator:adef22e7be4f5cde84075864c6e6f72db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8de4642e7b3f20e95a4b0ccc5c6db69"><td class="memItemLeft" align="right" valign="top">static ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#ac8de4642e7b3f20e95a4b0ccc5c6db69">parser_parse_statements_</a> (struct <a class="el" href="structParser.html">Parser</a> *const self)</td></tr>
-<tr class="memdesc:ac8de4642e7b3f20e95a4b0ccc5c6db69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses tokens into statements.  <a href="parser_8c.html#ac8de4642e7b3f20e95a4b0ccc5c6db69">More...</a><br /></td></tr>
-<tr class="separator:ac8de4642e7b3f20e95a4b0ccc5c6db69"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68325d099b475f7cc72bbf64aa1e6479"><td class="memItemLeft" align="right" valign="top">static ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a68325d099b475f7cc72bbf64aa1e6479">parser_parse_</a> (<a class="el" href="structParser.html">Parser</a> *const self, char *buf)</td></tr>
-<tr class="memdesc:a68325d099b475f7cc72bbf64aa1e6479"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses a character stream, creates tokens, and generates command statements.  <a href="parser_8c.html#a68325d099b475f7cc72bbf64aa1e6479">More...</a><br /></td></tr>
-<tr class="separator:a68325d099b475f7cc72bbf64aa1e6479"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaacb9325d296f06f4fe747d2e0327cf4"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structStatement.html">Statement</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#aaacb9325d296f06f4fe747d2e0327cf4">parser_get_statements_</a> (struct <a class="el" href="structParser.html">Parser</a> *const self)</td></tr>
-<tr class="memdesc:aaacb9325d296f06f4fe747d2e0327cf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns parsed statements to caller.  <a href="parser_8c.html#aaacb9325d296f06f4fe747d2e0327cf4">More...</a><br /></td></tr>
-<tr class="separator:aaacb9325d296f06f4fe747d2e0327cf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a5bcf9c158d9bf51e1781bedbea2ed2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a4a5bcf9c158d9bf51e1781bedbea2ed2">parser_ctor</a> (<a class="el" href="structParser.html">Parser</a> *self)</td></tr>
-<tr class="memdesc:a4a5bcf9c158d9bf51e1781bedbea2ed2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes <code>self</code> <code><a class="el" href="structParser.html" title="Defines parser namespace.">Parser</a></code> object.  <a href="parser_8c.html#a4a5bcf9c158d9bf51e1781bedbea2ed2">More...</a><br /></td></tr>
-<tr class="separator:a4a5bcf9c158d9bf51e1781bedbea2ed2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6667455d4a6e5c24feaf783b5a782465"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a6667455d4a6e5c24feaf783b5a782465">parser_dtor</a> (<a class="el" href="structParser.html">Parser</a> *self)</td></tr>
-<tr class="memdesc:a6667455d4a6e5c24feaf783b5a782465"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys <code>self</code> <code><a class="el" href="structParser.html" title="Defines parser namespace.">Parser</a></code> object.  <a href="parser_8c.html#a6667455d4a6e5c24feaf783b5a782465">More...</a><br /></td></tr>
-<tr class="separator:a6667455d4a6e5c24feaf783b5a782465"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ebec6223e45d162b9f4f90a120a8bdd"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a3ebec6223e45d162b9f4f90a120a8bdd">parser_insert_pid</a> (char *str, char **ptr, size_t *len)</td></tr>
-<tr class="memdesc:a3ebec6223e45d162b9f4f90a120a8bdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extends <code>string</code> with the process's current PID.  <a href="parser_8c.html#a3ebec6223e45d162b9f4f90a120a8bdd">More...</a><br /></td></tr>
-<tr class="separator:a3ebec6223e45d162b9f4f90a120a8bdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8353b2928336d03b7d28f93f75b3e7a8"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a8353b2928336d03b7d28f93f75b3e7a8">parser_substitute_variable</a> (char *word, char **old_ptr, char **new_ptr, size_t *len)</td></tr>
-<tr class="memdesc:a8353b2928336d03b7d28f93f75b3e7a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Substitutes variable followed by '$' into word and returns result. If no valid variable follows '$', then the '$' is copied into word instead.  <a href="parser_8c.html#a8353b2928336d03b7d28f93f75b3e7a8">More...</a><br /></td></tr>
-<tr class="separator:a8353b2928336d03b7d28f93f75b3e7a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5be6f162ba46bf60010622f55a09d766"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a5be6f162ba46bf60010622f55a09d766">parser_expand_word</a> (char *word)</td></tr>
-<tr class="memdesc:a5be6f162ba46bf60010622f55a09d766"><td class="mdescLeft">&#160;</td><td class="mdescRight">Substitutes all variables in a word string with their literal value, and returns the modified string.  <a href="parser_8c.html#a5be6f162ba46bf60010622f55a09d766">More...</a><br /></td></tr>
-<tr class="separator:a5be6f162ba46bf60010622f55a09d766"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5324336ab64fa7295c3d8ad79ec92a4"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#af5324336ab64fa7295c3d8ad79ec92a4">SH_ParserParseCmd</a> (<a class="el" href="structSH__Statement.html">SH_Statement</a> *stmt, <a class="el" href="structSH__TokenIterator.html">SH_TokenIterator</a> *const iter)</td></tr>
+<tr class="memdesc:af5324336ab64fa7295c3d8ad79ec92a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses a command into <code>stmt</code> command statement.  <a href="parser_8c.html#af5324336ab64fa7295c3d8ad79ec92a4">More...</a><br /></td></tr>
+<tr class="separator:af5324336ab64fa7295c3d8ad79ec92a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a034b9041655b29badeca722b6b9e6b58"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a034b9041655b29badeca722b6b9e6b58">SH_ParserParseIoRedir</a> (<a class="el" href="structSH__Statement.html">SH_Statement</a> *stmt, <a class="el" href="structSH__TokenIterator.html">SH_TokenIterator</a> *const iter, <a class="el" href="statement_8h.html#adcd481cc0d75251752b928fa6f6496a3">IORedirType</a> const type)</td></tr>
+<tr class="memdesc:a034b9041655b29badeca722b6b9e6b58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses an io redirection command into <code>stmt</code> command statement.  <a href="parser_8c.html#a034b9041655b29badeca722b6b9e6b58">More...</a><br /></td></tr>
+<tr class="separator:a034b9041655b29badeca722b6b9e6b58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a446e328d965e77f7e712625bdfab3a36"><td class="memItemLeft" align="right" valign="top">static ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a446e328d965e77f7e712625bdfab3a36">SH_ParserParseStmts</a> (<a class="el" href="structSH__Parser.html">SH_Parser</a> *const parser)</td></tr>
+<tr class="memdesc:a446e328d965e77f7e712625bdfab3a36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses tokens into statements.  <a href="parser_8c.html#a446e328d965e77f7e712625bdfab3a36">More...</a><br /></td></tr>
+<tr class="separator:a446e328d965e77f7e712625bdfab3a36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c2aa78859f22b30ffb7a0be9b6368c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structSH__Parser.html">SH_Parser</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a5c2aa78859f22b30ffb7a0be9b6368c3">SH_CreateParser</a> (void)</td></tr>
+<tr class="memdesc:a5c2aa78859f22b30ffb7a0be9b6368c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes <code>self</code> <code>Parser</code> object.  <a href="parser_8c.html#a5c2aa78859f22b30ffb7a0be9b6368c3">More...</a><br /></td></tr>
+<tr class="separator:a5c2aa78859f22b30ffb7a0be9b6368c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf622694734b7e7c896aac3e49cc4334"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#abf622694734b7e7c896aac3e49cc4334">SH_DestroyParser</a> (<a class="el" href="structSH__Parser.html">SH_Parser</a> **parser)</td></tr>
+<tr class="memdesc:abf622694734b7e7c896aac3e49cc4334"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys <code>parser</code> <code>Parser</code> object.  <a href="parser_8c.html#abf622694734b7e7c896aac3e49cc4334">More...</a><br /></td></tr>
+<tr class="separator:abf622694734b7e7c896aac3e49cc4334"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c917904f9e42805bf35854aa1fd7a3e"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a2c917904f9e42805bf35854aa1fd7a3e">SH_ParserExpandWord</a> (char *const word)</td></tr>
+<tr class="memdesc:a2c917904f9e42805bf35854aa1fd7a3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Substitutes all variables in a word string with their literal value, and returns the modified string.  <a href="parser_8c.html#a2c917904f9e42805bf35854aa1fd7a3e">More...</a><br /></td></tr>
+<tr class="separator:a2c917904f9e42805bf35854aa1fd7a3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8863c7bfa8be9e575bc0c0a43e655a7"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#ac8863c7bfa8be9e575bc0c0a43e655a7">SH_ParserInsertPid</a> (char *const str, char **ptr, size_t *const len)</td></tr>
+<tr class="memdesc:ac8863c7bfa8be9e575bc0c0a43e655a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extends <code>string</code> with the process's current PID.  <a href="parser_8c.html#ac8863c7bfa8be9e575bc0c0a43e655a7">More...</a><br /></td></tr>
+<tr class="separator:ac8863c7bfa8be9e575bc0c0a43e655a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7ec06d86eff867e323b5b867dd97f68"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#ac7ec06d86eff867e323b5b867dd97f68">SH_ParserParse</a> (<a class="el" href="structSH__Parser.html">SH_Parser</a> *const parser, char *buf)</td></tr>
+<tr class="memdesc:ac7ec06d86eff867e323b5b867dd97f68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses a character stream, creates tokens, and generates command statements.  <a href="parser_8c.html#ac7ec06d86eff867e323b5b867dd97f68">More...</a><br /></td></tr>
+<tr class="separator:ac7ec06d86eff867e323b5b867dd97f68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a50323d639f4b5ecdeb532ff42da743"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a4a50323d639f4b5ecdeb532ff42da743">SH_ParserSubstituteVariable</a> (char *const word, char **old_ptr, char **new_ptr, size_t *const len)</td></tr>
+<tr class="memdesc:a4a50323d639f4b5ecdeb532ff42da743"><td class="mdescLeft">&#160;</td><td class="mdescRight">Substitutes variable followed by '$' into word and returns result. If no valid variable follows '$', then the '$' is copied into word instead.  <a href="parser_8c.html#a4a50323d639f4b5ecdeb532ff42da743">More...</a><br /></td></tr>
+<tr class="separator:a4a50323d639f4b5ecdeb532ff42da743"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>For parsing a stream of tokens into nodes for later evaluation. </p>
 <dl class="section author"><dt>Author</dt><dd>Mohamed Al-Hussein </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>27 Jan 2022 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a4a5bcf9c158d9bf51e1781bedbea2ed2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a5bcf9c158d9bf51e1781bedbea2ed2">&#9670;&nbsp;</a></span>parser_ctor()</h2>
+<a id="a5c2aa78859f22b30ffb7a0be9b6368c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c2aa78859f22b30ffb7a0be9b6368c3">&#9670;&nbsp;</a></span>SH_CreateParser()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void parser_ctor </td>
+          <td class="memname"><a class="el" href="structSH__Parser.html">SH_Parser</a>* SH_CreateParser </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structParser.html">Parser</a> *&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initializes <code>self</code> <code><a class="el" href="structParser.html" title="Defines parser namespace.">Parser</a></code> object. </p>
+<p>Initializes <code>self</code> <code>Parser</code> object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td><code><a class="el" href="structParser.html" title="Defines parser namespace.">Parser</a></code> object to initialize </td></tr>
+    <tr><td class="paramname">self</td><td><code>Parser</code> object to initialize </td></tr>
   </table>
   </dd>
 </dl>
-
-<p class="reference">References <a class="el" href="parser_8c.html#aaacb9325d296f06f4fe747d2e0327cf4">parser_get_statements_()</a>, <a class="el" href="parser_8c.html#a68325d099b475f7cc72bbf64aa1e6479">parser_parse_()</a>, and <a class="el" href="statement_8h.html#aad1a4a6afa362d474c590496e74347f9">statement_print()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="smallsh_8c.html#aab7ee4d34e98147392afb5d3b4a88276">smallsh_eval()</a>.</p>
 
 </div>
 </div>
-<a id="a6667455d4a6e5c24feaf783b5a782465"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6667455d4a6e5c24feaf783b5a782465">&#9670;&nbsp;</a></span>parser_dtor()</h2>
+<a id="abf622694734b7e7c896aac3e49cc4334"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf622694734b7e7c896aac3e49cc4334">&#9670;&nbsp;</a></span>SH_DestroyParser()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void parser_dtor </td>
+          <td class="memname">void SH_DestroyParser </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structParser.html">Parser</a> *&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structSH__Parser.html">SH_Parser</a> **&#160;</td>
+          <td class="paramname"><em>parser</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Destroys <code>self</code> <code><a class="el" href="structParser.html" title="Defines parser namespace.">Parser</a></code> object. </p>
+<p>Destroys <code>parser</code> <code>Parser</code> object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td><code><a class="el" href="structParser.html" title="Defines parser namespace.">Parser</a></code> object to destroy </td></tr>
+    <tr><td class="paramname">parser</td><td><code>Parser</code> object to destroy </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="statement_8h.html#acbba0216fc6c87684bc9f9e80ce3a578">statement_del()</a>, and <a class="el" href="token_8h.html#aefe387092a32c96e19a9c0710e272b48">token_dtor()</a>.</p>
+<p class="reference">References <a class="el" href="statement_8h.html#a42f84a84950e171dbd82376b9872f413">SH_DestroyStatement()</a>, and <a class="el" href="token_8h.html#ab07921c4d52c1a4121ff88a6d2e1eae1">SH_DestroyToken()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="smallsh_8c.html#aab7ee4d34e98147392afb5d3b4a88276">smallsh_eval()</a>.</p>
 
 </div>
 </div>
-<a id="a5be6f162ba46bf60010622f55a09d766"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5be6f162ba46bf60010622f55a09d766">&#9670;&nbsp;</a></span>parser_expand_word()</h2>
+<a id="a2c917904f9e42805bf35854aa1fd7a3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c917904f9e42805bf35854aa1fd7a3e">&#9670;&nbsp;</a></span>SH_ParserExpandWord()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char* parser_expand_word </td>
+          <td class="memname">char* SH_ParserExpandWord </td>
           <td>(</td>
           <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>word</em></td><td>)</td>
@@ -219,58 +207,20 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>new word string containing literal substitutions for all variables </dd></dl>
 
-<p class="reference">References <a class="el" href="parser_8c.html#a8353b2928336d03b7d28f93f75b3e7a8">parser_substitute_variable()</a>.</p>
+<p class="reference">References <a class="el" href="parser_8c.html#a4a50323d639f4b5ecdeb532ff42da743">SH_ParserSubstituteVariable()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="parser_8c.html#a469b943aa3b4faf5da202fc25725332e">parser_parse_cmd_()</a>, and <a class="el" href="parser_8c.html#adef22e7be4f5cde84075864c6e6f72db">parser_parse_ioredir_()</a>.</p>
-
-</div>
-</div>
-<a id="aaacb9325d296f06f4fe747d2e0327cf4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaacb9325d296f06f4fe747d2e0327cf4">&#9670;&nbsp;</a></span>parser_get_statements_()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="structStatement.html">Statement</a>** parser_get_statements_ </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structParser.html">Parser</a> *const&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns parsed statements to caller. </p>
-<p>Implementation of <code><a class="el" href="structParser.html#a617acf84fdeb55ca5ef630f4eb5c26a0" title="Returns parsed statements to caller.">Parser::get_statements()</a></code>.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">self</td><td><code><a class="el" href="structParser.html" title="Defines parser namespace.">Parser</a></code> object </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>array of <code><a class="el" href="structStatement.html" title="A statement object is composed of the sub-statement objects required to execute a command.">Statement</a></code> objects parsed from character stream </dd></dl>
-
-<p class="reference">Referenced by <a class="el" href="parser_8c.html#a4a5bcf9c158d9bf51e1781bedbea2ed2">parser_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="parser_8c.html#af5324336ab64fa7295c3d8ad79ec92a4">SH_ParserParseCmd()</a>, and <a class="el" href="parser_8c.html#a034b9041655b29badeca722b6b9e6b58">SH_ParserParseIoRedir()</a>.</p>
 
 </div>
 </div>
-<a id="a3ebec6223e45d162b9f4f90a120a8bdd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ebec6223e45d162b9f4f90a120a8bdd">&#9670;&nbsp;</a></span>parser_insert_pid()</h2>
+<a id="ac8863c7bfa8be9e575bc0c0a43e655a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8863c7bfa8be9e575bc0c0a43e655a7">&#9670;&nbsp;</a></span>SH_ParserInsertPid()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char* parser_insert_pid </td>
+          <td class="memname">char* SH_ParserInsertPid </td>
           <td>(</td>
           <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>str</em>, </td>
@@ -308,24 +258,21 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>new string with PID at end, or <code>NULL</code> on error </dd></dl>
 
-<p class="reference">Referenced by <a class="el" href="parser_8c.html#a8353b2928336d03b7d28f93f75b3e7a8">parser_substitute_variable()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="parser_8c.html#a4a50323d639f4b5ecdeb532ff42da743">SH_ParserSubstituteVariable()</a>.</p>
 
 </div>
 </div>
-<a id="a68325d099b475f7cc72bbf64aa1e6479"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a68325d099b475f7cc72bbf64aa1e6479">&#9670;&nbsp;</a></span>parser_parse_()</h2>
+<a id="ac7ec06d86eff867e323b5b867dd97f68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7ec06d86eff867e323b5b867dd97f68">&#9670;&nbsp;</a></span>SH_ParserParse()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static ssize_t parser_parse_ </td>
+          <td class="memname">ssize_t SH_ParserParse </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structParser.html">Parser</a> *const&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
+          <td class="paramtype"><a class="el" href="structSH__Parser.html">SH_Parser</a> *&#160;</td>
+          <td class="paramname"><em>parser</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -339,33 +286,41 @@ Functions</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Parses a character stream, creates tokens, and generates command statements. </p>
-<p>Implementation of <code><a class="el" href="structParser.html#aa8336e9c9fa3033d55762ca116bb3946" title="Parses a character stream, creates tokens, and generates command statements.">Parser::parse()</a></code>.</p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p><br  />
+</p>
+<p>This step performs grouping of tokens based on the following production rules:</p>
+<p><br  />
+<br  />
+</p>
+<p>node: comment | command | io_redir | bg_ctrl<br  />
+comment: ^((whitespace)* '#' whitespace)<br  />
+command: ^(word)+ [excluding '&lt;', '&gt;', '&amp;', '#', whitespace, newline]<br  />
+bg_ctrl: (whitespace '&amp;' (whitespace | newline))$<br  />
+io_redir: whitespace ('&lt;' | '&gt;') whitespace word<br  />
+word: any consecutive characters, excluding whitespace and newline<br  />
+whitespace: (' ' | '\t')+<br  />
+newline: '\n'<br  />
+ </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td><code><a class="el" href="structParser.html" title="Defines parser namespace.">Parser</a></code> object </td></tr>
+    <tr><td class="paramname">parser</td><td><code>Parser</code> object </td></tr>
     <tr><td class="paramname">buf</td><td>character stream to parse </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>number of statements created on success, -1 on failure </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>Caller is responsible for freeing parsed statements via <code>statement_del</code>. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Caller is responsible for freeing parsed statements via <code>SH_DestroyStatement</code>. </dd></dl>
 
-<p class="reference">References <a class="el" href="lexer_8h.html#a9c5fcecec1d5cdecf516cb569f643c0e">lexer_generate_tokens()</a>, <a class="el" href="lexer_8h.html#a09886d6ba96e67553bf3c49ed8ade975">MAX_TOKENS</a>, and <a class="el" href="parser_8c.html#ac8de4642e7b3f20e95a4b0ccc5c6db69">parser_parse_statements_()</a>.</p>
+<p class="reference">References <a class="el" href="lexer_8h.html#a09886d6ba96e67553bf3c49ed8ade975">MAX_TOKENS</a>, <a class="el" href="structSH__Parser.html#ac4ce9639b2a6ffd8b36c54dc4eaf6b01">SH_Parser::n_toks</a>, <a class="el" href="lexer_8h.html#a650909ec8c10c23ae40eb7057d0b9f6b">SH_LexerGenerateTokens()</a>, <a class="el" href="parser_8c.html#a446e328d965e77f7e712625bdfab3a36">SH_ParserParseStmts()</a>, and <a class="el" href="structSH__Parser.html#a46f73549a5b8da6cf2f0fed84a973cdc">SH_Parser::toks</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="parser_8c.html#a4a5bcf9c158d9bf51e1781bedbea2ed2">parser_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="smallsh_8c.html#aab7ee4d34e98147392afb5d3b4a88276">smallsh_eval()</a>.</p>
 
 </div>
 </div>
-<a id="a469b943aa3b4faf5da202fc25725332e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a469b943aa3b4faf5da202fc25725332e">&#9670;&nbsp;</a></span>parser_parse_cmd_()</h2>
+<a id="af5324336ab64fa7295c3d8ad79ec92a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5324336ab64fa7295c3d8ad79ec92a4">&#9670;&nbsp;</a></span>SH_ParserParseCmd()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -374,15 +329,15 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static int parser_parse_cmd_ </td>
+          <td class="memname">static int SH_ParserParseCmd </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structStatement.html">Statement</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structSH__Statement.html">SH_Statement</a> *&#160;</td>
           <td class="paramname"><em>stmt</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structTokenIterator.html">TokenIterator</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structSH__TokenIterator.html">SH_TokenIterator</a> *const&#160;</td>
           <td class="paramname"><em>iter</em>&#160;</td>
         </tr>
         <tr>
@@ -401,21 +356,21 @@ Functions</h2></td></tr>
 <p>Parses a command into <code>stmt</code> command statement. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">stmt</td><td><code><a class="el" href="structStatement.html" title="A statement object is composed of the sub-statement objects required to execute a command.">Statement</a></code> object to add command to </td></tr>
+    <tr><td class="paramname">stmt</td><td><code>Statement</code> object to add command to </td></tr>
     <tr><td class="paramname">iter</td><td>iterator to extract command tokens from </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on failure </dd></dl>
 
-<p class="reference">References <a class="el" href="builtins_8h.html#a9839aca3d218cb7a00f92b81196482a8">builtins_is_supported()</a>, <a class="el" href="structStmtCmd.html#a8bb9a6c1a54b1e0f0aecc810fae91271">StmtCmd::cmd_argc</a>, <a class="el" href="structStmtCmd.html#a8c4d2948dd5a290f373a4760967423bd">StmtCmd::cmd_argv</a>, <a class="el" href="statement_8h.html#a77d50711e0d2daf004d857d496f7bc14a4764b6bd26928ec58a7c3b412c15055d">FLAGS_BUILTIN</a>, <a class="el" href="structTokenVtbl.html#a0f7452fd123ca8edb3ba09ebb8882a1f">TokenVtbl::get_value</a>, <a class="el" href="structTokenIteratorVtbl.html#aa78d706cd29d320ff63051f1fb33eb10">TokenIteratorVtbl::has_next</a>, <a class="el" href="parser_8h.html#a4438574edcb8411dbb2da37cd1a1817c">is_tok_ctrl_bg</a>, <a class="el" href="parser_8h.html#a33534d381833e47705fb584286117428">is_tok_ctrl_newline</a>, <a class="el" href="parser_8h.html#a0786e4ecb3520e58a25275c7b449d915">is_tok_word</a>, <a class="el" href="structTokenIteratorVtbl.html#a722b44fc6006b1c4a22683040f0b2fce">TokenIteratorVtbl::next</a>, <a class="el" href="parser_8c.html#a5be6f162ba46bf60010622f55a09d766">parser_expand_word()</a>, <a class="el" href="structTokenIteratorVtbl.html#a71b1a6c087eba5b478771312e9867bc7">TokenIteratorVtbl::peek</a>, <a class="el" href="structStatement.html#afe7313615634efa2ca70a96ea3b273a6">Statement::stmt_cmd</a>, <a class="el" href="structStatement.html#aba385eac4473bf5d28ca500a08507239">Statement::stmt_flags</a>, <a class="el" href="structWordToken.html#a85c685fec26bf342508fba83a7a73db5">WordToken::super</a>, <a class="el" href="structTokenIterator.html#a8bcd103f8bafa9ef92483db17e036b17">TokenIterator::vptr</a>, and <a class="el" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">Token::vptr</a>.</p>
+<p class="reference">References <a class="el" href="structStmtCmd.html#a3f77d4604cb2280fc1e33462b8f7a500">StmtCmd::args</a>, <a class="el" href="structSH__Statement.html#aba54a025efaa4948938932ed3aa834cc">SH_Statement::cmd</a>, <a class="el" href="structStmtCmd.html#ae38fec001f29dee9facf432adb751f4a">StmtCmd::count</a>, <a class="el" href="structSH__Statement.html#a9ec46ae8cb46176ca2fcbbd385e12dcd">SH_Statement::flags</a>, <a class="el" href="statement_8h.html#a77d50711e0d2daf004d857d496f7bc14a4764b6bd26928ec58a7c3b412c15055d">FLAGS_BUILTIN</a>, <a class="el" href="builtins_8h.html#a50190320f5f573ba7c4e72a1c3818069">SH_IsBuiltin()</a>, <a class="el" href="parser_8c.html#a2c917904f9e42805bf35854aa1fd7a3e">SH_ParserExpandWord()</a>, <a class="el" href="token-iterator_8h.html#a00436dfd223e1f5344481e719c0341ff">SH_TokenIteratorHasNext()</a>, <a class="el" href="token-iterator_8h.html#a25df3032a96c8afe7cba57ffa43cf00f">SH_TokenIteratorNext()</a>, <a class="el" href="token-iterator_8h.html#af79ea3c32ec70903820a88055e0973b4">SH_TokenIteratorPeek()</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164ca411f75d9c12d899a33a8993a3602da73">TOK_CTRL_BG</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164ca887cc6440dd799ceb7d66c4f1ca6bb2e">TOK_CTRL_NEWLINE</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164cae7dfa366936528afaf5c79581179e712">TOK_WORD</a>, and <a class="el" href="structSH__Token.html#a6c87c0d6575424e3a8a385bfc86e20b7">SH_Token::type</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="parser_8c.html#ac8de4642e7b3f20e95a4b0ccc5c6db69">parser_parse_statements_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="parser_8c.html#a446e328d965e77f7e712625bdfab3a36">SH_ParserParseStmts()</a>.</p>
 
 </div>
 </div>
-<a id="adef22e7be4f5cde84075864c6e6f72db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adef22e7be4f5cde84075864c6e6f72db">&#9670;&nbsp;</a></span>parser_parse_ioredir_()</h2>
+<a id="a034b9041655b29badeca722b6b9e6b58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a034b9041655b29badeca722b6b9e6b58">&#9670;&nbsp;</a></span>SH_ParserParseIoRedir()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -424,21 +379,21 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static int parser_parse_ioredir_ </td>
+          <td class="memname">static int SH_ParserParseIoRedir </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structStatement.html">Statement</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structSH__Statement.html">SH_Statement</a> *&#160;</td>
           <td class="paramname"><em>stmt</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structTokenIterator.html">TokenIterator</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structSH__TokenIterator.html">SH_TokenIterator</a> *const&#160;</td>
           <td class="paramname"><em>iter</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="statement_8h.html#adcd481cc0d75251752b928fa6f6496a3">IORedirType</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="statement_8h.html#adcd481cc0d75251752b928fa6f6496a3">IORedirType</a> const&#160;</td>
           <td class="paramname"><em>type</em>&#160;</td>
         </tr>
         <tr>
@@ -457,7 +412,7 @@ Functions</h2></td></tr>
 <p>Parses an io redirection command into <code>stmt</code> command statement. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">stmt</td><td><code><a class="el" href="structStatement.html" title="A statement object is composed of the sub-statement objects required to execute a command.">Statement</a></code> object to add io redirection command to </td></tr>
+    <tr><td class="paramname">stmt</td><td><code>Statement</code> object to add io redirection command to </td></tr>
     <tr><td class="paramname">iter</td><td>iterator to extract io redirection tokens from </td></tr>
     <tr><td class="paramname">type</td><td>type of io redirection to store </td></tr>
   </table>
@@ -465,14 +420,14 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on failure </dd></dl>
 
-<p class="reference">References <a class="el" href="structTokenVtbl.html#a0f7452fd123ca8edb3ba09ebb8882a1f">TokenVtbl::get_value</a>, <a class="el" href="statement_8h.html#adcd481cc0d75251752b928fa6f6496a3a3d6ebe7cf97b850ad935c600b06a656f">IOREDIR_STDIN</a>, <a class="el" href="statement_8h.html#adcd481cc0d75251752b928fa6f6496a3a1f67215f0820e04317a921551d9ec62d">IOREDIR_STDOUT</a>, <a class="el" href="parser_8h.html#a0786e4ecb3520e58a25275c7b449d915">is_tok_word</a>, <a class="el" href="structTokenIteratorVtbl.html#a722b44fc6006b1c4a22683040f0b2fce">TokenIteratorVtbl::next</a>, <a class="el" href="parser_8c.html#a5be6f162ba46bf60010622f55a09d766">parser_expand_word()</a>, <a class="el" href="structTokenIteratorVtbl.html#a71b1a6c087eba5b478771312e9867bc7">TokenIteratorVtbl::peek</a>, <a class="el" href="structStmtStdin.html#a767e0534cb7a64478640bd43d05e6362">StmtStdin::stdin_num_streams</a>, <a class="el" href="structStmtStdin.html#ad142b2d0806df255706ebc6b2219a947">StmtStdin::stdin_streams</a>, <a class="el" href="structStmtStdout.html#a7693efc180ae1dde8e5620f805c0fe2b">StmtStdout::stdout_num_streams</a>, <a class="el" href="structStmtStdout.html#ac7699d4ee2232fd88c531b82f06eefac">StmtStdout::stdout_streams</a>, <a class="el" href="structStatement.html#aa103cb6b33b85f15b7fe870cbda06faa">Statement::stmt_stdin</a>, <a class="el" href="structStatement.html#ac53610f2afa5a2356d515771d197365f">Statement::stmt_stdout</a>, <a class="el" href="structWordToken.html#a85c685fec26bf342508fba83a7a73db5">WordToken::super</a>, <a class="el" href="structTokenIterator.html#a8bcd103f8bafa9ef92483db17e036b17">TokenIterator::vptr</a>, and <a class="el" href="structToken.html#a759b94ee460172f9ba2e9e8a6deeacd0">Token::vptr</a>.</p>
+<p class="reference">References <a class="el" href="structSH__Statement.html#ab8aeca53eddb6c4a704c5946d19f37d0">SH_Statement::infile</a>, <a class="el" href="statement_8h.html#adcd481cc0d75251752b928fa6f6496a3a3d6ebe7cf97b850ad935c600b06a656f">IOREDIR_STDIN</a>, <a class="el" href="statement_8h.html#adcd481cc0d75251752b928fa6f6496a3a1f67215f0820e04317a921551d9ec62d">IOREDIR_STDOUT</a>, <a class="el" href="structStmtStdin.html#a416f3c1f45c412d0488a45d82b13e426">StmtStdin::n</a>, <a class="el" href="structStmtStdout.html#a09869ece83e956e8c2a9edf9af67323e">StmtStdout::n</a>, <a class="el" href="structSH__Statement.html#a1ef107e813115ff0e0b3167636601446">SH_Statement::outfile</a>, <a class="el" href="parser_8c.html#a2c917904f9e42805bf35854aa1fd7a3e">SH_ParserExpandWord()</a>, <a class="el" href="token-iterator_8h.html#a25df3032a96c8afe7cba57ffa43cf00f">SH_TokenIteratorNext()</a>, <a class="el" href="token-iterator_8h.html#af79ea3c32ec70903820a88055e0973b4">SH_TokenIteratorPeek()</a>, <a class="el" href="structStmtStdin.html#a8837a85df6c7e10b284e6037316c42cb">StmtStdin::streams</a>, <a class="el" href="structStmtStdout.html#ad9138cf6e15c931d05cb727b6ff3202f">StmtStdout::streams</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164cae7dfa366936528afaf5c79581179e712">TOK_WORD</a>, <a class="el" href="structSH__Token.html#a6c87c0d6575424e3a8a385bfc86e20b7">SH_Token::type</a>, and <a class="el" href="structSH__Token.html#a31a371ccf21ae4a67bcd7613f83d64ab">SH_Token::value</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="parser_8c.html#ac8de4642e7b3f20e95a4b0ccc5c6db69">parser_parse_statements_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="parser_8c.html#a446e328d965e77f7e712625bdfab3a36">SH_ParserParseStmts()</a>.</p>
 
 </div>
 </div>
-<a id="ac8de4642e7b3f20e95a4b0ccc5c6db69"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8de4642e7b3f20e95a4b0ccc5c6db69">&#9670;&nbsp;</a></span>parser_parse_statements_()</h2>
+<a id="a446e328d965e77f7e712625bdfab3a36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a446e328d965e77f7e712625bdfab3a36">&#9670;&nbsp;</a></span>SH_ParserParseStmts()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -481,10 +436,10 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static ssize_t parser_parse_statements_ </td>
+          <td class="memname">static ssize_t SH_ParserParseStmts </td>
           <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structParser.html">Parser</a> *const&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structSH__Parser.html">SH_Parser</a> *const&#160;</td>
+          <td class="paramname"><em>parser</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -498,26 +453,26 @@ Functions</h2></td></tr>
 <p>Parses tokens into statements. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td><code><a class="el" href="structParser.html" title="Defines parser namespace.">Parser</a></code> object </td></tr>
+    <tr><td class="paramname">parser</td><td><code>Parser</code> object </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>number of statements created on success, -1 on failure </dd></dl>
 
-<p class="reference">References <a class="el" href="statement_8h.html#a77d50711e0d2daf004d857d496f7bc14a4896254d97976e29991cffcadd292a31">FLAGS_BGCTRL</a>, <a class="el" href="structTokenIteratorVtbl.html#aa78d706cd29d320ff63051f1fb33eb10">TokenIteratorVtbl::has_next</a>, <a class="el" href="statement_8h.html#adcd481cc0d75251752b928fa6f6496a3a3d6ebe7cf97b850ad935c600b06a656f">IOREDIR_STDIN</a>, <a class="el" href="statement_8h.html#adcd481cc0d75251752b928fa6f6496a3a1f67215f0820e04317a921551d9ec62d">IOREDIR_STDOUT</a>, <a class="el" href="parser_8h.html#a51a55d003161a746b2f5e796def0b38d">is_tok_cmt</a>, <a class="el" href="parser_8h.html#a4438574edcb8411dbb2da37cd1a1817c">is_tok_ctrl_bg</a>, <a class="el" href="parser_8h.html#a33534d381833e47705fb584286117428">is_tok_ctrl_newline</a>, <a class="el" href="parser_8h.html#ab7c07276fba0f16180044f92713077b0">is_tok_redir_input</a>, <a class="el" href="parser_8h.html#a4ca0e68bfb6f74c72e1899a0d85dcc6d">is_tok_redir_output</a>, <a class="el" href="parser_8h.html#a0786e4ecb3520e58a25275c7b449d915">is_tok_word</a>, <a class="el" href="structTokenIteratorVtbl.html#a722b44fc6006b1c4a22683040f0b2fce">TokenIteratorVtbl::next</a>, <a class="el" href="parser_8c.html#a469b943aa3b4faf5da202fc25725332e">parser_parse_cmd_()</a>, <a class="el" href="parser_8c.html#adef22e7be4f5cde84075864c6e6f72db">parser_parse_ioredir_()</a>, <a class="el" href="structTokenIteratorVtbl.html#a71b1a6c087eba5b478771312e9867bc7">TokenIteratorVtbl::peek</a>, <a class="el" href="structTokenIterator.html#ad810e5f748df549c22be80c532d73e33">TokenIterator::private</a>, <a class="el" href="statement_8h.html#a1bd0b4e586c2e85d8b71baac013bb8b8">statement_new()</a>, <a class="el" href="structStmtStdout.html#a7693efc180ae1dde8e5620f805c0fe2b">StmtStdout::stdout_num_streams</a>, <a class="el" href="structStatement.html#aba385eac4473bf5d28ca500a08507239">Statement::stmt_flags</a>, <a class="el" href="structStatement.html#ac53610f2afa5a2356d515771d197365f">Statement::stmt_stdout</a>, <a class="el" href="token-iterator_8h.html#ab29cf18ebda2ad23745bf848ec16e7b4">token_iterator_ctor()</a>, <a class="el" href="token-iterator_8h.html#a863f1ed6d07259bf0f8c148cff4bd637">token_iterator_dtor()</a>, and <a class="el" href="structTokenIterator.html#a8bcd103f8bafa9ef92483db17e036b17">TokenIterator::vptr</a>.</p>
+<p class="reference">References <a class="el" href="structSH__Statement.html#a9ec46ae8cb46176ca2fcbbd385e12dcd">SH_Statement::flags</a>, <a class="el" href="statement_8h.html#a77d50711e0d2daf004d857d496f7bc14a4896254d97976e29991cffcadd292a31">FLAGS_BGCTRL</a>, <a class="el" href="statement_8h.html#adcd481cc0d75251752b928fa6f6496a3a3d6ebe7cf97b850ad935c600b06a656f">IOREDIR_STDIN</a>, <a class="el" href="statement_8h.html#adcd481cc0d75251752b928fa6f6496a3a1f67215f0820e04317a921551d9ec62d">IOREDIR_STDOUT</a>, <a class="el" href="structStmtStdout.html#a09869ece83e956e8c2a9edf9af67323e">StmtStdout::n</a>, <a class="el" href="structSH__Parser.html#a69823cfd7b90734be140df2998fe9820">SH_Parser::n_stmts</a>, <a class="el" href="structSH__Parser.html#ac4ce9639b2a6ffd8b36c54dc4eaf6b01">SH_Parser::n_toks</a>, <a class="el" href="structSH__Statement.html#a1ef107e813115ff0e0b3167636601446">SH_Statement::outfile</a>, <a class="el" href="statement_8h.html#a50191ab1d106af0c866003e82709d4c2">SH_CreateStatement()</a>, <a class="el" href="token-iterator_8h.html#ad67d34dbdb2005915730b9ece7fb6fd8">SH_CreateTokenIterator()</a>, <a class="el" href="token-iterator_8h.html#a712be812bd40f54d245284cc2e2ee420">SH_DestroyTokenIterator()</a>, <a class="el" href="parser_8c.html#af5324336ab64fa7295c3d8ad79ec92a4">SH_ParserParseCmd()</a>, <a class="el" href="parser_8c.html#a034b9041655b29badeca722b6b9e6b58">SH_ParserParseIoRedir()</a>, <a class="el" href="token-iterator_8h.html#a00436dfd223e1f5344481e719c0341ff">SH_TokenIteratorHasNext()</a>, <a class="el" href="token-iterator_8h.html#a25df3032a96c8afe7cba57ffa43cf00f">SH_TokenIteratorNext()</a>, <a class="el" href="token-iterator_8h.html#af79ea3c32ec70903820a88055e0973b4">SH_TokenIteratorPeek()</a>, <a class="el" href="structSH__Parser.html#ac3394d27398a84a522e6a66ab46ee95e">SH_Parser::stmts</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164caafc53fb53f7e61e0828c163490de7d54">TOK_CMT</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164ca411f75d9c12d899a33a8993a3602da73">TOK_CTRL_BG</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164ca887cc6440dd799ceb7d66c4f1ca6bb2e">TOK_CTRL_NEWLINE</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164cadbf4671ed01b7cb484b13e02ea37541c">TOK_REDIR_INPUT</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164cac1d6f2f8ac05b44b5b0dbf0970f1bc3b">TOK_REDIR_OUTPUT</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164cae7dfa366936528afaf5c79581179e712">TOK_WORD</a>, <a class="el" href="structSH__Parser.html#a46f73549a5b8da6cf2f0fed84a973cdc">SH_Parser::toks</a>, and <a class="el" href="structSH__Token.html#a6c87c0d6575424e3a8a385bfc86e20b7">SH_Token::type</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="parser_8c.html#a68325d099b475f7cc72bbf64aa1e6479">parser_parse_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="parser_8c.html#ac7ec06d86eff867e323b5b867dd97f68">SH_ParserParse()</a>.</p>
 
 </div>
 </div>
-<a id="a8353b2928336d03b7d28f93f75b3e7a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8353b2928336d03b7d28f93f75b3e7a8">&#9670;&nbsp;</a></span>parser_substitute_variable()</h2>
+<a id="a4a50323d639f4b5ecdeb532ff42da743"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a50323d639f4b5ecdeb532ff42da743">&#9670;&nbsp;</a></span>SH_ParserSubstituteVariable()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char* parser_substitute_variable </td>
+          <td class="memname">char* SH_ParserSubstituteVariable </td>
           <td>(</td>
           <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>word</em>, </td>
@@ -566,9 +521,9 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>new string with variable substituted at end, or just the '$' if no valid variables present </dd></dl>
 
-<p class="reference">References <a class="el" href="parser_8c.html#a3ebec6223e45d162b9f4f90a120a8bdd">parser_insert_pid()</a>.</p>
+<p class="reference">References <a class="el" href="parser_8c.html#ac8863c7bfa8be9e575bc0c0a43e655a7">SH_ParserInsertPid()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="parser_8c.html#a5be6f162ba46bf60010622f55a09d766">parser_expand_word()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="parser_8c.html#a2c917904f9e42805bf35854aa1fd7a3e">SH_ParserExpandWord()</a>.</p>
 
 </div>
 </div>

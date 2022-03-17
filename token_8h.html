@@ -85,91 +85,105 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structToken.html">Token</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a basic token object that has a type and value.  <a href="structToken.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTokenVtbl.html">TokenVtbl</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">VTable for a <code><a class="el" href="structToken.html" title="Defines a basic token object that has a type and value.">Token</a></code> object.  <a href="structTokenVtbl.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSH__Token.html">SH_Token</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a basic token object that has a type and value.  <a href="structSH__Token.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:aa520fbf142ba1e7e659590c07da31921"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="token_8h.html#aa520fbf142ba1e7e659590c07da31921">TokenType</a> { <a class="el" href="token_8h.html#aa520fbf142ba1e7e659590c07da31921ab8382dd53e5a46010b91deb01b84bbb1">TOK_0</a> = 0
+<tr class="memitem:ac13aa98b8b486d5ce9fb6f4e0f95164c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164c">SH_TokenType</a> { <br />
+&#160;&#160;<a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164cab8382dd53e5a46010b91deb01b84bbb1">TOK_0</a> = 0, 
+<a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164caafc53fb53f7e61e0828c163490de7d54">TOK_CMT</a> = 1, 
+<a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164ca411f75d9c12d899a33a8993a3602da73">TOK_CTRL_BG</a> = 2, 
+<a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164ca887cc6440dd799ceb7d66c4f1ca6bb2e">TOK_CTRL_NEWLINE</a> = 3, 
+<br />
+&#160;&#160;<a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164cadbf4671ed01b7cb484b13e02ea37541c">TOK_REDIR_INPUT</a> = 4, 
+<a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164cac1d6f2f8ac05b44b5b0dbf0970f1bc3b">TOK_REDIR_OUTPUT</a> = 5, 
+<a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164cae7dfa366936528afaf5c79581179e712">TOK_WORD</a> = 6, 
+<a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164ca4655b801eb31f256ec82cc2d190641cf">TOK_COUNT</a> = 7
+<br />
  }</td></tr>
-<tr class="memdesc:aa520fbf142ba1e7e659590c07da31921"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the base token type (class).  <a href="token_8h.html#aa520fbf142ba1e7e659590c07da31921">More...</a><br /></td></tr>
-<tr class="separator:aa520fbf142ba1e7e659590c07da31921"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:ac13aa98b8b486d5ce9fb6f4e0f95164c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the base token type (class).  <a href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164c">More...</a><br /></td></tr>
+<tr class="separator:ac13aa98b8b486d5ce9fb6f4e0f95164c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a7a14e268eddc63363b0d81b9a23d511d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="token_8h.html#a7a14e268eddc63363b0d81b9a23d511d">token_ctor</a> (<a class="el" href="structToken.html">Token</a> *self, <a class="el" href="token_8h.html#aa520fbf142ba1e7e659590c07da31921">TokenType</a> type)</td></tr>
-<tr class="memdesc:a7a14e268eddc63363b0d81b9a23d511d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <code><a class="el" href="structToken.html" title="Defines a basic token object that has a type and value.">Token</a></code> object.  <a href="token_8h.html#a7a14e268eddc63363b0d81b9a23d511d">More...</a><br /></td></tr>
-<tr class="separator:a7a14e268eddc63363b0d81b9a23d511d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aefe387092a32c96e19a9c0710e272b48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="token_8h.html#aefe387092a32c96e19a9c0710e272b48">token_dtor</a> (<a class="el" href="structToken.html">Token</a> *self)</td></tr>
-<tr class="memdesc:aefe387092a32c96e19a9c0710e272b48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys a <code><a class="el" href="structToken.html" title="Defines a basic token object that has a type and value.">Token</a></code> object, freeing its members and re-initializing them to <code>NULL</code> in the process.  <a href="token_8h.html#aefe387092a32c96e19a9c0710e272b48">More...</a><br /></td></tr>
-<tr class="separator:aefe387092a32c96e19a9c0710e272b48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ecf8ea322eb6cb96f828ce8c1d206e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="token_8h.html#aa520fbf142ba1e7e659590c07da31921">TokenType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="token_8h.html#a6ecf8ea322eb6cb96f828ce8c1d206e9">token_get_type_</a> (<a class="el" href="structToken.html">Token</a> const *self)</td></tr>
-<tr class="memdesc:a6ecf8ea322eb6cb96f828ce8c1d206e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of <code>Token::getType()</code>.  <a href="token_8h.html#a6ecf8ea322eb6cb96f828ce8c1d206e9">More...</a><br /></td></tr>
-<tr class="separator:a6ecf8ea322eb6cb96f828ce8c1d206e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adda741d6f8daf9f8ec2174bba3d63266"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="token_8h.html#adda741d6f8daf9f8ec2174bba3d63266">token_get_value_</a> (<a class="el" href="structToken.html">Token</a> const *self)</td></tr>
-<tr class="memdesc:adda741d6f8daf9f8ec2174bba3d63266"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of <code>Token::getValue()</code>.  <a href="token_8h.html#adda741d6f8daf9f8ec2174bba3d63266">More...</a><br /></td></tr>
-<tr class="separator:adda741d6f8daf9f8ec2174bba3d63266"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa681498b28d49522864aea40ec8359ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="token_8h.html#aa681498b28d49522864aea40ec8359ca">token_set_value_</a> (<a class="el" href="structToken.html">Token</a> const *self, const char *value)</td></tr>
-<tr class="memdesc:aa681498b28d49522864aea40ec8359ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of <code>Token::setValue()</code>.  <a href="token_8h.html#aa681498b28d49522864aea40ec8359ca">More...</a><br /></td></tr>
-<tr class="separator:aa681498b28d49522864aea40ec8359ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69778eb44633ddf753073d56b1034fca"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="token_8h.html#a69778eb44633ddf753073d56b1034fca">SH_GetTokenValue</a> (<a class="el" href="structSH__Token.html">SH_Token</a> const *token)</td></tr>
+<tr class="memdesc:a69778eb44633ddf753073d56b1034fca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns copy of the string stored by the token.  <a href="token_8h.html#a69778eb44633ddf753073d56b1034fca">More...</a><br /></td></tr>
+<tr class="separator:a69778eb44633ddf753073d56b1034fca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fdb44fa6fd3fbf775d1feb08c472bd2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="token_8h.html#a2fdb44fa6fd3fbf775d1feb08c472bd2">SH_PrintToken</a> (<a class="el" href="structSH__Token.html">SH_Token</a> const *token)</td></tr>
+<tr class="memdesc:a2fdb44fa6fd3fbf775d1feb08c472bd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a pretty-formatted version of <code>token</code>.  <a href="token_8h.html#a2fdb44fa6fd3fbf775d1feb08c472bd2">More...</a><br /></td></tr>
+<tr class="separator:a2fdb44fa6fd3fbf775d1feb08c472bd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1ede0759f9353aa580893b1094e52b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="token_8h.html#aa1ede0759f9353aa580893b1094e52b8">SH_SetTokenValue</a> (<a class="el" href="structSH__Token.html">SH_Token</a> *token, char const *value)</td></tr>
+<tr class="memdesc:aa1ede0759f9353aa580893b1094e52b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies <code>value</code> into <code>self's</code> value field.  <a href="token_8h.html#aa1ede0759f9353aa580893b1094e52b8">More...</a><br /></td></tr>
+<tr class="separator:aa1ede0759f9353aa580893b1094e52b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3f6a4aa19706f8897e56d903cdac9c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="token_8h.html#af3f6a4aa19706f8897e56d903cdac9c8">SH_TakeToken</a> (<a class="el" href="structSH__Token.html">SH_Token</a> *token, <a class="el" href="structSH__StringIterator.html">SH_StringIterator</a> *iter)</td></tr>
+<tr class="memdesc:af3f6a4aa19706f8897e56d903cdac9c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual method definition for 'taking', or storing a string as part of the token's value.  <a href="token_8h.html#af3f6a4aa19706f8897e56d903cdac9c8">More...</a><br /></td></tr>
+<tr class="separator:af3f6a4aa19706f8897e56d903cdac9c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e0e32677efb459b6421c8401456c9e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structSH__Token.html">SH_Token</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="token_8h.html#a9e0e32677efb459b6421c8401456c9e7">SH_CreateToken</a> (<a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164c">SH_TokenType</a> type)</td></tr>
+<tr class="memdesc:a9e0e32677efb459b6421c8401456c9e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <code>Token</code> object.  <a href="token_8h.html#a9e0e32677efb459b6421c8401456c9e7">More...</a><br /></td></tr>
+<tr class="separator:a9e0e32677efb459b6421c8401456c9e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab07921c4d52c1a4121ff88a6d2e1eae1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="token_8h.html#ab07921c4d52c1a4121ff88a6d2e1eae1">SH_DestroyToken</a> (<a class="el" href="structSH__Token.html">SH_Token</a> **token)</td></tr>
+<tr class="memdesc:ab07921c4d52c1a4121ff88a6d2e1eae1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys a <code>Token</code> object, freeing its members and re-initializing them to <code>NULL</code> in the process.  <a href="token_8h.html#ab07921c4d52c1a4121ff88a6d2e1eae1">More...</a><br /></td></tr>
+<tr class="separator:ab07921c4d52c1a4121ff88a6d2e1eae1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Definitions for a token object. </p>
 <dl class="section author"><dt>Author</dt><dd>Mohamed Al-Hussein </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>25 Jan 2022 Inspiration from: <a href="https://www.state-machine.com/doc/AN_OOP_in_C.pdf">https://www.state-machine.com/doc/AN_OOP_in_C.pdf</a>* </dd></dl>
 </div><h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="aa520fbf142ba1e7e659590c07da31921"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa520fbf142ba1e7e659590c07da31921">&#9670;&nbsp;</a></span>TokenType</h2>
+<a id="ac13aa98b8b486d5ce9fb6f4e0f95164c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac13aa98b8b486d5ce9fb6f4e0f95164c">&#9670;&nbsp;</a></span>SH_TokenType</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="token_8h.html#aa520fbf142ba1e7e659590c07da31921">TokenType</a></td>
+          <td class="memname">enum <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164c">SH_TokenType</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Defines the base token type (class). </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa520fbf142ba1e7e659590c07da31921ab8382dd53e5a46010b91deb01b84bbb1"></a>TOK_0&#160;</td><td class="fielddoc"><p>placeholder token type </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ac13aa98b8b486d5ce9fb6f4e0f95164cab8382dd53e5a46010b91deb01b84bbb1"></a>TOK_0&#160;</td><td class="fielddoc"><p>placeholder token type </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac13aa98b8b486d5ce9fb6f4e0f95164caafc53fb53f7e61e0828c163490de7d54"></a>TOK_CMT&#160;</td><td class="fielddoc"><p>a comment is identified by '#' at the start of the stream </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac13aa98b8b486d5ce9fb6f4e0f95164ca411f75d9c12d899a33a8993a3602da73"></a>TOK_CTRL_BG&#160;</td><td class="fielddoc"><p>a background is identified by '&amp;' at the end of the stream </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac13aa98b8b486d5ce9fb6f4e0f95164ca887cc6440dd799ceb7d66c4f1ca6bb2e"></a>TOK_CTRL_NEWLINE&#160;</td><td class="fielddoc"><p>a newline is identified by '\n' </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac13aa98b8b486d5ce9fb6f4e0f95164cadbf4671ed01b7cb484b13e02ea37541c"></a>TOK_REDIR_INPUT&#160;</td><td class="fielddoc"><p>an input redirection is a '&lt;' to redirect file io </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac13aa98b8b486d5ce9fb6f4e0f95164cac1d6f2f8ac05b44b5b0dbf0970f1bc3b"></a>TOK_REDIR_OUTPUT&#160;</td><td class="fielddoc"><p>an output redirection is a '&gt;' to redirect file io </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac13aa98b8b486d5ce9fb6f4e0f95164cae7dfa366936528afaf5c79581179e712"></a>TOK_WORD&#160;</td><td class="fielddoc"><p>a basic token is any word </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac13aa98b8b486d5ce9fb6f4e0f95164ca4655b801eb31f256ec82cc2d190641cf"></a>TOK_COUNT&#160;</td><td class="fielddoc"><p>count of tokens to allow iterating over them </p>
 </td></tr>
 </table>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a7a14e268eddc63363b0d81b9a23d511d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a14e268eddc63363b0d81b9a23d511d">&#9670;&nbsp;</a></span>token_ctor()</h2>
+<a id="a9e0e32677efb459b6421c8401456c9e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e0e32677efb459b6421c8401456c9e7">&#9670;&nbsp;</a></span>SH_CreateToken()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void token_ctor </td>
+          <td class="memname"><a class="el" href="structSH__Token.html">SH_Token</a>* SH_CreateToken </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structToken.html">Token</a> *&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164c">SH_TokenType</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="token_8h.html#aa520fbf142ba1e7e659590c07da31921">TokenType</a>&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Constructs a new <code><a class="el" href="structToken.html" title="Defines a basic token object that has a type and value.">Token</a></code> object. </p>
+<p>Constructs a new <code>Token</code> object. </p>
 <p><br  />
 </p>
 <p>This is a base class constructor and should only be called via a child class constructor.</p>
@@ -179,133 +193,121 @@ Functions</h2></td></tr>
 </p>
 <p>Source: <a href="https://www.state-machine.com/doc/AN_OOP_in_C.pdf">https://www.state-machine.com/doc/AN_OOP_in_C.pdf</a>* </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td><code><a class="el" href="structToken.html" title="Defines a basic token object that has a type and value.">Token</a></code> object to initialize </td></tr>
     <tr><td class="paramname">type</td><td><code>TokenType</code> to to assign to <code>self</code> </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="structTokenVtbl.html#a9626717617c7e53cdb743d739e9a3518">TokenVtbl::get_type</a>, <a class="el" href="token_8c.html#aa9b3e1d1e1d2d60341c454ce37977587">token_get_type_()</a>, <a class="el" href="token_8c.html#a0049a16abacaf1ab78144544cf1e08fc">token_get_value_()</a>, <a class="el" href="token_8c.html#af1792a763743c5433e480b46d8c5c3b5">token_print_()</a>, <a class="el" href="token_8c.html#aea45d86b772a4afe6a270a742592ab99">token_set_value_()</a>, and <a class="el" href="token_8c.html#a6239daa4ec9d8b833631ebd50edc5aa0">token_take_()</a>.</p>
+<p class="reference">References <a class="el" href="structSH__Token.html#a6c87c0d6575424e3a8a385bfc86e20b7">SH_Token::type</a>, and <a class="el" href="structSH__Token.html#a31a371ccf21ae4a67bcd7613f83d64ab">SH_Token::value</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="shell-tokens_8c.html#a11769c7ce7a83626dcc5b201a8c1ea2a">bgctrl_token_ctor()</a>, <a class="el" href="shell-tokens_8c.html#af93aac1a9b767267240e6eac69c8aabf">comment_token_ctor()</a>, <a class="el" href="shell-tokens_8c.html#a23f681e35070e98e354feaea1a19a4be">inputredir_token_ctor()</a>, <a class="el" href="shell-tokens_8c.html#abad0f54f557f34ee546d1aaba60b3df1">newline_token_ctor()</a>, <a class="el" href="shell-tokens_8c.html#a0cc07110bc86215bdacb8ee2d6639f2c">outputredir_token_ctor()</a>, and <a class="el" href="shell-tokens_8c.html#aacae5340c5b9e39e4bc80ace242b2d12">word_token_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="lexer_8c.html#ac17c7ebb0903306ad4c432dc35508892">SH_LexerGenerateTokens()</a>, and <a class="el" href="token-iterator_8c.html#a82aaa7ae62903d1240da5508f7a60cde">SH_TokenIteratorPeek()</a>.</p>
 
 </div>
 </div>
-<a id="aefe387092a32c96e19a9c0710e272b48"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aefe387092a32c96e19a9c0710e272b48">&#9670;&nbsp;</a></span>token_dtor()</h2>
+<a id="ab07921c4d52c1a4121ff88a6d2e1eae1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab07921c4d52c1a4121ff88a6d2e1eae1">&#9670;&nbsp;</a></span>SH_DestroyToken()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void token_dtor </td>
+          <td class="memname">void SH_DestroyToken </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structToken.html">Token</a> *&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structSH__Token.html">SH_Token</a> **&#160;</td>
+          <td class="paramname"><em>token</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Destroys a <code><a class="el" href="structToken.html" title="Defines a basic token object that has a type and value.">Token</a></code> object, freeing its members and re-initializing them to <code>NULL</code> in the process. </p>
+<p>Destroys a <code>Token</code> object, freeing its members and re-initializing them to <code>NULL</code> in the process. </p>
 <p><br  />
 </p>
 <p>This is a base class destructor and should only be called via a child class destructor. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td>pointer to <code><a class="el" href="structToken.html" title="Defines a basic token object that has a type and value.">Token</a></code> object </td></tr>
+    <tr><td class="paramname">token</td><td>pointer to <code>Token</code> object </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="token_8h.html#aa520fbf142ba1e7e659590c07da31921ab8382dd53e5a46010b91deb01b84bbb1">TOK_0</a>.</p>
+<p class="reference">References <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164cab8382dd53e5a46010b91deb01b84bbb1">TOK_0</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="shell-tokens_8c.html#af87bbf9a865bd97feeb816864ec7a27a">bgctrl_token_dtor()</a>, <a class="el" href="shell-tokens_8c.html#afae911ccef53f47f2228f3bc580d36e4">comment_token_dtor()</a>, <a class="el" href="shell-tokens_8c.html#a809b99083669b5cf18763897595ff40a">inputredir_token_dtor()</a>, <a class="el" href="shell-tokens_8c.html#a2217e4122524527ffd8d1601112be509">newline_token_dtor()</a>, <a class="el" href="shell-tokens_8c.html#a7f8538bd35ca4f0c412da95c62239b56">outputredir_token_dtor()</a>, <a class="el" href="parser_8c.html#a6667455d4a6e5c24feaf783b5a782465">parser_dtor()</a>, and <a class="el" href="shell-tokens_8c.html#adc4a84a2e9ecb85d0678ff1410ca0940">word_token_dtor()</a>.</p>
-
-</div>
-</div>
-<a id="a6ecf8ea322eb6cb96f828ce8c1d206e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ecf8ea322eb6cb96f828ce8c1d206e9">&#9670;&nbsp;</a></span>token_get_type_()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="token_8h.html#aa520fbf142ba1e7e659590c07da31921">TokenType</a> token_get_type_ </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structToken.html">Token</a> const *&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implementation of <code>Token::getType()</code>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">self</td><td>pointer to <code><a class="el" href="structToken.html" title="Defines a basic token object that has a type and value.">Token</a></code> object </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>the token's type identifier </dd></dl>
-
-<p class="reference">Referenced by <a class="el" href="shell-tokens_8c.html#a11769c7ce7a83626dcc5b201a8c1ea2a">bgctrl_token_ctor()</a>, <a class="el" href="shell-tokens_8c.html#af93aac1a9b767267240e6eac69c8aabf">comment_token_ctor()</a>, <a class="el" href="shell-tokens_8c.html#a23f681e35070e98e354feaea1a19a4be">inputredir_token_ctor()</a>, <a class="el" href="shell-tokens_8c.html#abad0f54f557f34ee546d1aaba60b3df1">newline_token_ctor()</a>, <a class="el" href="shell-tokens_8c.html#a0cc07110bc86215bdacb8ee2d6639f2c">outputredir_token_ctor()</a>, <a class="el" href="token_8c.html#a7a14e268eddc63363b0d81b9a23d511d">token_ctor()</a>, and <a class="el" href="shell-tokens_8c.html#aacae5340c5b9e39e4bc80ace242b2d12">word_token_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="parser_8c.html#abf622694734b7e7c896aac3e49cc4334">SH_DestroyParser()</a>.</p>
 
 </div>
 </div>
-<a id="adda741d6f8daf9f8ec2174bba3d63266"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adda741d6f8daf9f8ec2174bba3d63266">&#9670;&nbsp;</a></span>token_get_value_()</h2>
+<a id="a69778eb44633ddf753073d56b1034fca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69778eb44633ddf753073d56b1034fca">&#9670;&nbsp;</a></span>SH_GetTokenValue()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char* token_get_value_ </td>
+          <td class="memname">char* SH_GetTokenValue </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structToken.html">Token</a> const *&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structSH__Token.html">SH_Token</a> const *&#160;</td>
+          <td class="paramname"><em>token</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Implementation of <code>Token::getValue()</code>. </p>
+<p>Returns copy of the string stored by the token. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td>pointer to <code><a class="el" href="structToken.html" title="Defines a basic token object that has a type and value.">Token</a></code> object </td></tr>
+    <tr><td class="paramname">token</td><td>pointer to <code>Token</code> object </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>copy of string stored by <code>self</code> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>copy of string stored by <code>token</code> </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The caller is responsible for freeing the return value when they're done using it. </dd></dl>
 
-<p class="reference">Referenced by <a class="el" href="shell-tokens_8c.html#a11769c7ce7a83626dcc5b201a8c1ea2a">bgctrl_token_ctor()</a>, <a class="el" href="shell-tokens_8c.html#af93aac1a9b767267240e6eac69c8aabf">comment_token_ctor()</a>, <a class="el" href="shell-tokens_8c.html#a23f681e35070e98e354feaea1a19a4be">inputredir_token_ctor()</a>, <a class="el" href="shell-tokens_8c.html#abad0f54f557f34ee546d1aaba60b3df1">newline_token_ctor()</a>, <a class="el" href="shell-tokens_8c.html#a0cc07110bc86215bdacb8ee2d6639f2c">outputredir_token_ctor()</a>, <a class="el" href="token_8c.html#a7a14e268eddc63363b0d81b9a23d511d">token_ctor()</a>, and <a class="el" href="shell-tokens_8c.html#aacae5340c5b9e39e4bc80ace242b2d12">word_token_ctor()</a>.</p>
-
 </div>
 </div>
-<a id="aa681498b28d49522864aea40ec8359ca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa681498b28d49522864aea40ec8359ca">&#9670;&nbsp;</a></span>token_set_value_()</h2>
+<a id="a2fdb44fa6fd3fbf775d1feb08c472bd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fdb44fa6fd3fbf775d1feb08c472bd2">&#9670;&nbsp;</a></span>SH_PrintToken()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void token_set_value_ </td>
+          <td class="memname">void SH_PrintToken </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structToken.html">Token</a> const *&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
+          <td class="paramtype"><a class="el" href="structSH__Token.html">SH_Token</a> const *&#160;</td>
+          <td class="paramname"><em>token</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Prints a pretty-formatted version of <code>token</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">token</td><td>pointer to <code>Token</code> object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">References <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164caafc53fb53f7e61e0828c163490de7d54">TOK_CMT</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164ca411f75d9c12d899a33a8993a3602da73">TOK_CTRL_BG</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164ca887cc6440dd799ceb7d66c4f1ca6bb2e">TOK_CTRL_NEWLINE</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164cadbf4671ed01b7cb484b13e02ea37541c">TOK_REDIR_INPUT</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164cac1d6f2f8ac05b44b5b0dbf0970f1bc3b">TOK_REDIR_OUTPUT</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164cae7dfa366936528afaf5c79581179e712">TOK_WORD</a>, <a class="el" href="structSH__Token.html#a6c87c0d6575424e3a8a385bfc86e20b7">SH_Token::type</a>, and <a class="el" href="structSH__Token.html#a31a371ccf21ae4a67bcd7613f83d64ab">SH_Token::value</a>.</p>
+
+</div>
+</div>
+<a id="aa1ede0759f9353aa580893b1094e52b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1ede0759f9353aa580893b1094e52b8">&#9670;&nbsp;</a></span>SH_SetTokenValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SH_SetTokenValue </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structSH__Token.html">SH_Token</a> *&#160;</td>
+          <td class="paramname"><em>token</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const char *&#160;</td>
+          <td class="paramtype">char const *&#160;</td>
           <td class="paramname"><em>value</em>&#160;</td>
         </tr>
         <tr>
@@ -316,16 +318,61 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Implementation of <code>Token::setValue()</code>. </p>
+<p>Copies <code>value</code> into <code>self's</code> value field. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td>pointer to <code><a class="el" href="structToken.html" title="Defines a basic token object that has a type and value.">Token</a></code> object </td></tr>
-    <tr><td class="paramname">value</td><td>the string to copy to <code>self</code> </td></tr>
+    <tr><td class="paramname">token</td><td>pointer to <code>Token</code> object </td></tr>
+    <tr><td class="paramname">value</td><td>the string to copy to <code>token</code> </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="reference">Referenced by <a class="el" href="shell-tokens_8c.html#a11769c7ce7a83626dcc5b201a8c1ea2a">bgctrl_token_ctor()</a>, <a class="el" href="shell-tokens_8c.html#af93aac1a9b767267240e6eac69c8aabf">comment_token_ctor()</a>, <a class="el" href="shell-tokens_8c.html#a23f681e35070e98e354feaea1a19a4be">inputredir_token_ctor()</a>, <a class="el" href="shell-tokens_8c.html#abad0f54f557f34ee546d1aaba60b3df1">newline_token_ctor()</a>, <a class="el" href="shell-tokens_8c.html#a0cc07110bc86215bdacb8ee2d6639f2c">outputredir_token_ctor()</a>, <a class="el" href="token_8c.html#a7a14e268eddc63363b0d81b9a23d511d">token_ctor()</a>, and <a class="el" href="shell-tokens_8c.html#aacae5340c5b9e39e4bc80ace242b2d12">word_token_ctor()</a>.</p>
+<p class="reference">References <a class="el" href="structSH__Token.html#a31a371ccf21ae4a67bcd7613f83d64ab">SH_Token::value</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="token_8c.html#a9e481dcda13d3babe7e1deb5a2a34c52">SH_TakeToken()</a>.</p>
+
+</div>
+</div>
+<a id="af3f6a4aa19706f8897e56d903cdac9c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3f6a4aa19706f8897e56d903cdac9c8">&#9670;&nbsp;</a></span>SH_TakeToken()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SH_TakeToken </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structSH__Token.html">SH_Token</a> *&#160;</td>
+          <td class="paramname"><em>token</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structSH__StringIterator.html">SH_StringIterator</a> *&#160;</td>
+          <td class="paramname"><em>iter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Virtual method definition for 'taking', or storing a string as part of the token's value. </p>
+<p><br  />
+</p>
+<p>Implementations of this method should define how to parse a string using the @iter iterator in order to retrieve a valid token string to be stored at <code>TokenPrivate::value</code>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">token</td><td>pointer to <code>Token</code> object </td></tr>
+    <tr><td class="paramname">iter</td><td>pointer to <code>StringIterator</code> object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">References <a class="el" href="token_8c.html#a2c05e4d8f29f5ed43de023325852d8ef">SH_SetTokenValue()</a>, <a class="el" href="string-iterator_8h.html#a655b7d8a5c0e7283666bed0f3f8d6dfb">SH_StringIteratorConsumeChar()</a>, <a class="el" href="string-iterator_8h.html#a72f0e6bdce5ad567e6589a4990f30c8b">SH_StringIteratorConsumeWord()</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164caafc53fb53f7e61e0828c163490de7d54">TOK_CMT</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164ca411f75d9c12d899a33a8993a3602da73">TOK_CTRL_BG</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164ca887cc6440dd799ceb7d66c4f1ca6bb2e">TOK_CTRL_NEWLINE</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164cadbf4671ed01b7cb484b13e02ea37541c">TOK_REDIR_INPUT</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164cac1d6f2f8ac05b44b5b0dbf0970f1bc3b">TOK_REDIR_OUTPUT</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164cae7dfa366936528afaf5c79581179e712">TOK_WORD</a>, and <a class="el" href="structSH__Token.html#a6c87c0d6575424e3a8a385bfc86e20b7">SH_Token::type</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="lexer_8c.html#ac17c7ebb0903306ad4c432dc35508892">SH_LexerGenerateTokens()</a>.</p>
 
 </div>
 </div>

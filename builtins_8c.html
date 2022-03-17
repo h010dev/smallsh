@@ -95,15 +95,15 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a9839aca3d218cb7a00f92b81196482a8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="builtins_8c.html#a9839aca3d218cb7a00f92b81196482a8">builtins_is_supported</a> (char *cmd)</td></tr>
-<tr class="memdesc:a9839aca3d218cb7a00f92b81196482a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks <code>cmd</code> against supported builtin commands.  <a href="builtins_8c.html#a9839aca3d218cb7a00f92b81196482a8">More...</a><br /></td></tr>
-<tr class="separator:a9839aca3d218cb7a00f92b81196482a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8350c44105db1d7d04b5038f65e329ca"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="builtins_8c.html#a8350c44105db1d7d04b5038f65e329ca">SH_IsBuiltin</a> (char const *const cmd)</td></tr>
+<tr class="memdesc:a8350c44105db1d7d04b5038f65e329ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks <code>cmd</code> against supported builtin commands.  <a href="builtins_8c.html#a8350c44105db1d7d04b5038f65e329ca">More...</a><br /></td></tr>
+<tr class="separator:a8350c44105db1d7d04b5038f65e329ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a812ecde34bf03adcd1df13e30e12067f"><td class="memItemLeft" align="right" valign="top">static const char *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="builtins_8c.html#a812ecde34bf03adcd1df13e30e12067f">builtins</a> []</td></tr>
-<tr class="memdesc:a812ecde34bf03adcd1df13e30e12067f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translates builtin constants into their string representations.  <a href="builtins_8c.html#a812ecde34bf03adcd1df13e30e12067f">More...</a><br /></td></tr>
-<tr class="separator:a812ecde34bf03adcd1df13e30e12067f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32e46ba6a75c8905aa33e1b403dfd5be"><td class="memItemLeft" align="right" valign="top">static const char *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="builtins_8c.html#a32e46ba6a75c8905aa33e1b403dfd5be">BUILTINS</a> []</td></tr>
+<tr class="memdesc:a32e46ba6a75c8905aa33e1b403dfd5be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translates builtin constants into their string representations.  <a href="builtins_8c.html#a32e46ba6a75c8905aa33e1b403dfd5be">More...</a><br /></td></tr>
+<tr class="separator:a32e46ba6a75c8905aa33e1b403dfd5be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>For identifying and invoking shell builtin commands. </p>
@@ -137,16 +137,16 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a9839aca3d218cb7a00f92b81196482a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9839aca3d218cb7a00f92b81196482a8">&#9670;&nbsp;</a></span>builtins_is_supported()</h2>
+<a id="a8350c44105db1d7d04b5038f65e329ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8350c44105db1d7d04b5038f65e329ca">&#9670;&nbsp;</a></span>SH_IsBuiltin()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool builtins_is_supported </td>
+          <td class="memname">bool SH_IsBuiltin </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
+          <td class="paramtype">char const *&#160;</td>
           <td class="paramname"><em>cmd</em></td><td>)</td>
           <td></td>
         </tr>
@@ -162,15 +162,15 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if <code>cmd</code> is a supported builtin, false otherwise </dd></dl>
 
-<p class="reference">References <a class="el" href="builtins_8c.html#a812ecde34bf03adcd1df13e30e12067f">builtins</a>, and <a class="el" href="builtins_8c.html#a06fc87d81c62e9abb8790b6e5713c55ba17eb576db904eff56cba3945b7d95a01">BUILTINS_COUNT</a>.</p>
+<p class="reference">References <a class="el" href="builtins_8c.html#a32e46ba6a75c8905aa33e1b403dfd5be">BUILTINS</a>, and <a class="el" href="builtins_8c.html#a06fc87d81c62e9abb8790b6e5713c55ba17eb576db904eff56cba3945b7d95a01">BUILTINS_COUNT</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="parser_8c.html#a469b943aa3b4faf5da202fc25725332e">parser_parse_cmd_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="parser_8c.html#af5324336ab64fa7295c3d8ad79ec92a4">SH_ParserParseCmd()</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="a812ecde34bf03adcd1df13e30e12067f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a812ecde34bf03adcd1df13e30e12067f">&#9670;&nbsp;</a></span>builtins</h2>
+<a id="a32e46ba6a75c8905aa33e1b403dfd5be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32e46ba6a75c8905aa33e1b403dfd5be">&#9670;&nbsp;</a></span>BUILTINS</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -179,7 +179,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const char* const builtins[]</td>
+          <td class="memname">const char* const BUILTINS[]</td>
         </tr>
       </table>
   </td>
@@ -196,14 +196,14 @@ Variables</h2></td></tr>
 </div><!-- fragment -->
 <p>Translates builtin constants into their string representations. </p>
 
-<p class="reference">Referenced by <a class="el" href="builtins_8c.html#a9839aca3d218cb7a00f92b81196482a8">builtins_is_supported()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="builtins_8c.html#a8350c44105db1d7d04b5038f65e329ca">SH_IsBuiltin()</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
-<div class="ttc" id="abuiltins_8c_html_a06fc87d81c62e9abb8790b6e5713c55ba6b37567f1baeeac951a7a9fcf81647e6"><div class="ttname"><a href="builtins_8c.html#a06fc87d81c62e9abb8790b6e5713c55ba6b37567f1baeeac951a7a9fcf81647e6">BUILTINS_EXIT</a></div><div class="ttdeci">@ BUILTINS_EXIT</div><div class="ttdef"><b>Definition:</b> builtins.c:47</div></div>
-<div class="ttc" id="abuiltins_8c_html_a06fc87d81c62e9abb8790b6e5713c55ba9b6b81d88a601d39f874cc416bf57a33"><div class="ttname"><a href="builtins_8c.html#a06fc87d81c62e9abb8790b6e5713c55ba9b6b81d88a601d39f874cc416bf57a33">BUILTINS_CD</a></div><div class="ttdeci">@ BUILTINS_CD</div><div class="ttdef"><b>Definition:</b> builtins.c:46</div></div>
-<div class="ttc" id="abuiltins_8c_html_a06fc87d81c62e9abb8790b6e5713c55bad979ab4a1079fb9ab6c208a75a7e1393"><div class="ttname"><a href="builtins_8c.html#a06fc87d81c62e9abb8790b6e5713c55bad979ab4a1079fb9ab6c208a75a7e1393">BUILTINS_STATUS</a></div><div class="ttdeci">@ BUILTINS_STATUS</div><div class="ttdef"><b>Definition:</b> builtins.c:48</div></div>
+<div class="ttc" id="abuiltins_8c_html_a06fc87d81c62e9abb8790b6e5713c55ba6b37567f1baeeac951a7a9fcf81647e6"><div class="ttname"><a href="builtins_8c.html#a06fc87d81c62e9abb8790b6e5713c55ba6b37567f1baeeac951a7a9fcf81647e6">BUILTINS_EXIT</a></div><div class="ttdeci">@ BUILTINS_EXIT</div><div class="ttdef"><b>Definition:</b> builtins.c:46</div></div>
+<div class="ttc" id="abuiltins_8c_html_a06fc87d81c62e9abb8790b6e5713c55ba9b6b81d88a601d39f874cc416bf57a33"><div class="ttname"><a href="builtins_8c.html#a06fc87d81c62e9abb8790b6e5713c55ba9b6b81d88a601d39f874cc416bf57a33">BUILTINS_CD</a></div><div class="ttdeci">@ BUILTINS_CD</div><div class="ttdef"><b>Definition:</b> builtins.c:45</div></div>
+<div class="ttc" id="abuiltins_8c_html_a06fc87d81c62e9abb8790b6e5713c55bad979ab4a1079fb9ab6c208a75a7e1393"><div class="ttname"><a href="builtins_8c.html#a06fc87d81c62e9abb8790b6e5713c55bad979ab4a1079fb9ab6c208a75a7e1393">BUILTINS_STATUS</a></div><div class="ttdeci">@ BUILTINS_STATUS</div><div class="ttdef"><b>Definition:</b> builtins.c:47</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

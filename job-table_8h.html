@@ -70,7 +70,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">job-table.h File Reference</div>  </div>
@@ -85,85 +84,78 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structJobTable.html">JobTable</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structJobTable.html" title="JobTable object.">JobTable</a> object.  <a href="structJobTable.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSH__JobTable.html">SH_JobTable</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">JobTable object.  <a href="structSH__JobTable.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:aea6b7d23519611fdf40ed4e8caffb077"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structJobTable.html">JobTable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="job-table_8h.html#aea6b7d23519611fdf40ed4e8caffb077">JobTable</a></td></tr>
-<tr class="separator:aea6b7d23519611fdf40ed4e8caffb077"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ad95a2b37be040b183308482bc67b24dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="job-table_8h.html#ad95a2b37be040b183308482bc67b24dd">job_table_ctor</a> (<a class="el" href="structJobTable.html">JobTable</a> *self)</td></tr>
-<tr class="memdesc:ad95a2b37be040b183308482bc67b24dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes <code>self</code>.  <a href="job-table_8h.html#ad95a2b37be040b183308482bc67b24dd">More...</a><br /></td></tr>
-<tr class="separator:ad95a2b37be040b183308482bc67b24dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a331ed0c3284851eecf36786439e227ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="job-table_8h.html#a331ed0c3284851eecf36786439e227ec">job_table_dtor</a> (<a class="el" href="structJobTable.html">JobTable</a> *self)</td></tr>
-<tr class="memdesc:a331ed0c3284851eecf36786439e227ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">De-initializes self and frees up its resources.  <a href="job-table_8h.html#a331ed0c3284851eecf36786439e227ec">More...</a><br /></td></tr>
-<tr class="separator:a331ed0c3284851eecf36786439e227ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9290de79ef157e06bd24686b9d54b97b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structSH__JobTable.html">SH_JobTable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="job-table_8h.html#a9290de79ef157e06bd24686b9d54b97b">SH_CreateJobTable</a> (void)</td></tr>
+<tr class="memdesc:a9290de79ef157e06bd24686b9d54b97b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes new JobTable object.  <a href="job-table_8h.html#a9290de79ef157e06bd24686b9d54b97b">More...</a><br /></td></tr>
+<tr class="separator:a9290de79ef157e06bd24686b9d54b97b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05dc228e4ca7f835acdf478568d17550"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="job-table_8h.html#a05dc228e4ca7f835acdf478568d17550">SH_DestroyJobTable</a> (<a class="el" href="structSH__JobTable.html">SH_JobTable</a> *table)</td></tr>
+<tr class="memdesc:a05dc228e4ca7f835acdf478568d17550"><td class="mdescLeft">&#160;</td><td class="mdescRight">De-initializes self and frees up its resources.  <a href="job-table_8h.html#a05dc228e4ca7f835acdf478568d17550">More...</a><br /></td></tr>
+<tr class="separator:a05dc228e4ca7f835acdf478568d17550"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1ccb64afab88f574ef8b46a92bdd6b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="job-table_8h.html#ae1ccb64afab88f574ef8b46a92bdd6b9">SH_JobTableAddJob</a> (<a class="el" href="structSH__JobTable.html">SH_JobTable</a> *table, <a class="el" href="structSH__Job.html">SH_Job</a> *job)</td></tr>
+<tr class="memdesc:ae1ccb64afab88f574ef8b46a92bdd6b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a Job to the JobTable.  <a href="job-table_8h.html#ae1ccb64afab88f574ef8b46a92bdd6b9">More...</a><br /></td></tr>
+<tr class="separator:ae1ccb64afab88f574ef8b46a92bdd6b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47a247a5c91765b02b6a68e7a7fad689"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="job-table_8h.html#a47a247a5c91765b02b6a68e7a7fad689">SH_JobTableCleanJobs</a> (<a class="el" href="structSH__JobTable.html">SH_JobTable</a> *table)</td></tr>
+<tr class="memdesc:a47a247a5c91765b02b6a68e7a7fad689"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clean the JobTable, displaying completed job statuses along the way.  <a href="job-table_8h.html#a47a247a5c91765b02b6a68e7a7fad689">More...</a><br /></td></tr>
+<tr class="separator:a47a247a5c91765b02b6a68e7a7fad689"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a2c1cf1720395f1ef47ac307b05e8ed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structSH__Job.html">SH_Job</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="job-table_8h.html#a4a2c1cf1720395f1ef47ac307b05e8ed">SH_JobTableFindJob</a> (<a class="el" href="structSH__JobTable.html">SH_JobTable</a> const *table, pid_t job_pgid)</td></tr>
+<tr class="memdesc:a4a2c1cf1720395f1ef47ac307b05e8ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find a Job within the JobTable that has a matching <code>job_pgid</code>.  <a href="job-table_8h.html#a4a2c1cf1720395f1ef47ac307b05e8ed">More...</a><br /></td></tr>
+<tr class="separator:a4a2c1cf1720395f1ef47ac307b05e8ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8416074b4f3345040ff76c3727b58634"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="job-table_8h.html#a8416074b4f3345040ff76c3727b58634">SH_JobTableKillAllJobs</a> (<a class="el" href="structSH__JobTable.html">SH_JobTable</a> *table)</td></tr>
+<tr class="memdesc:a8416074b4f3345040ff76c3727b58634"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kills all children in JobTable.  <a href="job-table_8h.html#a8416074b4f3345040ff76c3727b58634">More...</a><br /></td></tr>
+<tr class="separator:a8416074b4f3345040ff76c3727b58634"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b270488f49a8c71642df9ab379cb390"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="job-table_8h.html#a5b270488f49a8c71642df9ab379cb390">SH_JobTablePrintJobs</a> (<a class="el" href="structSH__JobTable.html">SH_JobTable</a> const *table)</td></tr>
+<tr class="memdesc:a5b270488f49a8c71642df9ab379cb390"><td class="mdescLeft">&#160;</td><td class="mdescRight">List all Jobs in a pretty-printed format.  <a href="job-table_8h.html#a5b270488f49a8c71642df9ab379cb390">More...</a><br /></td></tr>
+<tr class="separator:a5b270488f49a8c71642df9ab379cb390"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a805671b24e7b00785d5e4f4cb4a4190b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="job-table_8h.html#a805671b24e7b00785d5e4f4cb4a4190b">SH_JobTableUpdateJob</a> (<a class="el" href="structSH__JobTable.html">SH_JobTable</a> const *table, pid_t pid, int status)</td></tr>
+<tr class="memdesc:a805671b24e7b00785d5e4f4cb4a4190b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update a Job's SH_status within the JobTable.  <a href="job-table_8h.html#a805671b24e7b00785d5e4f4cb4a4190b">More...</a><br /></td></tr>
+<tr class="separator:a805671b24e7b00785d5e4f4cb4a4190b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contain information about a collection of jobs. </p>
 <dl class="section author"><dt>Author</dt><dd>Mohamed Al-Hussein </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>05 Feb 2022 Ideas presented here were retrieved from the following source: <a href="https://www.gnu.org/software/libc/manual/html_node/Data-Structures.html">https://www.gnu.org/software/libc/manual/html_node/Data-Structures.html</a> </dd></dl>
-</div><h2 class="groupheader">Typedef Documentation</h2>
-<a id="aea6b7d23519611fdf40ed4e8caffb077"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea6b7d23519611fdf40ed4e8caffb077">&#9670;&nbsp;</a></span>JobTable</h2>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a9290de79ef157e06bd24686b9d54b97b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9290de79ef157e06bd24686b9d54b97b">&#9670;&nbsp;</a></span>SH_CreateJobTable()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef struct <a class="el" href="structJobTable.html">JobTable</a> <a class="el" href="structJobTable.html">JobTable</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="ad95a2b37be040b183308482bc67b24dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad95a2b37be040b183308482bc67b24dd">&#9670;&nbsp;</a></span>job_table_ctor()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void job_table_ctor </td>
+          <td class="memname"><a class="el" href="structSH__JobTable.html">SH_JobTable</a>* SH_CreateJobTable </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structJobTable.html">JobTable</a> *&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initializes <code>self</code>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">self</td><td><code><a class="el" href="structJobTable.html" title="JobTable object.">JobTable</a></code> object to initialize </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Initializes new JobTable object. </p>
+<dl class="section return"><dt>Returns</dt><dd>new JobTable object </dd></dl>
 
-<p class="reference">References <a class="el" href="job-table_8c.html#a2a61959e8c13721807af596dc4560b9c">job_table_add_job_()</a>, <a class="el" href="job-table_8c.html#a66c44bcdd6f804d115968494c8b2b1e4">job_table_clean_()</a>, <a class="el" href="job-table_8c.html#ab0ce98e45b01372350cbcacdc316da07">job_table_find_job_()</a>, <a class="el" href="job-table_8c.html#ae72b01b25b2580aefb99c52fb7d894d8">job_table_killall_()</a>, <a class="el" href="job-table_8c.html#ae06e64baa09cfc819c701670d52cae30">job_table_list_jobs_()</a>, and <a class="el" href="job-table_8c.html#a8df0fe0f169f40ddd3fffdd1a9b0cd01">job_table_update_()</a>.</p>
+<p class="reference">References <a class="el" href="structSH__JobTable.html#ad94bcbc56068e482a69f68ba0c167008">SH_JobTable::head</a>, and <a class="el" href="structSH__JobTable.html#ad151d094c3a2243b1623777cafb5715d">SH_JobTable::n_jobs</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="smallsh_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main()</a>.</p>
 
 </div>
 </div>
-<a id="a331ed0c3284851eecf36786439e227ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a331ed0c3284851eecf36786439e227ec">&#9670;&nbsp;</a></span>job_table_dtor()</h2>
+<a id="a05dc228e4ca7f835acdf478568d17550"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05dc228e4ca7f835acdf478568d17550">&#9670;&nbsp;</a></span>SH_DestroyJobTable()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void job_table_dtor </td>
+          <td class="memname">void SH_DestroyJobTable </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structJobTable.html">JobTable</a> *&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structSH__JobTable.html">SH_JobTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -172,14 +164,232 @@ Functions</h2></td></tr>
 <p>De-initializes self and frees up its resources. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td><code><a class="el" href="structJobTable.html" title="JobTable object.">JobTable</a></code> object to de-initialize </td></tr>
+    <tr><td class="paramname">table</td><td><code>JobTable</code> object to de-initialize </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="job_8h.html#ae753ae058dce09d5cfddfda98605ce38">job_dtor()</a>, <a class="el" href="structJob.html#a40a2f93f6d780660fcd8f18cdd90bd63">Job::job_next</a>, and <a class="el" href="structJobTablePrivate.html#a4507d14ad7291bb1a50cc077bad1c14a">JobTablePrivate::jt_head</a>.</p>
+<p class="reference">References <a class="el" href="structSH__JobTable.html#ad94bcbc56068e482a69f68ba0c167008">SH_JobTable::head</a>, <a class="el" href="structSH__JobTable.html#ad151d094c3a2243b1623777cafb5715d">SH_JobTable::n_jobs</a>, <a class="el" href="structSH__Job.html#a4e7c578f1037eb7e9ab94ec922ca814c">SH_Job::next</a>, and <a class="el" href="job_8h.html#ad098b559ba1feb756afdb77fd3558969">SH_DestroyJob()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="exit_8c.html#a06b48ef7aaf752e58a067f127259920c">exit_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="exit_8c.html#a8b9fb604e917fe5ff6e6897f06a58fca">SH_exit()</a>.</p>
+
+</div>
+</div>
+<a id="ae1ccb64afab88f574ef8b46a92bdd6b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1ccb64afab88f574ef8b46a92bdd6b9">&#9670;&nbsp;</a></span>SH_JobTableAddJob()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SH_JobTableAddJob </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structSH__JobTable.html">SH_JobTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structSH__Job.html">SH_Job</a> *&#160;</td>
+          <td class="paramname"><em>job</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a Job to the JobTable. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>JobTable object </td></tr>
+    <tr><td class="paramname">job</td><td>Job object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">References <a class="el" href="structSH__JobTable.html#ad94bcbc56068e482a69f68ba0c167008">SH_JobTable::head</a>, <a class="el" href="structSH__JobTable.html#ad151d094c3a2243b1623777cafb5715d">SH_JobTable::n_jobs</a>, <a class="el" href="structSH__Job.html#a4e7c578f1037eb7e9ab94ec922ca814c">SH_Job::next</a>, and <a class="el" href="structSH__Job.html#a6fc3ffb547facc9b270b3b4906bb47ec">SH_Job::spec</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="smallsh_8c.html#aab7ee4d34e98147392afb5d3b4a88276">smallsh_eval()</a>.</p>
+
+</div>
+</div>
+<a id="a47a247a5c91765b02b6a68e7a7fad689"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47a247a5c91765b02b6a68e7a7fad689">&#9670;&nbsp;</a></span>SH_JobTableCleanJobs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SH_JobTableCleanJobs </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structSH__JobTable.html">SH_JobTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clean the JobTable, displaying completed job statuses along the way. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>JobTable object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">References <a class="el" href="structSH__Job.html#aa9fd29b55fba12b5858551edd1b81aa1">SH_Job::command</a>, <a class="el" href="structSH__Process.html#a04b201c4f6399aeb285cb597786a1df8">SH_Process::has_completed</a>, <a class="el" href="structSH__JobTable.html#ad94bcbc56068e482a69f68ba0c167008">SH_JobTable::head</a>, <a class="el" href="structSH__JobTable.html#ad151d094c3a2243b1623777cafb5715d">SH_JobTable::n_jobs</a>, <a class="el" href="structSH__Job.html#a4e7c578f1037eb7e9ab94ec922ca814c">SH_Job::next</a>, <a class="el" href="structSH__Process.html#ae4fe1c4376269d5b306767320fe0e547">SH_Process::pid</a>, <a class="el" href="structSH__Job.html#a9baad136198f5302dc6f80a2b02428a7">SH_Job::proc</a>, <a class="el" href="structSH__Job.html#abfc8db6a981f5360a4e13d4f9c394e57">SH_Job::run_bg</a>, <a class="el" href="job_8h.html#ad098b559ba1feb756afdb77fd3558969">SH_DestroyJob()</a>, <a class="el" href="structSH__Job.html#a6fc3ffb547facc9b270b3b4906bb47ec">SH_Job::spec</a>, and <a class="el" href="structSH__Process.html#a74f6177cb3f13d870e6eaac349eaa3d9">SH_Process::status</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="job-table_8c.html#a8416074b4f3345040ff76c3727b58634">SH_JobTableKillAllJobs()</a>, and <a class="el" href="events_8c.html#a983a2d1edcdedbfc9b57194aabc9c3e6">SH_NotifyEvents()</a>.</p>
+
+</div>
+</div>
+<a id="a4a2c1cf1720395f1ef47ac307b05e8ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a2c1cf1720395f1ef47ac307b05e8ed">&#9670;&nbsp;</a></span>SH_JobTableFindJob()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structSH__Job.html">SH_Job</a>* SH_JobTableFindJob </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structSH__JobTable.html">SH_JobTable</a> const *&#160;</td>
+          <td class="paramname"><em>table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">pid_t&#160;</td>
+          <td class="paramname"><em>job_pgid</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Find a Job within the JobTable that has a matching <code>job_pgid</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>JobTable object </td></tr>
+    <tr><td class="paramname">job_pgid</td><td>Job PGID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Job</code> object if found, <code>NULL</code> if not </dd></dl>
+
+<p class="reference">References <a class="el" href="structSH__JobTable.html#ad94bcbc56068e482a69f68ba0c167008">SH_JobTable::head</a>, <a class="el" href="structSH__Job.html#a4e7c578f1037eb7e9ab94ec922ca814c">SH_Job::next</a>, and <a class="el" href="structSH__Job.html#ac41f6a8e92ea699cfabe613b8f14e022">SH_Job::pgid</a>.</p>
+
+</div>
+</div>
+<a id="a8416074b4f3345040ff76c3727b58634"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8416074b4f3345040ff76c3727b58634">&#9670;&nbsp;</a></span>SH_JobTableKillAllJobs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SH_JobTableKillAllJobs </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structSH__JobTable.html">SH_JobTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Kills all children in JobTable. </p>
+<p>Called on program exit to clean up any unterminated children the shell created. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>JobTable object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">References <a class="el" href="structSH__JobTable.html#ad94bcbc56068e482a69f68ba0c167008">SH_JobTable::head</a>, <a class="el" href="structSH__Job.html#a4e7c578f1037eb7e9ab94ec922ca814c">SH_Job::next</a>, <a class="el" href="structSH__Process.html#ae4fe1c4376269d5b306767320fe0e547">SH_Process::pid</a>, <a class="el" href="structSH__Job.html#a9baad136198f5302dc6f80a2b02428a7">SH_Job::proc</a>, and <a class="el" href="job-table_8c.html#a47a247a5c91765b02b6a68e7a7fad689">SH_JobTableCleanJobs()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="exit_8c.html#a8b9fb604e917fe5ff6e6897f06a58fca">SH_exit()</a>.</p>
+
+</div>
+</div>
+<a id="a5b270488f49a8c71642df9ab379cb390"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b270488f49a8c71642df9ab379cb390">&#9670;&nbsp;</a></span>SH_JobTablePrintJobs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SH_JobTablePrintJobs </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structSH__JobTable.html">SH_JobTable</a> const *&#160;</td>
+          <td class="paramname"><em>table</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>List all Jobs in a pretty-printed format. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>JobTable object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">References <a class="el" href="structSH__Process.html#aa07ec38913f1b6944833662d1e32d586">SH_Process::args</a>, <a class="el" href="structSH__Process.html#a04b201c4f6399aeb285cb597786a1df8">SH_Process::has_completed</a>, <a class="el" href="structSH__JobTable.html#ad94bcbc56068e482a69f68ba0c167008">SH_JobTable::head</a>, <a class="el" href="structSH__Job.html#a7568fe77b5036ab7510eed8a2c8ff51e">SH_Job::infile</a>, <a class="el" href="structSH__Job.html#a4e7c578f1037eb7e9ab94ec922ca814c">SH_Job::next</a>, <a class="el" href="structSH__Job.html#a432849da29f697139d8e3b23e5264d95">SH_Job::outfile</a>, <a class="el" href="structSH__Job.html#ac41f6a8e92ea699cfabe613b8f14e022">SH_Job::pgid</a>, <a class="el" href="structSH__Process.html#ae4fe1c4376269d5b306767320fe0e547">SH_Process::pid</a>, <a class="el" href="structSH__Job.html#a9baad136198f5302dc6f80a2b02428a7">SH_Job::proc</a>, <a class="el" href="structSH__Job.html#a6fc3ffb547facc9b270b3b4906bb47ec">SH_Job::spec</a>, and <a class="el" href="structSH__Process.html#a74f6177cb3f13d870e6eaac349eaa3d9">SH_Process::status</a>.</p>
+
+</div>
+</div>
+<a id="a805671b24e7b00785d5e4f4cb4a4190b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a805671b24e7b00785d5e4f4cb4a4190b">&#9670;&nbsp;</a></span>SH_JobTableUpdateJob()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SH_JobTableUpdateJob </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structSH__JobTable.html">SH_JobTable</a> const *&#160;</td>
+          <td class="paramname"><em>table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">pid_t&#160;</td>
+          <td class="paramname"><em>pid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>status</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Update a Job's SH_status within the JobTable. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>JobTable object </td></tr>
+    <tr><td class="paramname">pid</td><td>Job PID </td></tr>
+    <tr><td class="paramname">status</td><td>SH_status to give Job </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if Job was found and updated, -1 otherwise </dd></dl>
+
+<p class="reference">References <a class="el" href="structSH__Process.html#a04b201c4f6399aeb285cb597786a1df8">SH_Process::has_completed</a>, <a class="el" href="structSH__JobTable.html#ad94bcbc56068e482a69f68ba0c167008">SH_JobTable::head</a>, <a class="el" href="structSH__Job.html#a4e7c578f1037eb7e9ab94ec922ca814c">SH_Job::next</a>, <a class="el" href="structSH__Process.html#ae4fe1c4376269d5b306767320fe0e547">SH_Process::pid</a>, <a class="el" href="structSH__Job.html#a9baad136198f5302dc6f80a2b02428a7">SH_Job::proc</a>, and <a class="el" href="structSH__Process.html#a74f6177cb3f13d870e6eaac349eaa3d9">SH_Process::status</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="receiver_8c.html#a75edf740d673cb6ee2ae771a6271f921">SH_ReceiverSigchldCallbackHandler()</a>.</p>
 
 </div>
 </div>

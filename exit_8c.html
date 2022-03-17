@@ -83,19 +83,19 @@ $(function() {
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a06b48ef7aaf752e58a067f127259920c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exit_8c.html#a06b48ef7aaf752e58a067f127259920c">exit_</a> (int <a class="el" href="status_8c.html#a23939106a6e2cda8545e50fc0635d0eb">status</a>)</td></tr>
-<tr class="memdesc:a06b48ef7aaf752e58a067f127259920c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clean-up all child processes and exit shell.  <a href="exit_8c.html#a06b48ef7aaf752e58a067f127259920c">More...</a><br /></td></tr>
-<tr class="separator:a06b48ef7aaf752e58a067f127259920c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b9fb604e917fe5ff6e6897f06a58fca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exit_8c.html#a8b9fb604e917fe5ff6e6897f06a58fca">SH_exit</a> (int const status)</td></tr>
+<tr class="memdesc:a8b9fb604e917fe5ff6e6897f06a58fca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clean-up all child processes and exit shell.  <a href="exit_8c.html#a8b9fb604e917fe5ff6e6897f06a58fca">More...</a><br /></td></tr>
+<tr class="separator:a8b9fb604e917fe5ff6e6897f06a58fca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a06b48ef7aaf752e58a067f127259920c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06b48ef7aaf752e58a067f127259920c">&#9670;&nbsp;</a></span>exit_()</h2>
+<a id="a8b9fb604e917fe5ff6e6897f06a58fca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b9fb604e917fe5ff6e6897f06a58fca">&#9670;&nbsp;</a></span>SH_exit()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void exit_ </td>
+          <td class="memname">void SH_exit </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>status</em></td><td>)</td>
@@ -107,12 +107,12 @@ Functions</h2></td></tr>
 <p>Clean-up all child processes and exit shell. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">status</td><td>exit status </td></tr>
+    <tr><td class="paramname">status</td><td>exit SH_status </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="events_8h.html#a64bde057407debd7862302dda094b6ed">events_cleanup()</a>, <a class="el" href="job-control_8h.html#a769af495eaeafe093339399f540b00eb">job_table</a>, <a class="el" href="job-table_8h.html#a331ed0c3284851eecf36786439e227ec">job_table_dtor()</a>, <a class="el" href="structJobTable.html#a4ab6d5447a04560ba2bad7fdfcddcca5">JobTable::killall</a>, <a class="el" href="globals_8h.html#a71c10c0a73d21042d5e8b7d0aa38c56d">smallsh_interactive_mode</a>, and <a class="el" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status()</a>.</p>
+<p class="reference">References <a class="el" href="job-control_8h.html#a7c22b208eb318357a8d07d2b0a7f5d03">job_table</a>, <a class="el" href="events_8h.html#a0b64ae509893b5bde52df4b26b0d4896">SH_CleanupEvents()</a>, <a class="el" href="job-table_8h.html#a05dc228e4ca7f835acdf478568d17550">SH_DestroyJobTable()</a>, <a class="el" href="job-table_8h.html#a8416074b4f3345040ff76c3727b58634">SH_JobTableKillAllJobs()</a>, and <a class="el" href="globals_8h.html#a71c10c0a73d21042d5e8b7d0aa38c56d">smallsh_interactive_mode</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="smallsh_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main()</a>.</p>
 

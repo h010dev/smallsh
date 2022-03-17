@@ -78,7 +78,7 @@ $(function() {
 
 <p>For tokenizing a shell input string.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="shell-tokens_8h_source.html">shell-tokens.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="token_8h_source.html">interpreter/token.h</a>&quot;</code><br />
 </div>
 <p><a href="lexer_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -121,9 +121,9 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a9c5fcecec1d5cdecf516cb569f643c0e"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lexer_8h.html#a9c5fcecec1d5cdecf516cb569f643c0e">lexer_generate_tokens</a> (char *buf, size_t max_tok, <a class="el" href="structToken.html">Token</a> *tok[max_tok])</td></tr>
-<tr class="memdesc:a9c5fcecec1d5cdecf516cb569f643c0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given an text stream <code>buf</code>, scans stream and generates <code><a class="el" href="structToken.html" title="Defines a basic token object that has a type and value.">Token</a></code> objects to store in <code>tokens</code>.  <a href="lexer_8h.html#a9c5fcecec1d5cdecf516cb569f643c0e">More...</a><br /></td></tr>
-<tr class="separator:a9c5fcecec1d5cdecf516cb569f643c0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a650909ec8c10c23ae40eb7057d0b9f6b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lexer_8h.html#a650909ec8c10c23ae40eb7057d0b9f6b">SH_LexerGenerateTokens</a> (char *buf, size_t max_tok, <a class="el" href="structSH__Token.html">SH_Token</a> *toks[max_tok])</td></tr>
+<tr class="memdesc:a650909ec8c10c23ae40eb7057d0b9f6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given an text stream <code>buf</code>, scans stream and generates <code>Token</code> objects to store in <code>tokens</code>.  <a href="lexer_8h.html#a650909ec8c10c23ae40eb7057d0b9f6b">More...</a><br /></td></tr>
+<tr class="separator:a650909ec8c10c23ae40eb7057d0b9f6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>For tokenizing a shell input string. </p>
@@ -431,14 +431,14 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a9c5fcecec1d5cdecf516cb569f643c0e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9c5fcecec1d5cdecf516cb569f643c0e">&#9670;&nbsp;</a></span>lexer_generate_tokens()</h2>
+<a id="a650909ec8c10c23ae40eb7057d0b9f6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a650909ec8c10c23ae40eb7057d0b9f6b">&#9670;&nbsp;</a></span>SH_LexerGenerateTokens()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t lexer_generate_tokens </td>
+          <td class="memname">size_t SH_LexerGenerateTokens </td>
           <td>(</td>
           <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>buf</em>, </td>
@@ -452,8 +452,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structToken.html">Token</a> *&#160;</td>
-          <td class="paramname"><em>tok</em>[max_tok]&#160;</td>
+          <td class="paramtype"><a class="el" href="structSH__Token.html">SH_Token</a> *&#160;</td>
+          <td class="paramname"><em>toks</em>[max_tok]&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -463,21 +463,21 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Given an text stream <code>buf</code>, scans stream and generates <code><a class="el" href="structToken.html" title="Defines a basic token object that has a type and value.">Token</a></code> objects to store in <code>tokens</code>. </p>
+<p>Given an text stream <code>buf</code>, scans stream and generates <code>Token</code> objects to store in <code>tokens</code>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">buf</td><td>text stream to scan </td></tr>
     <tr><td class="paramname">max_tok</td><td>size of <code>tokens</code> array </td></tr>
-    <tr><td class="paramname">tok</td><td>array of pointers to <code><a class="el" href="structToken.html" title="Defines a basic token object that has a type and value.">Token</a></code> objects to store token data </td></tr>
+    <tr><td class="paramname">toks</td><td>array of pointers to <code>Token</code> objects to store token data </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>number of tokens parsed from stream </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Caller should verify that the number of tokens parsed is less than <code>n_tokens</code>. If this is not the case, then input stream was not fully tokenized. </dd></dl>
 
-<p class="reference">References <a class="el" href="shell-tokens_8h.html#a11769c7ce7a83626dcc5b201a8c1ea2a">bgctrl_token_ctor()</a>, <a class="el" href="shell-tokens_8h.html#af93aac1a9b767267240e6eac69c8aabf">comment_token_ctor()</a>, <a class="el" href="structStringIteratorVtbl.html#a2860328cc15a55a5176b0ed15fcd2f01">StringIteratorVtbl::has_next</a>, <a class="el" href="shell-tokens_8h.html#a23f681e35070e98e354feaea1a19a4be">inputredir_token_ctor()</a>, <a class="el" href="lexer_8h.html#a85faeaed462b15fa4dee2a388f17d4f8">IS_BG_CTRL_OP</a>, <a class="el" href="lexer_8h.html#adc6f31756c099bdfe8a33491110d76b0">IS_CMT_SYM</a>, <a class="el" href="lexer_8h.html#a957fd1a7e387612db6afab697ef62b2c">IS_INPUT_REDIR_OP</a>, <a class="el" href="lexer_8h.html#a339d514eef03f482bf990b47fa861402">IS_NEWLINE</a>, <a class="el" href="lexer_8h.html#a282876e653e9d8c97a8af919543e021c">IS_OUTPUT_REDIR_OP</a>, <a class="el" href="lexer_8h.html#a8e0cab4dcc3ef592793ac045edcd6344">IS_WHITESPACE</a>, <a class="el" href="shell-tokens_8h.html#abad0f54f557f34ee546d1aaba60b3df1">newline_token_ctor()</a>, <a class="el" href="structStringIteratorVtbl.html#a8e32b2ab9bd358530b3b5203bd370982">StringIteratorVtbl::next</a>, <a class="el" href="shell-tokens_8h.html#a0cc07110bc86215bdacb8ee2d6639f2c">outputredir_token_ctor()</a>, <a class="el" href="structStringIteratorVtbl.html#a55b376f38e8f88af2598c13315f048db">StringIteratorVtbl::peek</a>, <a class="el" href="string-iterator_8h.html#a151b907665589d8f68fd6ecbec3c6af1">string_iterator_ctor()</a>, <a class="el" href="string-iterator_8h.html#ae41fb65b8253cb82c4967afeb0e1cde3">string_iterator_dtor()</a>, <a class="el" href="structStringIterator.html#ac2117e6d4ad50c241a62363c73d79e14">StringIterator::vptr</a>, and <a class="el" href="shell-tokens_8h.html#aacae5340c5b9e39e4bc80ace242b2d12">word_token_ctor()</a>.</p>
+<p class="reference">References <a class="el" href="lexer_8h.html#a85faeaed462b15fa4dee2a388f17d4f8">IS_BG_CTRL_OP</a>, <a class="el" href="lexer_8h.html#adc6f31756c099bdfe8a33491110d76b0">IS_CMT_SYM</a>, <a class="el" href="lexer_8h.html#a957fd1a7e387612db6afab697ef62b2c">IS_INPUT_REDIR_OP</a>, <a class="el" href="lexer_8h.html#a339d514eef03f482bf990b47fa861402">IS_NEWLINE</a>, <a class="el" href="lexer_8h.html#a282876e653e9d8c97a8af919543e021c">IS_OUTPUT_REDIR_OP</a>, <a class="el" href="lexer_8h.html#a8e0cab4dcc3ef592793ac045edcd6344">IS_WHITESPACE</a>, <a class="el" href="string-iterator_8h.html#a4981bb82ce46009cd8122b2dc13271a7">SH_CreateStringIterator()</a>, <a class="el" href="token_8h.html#a9e0e32677efb459b6421c8401456c9e7">SH_CreateToken()</a>, <a class="el" href="string-iterator_8h.html#ace1fb17aec5f67fcb9a81d718db7e324">SH_DestroyStringIterator()</a>, <a class="el" href="string-iterator_8h.html#a780e1fd42993aebc7831ba58627b8f2e">SH_StringIteratorHasNext()</a>, <a class="el" href="string-iterator_8h.html#af53b918c632b2b3a1db6bed5284cdce3">SH_StringIteratorNext()</a>, <a class="el" href="string-iterator_8h.html#a4a642abaefc52a5d6e29bb3a80c809ea">SH_StringIteratorPeek()</a>, <a class="el" href="token_8h.html#af3f6a4aa19706f8897e56d903cdac9c8">SH_TakeToken()</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164caafc53fb53f7e61e0828c163490de7d54">TOK_CMT</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164ca411f75d9c12d899a33a8993a3602da73">TOK_CTRL_BG</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164ca887cc6440dd799ceb7d66c4f1ca6bb2e">TOK_CTRL_NEWLINE</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164cadbf4671ed01b7cb484b13e02ea37541c">TOK_REDIR_INPUT</a>, <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164cac1d6f2f8ac05b44b5b0dbf0970f1bc3b">TOK_REDIR_OUTPUT</a>, and <a class="el" href="token_8h.html#ac13aa98b8b486d5ce9fb6f4e0f95164cae7dfa366936528afaf5c79581179e712">TOK_WORD</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="parser_8c.html#a68325d099b475f7cc72bbf64aa1e6479">parser_parse_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="parser_8c.html#ac7ec06d86eff867e323b5b867dd97f68">SH_ParserParse()</a>.</p>
 
 </div>
 </div>

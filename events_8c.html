@@ -69,6 +69,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">events.c File Reference</div>  </div>
@@ -81,31 +82,51 @@ $(function() {
 <code>#include &quot;<a class="el" href="events_8h_source.html">events/events.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="job-control_8h_source.html">job-control/job-control.h</a>&quot;</code><br />
 </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:af8cef7f4e2f089c70de3677ee0f9282e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="events_8c.html#af8cef7f4e2f089c70de3677ee0f9282e">SH_MAX_EVENTS</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:af8cef7f4e2f089c70de3677ee0f9282e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a81ce7d6909034de9c012d78ae23c3f42"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="events_8c.html#a81ce7d6909034de9c012d78ae23c3f42">events_init</a> (void)</td></tr>
-<tr class="memdesc:a81ce7d6909034de9c012d78ae23c3f42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes global event-related data structures.  <a href="events_8c.html#a81ce7d6909034de9c012d78ae23c3f42">More...</a><br /></td></tr>
-<tr class="separator:a81ce7d6909034de9c012d78ae23c3f42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64bde057407debd7862302dda094b6ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="events_8c.html#a64bde057407debd7862302dda094b6ed">events_cleanup</a> (void)</td></tr>
-<tr class="memdesc:a64bde057407debd7862302dda094b6ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleans up the global event-related data structures.  <a href="events_8c.html#a64bde057407debd7862302dda094b6ed">More...</a><br /></td></tr>
-<tr class="separator:a64bde057407debd7862302dda094b6ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b61e1b76a1b5f640817937bde6c2f53"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="events_8c.html#a6b61e1b76a1b5f640817937bde6c2f53">events_notify</a> (void)</td></tr>
-<tr class="memdesc:a6b61e1b76a1b5f640817937bde6c2f53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Consumes new events, notifies user of any them, and removes completed jobs from global job table.  <a href="events_8c.html#a6b61e1b76a1b5f640817937bde6c2f53">More...</a><br /></td></tr>
-<tr class="separator:a6b61e1b76a1b5f640817937bde6c2f53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8e2e0f6415a6ff5388a0a0929a7ab53"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="events_8c.html#aa8e2e0f6415a6ff5388a0a0929a7ab53">SH_InitEvents</a> (void)</td></tr>
+<tr class="memdesc:aa8e2e0f6415a6ff5388a0a0929a7ab53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes global event-related data structures.  <a href="events_8c.html#aa8e2e0f6415a6ff5388a0a0929a7ab53">More...</a><br /></td></tr>
+<tr class="separator:aa8e2e0f6415a6ff5388a0a0929a7ab53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b64ae509893b5bde52df4b26b0d4896"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="events_8c.html#a0b64ae509893b5bde52df4b26b0d4896">SH_CleanupEvents</a> (void)</td></tr>
+<tr class="memdesc:a0b64ae509893b5bde52df4b26b0d4896"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleans up the global event-related data structures.  <a href="events_8c.html#a0b64ae509893b5bde52df4b26b0d4896">More...</a><br /></td></tr>
+<tr class="separator:a0b64ae509893b5bde52df4b26b0d4896"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a983a2d1edcdedbfc9b57194aabc9c3e6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="events_8c.html#a983a2d1edcdedbfc9b57194aabc9c3e6">SH_NotifyEvents</a> (void)</td></tr>
+<tr class="memdesc:a983a2d1edcdedbfc9b57194aabc9c3e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Consumes new events, notifies user of any them, and removes completed jobs from global job table.  <a href="events_8c.html#a983a2d1edcdedbfc9b57194aabc9c3e6">More...</a><br /></td></tr>
+<tr class="separator:a983a2d1edcdedbfc9b57194aabc9c3e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains functions for handling signal-generated events. </p>
 <dl class="section author"><dt>Author</dt><dd>Mohamed Al-Hussein </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>09 Feb 2022 </dd></dl>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a id="a64bde057407debd7862302dda094b6ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64bde057407debd7862302dda094b6ed">&#9670;&nbsp;</a></span>events_cleanup()</h2>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="af8cef7f4e2f089c70de3677ee0f9282e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8cef7f4e2f089c70de3677ee0f9282e">&#9670;&nbsp;</a></span>SH_MAX_EVENTS</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void events_cleanup </td>
+          <td class="memname">#define SH_MAX_EVENTS&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a0b64ae509893b5bde52df4b26b0d4896"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b64ae509893b5bde52df4b26b0d4896">&#9670;&nbsp;</a></span>SH_CleanupEvents()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SH_CleanupEvents </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -116,20 +137,20 @@ Functions</h2></td></tr>
 
 <p>Cleans up the global event-related data structures. </p>
 
-<p class="reference">References <a class="el" href="events_8h.html#a38eee5bd80ad6127bd4121865947c0c9">ch_sigchld</a>, <a class="el" href="channel_8h.html#ad7dbfb1df8d67151a8910925f6f08068">channel_dtor()</a>, <a class="el" href="events_8h.html#ae7d874f76a5f3e533ae39b150b48b4f4">rcv</a>, <a class="el" href="receiver_8h.html#aef7638000850183b385a0d89d6c7d283">receiver_dtor()</a>, <a class="el" href="sender_8h.html#a533a37ce0fc01b242ac7f143d4fb106a">sender_dtor()</a>, and <a class="el" href="events_8h.html#a4b4f17f8655cd7c89af3d73da19d3958">snd</a>.</p>
+<p class="reference">References <a class="el" href="events_8h.html#a0fac0a71d030b6181c6e44105ef02eb9">receiver</a>, <a class="el" href="events_8h.html#ab5f7f2dd44302d81930a9e81959f6f49">sender</a>, <a class="el" href="channel_8h.html#ae489b895f32d941b5143adcd5d7a6eae">SH_DestroyChannel()</a>, <a class="el" href="receiver_8h.html#ac18e973a443e6b9d4d892aa9836b7c8f">SH_DestroyReceiver()</a>, <a class="el" href="sender_8h.html#adc16213bc8ade172685a714cca5c355f">SH_DestroySender()</a>, and <a class="el" href="events_8h.html#a65ee3af3624cd721a328c05cfd32067e">sigchld_channel</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="exit_8c.html#a06b48ef7aaf752e58a067f127259920c">exit_()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="exit_8c.html#a8b9fb604e917fe5ff6e6897f06a58fca">SH_exit()</a>.</p>
 
 </div>
 </div>
-<a id="a81ce7d6909034de9c012d78ae23c3f42"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a81ce7d6909034de9c012d78ae23c3f42">&#9670;&nbsp;</a></span>events_init()</h2>
+<a id="aa8e2e0f6415a6ff5388a0a0929a7ab53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8e2e0f6415a6ff5388a0a0929a7ab53">&#9670;&nbsp;</a></span>SH_InitEvents()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int events_init </td>
+          <td class="memname">int SH_InitEvents </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -141,20 +162,20 @@ Functions</h2></td></tr>
 <p>Initializes global event-related data structures. </p>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on failure </dd></dl>
 
-<p class="reference">References <a class="el" href="events_8h.html#a38eee5bd80ad6127bd4121865947c0c9">ch_sigchld</a>, <a class="el" href="channel_8h.html#a3f79b80493f8beb9d16f302076cfe6aa">channel_ctor()</a>, <a class="el" href="events_8h.html#ae7d874f76a5f3e533ae39b150b48b4f4">rcv</a>, <a class="el" href="receiver_8h.html#ad32cfffb857b00b9674f9ccf5ac643df">receiver_add()</a>, <a class="el" href="receiver_8h.html#ac01622024f911484d5fa0dc8f5cf2b67">receiver_cb_sigchld()</a>, <a class="el" href="receiver_8h.html#a585953486d974aaf07388db57a5753d4">receiver_ctor()</a>, <a class="el" href="sender_8h.html#aab863276e1e12ef4b211877c91e11acb">sender_add()</a>, <a class="el" href="sender_8h.html#a0641c6a72fb9606c6e93200fb13098d1">sender_ctor()</a>, <a class="el" href="events_8h.html#a4b4f17f8655cd7c89af3d73da19d3958">snd</a>, and <a class="el" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status()</a>.</p>
+<p class="reference">References <a class="el" href="events_8h.html#a0fac0a71d030b6181c6e44105ef02eb9">receiver</a>, <a class="el" href="events_8h.html#ab5f7f2dd44302d81930a9e81959f6f49">sender</a>, <a class="el" href="channel_8h.html#a096397c90cec2a5e6f51e4648fd67962">SH_CreateChannel()</a>, <a class="el" href="receiver_8h.html#ad38197f99a9d4f3588e6c78a9a2c7fd0">SH_CreateReceiver()</a>, <a class="el" href="sender_8h.html#a42b4f0d090daf1d541171ca7dec835a9">SH_CreateSender()</a>, <a class="el" href="events_8c.html#af8cef7f4e2f089c70de3677ee0f9282e">SH_MAX_EVENTS</a>, <a class="el" href="receiver_8h.html#a0c430a3bbf0e2018e51e3dc9d315914f">SH_ReceiverAddChannel()</a>, <a class="el" href="receiver_8h.html#a52aae8e16117059308794ee5009d59e8">SH_ReceiverSigchldCallbackHandler()</a>, <a class="el" href="sender_8h.html#a0922f9c75f66fa988a3100524b9f658d">SH_SenderAddChannel()</a>, and <a class="el" href="events_8h.html#a65ee3af3624cd721a328c05cfd32067e">sigchld_channel</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="smallsh_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main()</a>.</p>
 
 </div>
 </div>
-<a id="a6b61e1b76a1b5f640817937bde6c2f53"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b61e1b76a1b5f640817937bde6c2f53">&#9670;&nbsp;</a></span>events_notify()</h2>
+<a id="a983a2d1edcdedbfc9b57194aabc9c3e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a983a2d1edcdedbfc9b57194aabc9c3e6">&#9670;&nbsp;</a></span>SH_NotifyEvents()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int events_notify </td>
+          <td class="memname">int SH_NotifyEvents </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -165,7 +186,7 @@ Functions</h2></td></tr>
 
 <p>Consumes new events, notifies user of any them, and removes completed jobs from global job table. </p>
 
-<p class="reference">References <a class="el" href="structJobTable.html#a5117b4005cde5b030b487983530e621c">JobTable::clean</a>, <a class="el" href="job-control_8h.html#a769af495eaeafe093339399f540b00eb">job_table</a>, <a class="el" href="events_8h.html#ae7d874f76a5f3e533ae39b150b48b4f4">rcv</a>, <a class="el" href="receiver_8h.html#a01961745f5b5ce989aa323b11c533ce8">receiver_consume_events()</a>, and <a class="el" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status()</a>.</p>
+<p class="reference">References <a class="el" href="job-control_8h.html#a7c22b208eb318357a8d07d2b0a7f5d03">job_table</a>, <a class="el" href="events_8h.html#a0fac0a71d030b6181c6e44105ef02eb9">receiver</a>, <a class="el" href="job-table_8h.html#a47a247a5c91765b02b6a68e7a7fad689">SH_JobTableCleanJobs()</a>, and <a class="el" href="receiver_8h.html#ac453cdb1ad1c1e148c037f0504e9f995">SH_ReceiverConsumeEvents()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="smallsh_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main()</a>.</p>
 

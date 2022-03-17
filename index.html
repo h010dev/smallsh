@@ -71,48 +71,14 @@ $(function() {
 <div class="textblock"><p>Simple implementation of a Linux shell written in C.</p>
 <h2><a class="anchor" id="autotoc_md1"></a>
 Build</h2>
-<h3><a class="anchor" id="autotoc_md2"></a>
-Option 1: Use build script</h3>
 <div class="fragment"><div class="line">chmod u+x ./build.sh &amp;&amp; ./build.sh</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md3"></a>
-Option 2: Link and build manually</h3>
-<div class="fragment"><div class="line">mkdir -p build/bin &amp;&amp; \</div>
-<div class="line">    gcc --std=c99 \</div>
-<div class="line">        -g -Wall -Wextra -Werror -pedantic \</div>
-<div class="line">        -DTEST_SCRIPT -DDEMO \</div>
-<div class="line">        -o smallsh \</div>
-<div class="line">        src/smallsh.c \</div>
-<div class="line">        src/error.c \</div>
-<div class="line">        src/builtins/builtins.c \</div>
-<div class="line">        src/builtins/cd.c \</div>
-<div class="line">        src/builtins/exit.c \</div>
-<div class="line">        src/builtins/status.c \</div>
-<div class="line">        src/events/channel.c \</div>
-<div class="line">        src/events/events.c \</div>
-<div class="line">        src/events/receiver.c \</div>
-<div class="line">        src/events/sender.c \</div>
-<div class="line">        src/interpreter/lexer.c \</div>
-<div class="line">        src/interpreter/parser.c \</div>
-<div class="line">        src/interpreter/shell-tokens.c \</div>
-<div class="line">        src/interpreter/statement.c \</div>
-<div class="line">        src/interpreter/token.c \</div>
-<div class="line">        src/interpreter/token-iterator.c \</div>
-<div class="line">        src/job-control/job.c \</div>
-<div class="line">        src/job-control/job-control.c \</div>
-<div class="line">        src/job-control/job-table.c \</div>
-<div class="line">        src/job-control/process.c \</div>
-<div class="line">        src/signals/handler.c \</div>
-<div class="line">        src/signals/installer.c \</div>
-<div class="line">        src/utils/string-iterator.c \</div>
-<div class="line">        -Iinclude/ &amp;&amp; \</div>
-<div class="line">    mv ./smallsh build/bin</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md4"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md2"></a>
 Run</h2>
 <div class="fragment"><div class="line">build/bin/smallsh</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md5"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md3"></a>
 Clean</h2>
 <div class="fragment"><div class="line">rm -rf build</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md6"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md4"></a>
 Docs</h2>
 <p><a href="https://h010dev.github.io/smallsh/index.html">Documentation</a> </p>
 </div></div><!-- PageDoc -->

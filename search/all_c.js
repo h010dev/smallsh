@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['lexer_2ec_144',['lexer.c',['../lexer_8c.html',1,'']]],
-  ['lexer_2eh_145',['lexer.h',['../lexer_8h.html',1,'']]],
-  ['lexer_5fgenerate_5ftokens_146',['lexer_generate_tokens',['../lexer_8h.html#a9c5fcecec1d5cdecf516cb569f643c0e',1,'lexer_generate_tokens(char *buf, size_t max_tok, Token *tok[max_tok]):&#160;lexer.c'],['../lexer_8c.html#a9c5fcecec1d5cdecf516cb569f643c0e',1,'lexer_generate_tokens(char *buf, size_t max_tok, Token *tok[max_tok]):&#160;lexer.c']]],
-  ['list_5fjobs_147',['list_jobs',['../structJobTable.html#a9386a845a338a339c8273294556db1c9',1,'JobTable']]]
+  ['main_71',['main',['../smallsh_8c.html#a840291bc02cba5474a4cb46a9b9566fe',1,'smallsh.c']]],
+  ['max_5ftokens_72',['MAX_TOKENS',['../lexer_8h.html#a09886d6ba96e67553bf3c49ed8ade975',1,'lexer.h']]]
 ];

@@ -75,7 +75,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Responsible for sending messages to subscribers via a dedicated <a class="el" href="structChannel.html" title="A Channel object consists of a read end and a write end, as well as a callback handler function that ...">Channel</a>.  
+<p>Responsible for sending messages to subscribers via a dedicated Channel.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;errno.h&gt;</code><br />
 <code>#include &lt;fcntl.h&gt;</code><br />
@@ -89,117 +89,67 @@ $(function() {
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a0641c6a72fb9606c6e93200fb13098d1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sender_8c.html#a0641c6a72fb9606c6e93200fb13098d1">sender_ctor</a> (<a class="el" href="structSender.html">Sender</a> *self, size_t max_ch)</td></tr>
-<tr class="memdesc:a0641c6a72fb9606c6e93200fb13098d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes <code>self</code> with provided data.  <a href="sender_8c.html#a0641c6a72fb9606c6e93200fb13098d1">More...</a><br /></td></tr>
-<tr class="separator:a0641c6a72fb9606c6e93200fb13098d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a533a37ce0fc01b242ac7f143d4fb106a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sender_8c.html#a533a37ce0fc01b242ac7f143d4fb106a">sender_dtor</a> (<a class="el" href="structSender.html">Sender</a> *self)</td></tr>
-<tr class="memdesc:a533a37ce0fc01b242ac7f143d4fb106a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets <code>self's</code> values.  <a href="sender_8c.html#a533a37ce0fc01b242ac7f143d4fb106a">More...</a><br /></td></tr>
-<tr class="separator:a533a37ce0fc01b242ac7f143d4fb106a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab863276e1e12ef4b211877c91e11acb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sender_8c.html#aab863276e1e12ef4b211877c91e11acb">sender_add</a> (<a class="el" href="structSender.html">Sender</a> *self, <a class="el" href="structChannel.html">Channel</a> *ch)</td></tr>
-<tr class="memdesc:aab863276e1e12ef4b211877c91e11acb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a new <code><a class="el" href="structChannel.html" title="A Channel object consists of a read end and a write end, as well as a callback handler function that ...">Channel</a></code> to its channel list, and initializes its write end.  <a href="sender_8c.html#aab863276e1e12ef4b211877c91e11acb">More...</a><br /></td></tr>
-<tr class="separator:aab863276e1e12ef4b211877c91e11acb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a480b90bd37ac42bd758e2c7782183618"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sender_8c.html#a480b90bd37ac42bd758e2c7782183618">sender_notify_sigchld</a> (struct <a class="el" href="structChannel.html">Channel</a> ch)</td></tr>
-<tr class="memdesc:a480b90bd37ac42bd758e2c7782183618"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends data received via a SIGCHLD signal to <code>self</code>.  <a href="sender_8c.html#a480b90bd37ac42bd758e2c7782183618">More...</a><br /></td></tr>
-<tr class="separator:a480b90bd37ac42bd758e2c7782183618"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a304217058d0873469cb7c9adb87e64b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structSH__Sender.html">SH_Sender</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sender_8c.html#a304217058d0873469cb7c9adb87e64b3">SH_CreateSender</a> (size_t const capacity)</td></tr>
+<tr class="memdesc:a304217058d0873469cb7c9adb87e64b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes new <code>Sender</code> object.  <a href="sender_8c.html#a304217058d0873469cb7c9adb87e64b3">More...</a><br /></td></tr>
+<tr class="separator:a304217058d0873469cb7c9adb87e64b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc16213bc8ade172685a714cca5c355f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sender_8c.html#adc16213bc8ade172685a714cca5c355f">SH_DestroySender</a> (<a class="el" href="structSH__Sender.html">SH_Sender</a> **<a class="el" href="smallsh_8c.html#ab5f7f2dd44302d81930a9e81959f6f49">sender</a>)</td></tr>
+<tr class="memdesc:adc16213bc8ade172685a714cca5c355f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets <code>self's</code> values.  <a href="sender_8c.html#adc16213bc8ade172685a714cca5c355f">More...</a><br /></td></tr>
+<tr class="separator:adc16213bc8ade172685a714cca5c355f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94990502348cf2029a22247c85abf7d0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sender_8c.html#a94990502348cf2029a22247c85abf7d0">SH_SenderAddChannel</a> (<a class="el" href="structSH__Sender.html">SH_Sender</a> *const <a class="el" href="smallsh_8c.html#ab5f7f2dd44302d81930a9e81959f6f49">sender</a>, <a class="el" href="structSH__Channel.html">SH_Channel</a> *const channel)</td></tr>
+<tr class="memdesc:a94990502348cf2029a22247c85abf7d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a new <code>Channel</code> to its channel list, and initializes its write end.  <a href="sender_8c.html#a94990502348cf2029a22247c85abf7d0">More...</a><br /></td></tr>
+<tr class="separator:a94990502348cf2029a22247c85abf7d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae25ce23458ae1187c82ba3ba12d0c9ab"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sender_8c.html#ae25ce23458ae1187c82ba3ba12d0c9ab">SH_SenderNotifySigchldEvent</a> (<a class="el" href="structSH__Channel.html">SH_Channel</a> *const channel)</td></tr>
+<tr class="memdesc:ae25ce23458ae1187c82ba3ba12d0c9ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends data received via a SIGCHLD signal to <code>self</code>.  <a href="sender_8c.html#ae25ce23458ae1187c82ba3ba12d0c9ab">More...</a><br /></td></tr>
+<tr class="separator:ae25ce23458ae1187c82ba3ba12d0c9ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Responsible for sending messages to subscribers via a dedicated <a class="el" href="structChannel.html" title="A Channel object consists of a read end and a write end, as well as a callback handler function that ...">Channel</a>. </p>
+<div class="textblock"><p>Responsible for sending messages to subscribers via a dedicated Channel. </p>
 <dl class="section author"><dt>Author</dt><dd>Mohamed Al-Hussein </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>09 Feb 2022 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="aab863276e1e12ef4b211877c91e11acb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab863276e1e12ef4b211877c91e11acb">&#9670;&nbsp;</a></span>sender_add()</h2>
+<a id="a304217058d0873469cb7c9adb87e64b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a304217058d0873469cb7c9adb87e64b3">&#9670;&nbsp;</a></span>SH_CreateSender()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int sender_add </td>
+          <td class="memname"><a class="el" href="structSH__Sender.html">SH_Sender</a>* SH_CreateSender </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structSender.html">Sender</a> *&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structChannel.html">Channel</a> *&#160;</td>
-          <td class="paramname"><em>ch</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Adds a new <code><a class="el" href="structChannel.html" title="A Channel object consists of a read end and a write end, as well as a callback handler function that ...">Channel</a></code> to its channel list, and initializes its write end. </p>
-<p>Behind the scenes, this function initializes the channel pipe's write end and sets it to be non-blocking as per the self-pipe trick requirements. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">self</td><td><code><a class="el" href="structSender.html" title="A Sender object consists of an array of Channels that it is responsible for sending messages to on re...">Sender</a></code> to add channel to </td></tr>
-    <tr><td class="paramname">ch</td><td><code><a class="el" href="structChannel.html" title="A Channel object consists of a read end and a write end, as well as a callback handler function that ...">Channel</a></code> to add to sender </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on failure </dd></dl>
-
-<p class="reference">References <a class="el" href="structChannel.html#ad874d338cec1167c20e7e503f50a212d">Channel::ch_write</a>, and <a class="el" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="events_8c.html#a81ce7d6909034de9c012d78ae23c3f42">events_init()</a>.</p>
-
-</div>
-</div>
-<a id="a0641c6a72fb9606c6e93200fb13098d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0641c6a72fb9606c6e93200fb13098d1">&#9670;&nbsp;</a></span>sender_ctor()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int sender_ctor </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structSender.html">Sender</a> *&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>max_ch</em>&#160;</td>
-        </tr>
-        <tr>
+          <td class="paramname"><em>capacity</em></td><td>)</td>
           <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initializes <code>self</code> with provided data. </p>
+<p>Initializes new <code>Sender</code> object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td><code><a class="el" href="structSender.html" title="A Sender object consists of an array of Channels that it is responsible for sending messages to on re...">Sender</a></code> to initialize </td></tr>
-    <tr><td class="paramname">max_ch</td><td>maximum number of channels sender will support </td></tr>
+    <tr><td class="paramname">sender</td><td><code>Sender</code> to initialize </td></tr>
+    <tr><td class="paramname">capacity</td><td>maximum number of channels sender will support </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on failure </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>new <code>Sender</code> object on success, <code>NULL</code> on failure </dd></dl>
 
-<p class="reference">Referenced by <a class="el" href="events_8c.html#a81ce7d6909034de9c012d78ae23c3f42">events_init()</a>.</p>
+<p class="reference">References <a class="el" href="structSH__Sender.html#a06797ddc2b029517f42d173658ddaeda">SH_Sender::capacity</a>, <a class="el" href="structSH__Sender.html#a641397b809318cb3643c14a063bf573f">SH_Sender::channels</a>, <a class="el" href="events_8h.html#ab5f7f2dd44302d81930a9e81959f6f49">sender</a>, and <a class="el" href="structSH__Sender.html#ab51deb9ccab6e70ceec689bfba932601">SH_Sender::size</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="events_8c.html#aa8e2e0f6415a6ff5388a0a0929a7ab53">SH_InitEvents()</a>.</p>
 
 </div>
 </div>
-<a id="a533a37ce0fc01b242ac7f143d4fb106a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a533a37ce0fc01b242ac7f143d4fb106a">&#9670;&nbsp;</a></span>sender_dtor()</h2>
+<a id="adc16213bc8ade172685a714cca5c355f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc16213bc8ade172685a714cca5c355f">&#9670;&nbsp;</a></span>SH_DestroySender()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void sender_dtor </td>
+          <td class="memname">void SH_DestroySender </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structSender.html">Sender</a> *&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structSH__Sender.html">SH_Sender</a> **&#160;</td>
+          <td class="paramname"><em>sender</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -208,27 +158,71 @@ Functions</h2></td></tr>
 <p>Resets <code>self's</code> values. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td><code><a class="el" href="structSender.html" title="A Sender object consists of an array of Channels that it is responsible for sending messages to on re...">Sender</a></code> to reset </td></tr>
+    <tr><td class="paramname">sender</td><td><code>Sender</code> to reset </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>This does not clear the actual channels by calling their respective destructors. It is the caller's responsibility to do so afterwards. </dd></dl>
 
-<p class="reference">Referenced by <a class="el" href="events_8c.html#a64bde057407debd7862302dda094b6ed">events_cleanup()</a>.</p>
+<p class="reference">References <a class="el" href="events_8h.html#ab5f7f2dd44302d81930a9e81959f6f49">sender</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="events_8c.html#a0b64ae509893b5bde52df4b26b0d4896">SH_CleanupEvents()</a>.</p>
 
 </div>
 </div>
-<a id="a480b90bd37ac42bd758e2c7782183618"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a480b90bd37ac42bd758e2c7782183618">&#9670;&nbsp;</a></span>sender_notify_sigchld()</h2>
+<a id="a94990502348cf2029a22247c85abf7d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94990502348cf2029a22247c85abf7d0">&#9670;&nbsp;</a></span>SH_SenderAddChannel()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int sender_notify_sigchld </td>
+          <td class="memname">int SH_SenderAddChannel </td>
           <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structChannel.html">Channel</a>&#160;</td>
-          <td class="paramname"><em>ch</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structSH__Sender.html">SH_Sender</a> *&#160;</td>
+          <td class="paramname"><em>sender</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structSH__Channel.html">SH_Channel</a> *&#160;</td>
+          <td class="paramname"><em>channel</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds a new <code>Channel</code> to its channel list, and initializes its write end. </p>
+<p>Behind the scenes, this function initializes the channel pipe's write end and sets it to be non-blocking as per the self-pipe trick requirements. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sender</td><td><code>Sender</code> to add channel to </td></tr>
+    <tr><td class="paramname">channel</td><td><code>Channel</code> to add to sender </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on failure </dd></dl>
+
+<p class="reference">References <a class="el" href="structSH__Sender.html#a06797ddc2b029517f42d173658ddaeda">SH_Sender::capacity</a>, <a class="el" href="structSH__Sender.html#a641397b809318cb3643c14a063bf573f">SH_Sender::channels</a>, <a class="el" href="events_8h.html#ab5f7f2dd44302d81930a9e81959f6f49">sender</a>, <a class="el" href="structSH__Sender.html#ab51deb9ccab6e70ceec689bfba932601">SH_Sender::size</a>, and <a class="el" href="structSH__Channel.html#a70035aec57d4e0a739c4a30f6f923764">SH_Channel::write_fd</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="events_8c.html#aa8e2e0f6415a6ff5388a0a0929a7ab53">SH_InitEvents()</a>.</p>
+
+</div>
+</div>
+<a id="ae25ce23458ae1187c82ba3ba12d0c9ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae25ce23458ae1187c82ba3ba12d0c9ab">&#9670;&nbsp;</a></span>SH_SenderNotifySigchldEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SH_SenderNotifySigchldEvent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structSH__Channel.html">SH_Channel</a> *&#160;</td>
+          <td class="paramname"><em>channel</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -237,17 +231,17 @@ Functions</h2></td></tr>
 <p>Sends data received via a SIGCHLD signal to <code>self</code>. </p>
 <p>This function abstracts the signal-handling step used in the self-pipe trick (TLPI section 63.5.2) in an attempt to relay SIGCHLD data while doing its best at remaining async-safe.</p>
 <p>Only async-safe system calls are made within this function, and the only global data type that is being accessed within is the pipe's write file descriptor, which is done so for reads only, and without any dereferences. The file descriptor is initialized on program startup, and remains unchanged until program termination.</p>
-<p>The data sent is used for updating the shell's global job table, as it requires information on both which child completed and what their exit status was. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The data sent is used for updating the shell's global job table, as it requires information on both which child completed and what their exit SH_status was. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ch</td><td><code><a class="el" href="structChannel.html" title="A Channel object consists of a read end and a write end, as well as a callback handler function that ...">Channel</a></code> to send data to </td></tr>
+    <tr><td class="paramname">channel</td><td><code>Channel</code> to send data to </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on failure </dd></dl>
 
-<p class="reference">References <a class="el" href="structChannel.html#ad874d338cec1167c20e7e503f50a212d">Channel::ch_write</a>, <a class="el" href="structSigchldDTO.html#a4a3b6d71f036c6b8f9cc0e07287307f7">SigchldDTO::chld_pid</a>, <a class="el" href="structSigchldDTO.html#a6a444cc7e2b4feea515de9823d2858ce">SigchldDTO::chld_status</a>, and <a class="el" href="status_8h.html#a685506d2c432425b89581f85cf876f22">status()</a>.</p>
+<p class="reference">References <a class="el" href="structSH__SigchldDTO.html#a4ba127e70465a49c5b5e98564ab725c6">SH_SigchldDTO::pid</a>, <a class="el" href="structSH__SigchldDTO.html#a41ad5a535475920d05a065c0bffd73fa">SH_SigchldDTO::status</a>, and <a class="el" href="structSH__Channel.html#a70035aec57d4e0a739c4a30f6f923764">SH_Channel::write_fd</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="handler_8c.html#a1afb82a207441052c002d287c4fc6a26">handler_handle_sigchld()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="handler_8c.html#a2488cd6d7cf4a777a47cd4bc87ba449d">SH_HandlerHandleSigchld()</a>.</p>
 
 </div>
 </div>

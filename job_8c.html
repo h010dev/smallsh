@@ -90,12 +90,12 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ae6da664e847549992adf52d196e88207"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="job_8c.html#ae6da664e847549992adf52d196e88207">job_ctor</a> (<a class="el" href="structJob.html">Job</a> *self, char *cmd, <a class="el" href="structProcess.html">Process</a> *proc, pid_t pgid, char *infile, char *outfile, bool bg)</td></tr>
-<tr class="memdesc:ae6da664e847549992adf52d196e88207"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes values for a <code><a class="el" href="structJob.html" title="Job object.">Job</a></code> object.  <a href="job_8c.html#ae6da664e847549992adf52d196e88207">More...</a><br /></td></tr>
-<tr class="separator:ae6da664e847549992adf52d196e88207"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae753ae058dce09d5cfddfda98605ce38"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="job_8c.html#ae753ae058dce09d5cfddfda98605ce38">job_dtor</a> (<a class="el" href="structJob.html">Job</a> *self)</td></tr>
-<tr class="memdesc:ae753ae058dce09d5cfddfda98605ce38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleans up and frees job resources.  <a href="job_8c.html#ae753ae058dce09d5cfddfda98605ce38">More...</a><br /></td></tr>
-<tr class="separator:ae753ae058dce09d5cfddfda98605ce38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4769ad3fa7ab6159028d6a4c1a8f1771"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structSH__Job.html">SH_Job</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="job_8c.html#a4769ad3fa7ab6159028d6a4c1a8f1771">SH_CreateJob</a> (char *command, <a class="el" href="structSH__Process.html">SH_Process</a> *proc, char *infile, char *outfile, bool run_bg)</td></tr>
+<tr class="memdesc:a4769ad3fa7ab6159028d6a4c1a8f1771"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes new Job object.  <a href="job_8c.html#a4769ad3fa7ab6159028d6a4c1a8f1771">More...</a><br /></td></tr>
+<tr class="separator:a4769ad3fa7ab6159028d6a4c1a8f1771"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad098b559ba1feb756afdb77fd3558969"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="job_8c.html#ad098b559ba1feb756afdb77fd3558969">SH_DestroyJob</a> (<a class="el" href="structSH__Job.html">SH_Job</a> *job)</td></tr>
+<tr class="memdesc:ad098b559ba1feb756afdb77fd3558969"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleans up and frees job resources.  <a href="job_8c.html#ad098b559ba1feb756afdb77fd3558969">More...</a><br /></td></tr>
+<tr class="separator:ad098b559ba1feb756afdb77fd3558969"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contain information about a a single job. </p>
@@ -117,35 +117,23 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ae6da664e847549992adf52d196e88207"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6da664e847549992adf52d196e88207">&#9670;&nbsp;</a></span>job_ctor()</h2>
+<a id="a4769ad3fa7ab6159028d6a4c1a8f1771"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4769ad3fa7ab6159028d6a4c1a8f1771">&#9670;&nbsp;</a></span>SH_CreateJob()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void job_ctor </td>
+          <td class="memname"><a class="el" href="structSH__Job.html">SH_Job</a>* SH_CreateJob </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structJob.html">Job</a> *&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>cmd</em>, </td>
+          <td class="paramname"><em>command</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structProcess.html">Process</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structSH__Process.html">SH_Process</a> *&#160;</td>
           <td class="paramname"><em>proc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">pid_t&#160;</td>
-          <td class="paramname"><em>pgid</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -163,7 +151,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>bg</em>&#160;</td>
+          <td class="paramname"><em>run_bg</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -173,35 +161,36 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initializes values for a <code><a class="el" href="structJob.html" title="Job object.">Job</a></code> object. </p>
+<p>Initializes new Job object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td>job object to initialize </td></tr>
-    <tr><td class="paramname">cmd</td><td>job command entered by user </td></tr>
+    <tr><td class="paramname">command</td><td>job command entered by user </td></tr>
     <tr><td class="paramname">proc</td><td>job's process object </td></tr>
-    <tr><td class="paramname">pgid</td><td>job's PGID </td></tr>
     <tr><td class="paramname">infile</td><td>job's STDIN filename </td></tr>
     <tr><td class="paramname">outfile</td><td>job's STDOUT filename </td></tr>
-    <tr><td class="paramname">bg</td><td>whether or not job is to be run in background </td></tr>
+    <tr><td class="paramname">run_bg</td><td>whether or not job is to be run in background </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>new Job object </dd></dl>
+
+<p class="reference">References <a class="el" href="structSH__Job.html#aa9fd29b55fba12b5858551edd1b81aa1">SH_Job::command</a>, <a class="el" href="structSH__Job.html#a7568fe77b5036ab7510eed8a2c8ff51e">SH_Job::infile</a>, <a class="el" href="structSH__Job.html#a4e7c578f1037eb7e9ab94ec922ca814c">SH_Job::next</a>, <a class="el" href="structSH__Job.html#a432849da29f697139d8e3b23e5264d95">SH_Job::outfile</a>, <a class="el" href="structSH__Job.html#ac41f6a8e92ea699cfabe613b8f14e022">SH_Job::pgid</a>, <a class="el" href="structSH__Job.html#a9baad136198f5302dc6f80a2b02428a7">SH_Job::proc</a>, and <a class="el" href="structSH__Job.html#abfc8db6a981f5360a4e13d4f9c394e57">SH_Job::run_bg</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="smallsh_8c.html#aab7ee4d34e98147392afb5d3b4a88276">smallsh_eval()</a>.</p>
 
 </div>
 </div>
-<a id="ae753ae058dce09d5cfddfda98605ce38"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae753ae058dce09d5cfddfda98605ce38">&#9670;&nbsp;</a></span>job_dtor()</h2>
+<a id="ad098b559ba1feb756afdb77fd3558969"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad098b559ba1feb756afdb77fd3558969">&#9670;&nbsp;</a></span>SH_DestroyJob()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void job_dtor </td>
+          <td class="memname">void SH_DestroyJob </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structJob.html">Job</a> *&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structSH__Job.html">SH_Job</a> *&#160;</td>
+          <td class="paramname"><em>job</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -210,14 +199,14 @@ Functions</h2></td></tr>
 <p>Cleans up and frees job resources. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td>job to clean up </td></tr>
+    <tr><td class="paramname">job</td><td>job to clean up </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="process_8h.html#ae0d55b607302d9f464589697dbb1761f">process_dtor()</a>.</p>
+<p class="reference">References <a class="el" href="structSH__Job.html#aa9fd29b55fba12b5858551edd1b81aa1">SH_Job::command</a>, <a class="el" href="structSH__Job.html#a7568fe77b5036ab7510eed8a2c8ff51e">SH_Job::infile</a>, <a class="el" href="structSH__Job.html#a4e7c578f1037eb7e9ab94ec922ca814c">SH_Job::next</a>, <a class="el" href="structSH__Job.html#a432849da29f697139d8e3b23e5264d95">SH_Job::outfile</a>, <a class="el" href="structSH__Job.html#ac41f6a8e92ea699cfabe613b8f14e022">SH_Job::pgid</a>, <a class="el" href="structSH__Job.html#a9baad136198f5302dc6f80a2b02428a7">SH_Job::proc</a>, <a class="el" href="structSH__Job.html#abfc8db6a981f5360a4e13d4f9c394e57">SH_Job::run_bg</a>, and <a class="el" href="process_8h.html#ac1c09f99fd0161c4d2cf4aa9a3a1a49c">SH_DestroyProcess()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="job-table_8c.html#a66c44bcdd6f804d115968494c8b2b1e4">job_table_clean_()</a>, and <a class="el" href="job-table_8c.html#a331ed0c3284851eecf36786439e227ec">job_table_dtor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="job-table_8c.html#a05dc228e4ca7f835acdf478568d17550">SH_DestroyJobTable()</a>, and <a class="el" href="job-table_8c.html#a47a247a5c91765b02b6a68e7a7fad689">SH_JobTableCleanJobs()</a>.</p>
 
 </div>
 </div>

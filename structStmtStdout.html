@@ -78,46 +78,46 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a7693efc180ae1dde8e5620f805c0fe2b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structStmtStdout.html#a7693efc180ae1dde8e5620f805c0fe2b">stdout_num_streams</a></td></tr>
-<tr class="separator:a7693efc180ae1dde8e5620f805c0fe2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7699d4ee2232fd88c531b82f06eefac"><td class="memItemLeft" align="right" valign="top">char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structStmtStdout.html#ac7699d4ee2232fd88c531b82f06eefac">stdout_streams</a></td></tr>
-<tr class="separator:ac7699d4ee2232fd88c531b82f06eefac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09869ece83e956e8c2a9edf9af67323e"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structStmtStdout.html#a09869ece83e956e8c2a9edf9af67323e">n</a></td></tr>
+<tr class="separator:a09869ece83e956e8c2a9edf9af67323e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9138cf6e15c931d05cb727b6ff3202f"><td class="memItemLeft" align="right" valign="top">char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structStmtStdout.html#ad9138cf6e15c931d05cb727b6ff3202f">streams</a></td></tr>
+<tr class="separator:ad9138cf6e15c931d05cb727b6ff3202f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>STDOUT Stream object. </p>
 <p>A stdout stream is composed of a list of filenames, and a count of the number of filenames. These streams will be later opened for stdout. </p>
 </div><h2 class="groupheader">Field Documentation</h2>
-<a id="a7693efc180ae1dde8e5620f805c0fe2b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7693efc180ae1dde8e5620f805c0fe2b">&#9670;&nbsp;</a></span>stdout_num_streams</h2>
+<a id="a09869ece83e956e8c2a9edf9af67323e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09869ece83e956e8c2a9edf9af67323e">&#9670;&nbsp;</a></span>n</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t StmtStdout::stdout_num_streams</td>
+          <td class="memname">size_t StmtStdout::n</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <p>number of file streams </p>
 
-<p class="reference">Referenced by <a class="el" href="parser_8c.html#adef22e7be4f5cde84075864c6e6f72db">parser_parse_ioredir_()</a>, <a class="el" href="parser_8c.html#ac8de4642e7b3f20e95a4b0ccc5c6db69">parser_parse_statements_()</a>, <a class="el" href="smallsh_8c.html#aab7ee4d34e98147392afb5d3b4a88276">smallsh_eval()</a>, and <a class="el" href="statement_8c.html#a1bd0b4e586c2e85d8b71baac013bb8b8">statement_new()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="statement_8c.html#a50191ab1d106af0c866003e82709d4c2">SH_CreateStatement()</a>, <a class="el" href="parser_8c.html#a034b9041655b29badeca722b6b9e6b58">SH_ParserParseIoRedir()</a>, <a class="el" href="parser_8c.html#a446e328d965e77f7e712625bdfab3a36">SH_ParserParseStmts()</a>, <a class="el" href="statement_8c.html#a6411ac03ca83cb3a8dafabd8c7577215">SH_PrintStatement()</a>, and <a class="el" href="smallsh_8c.html#aab7ee4d34e98147392afb5d3b4a88276">smallsh_eval()</a>.</p>
 
 </div>
 </div>
-<a id="ac7699d4ee2232fd88c531b82f06eefac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac7699d4ee2232fd88c531b82f06eefac">&#9670;&nbsp;</a></span>stdout_streams</h2>
+<a id="ad9138cf6e15c931d05cb727b6ff3202f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9138cf6e15c931d05cb727b6ff3202f">&#9670;&nbsp;</a></span>streams</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char** StmtStdout::stdout_streams</td>
+          <td class="memname">char** StmtStdout::streams</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <p>stream list </p>
 
-<p class="reference">Referenced by <a class="el" href="parser_8c.html#adef22e7be4f5cde84075864c6e6f72db">parser_parse_ioredir_()</a>, <a class="el" href="smallsh_8c.html#aab7ee4d34e98147392afb5d3b4a88276">smallsh_eval()</a>, and <a class="el" href="statement_8c.html#a1bd0b4e586c2e85d8b71baac013bb8b8">statement_new()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="statement_8c.html#a50191ab1d106af0c866003e82709d4c2">SH_CreateStatement()</a>, <a class="el" href="parser_8c.html#a034b9041655b29badeca722b6b9e6b58">SH_ParserParseIoRedir()</a>, <a class="el" href="statement_8c.html#a6411ac03ca83cb3a8dafabd8c7577215">SH_PrintStatement()</a>, and <a class="el" href="smallsh_8c.html#aab7ee4d34e98147392afb5d3b4a88276">smallsh_eval()</a>.</p>
 
 </div>
 </div>

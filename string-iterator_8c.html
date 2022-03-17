@@ -69,8 +69,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Data Structures</a> &#124;
-<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">string-iterator.c File Reference</div>  </div>
@@ -84,300 +82,236 @@ $(function() {
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="string-iterator_8h_source.html">utils/string-iterator.h</a>&quot;</code><br />
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structStringIteratorPrivate.html">StringIteratorPrivate</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hides <code><a class="el" href="structStringIterator.html" title="StringIterator object definition.">StringIterator</a></code> members from client code.  <a href="structStringIteratorPrivate.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a369266c24eacffb87046522897a570d5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string-iterator_8c.html#a369266c24eacffb87046522897a570d5">_GNU_SOURCE</a></td></tr>
-<tr class="separator:a369266c24eacffb87046522897a570d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:afb22c4c74ed4f2924a20480150cc08e4"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string-iterator_8c.html#afb22c4c74ed4f2924a20480150cc08e4">string_iterator_has_next_</a> (<a class="el" href="structStringIterator.html">StringIterator</a> const *const self)</td></tr>
-<tr class="memdesc:afb22c4c74ed4f2924a20480150cc08e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of <code>StringIterator::has_next()</code>.  <a href="string-iterator_8c.html#afb22c4c74ed4f2924a20480150cc08e4">More...</a><br /></td></tr>
-<tr class="separator:afb22c4c74ed4f2924a20480150cc08e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71c29d126f6139c3cae169e533592712"><td class="memItemLeft" align="right" valign="top">static char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string-iterator_8c.html#a71c29d126f6139c3cae169e533592712">string_iterator_munch_char_</a> (<a class="el" href="structStringIterator.html">StringIterator</a> const *const self)</td></tr>
-<tr class="memdesc:a71c29d126f6139c3cae169e533592712"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of <code>StringIterator::munchChar()</code>.  <a href="string-iterator_8c.html#a71c29d126f6139c3cae169e533592712">More...</a><br /></td></tr>
-<tr class="separator:a71c29d126f6139c3cae169e533592712"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c9e3c84b66608a727ed079586a9a36b"><td class="memItemLeft" align="right" valign="top">static char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string-iterator_8c.html#a1c9e3c84b66608a727ed079586a9a36b">string_iterator_munch_word_</a> (<a class="el" href="structStringIterator.html">StringIterator</a> const *const self)</td></tr>
-<tr class="memdesc:a1c9e3c84b66608a727ed079586a9a36b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of <code>StringIterator::munchWord()</code>.  <a href="string-iterator_8c.html#a1c9e3c84b66608a727ed079586a9a36b">More...</a><br /></td></tr>
-<tr class="separator:a1c9e3c84b66608a727ed079586a9a36b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3764dd0f15797b8075c9b4065fc6485d"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string-iterator_8c.html#a3764dd0f15797b8075c9b4065fc6485d">string_iterator_next_</a> (<a class="el" href="structStringIterator.html">StringIterator</a> const *const self)</td></tr>
-<tr class="memdesc:a3764dd0f15797b8075c9b4065fc6485d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of <code>StringIterator::next()</code>.  <a href="string-iterator_8c.html#a3764dd0f15797b8075c9b4065fc6485d">More...</a><br /></td></tr>
-<tr class="separator:a3764dd0f15797b8075c9b4065fc6485d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2fa880c3bd8bad9c075a495c6f78220"><td class="memItemLeft" align="right" valign="top">static char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string-iterator_8c.html#ad2fa880c3bd8bad9c075a495c6f78220">string_iterator_slice_</a> (<a class="el" href="structStringIterator.html">StringIterator</a> const *const self, const char *from)</td></tr>
-<tr class="separator:ad2fa880c3bd8bad9c075a495c6f78220"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08216d69610c426f337f4bd77ddee531"><td class="memItemLeft" align="right" valign="top">static char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string-iterator_8c.html#a08216d69610c426f337f4bd77ddee531">string_iterator_peek_</a> (<a class="el" href="structStringIterator.html">StringIterator</a> const *const self, unsigned int offset)</td></tr>
-<tr class="memdesc:a08216d69610c426f337f4bd77ddee531"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of <code>StringIterator::peek()</code>.  <a href="string-iterator_8c.html#a08216d69610c426f337f4bd77ddee531">More...</a><br /></td></tr>
-<tr class="separator:a08216d69610c426f337f4bd77ddee531"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a151b907665589d8f68fd6ecbec3c6af1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string-iterator_8c.html#a151b907665589d8f68fd6ecbec3c6af1">string_iterator_ctor</a> (<a class="el" href="structStringIterator.html">StringIterator</a> *self, char *str)</td></tr>
-<tr class="memdesc:a151b907665589d8f68fd6ecbec3c6af1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <code><a class="el" href="structStringIterator.html" title="StringIterator object definition.">StringIterator</a></code> object.  <a href="string-iterator_8c.html#a151b907665589d8f68fd6ecbec3c6af1">More...</a><br /></td></tr>
-<tr class="separator:a151b907665589d8f68fd6ecbec3c6af1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae41fb65b8253cb82c4967afeb0e1cde3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string-iterator_8c.html#ae41fb65b8253cb82c4967afeb0e1cde3">string_iterator_dtor</a> (<a class="el" href="structStringIterator.html">StringIterator</a> *self)</td></tr>
-<tr class="memdesc:ae41fb65b8253cb82c4967afeb0e1cde3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys a <code><a class="el" href="structStringIterator.html" title="StringIterator object definition.">StringIterator</a></code> object, freeing its members and re-initializing them to <code>NULL</code> in the process.  <a href="string-iterator_8c.html#ae41fb65b8253cb82c4967afeb0e1cde3">More...</a><br /></td></tr>
-<tr class="separator:ae41fb65b8253cb82c4967afeb0e1cde3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa195d3f50eaadd5a923b3986251da487"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string-iterator_8c.html#aa195d3f50eaadd5a923b3986251da487">SH_StringIteratorHasNext</a> (<a class="el" href="structSH__StringIterator.html">SH_StringIterator</a> const *const iter)</td></tr>
+<tr class="separator:aa195d3f50eaadd5a923b3986251da487"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb758edbb07036c190642a2dfc234b21"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string-iterator_8c.html#afb758edbb07036c190642a2dfc234b21">SH_StringIteratorConsumeChar</a> (<a class="el" href="structSH__StringIterator.html">SH_StringIterator</a> *const iter)</td></tr>
+<tr class="memdesc:afb758edbb07036c190642a2dfc234b21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterates over a single character and returns copy to caller.  <a href="string-iterator_8c.html#afb758edbb07036c190642a2dfc234b21">More...</a><br /></td></tr>
+<tr class="separator:afb758edbb07036c190642a2dfc234b21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a522ba1669d61fcbc26290984c2d45057"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string-iterator_8c.html#a522ba1669d61fcbc26290984c2d45057">SH_StringIteratorConsumeWord</a> (<a class="el" href="structSH__StringIterator.html">SH_StringIterator</a> *const iter)</td></tr>
+<tr class="memdesc:a522ba1669d61fcbc26290984c2d45057"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterates over a single word and returns copy to caller.  <a href="string-iterator_8c.html#a522ba1669d61fcbc26290984c2d45057">More...</a><br /></td></tr>
+<tr class="separator:a522ba1669d61fcbc26290984c2d45057"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af701df7aa540f97bd6444ebab6e01a6b"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string-iterator_8c.html#af701df7aa540f97bd6444ebab6e01a6b">SH_StringIteratorNext</a> (<a class="el" href="structSH__StringIterator.html">SH_StringIterator</a> *const iter)</td></tr>
+<tr class="memdesc:af701df7aa540f97bd6444ebab6e01a6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns character that the iterator is pointing at, then advances to the next character.  <a href="string-iterator_8c.html#af701df7aa540f97bd6444ebab6e01a6b">More...</a><br /></td></tr>
+<tr class="separator:af701df7aa540f97bd6444ebab6e01a6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c72c94cc185c7d67cfc0396aa868e8a"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string-iterator_8c.html#a8c72c94cc185c7d67cfc0396aa868e8a">SH_StringIteratorSlice</a> (<a class="el" href="structSH__StringIterator.html">SH_StringIterator</a> *const iter, char const *from)</td></tr>
+<tr class="memdesc:a8c72c94cc185c7d67cfc0396aa868e8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a slice copied from the pointer starting at <code>from</code> and ending at the iterators current position - 1.  <a href="string-iterator_8c.html#a8c72c94cc185c7d67cfc0396aa868e8a">More...</a><br /></td></tr>
+<tr class="separator:a8c72c94cc185c7d67cfc0396aa868e8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03b8747edd5456f3964c581d1225a74a"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string-iterator_8c.html#a03b8747edd5456f3964c581d1225a74a">SH_StringIteratorPeek</a> (<a class="el" href="structSH__StringIterator.html">SH_StringIterator</a> *const iter, unsigned int offset)</td></tr>
+<tr class="memdesc:a03b8747edd5456f3964c581d1225a74a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the nth character from the iterators cursor, without advancing to the it.  <a href="string-iterator_8c.html#a03b8747edd5456f3964c581d1225a74a">More...</a><br /></td></tr>
+<tr class="separator:a03b8747edd5456f3964c581d1225a74a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4981bb82ce46009cd8122b2dc13271a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structSH__StringIterator.html">SH_StringIterator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string-iterator_8c.html#a4981bb82ce46009cd8122b2dc13271a7">SH_CreateStringIterator</a> (char *str)</td></tr>
+<tr class="memdesc:a4981bb82ce46009cd8122b2dc13271a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <code>StringIterator</code> object.  <a href="string-iterator_8c.html#a4981bb82ce46009cd8122b2dc13271a7">More...</a><br /></td></tr>
+<tr class="separator:a4981bb82ce46009cd8122b2dc13271a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace1fb17aec5f67fcb9a81d718db7e324"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string-iterator_8c.html#ace1fb17aec5f67fcb9a81d718db7e324">SH_DestroyStringIterator</a> (<a class="el" href="structSH__StringIterator.html">SH_StringIterator</a> **iter)</td></tr>
+<tr class="memdesc:ace1fb17aec5f67fcb9a81d718db7e324"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys a <code>StringIterator</code> object, freeing its members and re-initializing them to <code>NULL</code> in the process.  <a href="string-iterator_8c.html#ace1fb17aec5f67fcb9a81d718db7e324">More...</a><br /></td></tr>
+<tr class="separator:ace1fb17aec5f67fcb9a81d718db7e324"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>For iterating over a single-line string. </p>
 <dl class="section author"><dt>Author</dt><dd>Mohamed Al-Hussein </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>25 Jan 2022 This is a utility module for aiding in parsing strings into tokens. The functions defined here allow for iterating over a string character by character, until either a newline is reached or null terminator. </dd></dl>
-</div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a369266c24eacffb87046522897a570d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a369266c24eacffb87046522897a570d5">&#9670;&nbsp;</a></span>_GNU_SOURCE</h2>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a4981bb82ce46009cd8122b2dc13271a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4981bb82ce46009cd8122b2dc13271a7">&#9670;&nbsp;</a></span>SH_CreateStringIterator()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define _GNU_SOURCE</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a151b907665589d8f68fd6ecbec3c6af1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a151b907665589d8f68fd6ecbec3c6af1">&#9670;&nbsp;</a></span>string_iterator_ctor()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void string_iterator_ctor </td>
+          <td class="memname"><a class="el" href="structSH__StringIterator.html">SH_StringIterator</a>* SH_CreateStringIterator </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structStringIterator.html">StringIterator</a> *&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>str</em>&#160;</td>
-        </tr>
-        <tr>
+          <td class="paramname"><em>str</em></td><td>)</td>
           <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Constructs a new <code><a class="el" href="structStringIterator.html" title="StringIterator object definition.">StringIterator</a></code> object. </p>
+<p>Constructs a new <code>StringIterator</code> object. </p>
 <p>The general implementation of a vtable, usage of const for the main object, and other OOP concepts were derived from this publication.</p>
 <p><br  />
 <br  />
 </p>
 <p>Source: <a href="https://www.state-machine.com/doc/AN_OOP_in_C.pdf">https://www.state-machine.com/doc/AN_OOP_in_C.pdf</a>* </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td><code><a class="el" href="structStringIterator.html" title="StringIterator object definition.">StringIterator</a></code> object to initialize </td></tr>
     <tr><td class="paramname">str</td><td>the string to iterate over </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>A copy is made of <code>string</code>, so the caller can free/overwrite the string safely after calling this constructor. Note this also means the caller must destroy the data via calling the <code>string_iterator_dtor</code> function. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>A copy is made of <code>string</code>, so the caller can free/overwrite the string safely after calling this constructor. Note this also means the caller must destroy the data via calling the <code>SH_DestroyStringIterator</code> function. </dd></dl>
 
-<p class="reference">References <a class="el" href="structStringIteratorVtbl.html#a2860328cc15a55a5176b0ed15fcd2f01">StringIteratorVtbl::has_next</a>, <a class="el" href="string-iterator_8c.html#afb22c4c74ed4f2924a20480150cc08e4">string_iterator_has_next_()</a>, <a class="el" href="string-iterator_8c.html#a71c29d126f6139c3cae169e533592712">string_iterator_munch_char_()</a>, <a class="el" href="string-iterator_8c.html#a1c9e3c84b66608a727ed079586a9a36b">string_iterator_munch_word_()</a>, <a class="el" href="string-iterator_8c.html#a3764dd0f15797b8075c9b4065fc6485d">string_iterator_next_()</a>, <a class="el" href="string-iterator_8c.html#a08216d69610c426f337f4bd77ddee531">string_iterator_peek_()</a>, and <a class="el" href="string-iterator_8c.html#ad2fa880c3bd8bad9c075a495c6f78220">string_iterator_slice_()</a>.</p>
+<p class="reference">References <a class="el" href="structSH__StringIterator.html#af7d54b5ed44874daa7bc30aeb27b005e">SH_StringIterator::cur</a>, and <a class="el" href="structSH__StringIterator.html#a51fb58c258770caa9b3c507c9db4fe13">SH_StringIterator::string</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="lexer_8c.html#a9c5fcecec1d5cdecf516cb569f643c0e">lexer_generate_tokens()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="lexer_8c.html#ac17c7ebb0903306ad4c432dc35508892">SH_LexerGenerateTokens()</a>.</p>
 
 </div>
 </div>
-<a id="ae41fb65b8253cb82c4967afeb0e1cde3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae41fb65b8253cb82c4967afeb0e1cde3">&#9670;&nbsp;</a></span>string_iterator_dtor()</h2>
+<a id="ace1fb17aec5f67fcb9a81d718db7e324"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace1fb17aec5f67fcb9a81d718db7e324">&#9670;&nbsp;</a></span>SH_DestroyStringIterator()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void string_iterator_dtor </td>
+          <td class="memname">void SH_DestroyStringIterator </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structStringIterator.html">StringIterator</a> *&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structSH__StringIterator.html">SH_StringIterator</a> **&#160;</td>
+          <td class="paramname"><em>iter</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Destroys a <code><a class="el" href="structStringIterator.html" title="StringIterator object definition.">StringIterator</a></code> object, freeing its members and re-initializing them to <code>NULL</code> in the process. </p>
+<p>Destroys a <code>StringIterator</code> object, freeing its members and re-initializing them to <code>NULL</code> in the process. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td>the <code><a class="el" href="structStringIterator.html" title="StringIterator object definition.">StringIterator</a></code> object to destroy </td></tr>
+    <tr><td class="paramname">iter</td><td>the <code>StringIterator</code> object to destroy </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>The caller is responsible for freeing <code>self</code> afterwards if it was originally allocated on the heap. </dd></dl>
 
-<p class="reference">Referenced by <a class="el" href="lexer_8c.html#a9c5fcecec1d5cdecf516cb569f643c0e">lexer_generate_tokens()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="lexer_8c.html#ac17c7ebb0903306ad4c432dc35508892">SH_LexerGenerateTokens()</a>.</p>
 
 </div>
 </div>
-<a id="afb22c4c74ed4f2924a20480150cc08e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb22c4c74ed4f2924a20480150cc08e4">&#9670;&nbsp;</a></span>string_iterator_has_next_()</h2>
+<a id="afb758edbb07036c190642a2dfc234b21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb758edbb07036c190642a2dfc234b21">&#9670;&nbsp;</a></span>SH_StringIteratorConsumeChar()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static bool string_iterator_has_next_ </td>
+          <td class="memname">char* SH_StringIteratorConsumeChar </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structStringIterator.html">StringIterator</a> const *const&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structSH__StringIterator.html">SH_StringIterator</a> *&#160;</td>
+          <td class="paramname"><em>iter</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Implementation of <code>StringIterator::has_next()</code>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Iterates over a single character and returns copy to caller. </p>
+<p>Iterator is updated to point to immediate character after end of copied character. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td>pointer to iterator object </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if iterator is positioned at parseable character, false otherwise </dd></dl>
-
-<p class="reference">Referenced by <a class="el" href="string-iterator_8c.html#a151b907665589d8f68fd6ecbec3c6af1">string_iterator_ctor()</a>.</p>
-
-</div>
-</div>
-<a id="a71c29d126f6139c3cae169e533592712"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a71c29d126f6139c3cae169e533592712">&#9670;&nbsp;</a></span>string_iterator_munch_char_()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static char* string_iterator_munch_char_ </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structStringIterator.html">StringIterator</a> const *const&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implementation of <code>StringIterator::munchChar()</code>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">self</td><td>pointer to iterator object </td></tr>
+    <tr><td class="paramname">iter</td><td>pointer to iterator object </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>string containing copied character </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The caller is responsible for freeing the return value after they are done using it. </dd></dl>
 
-<p class="reference">Referenced by <a class="el" href="string-iterator_8c.html#a151b907665589d8f68fd6ecbec3c6af1">string_iterator_ctor()</a>.</p>
+<p class="reference">References <a class="el" href="string-iterator_8c.html#af701df7aa540f97bd6444ebab6e01a6b">SH_StringIteratorNext()</a>, and <a class="el" href="string-iterator_8c.html#a8c72c94cc185c7d67cfc0396aa868e8a">SH_StringIteratorSlice()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="token_8c.html#a9e481dcda13d3babe7e1deb5a2a34c52">SH_TakeToken()</a>.</p>
 
 </div>
 </div>
-<a id="a1c9e3c84b66608a727ed079586a9a36b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1c9e3c84b66608a727ed079586a9a36b">&#9670;&nbsp;</a></span>string_iterator_munch_word_()</h2>
+<a id="a522ba1669d61fcbc26290984c2d45057"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a522ba1669d61fcbc26290984c2d45057">&#9670;&nbsp;</a></span>SH_StringIteratorConsumeWord()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static char* string_iterator_munch_word_ </td>
+          <td class="memname">char* SH_StringIteratorConsumeWord </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structStringIterator.html">StringIterator</a> const *const&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structSH__StringIterator.html">SH_StringIterator</a> *&#160;</td>
+          <td class="paramname"><em>iter</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Implementation of <code>StringIterator::munchWord()</code>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Iterates over a single word and returns copy to caller. </p>
+<p><br  />
+</p>
+<p>A word is any sequence of characters, excluding a space character.</p>
+<p><br  />
+<br  />
+</p>
+<p>Iterator is updated to point to immediate character after end of copied word. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td>pointer to iterator object </td></tr>
+    <tr><td class="paramname">iter</td><td>pointer to iterator object </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>string containing copied word </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The caller is responsible for freeing the return value after they are done using it. </dd></dl>
 
-<p class="reference">Referenced by <a class="el" href="string-iterator_8c.html#a151b907665589d8f68fd6ecbec3c6af1">string_iterator_ctor()</a>.</p>
+<p class="reference">References <a class="el" href="string-iterator_8c.html#aa195d3f50eaadd5a923b3986251da487">SH_StringIteratorHasNext()</a>, <a class="el" href="string-iterator_8c.html#af701df7aa540f97bd6444ebab6e01a6b">SH_StringIteratorNext()</a>, <a class="el" href="string-iterator_8c.html#a03b8747edd5456f3964c581d1225a74a">SH_StringIteratorPeek()</a>, and <a class="el" href="string-iterator_8c.html#a8c72c94cc185c7d67cfc0396aa868e8a">SH_StringIteratorSlice()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="token_8c.html#a9e481dcda13d3babe7e1deb5a2a34c52">SH_TakeToken()</a>.</p>
 
 </div>
 </div>
-<a id="a3764dd0f15797b8075c9b4065fc6485d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3764dd0f15797b8075c9b4065fc6485d">&#9670;&nbsp;</a></span>string_iterator_next_()</h2>
+<a id="aa195d3f50eaadd5a923b3986251da487"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa195d3f50eaadd5a923b3986251da487">&#9670;&nbsp;</a></span>SH_StringIteratorHasNext()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static const char* string_iterator_next_ </td>
+          <td class="memname">bool SH_StringIteratorHasNext </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structStringIterator.html">StringIterator</a> const *const&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structSH__StringIterator.html">SH_StringIterator</a> const *const&#160;</td>
+          <td class="paramname"><em>iter</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Implementation of <code>StringIterator::next()</code>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">self</td><td>pointer to iterator object </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>the character pointed to by the iterator </dd></dl>
+<p class="reference">References <a class="el" href="structSH__StringIterator.html#af7d54b5ed44874daa7bc30aeb27b005e">SH_StringIterator::cur</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="string-iterator_8c.html#a151b907665589d8f68fd6ecbec3c6af1">string_iterator_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="lexer_8c.html#ac17c7ebb0903306ad4c432dc35508892">SH_LexerGenerateTokens()</a>, <a class="el" href="string-iterator_8c.html#a522ba1669d61fcbc26290984c2d45057">SH_StringIteratorConsumeWord()</a>, and <a class="el" href="string-iterator_8c.html#a03b8747edd5456f3964c581d1225a74a">SH_StringIteratorPeek()</a>.</p>
 
 </div>
 </div>
-<a id="a08216d69610c426f337f4bd77ddee531"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08216d69610c426f337f4bd77ddee531">&#9670;&nbsp;</a></span>string_iterator_peek_()</h2>
+<a id="af701df7aa540f97bd6444ebab6e01a6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af701df7aa540f97bd6444ebab6e01a6b">&#9670;&nbsp;</a></span>SH_StringIteratorNext()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static char string_iterator_peek_ </td>
+          <td class="memname">char* SH_StringIteratorNext </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structStringIterator.html">StringIterator</a> const *const&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
+          <td class="paramtype"><a class="el" href="structSH__StringIterator.html">SH_StringIterator</a> *&#160;</td>
+          <td class="paramname"><em>iter</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns character that the iterator is pointing at, then advances to the next character. </p>
+<dl class="section pre"><dt>Precondition</dt><dd>It is assumed that the iterator is always within bounds of the string it is iterating. Behavior is undefined if this is not the case. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">iter</td><td>pointer to iterator object </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>pointer to the character pointed to by the iterator </dd></dl>
+
+<p class="reference">References <a class="el" href="structSH__StringIterator.html#af7d54b5ed44874daa7bc30aeb27b005e">SH_StringIterator::cur</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="lexer_8c.html#ac17c7ebb0903306ad4c432dc35508892">SH_LexerGenerateTokens()</a>, <a class="el" href="string-iterator_8c.html#afb758edbb07036c190642a2dfc234b21">SH_StringIteratorConsumeChar()</a>, <a class="el" href="string-iterator_8c.html#a522ba1669d61fcbc26290984c2d45057">SH_StringIteratorConsumeWord()</a>, and <a class="el" href="string-iterator_8c.html#a03b8747edd5456f3964c581d1225a74a">SH_StringIteratorPeek()</a>.</p>
+
+</div>
+</div>
+<a id="a03b8747edd5456f3964c581d1225a74a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03b8747edd5456f3964c581d1225a74a">&#9670;&nbsp;</a></span>SH_StringIteratorPeek()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char SH_StringIteratorPeek </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structSH__StringIterator.html">SH_StringIterator</a> *&#160;</td>
+          <td class="paramname"><em>iter</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -391,48 +325,49 @@ Functions</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Implementation of <code>StringIterator::peek()</code>. </p>
+<p>Returns the nth character from the iterators cursor, without advancing to the it. </p>
+<p><br  />
+</p>
+<p>If <code>offset</code> is equal to 0, then the character at the current cursor is retrieved.</p>
+<p><br  />
+</p>
+<p>If <code>offset</code> is positive, then the iterator peaks ahead of the cursor.</p>
+<p><br  />
+</p>
+<p>This function is provided to allow for look-ahead parsing by peeking at the next character in the iterator. </p><dl class="section pre"><dt>Precondition</dt><dd>It is assumed that the iterator is always within bounds of the string it is iterating. Behavior is undefined if this is not the case. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">self</td><td>pointer to iterator object </td></tr>
-    <tr><td class="paramname">offset</td><td>how far ahead to peek </td></tr>
+    <tr><td class="paramname">iter</td><td>pointer to iterator object </td></tr>
+    <tr><td class="paramname">offset</td><td>how far ahead to peak </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>the character pointed to by the iterator </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>the nth character past the iterators cursor, or EOL if no more characters to seek past </dd></dl>
 
-<p class="reference">References <a class="el" href="string-iterator_8h.html#a21f41f42b53d059cdd11fcb240fd3962">STRING_ITERATOR_EOL</a>.</p>
+<p class="reference">References <a class="el" href="structSH__StringIterator.html#af7d54b5ed44874daa7bc30aeb27b005e">SH_StringIterator::cur</a>, <a class="el" href="string-iterator_8c.html#aa195d3f50eaadd5a923b3986251da487">SH_StringIteratorHasNext()</a>, <a class="el" href="string-iterator_8c.html#af701df7aa540f97bd6444ebab6e01a6b">SH_StringIteratorNext()</a>, and <a class="el" href="string-iterator_8h.html#a21f41f42b53d059cdd11fcb240fd3962">STRING_ITERATOR_EOL</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="string-iterator_8c.html#a151b907665589d8f68fd6ecbec3c6af1">string_iterator_ctor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="lexer_8c.html#ac17c7ebb0903306ad4c432dc35508892">SH_LexerGenerateTokens()</a>, and <a class="el" href="string-iterator_8c.html#a522ba1669d61fcbc26290984c2d45057">SH_StringIteratorConsumeWord()</a>.</p>
 
 </div>
 </div>
-<a id="ad2fa880c3bd8bad9c075a495c6f78220"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2fa880c3bd8bad9c075a495c6f78220">&#9670;&nbsp;</a></span>string_iterator_slice_()</h2>
+<a id="a8c72c94cc185c7d67cfc0396aa868e8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c72c94cc185c7d67cfc0396aa868e8a">&#9670;&nbsp;</a></span>SH_StringIteratorSlice()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static char* string_iterator_slice_ </td>
+          <td class="memname">char* SH_StringIteratorSlice </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structStringIterator.html">StringIterator</a> const *const&#160;</td>
+          <td class="paramtype"><a class="el" href="structSH__StringIterator.html">SH_StringIterator</a> *&#160;</td>
           <td class="paramname"><em>self</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const char *&#160;</td>
+          <td class="paramtype">char const *&#160;</td>
           <td class="paramname"><em>from</em>&#160;</td>
         </tr>
         <tr>
@@ -441,14 +376,23 @@ Functions</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="string-iterator_8c.html#a151b907665589d8f68fd6ecbec3c6af1">string_iterator_ctor()</a>.</p>
+<p>Returns a slice copied from the pointer starting at <code>from</code> and ending at the iterators current position - 1. </p>
+<dl class="section pre"><dt>Precondition</dt><dd><code>from</code> must point to a valid address within the iterators internal string. This value should be retrieved by a prior call to <code>StringIterator::next()</code>. This function will perform bounds checking to verify the above is true, and will return <code>NULL</code> if it is not. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>pointer to iterator object </td></tr>
+    <tr><td class="paramname">from</td><td>pointer to a position within iterator string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a slice of the iterator string on success, <code>NULL</code> on failure </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The caller is responsible for freeing the slice after they're done using it. </dd></dl>
+
+<p class="reference">References <a class="el" href="structSH__StringIterator.html#af7d54b5ed44874daa7bc30aeb27b005e">SH_StringIterator::cur</a>, and <a class="el" href="structSH__StringIterator.html#a51fb58c258770caa9b3c507c9db4fe13">SH_StringIterator::string</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="string-iterator_8c.html#afb758edbb07036c190642a2dfc234b21">SH_StringIteratorConsumeChar()</a>, and <a class="el" href="string-iterator_8c.html#a522ba1669d61fcbc26290984c2d45057">SH_StringIteratorConsumeWord()</a>.</p>
 
 </div>
 </div>
