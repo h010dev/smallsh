@@ -45,7 +45,11 @@ SH_Sender *SH_CreateSender(size_t capacity);
  * @note This does not clear the actual channels by calling their respective
  * destructors. It is the caller's responsibility to do so afterwards.
  */
+<<<<<<< HEAD
 void SH_DestroySender(SH_Sender **sender);
+=======
+void SH_DestroySender(SH_Sender *sender);
+>>>>>>> 1a40864 (Refactor Events modules)
 
 /**
  * @brief Sends data received via a SIGCHLD signal to @p self.
@@ -62,7 +66,7 @@ void SH_DestroySender(SH_Sender **sender);
  *
  * The data sent is used for updating the shell's global job table, as it
  * requires information on both which child completed and what their exit
- * SH_status was.
+ * status was.
  * @param channel @c Channel to send data to
  * @return 0 on success, -1 on failure
  */
