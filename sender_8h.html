@@ -70,8 +70,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">sender.h File Reference</div>  </div>
 </div><!--header-->
@@ -97,12 +96,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a42b4f0d090daf1d541171ca7dec835a9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structSH__Sender.html">SH_Sender</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sender_8h.html#a42b4f0d090daf1d541171ca7dec835a9">SH_CreateSender</a> (size_t capacity)</td></tr>
 <tr class="memdesc:a42b4f0d090daf1d541171ca7dec835a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes new <code>Sender</code> object.  <a href="sender_8h.html#a42b4f0d090daf1d541171ca7dec835a9">More...</a><br /></td></tr>
 <tr class="separator:a42b4f0d090daf1d541171ca7dec835a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a851324c767df15c4e3b8fffef7f8ff85"><td class="memItemLeft" align="right" valign="top">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD void <a class="el" href="sender_8c.html#adc16213bc8ade172685a714cca5c355f">SH_DestroySender</a>(<a class="el" href="structSH__Sender.html">SH_Sender</a> **<a class="el" href="smallsh_8c.html#ab5f7f2dd44302d81930a9e81959f6f49">sender</a>);=======void <a class="el" href="sender_8c.html#adc16213bc8ade172685a714cca5c355f">SH_DestroySender</a>(<a class="el" href="structSH__Sender.html">SH_Sender</a> *<a class="el" href="smallsh_8c.html#ab5f7f2dd44302d81930a9e81959f6f49">sender</a>);&gt;&gt;&gt;&gt;&gt;&gt; Refactor Events modules int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sender_8h.html#a851324c767df15c4e3b8fffef7f8ff85">SH_SenderNotifySigchldEvent</a> (<a class="el" href="structSH__Channel.html">SH_Channel</a> *channel)</td></tr>
-<tr class="memdesc:a851324c767df15c4e3b8fffef7f8ff85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets <code>self's</code> values.  <a href="sender_8h.html#a851324c767df15c4e3b8fffef7f8ff85">More...</a><br /></td></tr>
-<tr class="separator:a851324c767df15c4e3b8fffef7f8ff85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc16213bc8ade172685a714cca5c355f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sender_8h.html#adc16213bc8ade172685a714cca5c355f">SH_DestroySender</a> (<a class="el" href="structSH__Sender.html">SH_Sender</a> **<a class="el" href="smallsh_8c.html#ab5f7f2dd44302d81930a9e81959f6f49">sender</a>)</td></tr>
+<tr class="memdesc:adc16213bc8ade172685a714cca5c355f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets <code>self's</code> values.  <a href="sender_8h.html#adc16213bc8ade172685a714cca5c355f">More...</a><br /></td></tr>
+<tr class="separator:adc16213bc8ade172685a714cca5c355f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeaac0b4446079611e19b6a177d709a73"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sender_8h.html#aeaac0b4446079611e19b6a177d709a73">SH_SenderNotifySigchldEvent</a> (<a class="el" href="structSH__Channel.html">SH_Channel</a> *channel)</td></tr>
+<tr class="memdesc:aeaac0b4446079611e19b6a177d709a73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends data received via a SIGCHLD signal to <code>self</code>.  <a href="sender_8h.html#aeaac0b4446079611e19b6a177d709a73">More...</a><br /></td></tr>
+<tr class="separator:aeaac0b4446079611e19b6a177d709a73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Responsible for sending messages to subscribers via a dedicated Channel. </p>
@@ -138,6 +137,37 @@ Variables</h2></td></tr>
 <p class="reference">References <a class="el" href="structSH__Sender.html#a06797ddc2b029517f42d173658ddaeda">SH_Sender::capacity</a>, <a class="el" href="structSH__Sender.html#a641397b809318cb3643c14a063bf573f">SH_Sender::channels</a>, <a class="el" href="events_8h.html#ab5f7f2dd44302d81930a9e81959f6f49">sender</a>, and <a class="el" href="structSH__Sender.html#ab51deb9ccab6e70ceec689bfba932601">SH_Sender::size</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="events_8c.html#aa8e2e0f6415a6ff5388a0a0929a7ab53">SH_InitEvents()</a>.</p>
+
+</div>
+</div>
+<a id="adc16213bc8ade172685a714cca5c355f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc16213bc8ade172685a714cca5c355f">&#9670;&nbsp;</a></span>SH_DestroySender()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SH_DestroySender </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structSH__Sender.html">SH_Sender</a> **&#160;</td>
+          <td class="paramname"><em>sender</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Resets <code>self's</code> values. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sender</td><td><code>Sender</code> to reset </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This does not clear the actual channels by calling their respective destructors. It is the caller's responsibility to do so afterwards. </dd></dl>
+
+<p class="reference">References <a class="el" href="events_8h.html#ab5f7f2dd44302d81930a9e81959f6f49">sender</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="events_8c.html#a0b64ae509893b5bde52df4b26b0d4896">SH_CleanupEvents()</a>.</p>
 
 </div>
 </div>
@@ -183,28 +213,23 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a851324c767df15c4e3b8fffef7f8ff85"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a851324c767df15c4e3b8fffef7f8ff85">&#9670;&nbsp;</a></span>SH_SenderNotifySigchldEvent</h2>
+<a id="aeaac0b4446079611e19b6a177d709a73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeaac0b4446079611e19b6a177d709a73">&#9670;&nbsp;</a></span>SH_SenderNotifySigchldEvent()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD void <a class="el" href="sender_8c.html#adc16213bc8ade172685a714cca5c355f">SH_DestroySender</a>(<a class="el" href="structSH__Sender.html">SH_Sender</a> **<a class="el" href="smallsh_8c.html#ab5f7f2dd44302d81930a9e81959f6f49">sender</a>); ======= void <a class="el" href="sender_8c.html#adc16213bc8ade172685a714cca5c355f">SH_DestroySender</a>(<a class="el" href="structSH__Sender.html">SH_Sender</a> *<a class="el" href="smallsh_8c.html#ab5f7f2dd44302d81930a9e81959f6f49">sender</a>); &gt;&gt;&gt;&gt;&gt;&gt; Refactor Events modules int SH_SenderNotifySigchldEvent(<a class="el" href="structSH__Channel.html">SH_Channel</a> *channel)</td>
+          <td class="memname">int SH_SenderNotifySigchldEvent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structSH__Channel.html">SH_Channel</a> *&#160;</td>
+          <td class="paramname"><em>channel</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Resets <code>self's</code> values. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">sender</td><td><code>Sender</code> to reset </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section note"><dt>Note</dt><dd>This does not clear the actual channels by calling their respective destructors. It is the caller's responsibility to do so afterwards.</dd></dl>
-<p>Sends data received via a SIGCHLD signal to <code>self</code>.</p>
+<p>Sends data received via a SIGCHLD signal to <code>self</code>. </p>
 <p>This function abstracts the signal-handling step used in the self-pipe trick (TLPI section 63.5.2) in an attempt to relay SIGCHLD data while doing its best at remaining async-safe.</p>
 <p>Only async-safe system calls are made within this function, and the only global data type that is being accessed within is the pipe's write file descriptor, which is done so for reads only, and without any dereferences. The file descriptor is initialized on program startup, and remains unchanged until program termination.</p>
 <p>The data sent is used for updating the shell's global job table, as it requires information on both which child completed and what their exit SH_status was. </p><dl class="params"><dt>Parameters</dt><dd>
@@ -214,6 +239,8 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on failure </dd></dl>
+
+<p class="reference">References <a class="el" href="structSH__SigchldDTO.html#a4ba127e70465a49c5b5e98564ab725c6">SH_SigchldDTO::pid</a>, <a class="el" href="structSH__SigchldDTO.html#a41ad5a535475920d05a065c0bffd73fa">SH_SigchldDTO::status</a>, and <a class="el" href="structSH__Channel.html#a70035aec57d4e0a739c4a30f6f923764">SH_Channel::write_fd</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="handler_8c.html#a2488cd6d7cf4a777a47cd4bc87ba449d">SH_HandlerHandleSigchld()</a>.</p>
 
