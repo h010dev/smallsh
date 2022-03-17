@@ -8,79 +8,70 @@
 #define SMALLSH_TOKEN_ITERATOR_H
 
 #include <stdlib.h>
+#include <stdbool.h>
 
-#include "shell-tokens.h"
-
-struct TokenIteratorVtbl;
-struct TokenIteratorPrivate;
+#include "token.h"
 
 /**
  * @brief @c TokenIterator object definition.
  */
 typedef struct {
-        struct TokenIteratorVtbl const *vptr; /**< virtual table */
-        struct TokenIteratorPrivate *private; /**< private data */
-} TokenIterator;
+        size_t len; /**< length of iterable */
+        SH_Token **toks; /**< token array we are iterating over */
+        size_t cur; /**< cursor position of iterator */
+} SH_TokenIterator;
 
 /**
- * @brief VTable for @c TokenIterator object.
+ * @brief Let's caller know if there are any more tokens left to
+ * parse from iterable.
  *
- * Iterator methods derived from this source:
- * https://www.youtube.com/watch?v=hnlmbeQa31E
+ * <br>
+ *
+ * The iterable is deemed exhausted under two conditions:
+ *
+ * <ol>
+ * <li>The iterator is pointing at the last token in the iterable.</li>
+ * <li>The next token in the iterable is a newline token.</li>
+ * </ol>
+ * @param iter pointer to iterator object
+ * @return true if iterator is positioned at a valid token, false
+ * otherwise
  */
-struct TokenIteratorVtbl {
-        /**
-         * @brief Let's caller know if there are any more tokens left to
-         * parse from iterable.
-         *
-         * <br>
-         *
-         * The iterable is deemed exhausted under two conditions:
-         *
-         * <ol>
-         * <li>The iterator is pointing at the last token in the iterable.</li>
-         * <li>The next token in the iterable is a newline token.</li>
-         * </ol>
-         * @param self pointer to iterator object
-         * @return true if iterator is positioned at a valid token, false
-         * otherwise
-         */
-        bool (*has_next) (TokenIterator const * const self);
+bool SH_TokenIteratorHasNext(SH_TokenIterator const *iter);
 
-        /**
-         * @brief Returns the token the iterator is pointing at, then advances
-         * to the next token.
-         * @pre It is assumed that the iterator can retrieve the next token.
-         * Behavior is undefined if this is not the case. Caller should use
-         * @c TokenIterator::has_next() to verify before calling this method.
-         * @param self pointer to iterator object
-         * @return pointer to next token in iterable
-         */
-        Token *(*next) (TokenIterator const * const self);
+/**
+ * @brief Returns the token the iterator is pointing at, then advances
+ * to the next token.
+ * @pre It is assumed that the iterator can retrieve the next token.
+ * Behavior is undefined if this is not the case. Caller should use
+ * @c TokenIterator::has_next() to verify before calling this method.
+ * @param iter pointer to iterator object
+ * @return pointer to next token in iterable
+ */
+SH_Token *SH_TokenIteratorNext(SH_TokenIterator *iter);
 
-        /**
-         * @brief Returns the nth token from the iterators cursor, without
-         * advancing to it.
-         *
-         * <br>
-         *
-         * If @p offset is equal to 0, then the token at the current position
-         * of the iterator is retrieved.
-         *
-         * <br>
-         *
-         * If @p offset is positive, then the iterator will return the token
-         * that is @offset elements ahead of the current cursor.
-         *
-         * This function is provided to allow for look-ahead parsing by peeking
-         * at the next token in the iterator.
-         * @param self pointer to iterator object
-         * @param offset how far ahead to peek
-         * @return the nth character past the iterators cursor, or an empty
-         * @c NewlineToken object if no more tokens to seek past
-         */
-        Token (*peek) (TokenIterator const * const self, unsigned int offset);
-};
+/**
+ * @brief Returns the nth token from the iterators cursor, without
+ * advancing to it.
+ *
+ * <br>
+ *
+ * If @p offset is equal to 0, then the token at the current position
+ * of the iterator is retrieved.
+ *
+ * <br>
+ *
+ * If @p offset is positive, then the iterator will return the token
+ * that is @offset elements ahead of the current cursor.
+ *
+ * This function is provided to allow for look-ahead parsing by peeking
+ * at the next token in the iterator.
+ * @param iter pointer to iterator object
+ * @param offset how far ahead to peek
+ * @return the nth character past the iterators cursor, or an empty
+ * @c NewlineToken object if no more tokens to seek past
+ */
+SH_Token *SH_TokenIteratorPeek(SH_TokenIterator *iter, unsigned int offset);
 
 /**
  * @brief Constructs a new @c TokenIterator object.
@@ -96,13 +87,13 @@ struct TokenIteratorVtbl {
  * Behavior is undefined if this is not the case.
  * @param self @c TokenIterator object to initialize
  * @param len length of the token array
- * @param tok the token array to iterate over
+ * @param toks the token array to iterate over
  * @note No copy is made of @p tokens, so the caller must not free or modify
  * the parameter until they are finished using the iterator. Likewise, the
  * caller cannot guarantee that the tokens array is left unmodified at the end
  * of the iterators lifespan.
  */
-void token_iterator_ctor(TokenIterator *self, size_t len, Token *tok[len]);
+SH_TokenIterator *SH_CreateTokenIterator(size_t len, SH_Token *toks[len]);
 
 /**
  * @brief Destroys a @c TokenIterator object, freeing its members and
@@ -110,9 +101,9 @@ void token_iterator_ctor(TokenIterator *self, size_t len, Token *tok[len]);
  *
  * The exception to this is that the @c tokens array is not freed, as that is
  * up to the caller to perform.
- * @param self The caller is responsible for freeing @p self afterwards if it
+ * @param iter The caller is responsible for freeing @p self afterwards if it
  * was originally allocated on the heap.
  */
-void token_iterator_dtor(TokenIterator *self);
+void SH_DestroyTokenIterator(SH_TokenIterator **iter);
 
 #endif //SMALLSH_TOKEN_ITERATOR_H

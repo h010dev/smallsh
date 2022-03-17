@@ -17,7 +17,6 @@ set(
         interpreter/statement.c
         interpreter/token-iterator.c
         interpreter/lexer.c
-        interpreter/shell-tokens.c
         interpreter/token.c
 
         job-control/job-control.c

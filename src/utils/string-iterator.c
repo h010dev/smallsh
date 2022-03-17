@@ -8,7 +8,6 @@
  * functions defined here allow for iterating over a string character by
  * character, until either a newline is reached or null terminator.
  */
-#define _GNU_SOURCE
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
@@ -18,7 +17,6 @@
 #endif
 
 #include "utils/string-iterator.h"
-
 /* *****************************************************************************
  * PRIVATE DEFINITIONS
  *
@@ -39,64 +37,30 @@
  *
  *
  ******************************************************************************/
-/* *****************************************************************************
- * OBJECTS
- *
- *
- *
- *
- *
- *
- *
- ******************************************************************************/
-/**
- * @brief Hides @c StringIterator members from client code.
- */
-struct StringIteratorPrivate {
-        const char *si_str; /**< the string we are iterating over */
-        const char *si_cur; /**< cursor position of string */
-};
-
-/**
- * @brief Implementation of @c StringIterator::has_next().
- * @param self pointer to iterator object
- * @return true if iterator is positioned at parseable character, false
- * otherwise
- */
-static inline bool string_iterator_has_next_(StringIterator const * const self)
+bool SH_StringIteratorHasNext(SH_StringIterator const * const iter)
 {
-        char itr = *self->private->si_cur;
+        char itr = *iter->cur;
         return itr != '\0';
 }
 
-/**
- * @brief Implementation of @c StringIterator::munchChar().
- * @param self pointer to iterator object
- * @return string containing copied character
- */
-static char *string_iterator_munch_char_(StringIterator const * const self)
+char *SH_StringIteratorConsumeChar(SH_StringIterator *const iter)
 {
         // grab character
-        const char *start = self->vptr->next(self);
+        char *start = SH_StringIteratorNext(iter);
 
         // copy and return character
-        char *slice = self->vptr->slice(self, start);
+        char *slice = SH_StringIteratorSlice(iter, start);
         return slice;
 }
 
-/**
- * @brief Implementation of @c StringIterator::munchWord().
- * @param self pointer to iterator object
- * @return string containing copied word
- */
-static char *string_iterator_munch_word_(StringIterator const * const self)
+char *SH_StringIteratorConsumeWord(SH_StringIterator *const iter)
 {
         // grab word
-        const char *start = self->vptr->next(self);
+        char *start = SH_StringIteratorNext(iter);
         char *slice;
         char c;
-        while (self->vptr->has_next(self)) {
-                c = self->vptr->peek(self, 0);
+        while (SH_StringIteratorHasNext(iter)) {
+                c = SH_StringIteratorPeek(iter, 0);
                 switch (c) {
                         // stop at terminal character
                         case ' ':
@@ -106,30 +70,25 @@ static char *string_iterator_munch_word_(StringIterator const * const self)
                         default:
                                 break;
                 }
-                self->vptr->next(self);
+                SH_StringIteratorNext(iter);
         }
 
 seek_fin:
         // copy and return word
-        slice = self->vptr->slice(self, start);
+        slice = SH_StringIteratorSlice(iter, start);
         return slice;
 }
 
-/**
- * @brief Implementation of @c StringIterator::next().
- * @param self pointer to iterator object
- * @return the character pointed to by the iterator
- */
-static inline const char *string_iterator_next_(StringIterator const * const self)
+char *SH_StringIteratorNext(SH_StringIterator *const iter)
 {
-        const char *next = self->private->si_cur++;
+        char *next = iter->cur++;
         return next;
 }
 
-static char *string_iterator_slice_(StringIterator const * const self, const char *from)
+char *SH_StringIteratorSlice(SH_StringIterator *const iter, char const *from)
 {
-        const char *l_bound = self->private->si_str;
-        const char *r_bound = self->private->si_cur;
+        char *l_bound = iter->string;
+        char *r_bound = iter->cur;
 
         if (from < l_bound || from >= r_bound) {
                 /* error out of bounds */
@@ -142,28 +101,21 @@ static char *string_iterator_slice_(StringIterator const * const self, const cha
         return slice;
 }
 
-/**
- * @brief Implementation of @c StringIterator::peek().
- * @param self pointer to iterator object
- * @param offset how far ahead to peek
- * @return the character pointed to by the iterator
- */
-static inline char string_iterator_peek_(StringIterator const * const self,
-                                         unsigned int offset)
+char SH_StringIteratorPeek(SH_StringIterator *const iter, unsigned int offset)
 {
-        const char *orig, *cur;
+        char *orig, *cur;
         char result;
         unsigned int pos;
 
         // store pointer to originating character
-        orig = self->private->si_cur;
+        orig = iter->cur;
 
         // seek to offset or end of stream, whichever comes first
         pos = 0;
         do {
-                cur = self->vptr->next(self);
+                cur = SH_StringIteratorNext(iter);
                 pos++;
-        } while (pos <= offset && self->vptr->has_next(self));
+        } while (pos <= offset && SH_StringIteratorHasNext(iter));
 
         // check if iterator exhausted before reaching offset
         if (pos <= offset)
@@ -172,11 +124,10 @@ static inline char string_iterator_peek_(StringIterator const * const self,
                 result = *cur;
 
         // reset pointer to originating character
-        self->private->si_cur = orig;
+        iter->cur = orig;
 
         return result;
 }
-
 /* *****************************************************************************
  * PUBLIC DEFINITIONS
  *
@@ -207,31 +158,29 @@ static inline char string_iterator_peek_(StringIterator const * const self,
  *
  *
  ******************************************************************************/
-void string_iterator_ctor(StringIterator *self, char *str)
+SH_StringIterator *SH_CreateStringIterator(char *str)
 {
-        static struct StringIteratorVtbl const vtbl = {
-                .has_next = &string_iterator_has_next_,
-                .munch_char = &string_iterator_munch_char_,
-                .munch_word = &string_iterator_munch_word_,
-                .next = &string_iterator_next_,
-                .peek = &string_iterator_peek_,
-                .slice = &string_iterator_slice_,
-        };
-        self->vptr = &vtbl;
-        self->private = malloc(sizeof(struct StringIteratorPrivate));
+        SH_StringIterator *iter;
 
-        self->private->si_str = strdup(str);
-        self->private->si_cur = &self->private->si_str[0];
+        iter = malloc(sizeof *iter);
+        if (iter == NULL) {
+                return NULL;
+        }
+
+        iter->string = strdup(str);
+        iter->cur = &iter->string[0];
+
+        return iter;
 }
 
-void string_iterator_dtor(StringIterator *self)
+void SH_DestroyStringIterator(SH_StringIterator **iter)
 {
-        self->vptr = NULL;
+        if (*iter) {
+                free((*iter)->string);
+                (*iter)->string = NULL;
+                (*iter)->cur = NULL;
 
-        free((char *) self->private->si_str);
-        self->private->si_str = NULL;
-        self->private->si_cur = NULL;
-
-        free(self->private);
-        self->private = NULL;
+                free(*iter);
+                *iter = NULL;
+        }
 }

@@ -61,9 +61,9 @@
 static int smallsh_eval(char *cmd)
 {
         int status_;
-        Parser parser;
+        SH_Parser *parser;
         ssize_t n_stmts;
-        Statement *stmt;
+        SH_Statement *stmt;
         SH_Process *proc;
         StmtStdin *st_in;
         StmtStdout *st_out;
@@ -73,43 +73,43 @@ static int smallsh_eval(char *cmd)
         SH_Job *job;
 
         /* Parse command into statements for evaluation. */
-        parser_ctor(&parser);
+        parser = SH_CreateParser();
 
-        n_stmts = parser.parse(&parser, cmd);
+        n_stmts = SH_ParserParse(parser, cmd);
         if (n_stmts == -1) {
-                parser_dtor(&parser);
+                SH_DestroyParser(&parser);
                 return -1; /* error */
         } else if (n_stmts == 0) {
-                parser_dtor(&parser);
+                SH_DestroyParser(&parser);
                 smallsh_line_buffer = true;
                 return 0; /* no statements parsed */
         }
 
         /* Can have multiple statements, but we only want first one. */
-        stmt = parser.get_statements(&parser)[0];
+        stmt = parser->stmts[0];
 
         /* Statement is not a builtin. */
-        if ((stmt->stmt_flags & FLAGS_BUILTIN) == 0) {
+        if ((stmt->flags & FLAGS_BUILTIN) == 0) {
                 /* Create process object. */
-                proc = SH_CreateProcess(stmt->stmt_cmd->cmd_argc, stmt->stmt_cmd->cmd_argv);
+                proc = SH_CreateProcess(stmt->cmd->count, stmt->cmd->args);
 
-                st_in = stmt->stmt_stdin;
-                st_out = stmt->stmt_stdout;
-                n_in = st_in->stdin_num_streams;
-                n_out = st_out->stdout_num_streams;
+                st_in = stmt->infile;
+                st_out = stmt->outfile;
+                n_in = st_in->n;
+                n_out = st_out->n;
                 if (n_in > 0) {
-                        infile = st_in->stdin_streams[n_in - 1];
+                        infile = st_in->streams[n_in - 1];
                 } else {
                         infile = NULL;
                 }
                 if (n_out > 0) {
-                        outfile = st_out->stdout_streams[n_out - 1];
+                        outfile = st_out->streams[n_out - 1];
                         smallsh_line_buffer = true;
                 } else {
                         if (!smallsh_interactive_mode) {
 #ifdef TEST_SCRIPT
                                 /* Add newline to end of empty non-echo commands. */
-                                if (strcmp("echo", stmt->stmt_cmd->cmd_argv[0]) != 0) {
+                                if (strcmp("echo", stmt->cmd->args[0]) != 0) {
                                         write(STDOUT_FILENO, "\n", 1);
                                 }
 #endif
@@ -117,7 +117,7 @@ static int smallsh_eval(char *cmd)
                         outfile = NULL;
                 }
 
-                if ((stmt->stmt_flags & FLAGS_BGCTRL) == 0 || smallsh_fg_only_mode) {
+                if ((stmt->flags & FLAGS_BGCTRL) == 0 || smallsh_fg_only_mode) {
                         foreground = true;
                 } else{
                         foreground = false;
@@ -127,7 +127,7 @@ static int smallsh_eval(char *cmd)
 #ifdef TEST_SCRIPT
                         /* Some fun magic to make output pretty for test script. */
                         if (smallsh_fg_only_mode) {
-                                if ((stmt->stmt_flags & FLAGS_BGCTRL) != 0) {
+                                if ((stmt->flags & FLAGS_BGCTRL) != 0) {
                                         if (outfile == NULL) {
                                                 smallsh_line_buffer = true;
                                         }
@@ -147,12 +147,12 @@ static int smallsh_eval(char *cmd)
         /* Statement is a builtin. */
         else {
                 /* Determine builtin name and run it. */
-                cmd_name = stmt->stmt_cmd->cmd_argv[0];
+                cmd_name = stmt->cmd->args[0];
                 if (strcmp("exit", cmd_name) == 0) {
                         status_ = 1;
                         smallsh_line_buffer = true;
                 } else if (strcmp("cd", cmd_name) == 0) {
-                        char *dirname = stmt->stmt_cmd->cmd_argv[1];
+                        char *dirname = stmt->cmd->args[1];
                         SH_cd(dirname);
                         status_ = 0;
                         smallsh_line_buffer = true;
@@ -165,7 +165,7 @@ static int smallsh_eval(char *cmd)
                 }
         }
 
-        parser_dtor(&parser);
+        SH_DestroyParser(&parser);
 
         return status_;
 }

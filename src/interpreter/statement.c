@@ -8,7 +8,6 @@
 #include <stdio.h>
 
 #include "interpreter/statement.h"
-
 /* *****************************************************************************
  * PUBLIC DEFINITIONS
  *
@@ -39,79 +38,78 @@
  *
  *
  ******************************************************************************/
-Statement *statement_new(void)
+SH_Statement *SH_CreateStatement(void)
 {
-        Statement *stmt = malloc(sizeof(Statement));
+        SH_Statement *stmt = malloc(sizeof(SH_Statement));
 
         // statement command init
-        stmt->stmt_cmd = malloc(sizeof(StmtCmd));
-        stmt->stmt_cmd->cmd_argc = 0;
-        stmt->stmt_cmd->cmd_argv = malloc(sizeof(char *));
-        stmt->stmt_cmd->cmd_argv[0] = NULL;
+        stmt->cmd = malloc(sizeof(StmtCmd));
+        stmt->cmd->count = 0;
+        stmt->cmd->args = malloc(sizeof(char *));
+        stmt->cmd->args[0] = NULL;
 
         // statement io redirection: stdin init
-        stmt->stmt_stdin = malloc(sizeof(StmtStdin));
-        stmt->stmt_stdin->stdin_num_streams = 0;
-        stmt->stmt_stdin->stdin_streams = malloc(sizeof(char *));
-        stmt->stmt_stdin->stdin_streams[0] = NULL;
+        stmt->infile = malloc(sizeof(StmtStdin));
+        stmt->infile->n = 0;
+        stmt->infile->streams = malloc(sizeof(char *));
+        stmt->infile->streams[0] = NULL;
 
         // statement io redirection: stdout init
-        stmt->stmt_stdout = malloc(sizeof(StmtStdout));
-        stmt->stmt_stdout->stdout_num_streams = 0;
-        stmt->stmt_stdout->stdout_streams = malloc(sizeof(char *));
-        stmt->stmt_stdout->stdout_streams[0] = NULL;
+        stmt->outfile = malloc(sizeof(StmtStdout));
+        stmt->outfile->n = 0;
+        stmt->outfile->streams = malloc(sizeof(char *));
+        stmt->outfile->streams[0] = NULL;
 
         // statement flags init
-        stmt->stmt_flags = 0;
+        stmt->flags = 0;
 
         return stmt;
 }
 
-void statement_del(Statement **stmt)
+void SH_DestroyStatement(SH_Statement **stmt)
 {
         // statement command delete
-        for (size_t i = 0; i < (*stmt)->stmt_cmd->cmd_argc; i++) {
-                free((*stmt)->stmt_cmd->cmd_argv[i]);
-                (*stmt)->stmt_cmd->cmd_argv[i] = NULL;
+        for (size_t i = 0; i < (*stmt)->cmd->count; i++) {
+                free((*stmt)->cmd->args[i]);
+                (*stmt)->cmd->args[i] = NULL;
         }
-        free((*stmt)->stmt_cmd->cmd_argv);
-        (*stmt)->stmt_cmd->cmd_argc = 0;
-        (*stmt)->stmt_cmd->cmd_argv = NULL;
-        free((*stmt)->stmt_cmd);
-        (*stmt)->stmt_cmd = NULL;
+        free((*stmt)->cmd->args);
+        (*stmt)->cmd->count = 0;
+        (*stmt)->cmd->args = NULL;
+        free((*stmt)->cmd);
+        (*stmt)->cmd = NULL;
 
         // statement io redirection: stdin delete
-        for (size_t i = 0; i < (*stmt)->stmt_stdin->stdin_num_streams; i++) {
-                free((*stmt)->stmt_stdin->stdin_streams[i]);
-                (*stmt)->stmt_stdin->stdin_streams[i] = NULL;
+        for (size_t i = 0; i < (*stmt)->infile->n; i++) {
+                free((*stmt)->infile->streams[i]);
+                (*stmt)->infile->streams[i] = NULL;
         }
-        free((*stmt)->stmt_stdin->stdin_streams);
-        (*stmt)->stmt_stdin->stdin_num_streams = 0;
-        (*stmt)->stmt_stdin->stdin_streams = NULL;
-        free((*stmt)->stmt_stdin);
-        (*stmt)->stmt_stdin = NULL;
+        free((*stmt)->infile->streams);
+        (*stmt)->infile->n = 0;
+        (*stmt)->infile->streams = NULL;
+        free((*stmt)->infile);
+        (*stmt)->infile = NULL;
 
         // statement io redirection: stdout delete
-        for (size_t i = 0; i < (*stmt)->stmt_stdout->stdout_num_streams; i++) {
-                free((*stmt)->stmt_stdout->stdout_streams[i]);
-                (*stmt)->stmt_stdout->stdout_streams[i] = NULL;
+        for (size_t i = 0; i < (*stmt)->outfile->n; i++) {
+                free((*stmt)->outfile->streams[i]);
+                (*stmt)->outfile->streams[i] = NULL;
         }
-        free((*stmt)->stmt_stdout->stdout_streams);
-        (*stmt)->stmt_stdout->stdout_num_streams = 0;
-        (*stmt)->stmt_stdout->stdout_streams = NULL;
-        free((*stmt)->stmt_stdout);
-        (*stmt)->stmt_stdout = NULL;
+        free((*stmt)->outfile->streams);
+        (*stmt)->outfile->n = 0;
+        (*stmt)->outfile->streams = NULL;
+        free((*stmt)->outfile);
+        (*stmt)->outfile = NULL;
 
         // statement flags delete
-        (*stmt)->stmt_flags = FLAGS_NONE;
+        (*stmt)->flags = FLAGS_NONE;
 
         // statement delete
         free(*stmt);
         *stmt = NULL;
 }
-
 /* *****************************************************************************
- * CLASS METHODS
+ * FUNCTIONS
  *
  *
  *
@@ -120,30 +118,30 @@ void statement_del(Statement **stmt)
  *
  *
  ******************************************************************************/
-void statement_print(const Statement *self)
+void SH_PrintStatement(SH_Statement const *stmt)
 {
         printf("STATEMENT(\n");
         printf("\tFLAGS(\n");
-        if (self->stmt_flags == FLAGS_BGCTRL) {
+        if (stmt->flags == FLAGS_BGCTRL) {
                 printf("\t\tBG_CTRL,\n");
         }
         printf("\t)\n");
 
         printf("\tCMD(\n");
-        for (size_t i = 0; i < self->stmt_cmd->cmd_argc; i++) {
-                printf("\t\tARG [%zu] = %s,\n", i, self->stmt_cmd->cmd_argv[i]);
+        for (size_t i = 0; i < stmt->cmd->count; i++) {
+                printf("\t\tARG [%zu] = %s,\n", i, stmt->cmd->args[i]);
         }
         printf("\t)\n");
 
         printf("\tSTDIN(\n");
-        for (size_t i = 0; i < self->stmt_stdin->stdin_num_streams; i++) {
-                printf("\t\t[%zu] = %s,\n", i, self->stmt_stdin->stdin_streams[i]);
+        for (size_t i = 0; i < stmt->infile->n; i++) {
+                printf("\t\t[%zu] = %s,\n", i, stmt->infile->streams[i]);
         }
         printf("\t)\n");
 
         printf("\tSTDOUT(\n");
-        for (size_t i = 0; i < self->stmt_stdout->stdout_num_streams; i++) {
-                printf("\t\t[%zu] = %s,\n", i, self->stmt_stdout->stdout_streams[i]);
+        for (size_t i = 0; i < stmt->outfile->n; i++) {
+                printf("\t\t[%zu] = %s,\n", i, stmt->outfile->streams[i]);
         }
         printf("\t)\n");
         printf(")\n");
