@@ -16,7 +16,7 @@
  */
 typedef struct {
         pid_t pid; /**< PID of child that sent the signal */
-        int status; /**< exit status of child */
+        int status; /**< exit SH_status of child */
 } SH_SigchldDTO;
 
 #endif //SMALLSH_DTO_H

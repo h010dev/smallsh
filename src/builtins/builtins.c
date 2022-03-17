@@ -42,9 +42,9 @@
  * @brief Constants for defining supported builtins.
  */
 enum {
-        BUILTINS_CD, /**< cd command */
+        BUILTINS_CD, /**< SH_cd command */
         BUILTINS_EXIT, /**< exit command */
-        BUILTINS_STATUS, /**< status command */
+        BUILTINS_STATUS, /**< SH_status command */
         BUILTINS_COUNT, /**< number of supported builtins */
 };
 
