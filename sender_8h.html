@@ -207,7 +207,7 @@ Variables</h2></td></tr>
 <p>Sends data received via a SIGCHLD signal to <code>self</code>.</p>
 <p>This function abstracts the signal-handling step used in the self-pipe trick (TLPI section 63.5.2) in an attempt to relay SIGCHLD data while doing its best at remaining async-safe.</p>
 <p>Only async-safe system calls are made within this function, and the only global data type that is being accessed within is the pipe's write file descriptor, which is done so for reads only, and without any dereferences. The file descriptor is initialized on program startup, and remains unchanged until program termination.</p>
-<p>The data sent is used for updating the shell's global job table, as it requires information on both which child completed and what their exit status was. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The data sent is used for updating the shell's global job table, as it requires information on both which child completed and what their exit SH_status was. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">channel</td><td><code>Channel</code> to send data to </td></tr>
   </table>
